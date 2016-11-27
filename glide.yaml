@@ -1,0 +1,11 @@
+package: termbox
+import:
+- package: github.com/hyperhq/hyperd
+  version: ~0.7.0
+  subpackages:
+  - client/api
+- package: github.com/labstack/echo
+  version: ~3.0.2
+- package: golang.org/x/net
+  subpackages:
+  - context

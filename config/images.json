@@ -1,0 +1,6 @@
+[
+  "ubuntu:16.04",
+  "fedora:25",
+  "debian:8",
+  "centos:7"
+]
