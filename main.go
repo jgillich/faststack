@@ -1,9 +1,11 @@
 package main
 
-import "termbox/api"
+import (
+	"fmt"
+	"termbox/api"
+)
 
 func main() {
-
+	fmt.Println("foo")
 	api.Run()
-
 }

@@ -31,13 +31,12 @@ export default class App extends Component {
         </span>
 
         <div className="nav-right nav-menu">
-          <a className="nav-item" href="/">
+          <Link className="nav-item" to="/">
             Home
-          </a>
-          <a className="nav-item" href="/faq">
+          </Link>
+          <Link className="nav-item" to="/faq">
             FAQ
-          </a>
-
+          </Link>
         </div>
       </nav>
       {this.props.children}

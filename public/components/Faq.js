@@ -1,12 +1,9 @@
 import React from 'react'
-import {Store} from 'redux'
-import {Router as ReactRouter, Route, IndexRoute} from 'react-router'
-import App from './App'
-import Home from './Home'
+import Markdown from 'react-markdown'
 
 let faq = `
 
-  ### Who is ${APPNAME} for?
+  ### Who is Termbox for?
 
   People that need to quickly test something (feel free to run
   \`rm -rf --no-preserve-root /\` here), people that need a specific Linux
@@ -40,7 +37,9 @@ let faq = `
 
 `
 
-export const Router = () =>
-  <div>
-
-  </div>
+export default Faq = () =>
+  <section className="section">
+    <div className="container">
+      <Markdown source={faq}/>
+    </div>
+  </section>

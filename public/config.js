@@ -25,12 +25,12 @@ System.config({
     "bulma": "npm:bulma@0.2.3",
     "core-js": "npm:core-js@1.2.7",
     "css": "github:systemjs/plugin-css@0.1.32",
-    "react": "npm:react@15.4.0",
+    "react": "npm:react@15.4.1",
     "react-dom": "npm:react-dom@15.4.0",
     "react-google-recaptcha": "npm:react-google-recaptcha@0.5.4",
+    "react-markdown": "npm:react-markdown@2.4.2",
     "react-redux": "npm:react-redux@4.4.6",
     "react-router": "npm:react-router@3.0.0",
-    "react-router-redux": "npm:react-router-redux@4.0.7",
     "redux": "npm:redux@3.6.0",
     "redux-logger": "npm:redux-logger@2.7.4",
     "redux-thunk": "npm:redux-thunk@2.1.0",
@@ -113,6 +113,23 @@ System.config({
       "isarray": "npm:isarray@1.0.0",
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
+    "npm:commonmark-react-renderer@4.3.1": {
+      "commonmark": "npm:commonmark@0.24.0",
+      "in-publish": "npm:in-publish@2.0.0",
+      "lodash.assign": "npm:lodash.assign@4.2.0",
+      "lodash.isplainobject": "npm:lodash.isplainobject@4.0.6",
+      "pascalcase": "npm:pascalcase@0.1.1",
+      "process": "github:jspm/nodelibs-process@0.1.2",
+      "react": "npm:react@15.4.1",
+      "xss-filters": "npm:xss-filters@1.2.7"
+    },
+    "npm:commonmark@0.24.0": {
+      "entities": "npm:entities@1.1.1",
+      "mdurl": "npm:mdurl@1.0.1",
+      "process": "github:jspm/nodelibs-process@0.1.2",
+      "string.prototype.repeat": "npm:string.prototype.repeat@0.2.0",
+      "systemjs-json": "github:systemjs/plugin-json@0.1.2"
+    },
     "npm:core-js@1.2.7": {
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "path": "github:jspm/nodelibs-path@0.1.0",
@@ -128,6 +145,9 @@ System.config({
     "npm:encoding@0.1.12": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
       "iconv-lite": "npm:iconv-lite@0.4.15"
+    },
+    "npm:entities@1.1.1": {
+      "systemjs-json": "github:systemjs/plugin-json@0.1.2"
     },
     "npm:fbjs@0.8.6": {
       "core-js": "npm:core-js@1.2.7",
@@ -154,6 +174,9 @@ System.config({
       "stream": "github:jspm/nodelibs-stream@0.1.0",
       "string_decoder": "github:jspm/nodelibs-string_decoder@0.1.0",
       "systemjs-json": "github:systemjs/plugin-json@0.1.2"
+    },
+    "npm:in-publish@2.0.0": {
+      "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:inherits@2.0.1": {
       "util": "github:jspm/nodelibs-util@0.1.0"
@@ -218,12 +241,20 @@ System.config({
       "loose-envify": "npm:loose-envify@1.3.0",
       "object-assign": "npm:object-assign@4.1.0",
       "process": "github:jspm/nodelibs-process@0.1.2",
-      "react": "npm:react@15.4.0"
+      "react": "npm:react@15.4.1"
     },
     "npm:react-google-recaptcha@0.5.4": {
       "babel-runtime": "npm:babel-runtime@5.8.38",
-      "react": "npm:react@15.4.0",
+      "react": "npm:react@15.4.1",
       "react-async-script": "npm:react-async-script@0.5.1"
+    },
+    "npm:react-markdown@2.4.2": {
+      "commonmark": "npm:commonmark@0.24.0",
+      "commonmark-react-renderer": "npm:commonmark-react-renderer@4.3.1",
+      "in-publish": "npm:in-publish@2.0.0",
+      "path": "github:jspm/nodelibs-path@0.1.0",
+      "process": "github:jspm/nodelibs-process@0.1.2",
+      "react": "npm:react@15.4.1"
     },
     "npm:react-redux@4.4.6": {
       "hoist-non-react-statics": "npm:hoist-non-react-statics@1.2.0",
@@ -231,7 +262,7 @@ System.config({
       "lodash": "npm:lodash@4.17.2",
       "loose-envify": "npm:loose-envify@1.3.0",
       "process": "github:jspm/nodelibs-process@0.1.2",
-      "react": "npm:react@15.4.0",
+      "react": "npm:react@15.4.1",
       "redux": "npm:redux@3.6.0"
     },
     "npm:react-router@3.0.0": {
@@ -240,10 +271,10 @@ System.config({
       "invariant": "npm:invariant@2.2.2",
       "loose-envify": "npm:loose-envify@1.3.0",
       "process": "github:jspm/nodelibs-process@0.1.2",
-      "react": "npm:react@15.4.0",
+      "react": "npm:react@15.4.1",
       "warning": "npm:warning@3.0.0"
     },
-    "npm:react@15.4.0": {
+    "npm:react@15.4.1": {
       "fbjs": "npm:fbjs@0.8.6",
       "loose-envify": "npm:loose-envify@1.3.0",
       "object-assign": "npm:object-assign@4.1.0",
@@ -310,6 +341,9 @@ System.config({
     },
     "npm:warning@3.0.0": {
       "loose-envify": "npm:loose-envify@1.3.0",
+      "process": "github:jspm/nodelibs-process@0.1.2"
+    },
+    "npm:xss-filters@1.2.7": {
       "process": "github:jspm/nodelibs-process@0.1.2"
     }
   }

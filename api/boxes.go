@@ -14,7 +14,6 @@ import (
 
 type createResponse struct {
 	podID string
-	error string
 }
 
 func createBox(c echo.Context) error {
@@ -22,7 +21,7 @@ func createBox(c echo.Context) error {
 
 	image := c.FormValue("image")
 	if !imageAllowed(image) {
-		return c.JSON(http.StatusBadRequest, createResponse{error: "invalid image"})
+		// FIXME return error
 	}
 
 	container := pod.UserContainer{
@@ -35,10 +34,9 @@ func createBox(c echo.Context) error {
 		Tty:        true,
 	}
 
-	podID, statusCode, err := cc.hyper.CreatePod(pod)
+	podID, _, err := cc.hyper.CreatePod(pod)
 	if err != nil {
-		log.Println(err, statusCode)
-		return c.JSON(http.StatusInternalServerError, createResponse{error: "failed to create pod"})
+		return err
 	}
 
 	return c.JSON(http.StatusOK, createResponse{podID: podID})

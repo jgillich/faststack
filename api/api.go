@@ -3,6 +3,7 @@ package api
 import (
 	"github.com/hyperhq/hyperd/client/api"
 	"github.com/labstack/echo"
+	"github.com/labstack/gommon/log"
 )
 
 type ApiContext struct {
@@ -12,6 +13,8 @@ type ApiContext struct {
 
 func Run() {
 	e := echo.New()
+	e.Debug = true
+	e.Logger.SetLevel(log.DEBUG)
 
 	hyper := api.NewClient("unix", "/var/run/hyper.sock", nil)
 
