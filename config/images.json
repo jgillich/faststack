@@ -1,6 +1,6 @@
 [
-  "ubuntu:16.04",
-  "fedora:25",
-  "debian:8",
-  "centos:7"
+  "termbox/ubuntu:16.04",
+  "termbox/fedora:25",
+  "termbox/debian:8",
+  "termbox/centos:7"
 ]
