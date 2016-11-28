@@ -5,10 +5,12 @@ import App from './App'
 import Home from './Home'
 import Faq from './Faq'
 
-export default Router = () =>
+const Router = () =>
   <ReactRouter history={hashHistory}>
     <Route path='/' component={App}>
       <IndexRoute component={Home}/>
       <Route path='/faq' component={Faq}/>
     </Route>
   </ReactRouter>
+
+export default Router

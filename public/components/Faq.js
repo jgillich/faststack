@@ -2,7 +2,6 @@ import React from 'react'
 import Markdown from 'react-markdown'
 
 let faq = `
-
   ### Who is Termbox for?
 
   People that need to quickly test something (feel free to run
@@ -24,7 +23,7 @@ let faq = `
 
   ### Where can I report a bug or request a feature?
 
-  Please write to hi@instantlinux.com.
+  Please create a issue on our [Github page](https://github.com/termbox/termbox).
 
   ### How can this be free?
 
@@ -32,14 +31,13 @@ let faq = `
   less than $0.0002, so we don't loose much by offering it for free. In the
   future, we want to show non-obtrusive ads to relevant services to finance
   hosting and development.
-
-
-
 `
 
-export default Faq = () =>
+const Faq = () =>
   <section className="section">
     <div className="container">
       <Markdown source={faq}/>
     </div>
   </section>
+
+export default Faq
