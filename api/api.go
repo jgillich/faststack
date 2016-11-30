@@ -25,7 +25,7 @@ func Run() {
 		}
 	})
 
-	e.Static("/", "public")
+	e.Static("/", "app")
 
 	e.POST("/box", createBox)
 	e.POST("/box/:id/exec", execBox)

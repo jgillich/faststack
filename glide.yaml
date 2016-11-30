@@ -9,3 +9,5 @@ import:
 - package: golang.org/x/net
   subpackages:
   - context
+- package: github.com/joho/godotenv
+  version: ^1.0.0
