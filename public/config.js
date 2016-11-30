@@ -13,9 +13,18 @@ System.config({
     "npm:*": "jspm_packages/npm/*"
   },
   meta: {
-    "*.scss": { "loader": "sass" },
-    "*.sass": { "loader": "sass" },
-    "*.css": { "loader": "css" }
+    "*.json": {
+      "loader": "json"
+    },
+    "*.scss": {
+      "loader": "sass"
+    },
+    "*.sass": {
+      "loader": "sass"
+    },
+    "*.css": {
+      "loader": "css"
+    }
   },
   map: {
     "babel": "npm:babel-core@5.8.38",
@@ -23,6 +32,7 @@ System.config({
     "bulma": "npm:bulma@0.2.3",
     "core-js": "npm:core-js@1.2.7",
     "css": "github:systemjs/plugin-css@0.1.32",
+    "json": "github:systemjs/plugin-json@0.2.2",
     "react": "npm:react@15.4.1",
     "react-dom": "npm:react-dom@15.4.0",
     "react-google-recaptcha": "npm:react-google-recaptcha@0.5.4",

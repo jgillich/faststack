@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router';
 import Recaptcha from 'react-google-recaptcha'
+import images from "../config/images.json!"
 
 export default class App extends Component {
 
@@ -19,42 +20,34 @@ export default class App extends Component {
   render() {
     return <div >
 
-      <section className="hero">
+      <section className="hero is-primary">
         <div className="hero-body">
           <div className="container has-text-centered">
             <h1 className="title">
-              Get instant access to a Linux machine!
+              Launch a Linux box with two clicks.
             </h1>
           </div>
         </div>
       </section>
-
 
       <section className="section">
         <div className="container">
 
           <nav className="level">
             <div className="level-item">
-             <p className="control has-addons">
-                <a className="button is-large" href="#">
-                  <span className="icon"><span className="fl-ubuntu"></span></span>
-                  &nbsp;Ubuntu
-                </a>
-                <a className="button is-large" href="#">
-                  <span className="icon"><span className="fl-debian"></span></span>
-                  &nbsp;Debian
-                </a>
-                <a className="button is-large" href="#">
-                  <span className="icon"><span className="fl-fedora"></span></span>
-                  &nbsp;Fedora
-                </a>
-                <a className="button is-large" href="#">
-                  <span className="icon"><span className="fl-centos"></span></span>
-                  &nbsp;CentOS
-                </a>
-              </p>
+              <div className="tabs is-toggle">
+                <ul>
+                  {images.map((image, i) =>
+                    <li className={i === 0 ? 'is-active' : ''}>
+                      <a>
+                        <span className="icon is-large"><i className={'icon-' + image.name}></i></span>
+                        <span>{image.displayName}</span>
+                      </a>
+                    </li>
+                  )}
+                </ul>
+              </div>
             </div>
-
             <div className="level-item">
               <Recaptcha
                 ref="recaptcha"
@@ -63,7 +56,7 @@ export default class App extends Component {
             </div>
 
             <div className="level-item">
-               <a className="button is-large is-primary" href="#">
+              <a className="button is-large is-primary" href="#">
                 Launch
               </a>
             </div>
@@ -71,10 +64,9 @@ export default class App extends Component {
         </div>
       </section>
 
+
       <section className="section">
         <div className="container">
-
-
 
           <div className="columns">
 
@@ -90,7 +82,7 @@ export default class App extends Component {
                     <div className="content">
                       <p>
                         <strong>Free</strong><br/>
-                        InstantLinux is completely free, no sign up required.
+                        Termbox is completely free, no sign up required.
                       </p>
                     </div>
                   </div>
@@ -110,7 +102,7 @@ export default class App extends Component {
                     <div className="content">
                       <p>
                         <strong>Secure</strong><br/>
-                        Containers are securely isolated in their own virtual
+                        Boxes are securely isolated in their own virtual
                         machine.
                       </p>
                     </div>
@@ -131,7 +123,8 @@ export default class App extends Component {
                     <div className="content">
                       <p>
                         <strong>Ephemeral</strong><br/>
-                        A container and all its data is automatically deleted after 6 hours.
+                        Boxes and all their data are automatically deleted after
+                        6 hours.
                       </p>
                     </div>
                   </div>

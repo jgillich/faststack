@@ -20,6 +20,7 @@
     "dependencies": {
       "bulma": "npm:bulma@^0.2.3",
       "css": "github:systemjs/plugin-css@^0.1.32",
+      "json": "github:systemjs/plugin-json@^0.2.2",
       "react": "npm:react@^15.4.0",
       "react-dom": "npm:react-dom@^15.4.0",
       "react-google-recaptcha": "npm:react-google-recaptcha@^0.5.4",
