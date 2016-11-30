@@ -5,12 +5,18 @@ import images from "../config/images.json!"
 
 export default class App extends Component {
 
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
 
     this.state = {
-
+        activeImage: images[0]
     }
+  }
+
+  setActive(image) {
+    this.setState({
+      activeImage: image
+    })
   }
 
   createContainer() {
@@ -37,9 +43,9 @@ export default class App extends Component {
             <div className="level-item">
               <div className="tabs is-toggle">
                 <ul>
-                  {images.map((image, i) =>
-                    <li className={i === 0 ? 'is-active' : ''}>
-                      <a>
+                  {images.map((image) =>
+                    <li className={this.state.activeImage.name == image.name ? 'is-active' : ''} key={image.name}>
+                      <a onClick={e => this.setActive(image)}>
                         <span className="icon is-large"><i className={'icon-' + image.name}></i></span>
                         <span>{image.displayName}</span>
                       </a>
@@ -52,6 +58,7 @@ export default class App extends Component {
               <Recaptcha
                 ref="recaptcha"
                 sitekey="6LfgsAwUAAAAAJVKLSxG4Qk7K-ggw4wEvrxCbMGd"
+                onChange={e => null}
               />
             </div>
 
