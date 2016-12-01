@@ -63,9 +63,12 @@ export default class App extends Component {
             </div>
 
             <div className="level-item">
-              <a className="button is-large is-primary" href="#">
-                Launch
-              </a>
+              <Link className="button is-large is-primary">
+                <span className="icon">
+                  <i className="fa fa-rocket"></i>
+                </span>
+                <span>Launch</span>
+              </Link>
             </div>
           </nav>
         </div>

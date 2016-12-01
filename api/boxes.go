@@ -2,15 +2,33 @@ package api
 
 import (
 	"encoding/json"
+	"errors"
 	"io/ioutil"
 	"log"
 	"net/http"
+	"strings"
 
 	"golang.org/x/net/websocket"
 
 	"github.com/hyperhq/runv/hypervisor/pod"
 	"github.com/labstack/echo"
 )
+
+var (
+	images Images
+)
+
+func init() {
+	dat, err := ioutil.ReadFile("app/config/images.json")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	err = json.Unmarshal([]byte(dat), &images)
+	if err != nil {
+		log.Fatal(err)
+	}
+}
 
 type createResponse struct {
 	podID string
@@ -19,9 +37,23 @@ type createResponse struct {
 func createBox(c echo.Context) error {
 	cc := c.(*ApiContext)
 
-	image := c.FormValue("image")
+	s := strings.Split(c.FormValue("image"), ":")
+	image, version := s[0], s[1]
+
+	imageAllowed := func(imageName string) bool {
+		for _, i := range images {
+			if i.Name == image {
+				for _, v := range i.Versions {
+					if v == version {
+						return true
+					}
+				}
+			}
+		}
+		return false
+	}
 	if !imageAllowed(image) {
-		// FIXME return error
+		return errors.New("image not allowed")
 	}
 
 	container := pod.UserContainer{
@@ -40,26 +72,6 @@ func createBox(c echo.Context) error {
 	}
 
 	return c.JSON(http.StatusOK, createResponse{podID: podID})
-}
-
-func imageAllowed(imageName string) bool {
-	dat, err := ioutil.ReadFile("config/images.json")
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	var images []string
-	err = json.Unmarshal([]byte(dat), &images)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	for _, i := range images {
-		if i == imageName {
-			return true
-		}
-	}
-	return false
 }
 
 type execMessage struct {
