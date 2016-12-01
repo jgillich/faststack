@@ -34,7 +34,7 @@ type createResponse struct {
 	podID string
 }
 
-func createBox(c echo.Context) error {
+func CreateBox(c echo.Context) error {
 	cc := c.(*ApiContext)
 
 	s := strings.Split(c.FormValue("image"), ":")
@@ -79,7 +79,7 @@ type execMessage struct {
 	Message string `json:"message"`
 }
 
-func execBox(c echo.Context) error {
+func ExecBox(c echo.Context) error {
 	websocket.Handler(func(ws *websocket.Conn) {
 		podID := ""
 

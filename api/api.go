@@ -27,8 +27,8 @@ func Run() {
 
 	e.Static("/", "app")
 
-	e.POST("/box", createBox)
-	e.POST("/box/:id/exec", execBox)
+	e.POST("/boxes", CreateBox)
+	e.POST("/boxes/:id/exec", ExecBox)
 
 	e.Logger.Fatal(e.Start(":8888"))
 }

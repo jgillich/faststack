@@ -1,10 +1,11 @@
+import 'whatwg-fetch'
+
 import React from 'react'
 import {render} from 'react-dom';
 import {Provider} from 'react-redux';
 import App from './components/App'
 import Router from './components/Router'
 import createStore from './store';
-
 
 const store = createStore();
 

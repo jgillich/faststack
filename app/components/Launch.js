@@ -1,26 +1,29 @@
 import React, {Component} from 'react'
-import {Link} from 'react-router';
+import {Link} from 'react-router'
+import {connect} from 'react-redux'
 import Recaptcha from 'react-google-recaptcha'
 import images from "../config/images.json!"
+import {createBox} from '../actions/box'
 
-export default class App extends Component {
+export class Launch extends Component {
 
   constructor(props) {
     super(props)
 
     this.state = {
-        activeImage: images[0]
+        image: images[0]
     }
   }
 
-  setActive(image) {
+  launchClick() {
+    this.props.dispatch(createBox({
+      image: this.state.image.image + ':' + this.state.image.versions[0],
+      recaptcha: this.state.recaptcha
+    }))
+
     this.setState({
-      activeImage: image
+      loading: true
     })
-  }
-
-  createContainer() {
-
   }
 
   render() {
@@ -44,8 +47,8 @@ export default class App extends Component {
               <div className="tabs is-toggle">
                 <ul>
                   {images.map((image) =>
-                    <li className={this.state.activeImage.name == image.name ? 'is-active' : ''} key={image.name}>
-                      <a onClick={e => this.setActive(image)}>
+                    <li className={this.state.image.name == image.name ? 'is-active' : ''} key={image.name}>
+                      <a onClick={e => this.setState({image: image})}>
                         <span className="icon is-large"><i className={'icon-' + image.name}></i></span>
                         <span>{image.displayName}</span>
                       </a>
@@ -58,17 +61,17 @@ export default class App extends Component {
               <Recaptcha
                 ref="recaptcha"
                 sitekey="6LfgsAwUAAAAAJVKLSxG4Qk7K-ggw4wEvrxCbMGd"
-                onChange={e => null}
+                onChange={v => this.setState({recaptcha: v})}
               />
             </div>
 
             <div className="level-item">
-              <Link className="button is-large is-primary">
+              <a className={'button is-large is-primary' + (this.state.loading ? ' is-loading' : '')} onClick={this.launchClick.bind(this)}>
                 <span className="icon">
                   <i className="fa fa-rocket"></i>
                 </span>
                 <span>Launch</span>
-              </Link>
+              </a>
             </div>
           </nav>
         </div>
@@ -151,3 +154,9 @@ export default class App extends Component {
   }
 
 }
+
+
+export const LaunchContainer = connect(
+  state => ({}),
+  dispatch => ({dispatch})
+)(Launch);

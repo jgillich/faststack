@@ -12,6 +12,7 @@ System.config({
     "github:*": "jspm_packages/github/*",
     "npm:*": "jspm_packages/npm/*"
   },
+
   meta: {
     "*.json": {
       "loader": "json"
@@ -26,6 +27,7 @@ System.config({
       "loader": "css"
     }
   },
+
   map: {
     "babel": "npm:babel-core@5.8.38",
     "babel-runtime": "npm:babel-runtime@5.8.38",
@@ -43,6 +45,7 @@ System.config({
     "redux-logger": "npm:redux-logger@2.7.4",
     "redux-thunk": "npm:redux-thunk@2.1.0",
     "sass": "github:mobilexag/plugin-sass@0.5.0",
+    "whatwg-fetch": "npm:whatwg-fetch@2.0.1",
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.4.1"
     },
