@@ -1,5 +1,5 @@
-hash: 6e0364c739ed70a27926ac86075ecbb780ce4a11277369dc4efa76d23e192655
-updated: 2016-12-02T02:58:25.739957023+01:00
+hash: 2879f141ecd0b1e3889ca46450f288a49b61d18b3d349b41eaf4c5bf2545859b
+updated: 2016-12-03T00:27:53.199344012+01:00
 imports:
 - name: github.com/Azure/go-ansiterm
   version: 70b2c90b260171e829f1ebd7c17f600c11858dbe
@@ -200,6 +200,8 @@ imports:
   version: 14f550f51af52180c2eefed15e5fd18d63c0a64a
 - name: github.com/gorilla/mux
   version: e444e69cbd2e2e3e0749a2f3c717cec491552bbf
+- name: github.com/gorilla/websocket
+  version: 1f512fc3f05332ba7117626cdfb4e07474e58e60
 - name: github.com/hyperhq/hyperd
   version: 9f31f2a534d842d6d8f2a31c2a6f3a11b1cdcbc7
   subpackages:
@@ -243,7 +245,7 @@ imports:
 - name: github.com/joho/godotenv
   version: a01a834e1654b4c9ca5b3ad05159445cc9c7ad08
 - name: github.com/labstack/echo
-  version: cd2530ea098106338b888f4fb66e966efa2fd75e
+  version: 8d504c1b699c757b267255c53b3e5219f9974abc
 - name: github.com/labstack/gommon
   version: 9a43ff0d261e0e65594422e9eee08cf301aabbe7
   subpackages:

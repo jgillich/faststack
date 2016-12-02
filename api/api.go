@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"os"
 	"strings"
 
 	"time"
@@ -52,7 +53,12 @@ func Run() {
 	e.POST("/boxes", CreateBox)
 	e.POST("/boxes/:id/exec", ExecBox)
 
-	e.Logger.Fatal(e.Start(":8888"))
+	tlscert, tlskey := os.Getenv("TLS_CERT"), os.Getenv("TLS_KEY")
+	if tlscert != "" && tlskey != "" {
+		e.Logger.Fatal(e.StartTLS(":7842", "cert.pem", "key.pem"))
+	} else {
+		e.Logger.Fatal(e.Start(":7842"))
+	}
 }
 
 type PullImages struct {
