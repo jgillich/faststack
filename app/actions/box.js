@@ -9,7 +9,7 @@ export function createBox(box) {
       if(res.status != 200) {
         return dispatch({
           type: 'ADD_ERROR',
-          text: res.statusText
+          error: new Error(res.statusText)
         })
       }
 

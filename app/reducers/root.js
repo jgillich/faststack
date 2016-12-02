@@ -1,7 +1,10 @@
-import {combineReducers} from "redux";
+import {combineReducers} from 'redux';
+import boxReducer from './box'
+import errorReducer from './error'
 
 const rootReducer = combineReducers({
-  shutUpRedux: (s) => s || {}
+  box: boxReducer,
+  errors: errorReducer
 });
 
 export default rootReducer;
