@@ -19,7 +19,7 @@ var (
 )
 
 func init() {
-	dat, err := ioutil.ReadFile("app/config/images.json")
+	dat, err := ioutil.ReadFile("images/images.json")
 	if err != nil {
 		log.Fatal(err)
 	}

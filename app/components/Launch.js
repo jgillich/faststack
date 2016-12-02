@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {Link} from 'react-router'
 import {connect} from 'react-redux'
 import Recaptcha from 'react-google-recaptcha'
-import images from "../config/images.json!"
+import images from "../images.json!"
 import {createBox} from '../actions/box'
 
 export class Launch extends Component {
