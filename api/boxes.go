@@ -53,9 +53,18 @@ func CreateBox(c echo.Context) error {
 		Tty:        true,
 	}
 
-	podID, _, err := Hyper.CreatePod(pod)
+	podID, statusCode, err := Hyper.CreatePod(pod)
 	if err != nil {
-		return err
+		if statusCode == http.StatusNotFound {
+			err = HyperClient.PullImages(&pod)
+			if err != nil {
+				return err
+			}
+			podID, statusCode, err = Hyper.CreatePod(pod)
+		}
+		if err != nil {
+			return err
+		}
 	}
 
 	return c.JSON(http.StatusOK, CreateBoxResponse{PodID: podID})

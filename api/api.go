@@ -41,7 +41,6 @@ func Run() {
 	e.Logger.SetLevel(log.DEBUG)
 
 	jobrunner.Start()
-	jobrunner.Now(PullImages{})
 	jobrunner.Schedule("@midnight", PullImages{})
 
 	e.Static("/", "app")
