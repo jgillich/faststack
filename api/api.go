@@ -4,6 +4,9 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"strings"
+
+	"time"
 
 	"github.com/bamzi/jobrunner"
 	"github.com/hyperhq/hyperd/client"
@@ -41,6 +44,7 @@ func Run() {
 	e.Logger.SetLevel(log.DEBUG)
 
 	jobrunner.Start()
+	jobrunner.Schedule("@every 1m", RemoveBoxes{})
 	jobrunner.Schedule("@midnight", PullImages{})
 
 	e.Static("/", "app")
@@ -64,5 +68,42 @@ func (c PullImages) Run() {
 				log.Error(err)
 			}
 		}
+	}
+}
+
+type RemoveBoxes struct {
+}
+
+func (c RemoveBoxes) Run() {
+	remoteInfo, err := Hyper.List("pod", "", "", true)
+	if err != nil {
+		log.Error(err)
+		return
+	}
+
+	for _, podData := range remoteInfo.GetList("podData") {
+		fields := strings.Split(podData, ":")
+		podID, podName := fields[0], fields[1]
+
+		if podName != "termbox-userbox" {
+			continue
+		}
+
+		podInfo, err := Hyper.GetPodInfo(podID)
+		if err != nil {
+			log.Error(err)
+			continue
+		}
+
+		// Delete pods after 6 hours
+		if (time.Now().Unix() - podInfo.CreatedAt) > 21600 {
+			err := Hyper.RmPod(podID)
+			if err != nil {
+				log.Error(err)
+				continue
+			}
+			log.Info("Deleted ", podID)
+		}
+
 	}
 }

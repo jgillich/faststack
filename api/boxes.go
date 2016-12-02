@@ -48,6 +48,7 @@ func CreateBox(c echo.Context) error {
 	}
 
 	pod := pod.UserPod{
+		Name:       "termbox-userbox",
 		Containers: []pod.UserContainer{container},
 		Resource:   pod.UserResource{Vcpu: 1, Memory: 256},
 		Tty:        true,
