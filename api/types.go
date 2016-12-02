@@ -9,3 +9,12 @@ type Image struct {
 }
 
 type Images []Image
+
+type CreateBoxRequest struct {
+	Image   string `json:"image"`
+	Version string `json:"version"`
+	Captcha string `json:"captcha"`
+}
+type CreateBoxResponse struct {
+	PodID string `json:"podID"`
+}

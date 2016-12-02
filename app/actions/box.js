@@ -3,6 +3,7 @@ export function createBox(box) {
   return function(dispatch) {
     fetch('/boxes', {
       method: 'POST',
+      headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(box)
     }).then(res => {
       if(res.status != 200) {

@@ -17,7 +17,8 @@ export class Launch extends Component {
 
   launchClick() {
     this.props.dispatch(createBox({
-      image: this.state.image.image + ':' + this.state.image.versions[0],
+      image: this.state.image.image,
+      version: this.state.image.versions[0],
       recaptcha: this.state.recaptcha
     }))
 

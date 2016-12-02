@@ -3,10 +3,10 @@ package api
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
-	"strings"
 
 	"golang.org/x/net/websocket"
 
@@ -30,21 +30,25 @@ func init() {
 	}
 }
 
-type createResponse struct {
-	podID string
-}
-
 func CreateBox(c echo.Context) error {
 	cc := c.(*ApiContext)
 
-	s := strings.Split(c.FormValue("image"), ":")
-	image, version := s[0], s[1]
+	body, err := ioutil.ReadAll(c.Request().Body)
+	if err != nil {
+		return err
+	}
 
-	imageAllowed := func(imageName string) bool {
-		for _, i := range images {
-			if i.Name == image {
-				for _, v := range i.Versions {
-					if v == version {
+	var req CreateBoxRequest
+	err = json.Unmarshal(body, &req)
+	if err != nil {
+		return err
+	}
+
+	imageAllowed := func() bool {
+		for _, image := range images {
+			if req.Image == image.Image {
+				for _, version := range image.Versions {
+					if req.Version == version {
 						return true
 					}
 				}
@@ -52,12 +56,13 @@ func CreateBox(c echo.Context) error {
 		}
 		return false
 	}
-	if !imageAllowed(image) {
+
+	if !imageAllowed() {
 		return errors.New("image not allowed")
 	}
 
 	container := pod.UserContainer{
-		Image: image,
+		Image: fmt.Sprintf("%s:%s", req.Image, req.Version),
 	}
 
 	pod := pod.UserPod{
@@ -71,7 +76,7 @@ func CreateBox(c echo.Context) error {
 		return err
 	}
 
-	return c.JSON(http.StatusOK, createResponse{podID: podID})
+	return c.JSON(http.StatusOK, CreateBoxResponse{PodID: podID})
 }
 
 type execMessage struct {
