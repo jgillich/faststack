@@ -8,8 +8,6 @@ type Image struct {
 	Versions    []string
 }
 
-type Images []Image
-
 type CreateBoxRequest struct {
 	Image   string `json:"image"`
 	Version string `json:"version"`

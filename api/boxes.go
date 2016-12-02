@@ -14,25 +14,7 @@ import (
 	"github.com/labstack/echo"
 )
 
-var (
-	images Images
-)
-
-func init() {
-	dat, err := ioutil.ReadFile("images/images.json")
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	err = json.Unmarshal([]byte(dat), &images)
-	if err != nil {
-		log.Fatal(err)
-	}
-}
-
 func CreateBox(c echo.Context) error {
-	cc := c.(*ApiContext)
-
 	body, err := ioutil.ReadAll(c.Request().Body)
 	if err != nil {
 		return err
@@ -45,7 +27,7 @@ func CreateBox(c echo.Context) error {
 	}
 
 	imageAllowed := func() bool {
-		for _, image := range images {
+		for _, image := range Images {
 			if req.Image == image.Image {
 				for _, version := range image.Versions {
 					if req.Version == version {
@@ -71,7 +53,7 @@ func CreateBox(c echo.Context) error {
 		Tty:        true,
 	}
 
-	podID, _, err := cc.hyper.CreatePod(pod)
+	podID, _, err := Hyper.CreatePod(pod)
 	if err != nil {
 		return err
 	}

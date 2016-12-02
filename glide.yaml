@@ -11,3 +11,4 @@ import:
   - context
 - package: github.com/joho/godotenv
   version: ^1.0.0
+- package: github.com/bamzi/jobrunner

@@ -1,6 +1,30 @@
-hash: 72beb9e92a23334db536dc1824eacc3ff65fee5c18e4fee05a1cd238c31882e6
-updated: 2016-11-30T23:47:55.521204619+01:00
+hash: 6e0364c739ed70a27926ac86075ecbb780ce4a11277369dc4efa76d23e192655
+updated: 2016-12-02T02:58:25.739957023+01:00
 imports:
+- name: github.com/Azure/go-ansiterm
+  version: 70b2c90b260171e829f1ebd7c17f600c11858dbe
+  subpackages:
+  - winterm
+- name: github.com/bamzi/jobrunner
+  version: 273175f8b6ebabab8a639a4e6260a5c50fbf016a
+- name: github.com/docker/distribution
+  version: 0f2d99b13ae0cfbcf118eff103e6e680b726b47e
+  subpackages:
+  - context
+  - digest
+  - manifest
+  - manifest/manifestlist
+  - manifest/schema1
+  - manifest/schema2
+  - reference
+  - registry/api/errcode
+  - registry/api/v2
+  - registry/client
+  - registry/client/auth
+  - registry/client/transport
+  - registry/storage/cache
+  - registry/storage/cache/memory
+  - uuid
 - name: github.com/docker/docker
   version: 20f81dde9bd97c86b2d0e33bbbf1388018611929
   subpackages:
@@ -138,6 +162,8 @@ imports:
   - tlsconfig
 - name: github.com/docker/go-units
   version: 651fc226e7441360384da338d0fd37f2440ffbe3
+- name: github.com/docker/libtrust
+  version: 9cbd2a1374f46905c68a4eb3694a130610adc62a
 - name: github.com/gogo/protobuf
   version: 82d16f734d6d871204a3feb1a73cb220cc92574c
   subpackages:
@@ -170,9 +196,14 @@ imports:
   version: 9e6977f30c91c78396e719e164e57f9287fff42c
   subpackages:
   - proto
+- name: github.com/gorilla/context
+  version: 14f550f51af52180c2eefed15e5fd18d63c0a64a
+- name: github.com/gorilla/mux
+  version: e444e69cbd2e2e3e0749a2f3c717cec491552bbf
 - name: github.com/hyperhq/hyperd
   version: 9f31f2a534d842d6d8f2a31c2a6f3a11b1cdcbc7
   subpackages:
+  - client
   - client/api
   - engine
   - lib/promise
@@ -207,6 +238,8 @@ imports:
   - lib/term
   - lib/utils
   - template
+- name: github.com/jessevdk/go-flags
+  version: 1acbbaff2f347c412a0c7884873bd72cc9c1f5b4
 - name: github.com/joho/godotenv
   version: a01a834e1654b4c9ca5b3ad05159445cc9c7ad08
 - name: github.com/labstack/echo
@@ -222,6 +255,26 @@ imports:
   version: 30a891c33c7cde7b02a981314b4228ec99380cca
 - name: github.com/miekg/dns
   version: 75e6e86cc601825c5dbcd4e0c209eab180997cd7
+- name: github.com/opencontainers/runc
+  version: 47e3f834d73e76bc2a6a585b48d2a93325b34979
+  subpackages:
+  - libcontainer
+  - libcontainer/apparmor
+  - libcontainer/cgroups
+  - libcontainer/cgroups/fs
+  - libcontainer/cgroups/systemd
+  - libcontainer/configs
+  - libcontainer/configs/validate
+  - libcontainer/criurpc
+  - libcontainer/devices
+  - libcontainer/label
+  - libcontainer/nsenter
+  - libcontainer/seccomp
+  - libcontainer/selinux
+  - libcontainer/stacktrace
+  - libcontainer/system
+  - libcontainer/user
+  - libcontainer/utils
 - name: github.com/opencontainers/runtime-spec
   version: b2f69c69e8cd3dc2ce6a58c27254a665ae3ccd5f
   subpackages:
@@ -234,6 +287,12 @@ imports:
   version: 4df1190835320af7076dfcf27b3d071fd3612caf
 - name: github.com/valyala/fasttemplate
   version: 3b874956e03f1636d171bda64b130f9135f42cff
+- name: github.com/vbatts/tar-split
+  version: 0de4e9db0c2672f3d741cb6738fc5ff00528dd91
+  subpackages:
+  - archive/tar
+  - tar/asm
+  - tar/storage
 - name: github.com/xenolf/lego
   version: 0abbd738a45af51595a214c52b02b18d16974f19
   subpackages:
@@ -241,6 +300,8 @@ imports:
 - name: golang.org/x/crypto
   version: c10c31b5e94b6f7a0283272dc2bb27163dcea24b
   subpackages:
+  - bcrypt
+  - blowfish
   - ocsp
 - name: golang.org/x/net
   version: fb93926129b8ec0056f2f458b1f519654814edf0
@@ -270,9 +331,13 @@ imports:
   - naming
   - peer
   - transport
+- name: gopkg.in/robfig/cron.v2
+  version: be2e0b0deed5a68ffee390b4583a13aff8321535
 - name: gopkg.in/square/go-jose.v1
   version: aa2e30fdd1fe9dd3394119af66451ae790d50e0d
   subpackages:
   - cipher
   - json
+- name: gopkg.in/yaml.v2
+  version: 7ad95dd0798a40da1ccdff6dff35fd177b5edf40
 testImports: []
