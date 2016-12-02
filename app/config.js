@@ -36,7 +36,7 @@ System.config({
     "css": "github:systemjs/plugin-css@0.1.32",
     "json": "github:systemjs/plugin-json@0.2.2",
     "react": "npm:react@15.4.1",
-    "react-dom": "npm:react-dom@15.4.0",
+    "react-dom": "npm:react-dom@15.4.1",
     "react-google-recaptcha": "npm:react-google-recaptcha@0.5.4",
     "react-markdown": "npm:react-markdown@2.4.2",
     "react-redux": "npm:react-redux@4.4.6",
@@ -44,7 +44,7 @@ System.config({
     "redux": "npm:redux@3.6.0",
     "redux-logger": "npm:redux-logger@2.7.4",
     "redux-thunk": "npm:redux-thunk@2.1.0",
-    "sass": "github:mobilexag/plugin-sass@0.5.0",
+    "sass": "github:mobilexag/plugin-sass@0.5.1",
     "whatwg-fetch": "npm:whatwg-fetch@2.0.1",
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.4.1"
@@ -102,12 +102,11 @@ System.config({
     "github:jspm/nodelibs-zlib@0.1.0": {
       "browserify-zlib": "npm:browserify-zlib@0.1.4"
     },
-    "github:mobilexag/plugin-sass@0.5.0": {
+    "github:mobilexag/plugin-sass@0.5.1": {
       "autoprefixer": "npm:autoprefixer@6.5.3",
       "css-asset-copier": "npm:css-asset-copier@1.0.2",
       "css-url-rewriter-ex": "npm:css-url-rewriter-ex@1.0.6",
       "fs": "github:jspm/nodelibs-fs@0.1.2",
-      "lodash": "npm:lodash@4.17.2",
       "path": "github:jspm/nodelibs-path@0.1.0",
       "postcss": "npm:postcss@5.2.6",
       "reqwest": "github:ded/reqwest@2.0.5",
@@ -133,7 +132,7 @@ System.config({
     },
     "npm:autoprefixer@6.5.3": {
       "browserslist": "npm:browserslist@1.4.0",
-      "caniuse-db": "npm:caniuse-db@1.0.30000588",
+      "caniuse-db": "npm:caniuse-db@1.0.30000590",
       "normalize-range": "npm:normalize-range@0.1.2",
       "num2fraction": "npm:num2fraction@1.2.2",
       "postcss": "npm:postcss@5.2.6",
@@ -208,7 +207,7 @@ System.config({
       "util": "github:jspm/nodelibs-util@0.1.0"
     },
     "npm:browserslist@1.4.0": {
-      "caniuse-db": "npm:caniuse-db@1.0.30000588",
+      "caniuse-db": "npm:caniuse-db@1.0.30000590",
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "path": "github:jspm/nodelibs-path@0.1.0",
       "process": "github:jspm/nodelibs-process@0.1.2",
@@ -568,7 +567,7 @@ System.config({
     "npm:react-async-script@0.5.1": {
       "babel-runtime": "npm:babel-runtime@5.8.38"
     },
-    "npm:react-dom@15.4.0": {
+    "npm:react-dom@15.4.1": {
       "fbjs": "npm:fbjs@0.8.6",
       "loose-envify": "npm:loose-envify@1.3.0",
       "object-assign": "npm:object-assign@4.1.0",

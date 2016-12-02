@@ -11,10 +11,12 @@
     "babel-core": "^6.18.2",
     "babel-preset-es2015": "^6.18.0",
     "jshint": "^2.9.4",
-    "jspm": "^0.16.48",
-    "jspm-dev-server": "^0.4.1"
+    "jspm": "^0.16.48"
   },
   "jspm": {
+    "directories": {
+      "baseURL": "app"
+    },
     "dependencies": {
       "bulma": "npm:bulma@^0.2.3",
       "css": "github:systemjs/plugin-css@^0.1.32",
