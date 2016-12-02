@@ -60,7 +60,10 @@ func (c PullImages) Run() {
 		for _, version := range image.Versions {
 			imageName := fmt.Sprintf("%s:%s", image.Image, version)
 			log.Info("Pulling image ", imageName)
-			HyperClient.PullImage(imageName)
+			err := HyperClient.PullImage(imageName)
+			if err != nil {
+				log.Error(err)
+			}
 		}
 	}
 }
