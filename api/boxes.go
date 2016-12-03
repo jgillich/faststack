@@ -52,7 +52,7 @@ func CreateBox(c echo.Context) error {
 			return err
 		}
 		if !verify.Success {
-			return errors.New("failed to verify captcha")
+			return errors.New("Captcha verification failed")
 		}
 	} else {
 		Logger.Warn("Creating box without captcha verfication")
@@ -70,14 +70,14 @@ func CreateBox(c echo.Context) error {
 		}
 	}
 	if !imageAllowed {
-		return errors.New("image not allowed")
+		return errors.New("Image not allowed")
 	}
 
 	// make sure we are not running out of memory
 	mem := sigar.Mem{}
 	mem.Get()
 	if mem.ActualFree < bytefmt.GIGABYTE {
-		return errors.New("resource limit reached")
+		return errors.New("Resource limit reached, try again later")
 	}
 
 	container := pod.UserContainer{
