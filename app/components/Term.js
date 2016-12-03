@@ -12,29 +12,31 @@ export default class Term extends Component {
       let term = new hterm.Terminal();
       term.decorate(this.termElem);
 
-      var ws = new WebSocket(`wss://${location.host}/boxes/${this.props.params.podId}/exec`);
+      term.prefs_.set('audible-bell-sound', '')
+      term.prefs_.set('ctrl-c-copy', true);
+      term.prefs_.set('use-default-window-copy', true);
 
-      term.onTerminalReady = function() {
-        let  io = term.io.push();
+      let ws = new WebSocket(`ws${location.protocol === 'https:' ? 's' : ''}://${location.host}/boxes/${this.props.params.podId}/exec`);
 
-        ws.onmessage = (ev) => {
-          term.io.print(ev.data)
+      ws.onmessage = (ev) => {
+        term.io.print(ev.data)
+      }
+
+      function HTerm(argv) {
+        this.io = argv.io.push();
+      }
+
+      HTerm.prototype.run = function() {
+        this.io.onVTKeystroke = this.io.sendString = (str) => {
+          ws.send(str)
         }
+      }
 
-        io.onVTKeystroke = function(str) {
-          ws.send(str)
-        };
-
-        io.sendString = function(str) {
-          ws.send(str)
-        };
-
-        io.onTerminalResize = function(columns, rows) {
-          // React to size changes here.
-          // Secure Shell pokes at NaCl, which eventually results in
-          // some ioctls on the host.
-        };
+      HTerm.prototype.sendString_ = function(str) {
+        ws.send(str)
       };
+
+      term.runCommandClass(HTerm);
     })
   }
 
