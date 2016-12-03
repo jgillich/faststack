@@ -86,7 +86,7 @@ func CreateBox(c echo.Context) error {
 	pod := pod.UserPod{
 		Name:       "termbox",
 		Containers: []pod.UserContainer{container},
-		Resource:   pod.UserResource{Vcpu: 1, Memory: 256},
+		Resource:   pod.UserResource{Vcpu: 1, Memory: 512},
 	}
 
 	podID, statusCode, err := Hyper.CreatePod(pod)

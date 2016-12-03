@@ -7,7 +7,7 @@ let faq = `
 
   #### What are the resource limits?
 
-  Every box gets 256MB RAM, a single CPU and 10GB disk.
+  Every box gets 512MB RAM, a single CPU and 10GB disk.
 
   #### Can I use this to run servers?
 
