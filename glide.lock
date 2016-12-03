@@ -1,12 +1,16 @@
-hash: d2b2ce23afea87055ff02074317a0ce1c408f01471d11a8a9ae7d3b65a881c2e
-updated: 2016-12-03T05:40:41.096962389+01:00
+hash: 2261a1e68b60e9fbc6e494c6620cc56c59b8e2bd0b27e6beca0915158ec5a9ac
+updated: 2016-12-03T07:21:56.166930459+01:00
 imports:
+- name: code.cloudfoundry.org/bytefmt
+  version: b12c1522f4cbb5f35861bd5dd2c39a4fa996441a
 - name: github.com/Azure/go-ansiterm
   version: 70b2c90b260171e829f1ebd7c17f600c11858dbe
   subpackages:
   - winterm
 - name: github.com/bamzi/jobrunner
   version: 273175f8b6ebabab8a639a4e6260a5c50fbf016a
+- name: github.com/cloudfoundry/gosigar
+  version: c32d31af94b0e9d3b2877e49c1a581ad5a793343
 - name: github.com/docker/distribution
   version: 0f2d99b13ae0cfbcf118eff103e6e680b726b47e
   subpackages:

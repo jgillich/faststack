@@ -8,10 +8,13 @@ import (
 	"net/http"
 	"os"
 
+	"code.cloudfoundry.org/bytefmt"
+
 	"golang.org/x/net/websocket"
 
 	"net/url"
 
+	sigar "github.com/cloudfoundry/gosigar"
 	"github.com/hyperhq/runv/hypervisor/pod"
 	"github.com/labstack/echo"
 )
@@ -69,6 +72,13 @@ func CreateBox(c echo.Context) error {
 		return errors.New("image not allowed")
 	}
 
+	// make sure we are not running out of memory
+	mem := sigar.Mem{}
+	mem.Get()
+	if mem.ActualFree < bytefmt.GIGABYTE {
+		return errors.New("resource limit reached")
+	}
+
 	container := pod.UserContainer{
 		Image: fmt.Sprintf("%s:%s", req.Image, req.Version),
 	}
@@ -77,7 +87,6 @@ func CreateBox(c echo.Context) error {
 		Name:       "termbox",
 		Containers: []pod.UserContainer{container},
 		Resource:   pod.UserResource{Vcpu: 1, Memory: 256},
-		Tty:        true,
 	}
 
 	podID, statusCode, err := Hyper.CreatePod(pod)

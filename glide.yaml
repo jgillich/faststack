@@ -14,3 +14,5 @@ import:
 - package: github.com/bamzi/jobrunner
 - package: github.com/Sirupsen/logrus
   version: ^0.11.0
+- package: github.com/cloudfoundry/gosigar
+- package: code.cloudfoundry.org/bytefmt
