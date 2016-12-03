@@ -2,10 +2,10 @@ FROM alpine:3.4
 
 RUN apk add --no-cache \
       build-base bash \
-      curl file sudo \
+      curl file \
       git subversion \
       nodejs \
       ruby ruby-bundler \
       go \
       python3 py-pip && \
-    curl -sSf https://static.rust-lang.org/rustup.sh | sh
+    curl https://sh.rustup.rs -sSf | sh -s -- -y
