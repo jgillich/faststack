@@ -19,7 +19,7 @@ export class Launch extends Component {
     this.props.dispatch(createBox({
       image: this.state.image.image,
       version: this.state.image.versions[0],
-      recaptcha: this.state.recaptcha
+      captcha: this.state.captcha
     }))
 
     this.setState({
@@ -61,8 +61,8 @@ export class Launch extends Component {
             <div className="level-item">
               <Recaptcha
                 ref="recaptcha"
-                sitekey="6LfgsAwUAAAAAJVKLSxG4Qk7K-ggw4wEvrxCbMGd"
-                onChange={v => this.setState({recaptcha: v})}
+                sitekey="6Lf-uw0UAAAAACcJpyWXVZMgNlG-fkS7Nscshkmq"
+                onChange={c => this.setState({captcha: c})}
               />
             </div>
 

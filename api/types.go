@@ -16,3 +16,7 @@ type CreateBoxRequest struct {
 type CreateBoxResponse struct {
 	PodID string `json:"podID"`
 }
+
+type CaptchaVerifyResponse struct {
+	Success bool `json:"success"`
+}

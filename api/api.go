@@ -14,6 +14,7 @@ import (
 	"github.com/hyperhq/hyperd/client"
 	"github.com/hyperhq/hyperd/client/api"
 	"github.com/labstack/echo"
+	"github.com/labstack/gommon/log"
 )
 
 var (
@@ -42,6 +43,8 @@ func init() {
 
 func Run() {
 	e := echo.New()
+	e.Debug = true
+	e.Logger.SetLevel(log.INFO)
 
 	jobrunner.Start()
 	jobrunner.Schedule("@every 1m", RemoveBoxes{})
@@ -91,7 +94,7 @@ func (c RemoveBoxes) Run() {
 		fields := strings.Split(podData, ":")
 		podID, podName := fields[0], fields[1]
 
-		if podName != "termbox-userbox" {
+		if podName != "termbox" {
 			continue
 		}
 

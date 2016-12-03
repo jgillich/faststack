@@ -6,8 +6,11 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"os"
 
 	"golang.org/x/net/websocket"
+
+	"net/url"
 
 	"github.com/hyperhq/runv/hypervisor/pod"
 	"github.com/labstack/echo"
@@ -25,20 +28,44 @@ func CreateBox(c echo.Context) error {
 		return err
 	}
 
-	imageAllowed := func() bool {
-		for _, image := range Images {
-			if req.Image == image.Image {
-				for _, version := range image.Versions {
-					if req.Version == version {
-						return true
-					}
+	// validate captcha if secret is configured
+	if os.Getenv("RECAPTCHA_SECRET") != "" {
+		data := url.Values{}
+		data.Set("secret", os.Getenv("RECAPTCHA_SECRET"))
+		data.Set("response", req.Captcha)
+		data.Set("remoteip", c.RealIP())
+
+		res, err := http.PostForm("https://www.google.com/recaptcha/api/siteverify", data)
+		if err != nil {
+			return err
+		}
+
+		defer res.Body.Close()
+
+		var verify CaptchaVerifyResponse
+		err = json.NewDecoder(res.Body).Decode(&verify)
+		if err != nil {
+			return err
+		}
+		if !verify.Success {
+			return errors.New("failed to verify captcha")
+		}
+	} else {
+		Logger.Warn("Creating box without captcha verfication")
+	}
+
+	// verify image is whitelisted
+	imageAllowed := false
+	for _, image := range Images {
+		if req.Image == image.Image {
+			for _, version := range image.Versions {
+				if req.Version == version {
+					imageAllowed = true
 				}
 			}
 		}
-		return false
 	}
-
-	if !imageAllowed() {
+	if !imageAllowed {
 		return errors.New("image not allowed")
 	}
 
@@ -47,7 +74,7 @@ func CreateBox(c echo.Context) error {
 	}
 
 	pod := pod.UserPod{
-		Name:       "termbox-userbox",
+		Name:       "termbox",
 		Containers: []pod.UserContainer{container},
 		Resource:   pod.UserResource{Vcpu: 1, Memory: 256},
 		Tty:        true,
@@ -95,8 +122,6 @@ func ExecBox(c echo.Context) error {
 			}
 		}
 		container, _ := Hyper.GetContainerByPod(podID)
-
-		Logger.Info("CreatExec ", container)
 
 		command, err := json.Marshal([]string{"bash"})
 		if err != nil {
