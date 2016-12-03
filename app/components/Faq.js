@@ -7,34 +7,25 @@ let faq = `
 
   #### What are the resource limits?
 
-  Each box gets 256MB RAM, a single CPU and 2GB disk. To ensure each user gets
-  a minimum of performance, we will instantly terminate
-  boxes that make excessive use of resources. We will work hard to make sure
-  legitimate users will never be hit by this, but we can not tolarate people
-  that use our platform to mine bitcoin, among other things.
+  Every box gets 256MB RAM, a single CPU and 10GB disk.
 
   #### Can I use this to run servers?
 
-  At the moment no, but we plan to assign each box a single public port >1024.
+  Not yet.
 
-  #### Aren't containers insecure?
+  #### How is this implemented?
 
   We use [HyperContainer](https://hypercontainer.io/) to isolate each
-  box in a virtual machine, which gives us the best of both worlds: Low startup
-  times and high security.
+  box in a virtual machine, which gives us the best of both vm's and containers:
+  High security and low startup times.
 
   #### Can I delete a box manually?
 
-  No, it will be automatically deleted after 6 hours. Start as many  boxes as
-  you like, you don't have to worry about removing old ones.
-
-  If you want to delete personal data, feel free to run \`rm -rf --no-preserve-root /\`.
-  You always wanted to do that anyway, didn't you? :)
+  No, it will be automatically deleted after 6 hours.
 
   #### Can I access my box using SSH?
 
-  At the moment, no. Automatically launching boxes via SSH is something we have
-  planned for the future.
+  No.
 
   #### Where can I report a bug or request a feature?
 
@@ -42,10 +33,9 @@ let faq = `
 
   #### How can this be free?
 
-  At our current capacity of 100 concurrent boxes, a single launch costs us
-  around $0.0002, so we don't loose much by offering it for free. In the
-  future, we want to show non-obtrusive ads to relevant services to finance
-  hosting and development.
+  At our current capacity, a single launch costs us around $0.0002, so we don't
+  loose much by offering it for free. In order to increase performance, we will
+  be looking at displaying relevant ads.
 `
 
 const Faq = () =>
