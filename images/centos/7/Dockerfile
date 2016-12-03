@@ -3,7 +3,7 @@ FROM centos:7
 # TODO golang
 RUN yum update -y && \
     yum install -y \
-      @development \
+      @development sudo \
       subversion \
       nodejs npm \
       ruby rubygem-bundler \
