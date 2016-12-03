@@ -1,7 +1,7 @@
 FROM alpine:3.4
 
 RUN apk add --no-cache \
-      build-base \
+      build-base bash \
       curl file sudo \
       git subversion \
       nodejs \
