@@ -13,30 +13,33 @@ export default class Term extends Component {
       term.decorate(this.termElem);
 
       term.prefs_.set('audible-bell-sound', '')
-      term.prefs_.set('ctrl-c-copy', true);
-      term.prefs_.set('use-default-window-copy', true);
+      term.prefs_.set('ctrl-c-copy', true)
+      term.prefs_.set('use-default-window-copy', true)
 
-      let ws = new WebSocket(`ws${location.protocol === 'https:' ? 's' : ''}://${location.host}/boxes/${this.props.params.podId}/exec`);
+      let ws = new WebSocket(`ws${location.protocol === 'https:' ? 's' : ''}://${location.host}/boxes/${this.props.params.podId}/exec`)
 
       ws.onmessage = (ev) => {
         term.io.print(ev.data)
       }
 
+      ws.onclose = () => {
+        term.io.print('connection closed')
+      }
+
       function HTerm(argv) {
-        this.io = argv.io.push();
+        this.io = argv.io.push()
       }
 
       HTerm.prototype.run = function() {
         this.io.onVTKeystroke = this.io.sendString = (str) => {
-          ws.send(str)
+          ws.send(JSON.stringify({data: str}))
+        }
+        this.io.onTerminalResize = (width, height) => {
+          ws.send(JSON.stringify({width, height}))
         }
       }
 
-      HTerm.prototype.sendString_ = function(str) {
-        ws.send(str)
-      };
-
-      term.runCommandClass(HTerm);
+      term.runCommandClass(HTerm)
     })
   }
 

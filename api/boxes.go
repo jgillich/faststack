@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"io"
 	"io/ioutil"
 	"net/http"
 	"os"
@@ -130,7 +131,7 @@ func ExecBox(c echo.Context) error {
 				return
 			}
 		}
-		container, _ := Hyper.GetContainerByPod(podID)
+		containerID, _ := Hyper.GetContainerByPod(podID)
 
 		command, err := json.Marshal([]string{"bash"})
 		if err != nil {
@@ -138,19 +139,56 @@ func ExecBox(c echo.Context) error {
 			return
 		}
 
-		execID, err := Hyper.CreateExec(container, command, true)
+		execID, err := Hyper.CreateExec(containerID, command, true)
 		if err != nil {
 			Logger.Warn(err)
 			return
 		}
 
-		err = Hyper.StartExec(container, execID, true, ws, ws, ws)
 		if err != nil {
 			Logger.Warn(err)
 			return
+		}
+
+		dec := json.NewDecoder(ws)
+
+		r, w := io.Pipe()
+
+		go func() {
+			err = Hyper.StartExec(containerID, execID, true, r, ws, ws)
+			if err != nil {
+				Logger.Warn(err)
+				return
+			}
+		}()
+
+		for {
+			var message ExecBoxMessage
+			err := dec.Decode(&message)
+			if err != nil {
+				Logger.Warning(err)
+				break
+			}
+
+			if message.Width != 0 && message.Height != 0 {
+				err = Hyper.WinResize(containerID, execID, message.Height, message.Width)
+				continue
+			}
+			if message.Data != "" {
+				io.WriteString(w, message.Data)
+				if err != nil {
+					Logger.Warn(err)
+					break
+				}
+			}
 		}
 
 	}).ServeHTTP(c.Response(), c.Request())
 	return nil
 
+}
+
+type ExecReader struct {
+	data      []byte
+	readIndex int64
 }
