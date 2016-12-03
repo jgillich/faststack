@@ -12,6 +12,7 @@ System.config({
     "github:*": "jspm_packages/github/*",
     "npm:*": "jspm_packages/npm/*"
   },
+
   meta: {
     "*.json": {
       "loader": "json"
@@ -33,6 +34,7 @@ System.config({
     "bulma": "npm:bulma@0.2.3",
     "core-js": "npm:core-js@1.2.7",
     "css": "github:systemjs/plugin-css@0.1.32",
+    "hterm-umdjs": "npm:hterm-umdjs@1.1.3",
     "json": "github:systemjs/plugin-json@0.2.2",
     "react": "npm:react@15.4.1",
     "react-dom": "npm:react-dom@15.4.1",
@@ -417,6 +419,13 @@ System.config({
       "process": "github:jspm/nodelibs-process@0.1.2",
       "query-string": "npm:query-string@4.2.3",
       "warning": "npm:warning@3.0.0"
+    },
+    "npm:hterm-umdjs@1.1.3": {
+      "buffer": "github:jspm/nodelibs-buffer@0.1.0",
+      "child_process": "github:jspm/nodelibs-child_process@0.1.0",
+      "fs": "github:jspm/nodelibs-fs@0.1.2",
+      "path": "github:jspm/nodelibs-path@0.1.0",
+      "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:https-browserify@0.0.0": {
       "http": "github:jspm/nodelibs-http@1.7.1"

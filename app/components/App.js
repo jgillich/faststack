@@ -5,7 +5,7 @@ import {ErrorContainer} from './Error'
 export default class App extends Component {
 
   render() {
-    return <div>
+    return <div style={{height: '100%'}}>
       <nav className="nav">
         <div className="container">
           <div className="nav-left">

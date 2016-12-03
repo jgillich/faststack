@@ -4,12 +4,14 @@ import {Router as ReactRouter, Route, IndexRoute, hashHistory} from 'react-route
 import App from './App'
 import {LaunchContainer} from './Launch'
 import Faq from './Faq'
+import Term from './Term'
 
 const Router = () =>
   <ReactRouter history={hashHistory}>
     <Route path='/' component={App}>
       <IndexRoute component={LaunchContainer}/>
       <Route path='/faq' component={Faq}/>
+      <Route path='term' component={Term}/>
     </Route>
   </ReactRouter>
 
