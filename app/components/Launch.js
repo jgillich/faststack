@@ -28,6 +28,8 @@ export class Launch extends Component {
   }
 
   render() {
+    let {box} = this.props
+
     return <div >
 
       <section className="hero is-primary">
@@ -67,7 +69,7 @@ export class Launch extends Component {
             </div>
 
             <div className="level-item">
-              <a className={'button is-large is-primary' + (this.state.loading ? ' is-loading' : '')} onClick={this.launchClick.bind(this)}>
+              <a className={'button is-large is-primary' + (box.loading ? ' is-loading' : '')} onClick={this.launchClick.bind(this)}>
                 <span className="icon">
                   <i className="fa fa-rocket"></i>
                 </span>
@@ -75,9 +77,14 @@ export class Launch extends Component {
               </a>
             </div>
           </nav>
+
+          {box.error ?
+            <div className="notification is-danger">
+              {box.error.message}
+            </div>
+          : null}
         </div>
       </section>
-
 
       <section className="section">
         <div className="container">
@@ -158,6 +165,6 @@ export class Launch extends Component {
 
 
 export const LaunchContainer = connect(
-  state => ({}),
+  state => ({box: state.box}),
   dispatch => ({dispatch})
 )(Launch);

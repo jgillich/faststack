@@ -1,6 +1,12 @@
+import {hashHistory} from 'react-router'
 
 export function createBox(box) {
   return function(dispatch) {
+    dispatch({
+        type: 'CREATE_BOX',
+        loading: true,
+    })
+
     fetch('/boxes', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
@@ -8,15 +14,19 @@ export function createBox(box) {
     }).then(res => {
       if(res.status != 200) {
         return dispatch({
-          type: 'ADD_ERROR',
-          error: new Error(res.statusText)
+          type: 'CREATE_BOX',
+          error: new Error(res.statusText),
         })
       }
 
+      return res.json()
+    }).then((json) => {
+      box = Object.assign(box, json)
       dispatch({
         type: 'CREATE_BOX',
-        box: Object.assign(box, res.json()),
+        box: box,
       })
+      hashHistory.push(`/term/${box.podID}`)
     })
   };
 }

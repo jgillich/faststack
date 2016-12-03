@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import {Link} from "react-router";
-import {ErrorContainer} from './Error'
 
 export default class App extends Component {
 
@@ -40,8 +39,6 @@ export default class App extends Component {
           </div>
         </div>
       </nav>
-
-      <ErrorContainer/>
 
       {this.props.children}
 

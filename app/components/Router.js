@@ -11,7 +11,7 @@ const Router = () =>
     <Route path='/' component={App}>
       <IndexRoute component={LaunchContainer}/>
       <Route path='/faq' component={Faq}/>
-      <Route path='term' component={Term}/>
+      <Route path='/term/:podId' component={Term}/>
     </Route>
   </ReactRouter>
 

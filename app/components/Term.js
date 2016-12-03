@@ -12,7 +12,7 @@ export default class Term extends Component {
       let term = new hterm.Terminal();
       term.decorate(this.termElem);
 
-      var ws = new WebSocket(`wss://${location.host}/boxes/pod-qFMOiURfmo/exec`);
+      var ws = new WebSocket(`wss://${location.host}/boxes/${this.props.params.podId}/exec`);
 
       term.onTerminalReady = function() {
         let  io = term.io.push();

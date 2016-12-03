@@ -2,7 +2,9 @@
 export default function boxReducer(state = {}, action) {
 
   switch (action.type) {
-    case "LAUNCH_BOX":
+    case "CREATE_BOX":
+      return action
+
   }
 
   return state
