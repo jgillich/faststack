@@ -8,5 +8,5 @@ RUN yum update -y && \
       nodejs npm \
       ruby rubygem-bundler \
       python3 python3-pip && \
-    yum clean && \
+    yum clean all && \
     curl -sSf https://static.rust-lang.org/rustup.sh | sh
