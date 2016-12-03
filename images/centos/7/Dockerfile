@@ -2,7 +2,7 @@ FROM centos:7
 
 # TODO golang
 RUN yum update -y && \
-    yum install -y && \
+    yum install -y \
       @development \
       subversion \
       nodejs npm \

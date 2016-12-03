@@ -9,4 +9,4 @@ RUN dnf update -y && \
       golang \
       rust cargo \
       python3 python3-pip && \
-    dnf clean
+    dnf clean all
