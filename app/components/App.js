@@ -5,7 +5,7 @@ export default class App extends Component {
 
   render() {
     return <div style={{height: '100%'}}>
-      <nav className="nav">
+      <nav className="nav has-shadow">
         <div className="container">
           <div className="nav-left">
             <a className="nav-item is-brand" href="#">
@@ -26,33 +26,12 @@ export default class App extends Component {
             <Link className="nav-item" to="/faq">
               FAQ
             </Link>
-
-            <span className="nav-item">
-              <a className="button is-primary" href="#">
-                <span className="icon">
-                  <i className="fa fa-rocket"></i>
-                </span>
-                <span>Launch</span>
-              </a>
-            </span>
-
           </div>
         </div>
       </nav>
 
       {this.props.children}
 
-      <footer className="footer">
-        <div className="container">
-          <div className="content has-text-centered">
-            <p>
-              <a className="icon" href="https://github.com/termbox/termbox">
-                <i className="fa fa-github"></i>
-              </a>
-            </p>
-          </div>
-        </div>
-      </footer>
     </div>
   }
 

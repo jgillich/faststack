@@ -39,10 +39,24 @@ export default class Term extends Component {
   }
 
   render() {
-    return <section className="section" style={{height: '80%'}}>
-      <div className="container" style={{height: '100%'}}>
-        <div ref={(div) => { this.termElem = div; }} style={{position: 'relative', width: '100%', height: '100%'}}/>
-      </div>
-    </section>
+    return <div style={{height: '90%'}}>
+      <section className="section" style={{height: '85%'}}>
+        <div className="container" style={{height: '100%'}}>
+          <div ref={(div) => { this.termElem = div; }} style={{position: 'relative', width: '100%', height: '100%'}}/>
+        </div>
+      </section>
+
+      <footer className="footer">
+        <div className="container">
+          <div className="content has-text-centered">
+            <p>
+              <strong>Want more?</strong>{' '}
+              <a href="http://www.vultr.com/?ref=7052736-3B">Sign up for Vultr</a>{' '}
+              and get $20 credit for high speed virtual servers.
+            </p>
+          </div>
+        </div>
+      </footer>
+    </div>
   }
 }

@@ -32,7 +32,7 @@ export class Launch extends Component {
 
     return <div >
 
-      <section className="hero is-primary">
+      <section className="hero is-bold is-primary">
         <div className="hero-body">
           <div className="container has-text-centered">
             <h1 className="title">
@@ -47,18 +47,18 @@ export class Launch extends Component {
 
           <nav className="level">
             <div className="level-item">
-              <div className="tabs is-toggle">
-                <ul>
-                  {images.map((image) =>
-                    <li className={this.state.image.name == image.name ? 'is-active' : ''} key={image.name}>
-                      <a onClick={e => this.setState({image: image})}>
-                        <span className="icon is-large"><i className={'icon-' + image.name}></i></span>
-                        <span>{image.displayName}</span>
-                      </a>
-                    </li>
-                  )}
-                </ul>
-              </div>
+              <p className="control has-addons">
+                {images.map((image) =>
+                  <a onClick={e => this.setState({image: image})}
+                     className={'button is-medium' + (this.state.image.name == image.name ? ' is-primary' : '')}
+                     key={image.name}>
+                    <span className="icon">
+                      <i className={'icon-' + image.name}></i>
+                    </span>
+                    <span>{image.displayName}</span>
+                  </a>
+                )}
+              </p>
             </div>
             <div className="level-item">
               <Recaptcha
@@ -69,7 +69,8 @@ export class Launch extends Component {
             </div>
 
             <div className="level-item">
-              <a className={'button is-large is-primary' + (box.loading ? ' is-loading' : '')} onClick={this.launchClick.bind(this)}>
+              <a className={'button is-medium is-primary' + (box.loading ? ' is-loading' : '')}
+                 onClick={this.launchClick.bind(this)}>
                 <span className="icon">
                   <i className="fa fa-rocket"></i>
                 </span>
@@ -92,65 +93,59 @@ export class Launch extends Component {
           <div className="columns">
 
             <div className="column">
-              <div className="box">
-                <article className="media">
-                  <div className="media-left">
-                    <figure className="icon is-large">
-                      <i className="fa fa-user-times" aria-hidden="true"></i>
-                    </figure>
+              <article className="media">
+                <div className="media-left">
+                  <figure className="icon is-large">
+                    <i className="fa fa-user-times" aria-hidden="true"></i>
+                  </figure>
+                </div>
+                <div className="media-content">
+                  <div className="content">
+                    <p>
+                      <strong>Free</strong><br/>
+                      Termbox is completely free, no sign up required.
+                    </p>
                   </div>
-                  <div className="media-content">
-                    <div className="content">
-                      <p>
-                        <strong>Free</strong><br/>
-                        Termbox is completely free, no sign up required.
-                      </p>
-                    </div>
-                  </div>
-                </article>
-              </div>
+                </div>
+              </article>
             </div>
 
             <div className="column">
-              <div className="box">
-                <article className="media">
-                  <div className="media-left">
-                    <figure className="icon is-large">
-                      <i className="fa fa-shield" aria-hidden="true"></i>
-                    </figure>
+              <article className="media">
+                <div className="media-left">
+                  <figure className="icon is-large">
+                    <i className="fa fa-shield" aria-hidden="true"></i>
+                  </figure>
+                </div>
+                <div className="media-content">
+                  <div className="content">
+                    <p>
+                      <strong>Secure</strong><br/>
+                      Boxes are securely isolated in their own virtual
+                      machine.
+                    </p>
                   </div>
-                  <div className="media-content">
-                    <div className="content">
-                      <p>
-                        <strong>Secure</strong><br/>
-                        Boxes are securely isolated in their own virtual
-                        machine.
-                      </p>
-                    </div>
-                  </div>
-                </article>
-              </div>
+                </div>
+              </article>
             </div>
 
             <div className="column">
-              <div className="box">
-                <article className="media">
-                  <div className="media-left">
-                    <figure className="icon is-large">
-                      <i className="fa fa fa-heartbeat" aria-hidden="true"></i>
-                    </figure>
+              <article className="media">
+                <div className="media-left">
+                  <figure className="icon is-large">
+                    <i className="fa fa fa-heartbeat" aria-hidden="true"></i>
+                  </figure>
+                </div>
+                <div className="media-content">
+                  <div className="content">
+                    <p>
+                      <strong>Ephemeral</strong><br/>
+                      Boxes and all their data are automatically deleted after
+                      6 hours.
+                    </p>
                   </div>
-                  <div className="media-content">
-                    <div className="content">
-                      <p>
-                        <strong>Ephemeral</strong><br/>
-                        Boxes and all their data are automatically deleted after
-                        6 hours.
-                      </p>
-                    </div>
-                  </div>
-                </article>
-              </div>
+                </div>
+              </article>
             </div>
 
           </div>
@@ -158,6 +153,7 @@ export class Launch extends Component {
 
         </div>
       </section>
+
     </div>
   }
 

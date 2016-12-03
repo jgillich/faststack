@@ -34,8 +34,8 @@ let faq = `
   #### How can this be free?
 
   At our current capacity, a single launch costs us around $0.0002, so we don't
-  loose much by offering it for free. In order to increase performance, we will
-  be looking at displaying relevant ads.
+  loose much by offering it for free. We are experimenting with ads in order
+  to increase server capacity and performance.
 `
 
 const Faq = () =>
