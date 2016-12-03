@@ -5,7 +5,6 @@ import (
 	"errors"
 	"fmt"
 	"io/ioutil"
-	"log"
 	"net/http"
 
 	"golang.org/x/net/websocket"
@@ -77,41 +76,47 @@ type execMessage struct {
 }
 
 func ExecBox(c echo.Context) error {
+
 	websocket.Handler(func(ws *websocket.Conn) {
-		podID := ""
-
-		sendErr := func(msg string) {
-			websocket.Message.Send(ws, execMessage{Type: "error", Message: msg})
-		}
-
 		defer ws.Close()
-		for {
-			raw := ""
-			err := websocket.Message.Receive(ws, &raw)
-			if err != nil {
-				log.Println(err)
-				sendErr("error receiving message, closing")
-				return
-			}
-			var msg execMessage
 
-			if err := json.Unmarshal([]byte(raw), &msg); err != nil {
-				sendErr("malformed message received, closing")
-				return
-			}
-
-			switch msg.Type {
-			case "attach":
-				if podID != "" {
-					sendErr("podID already set, closing")
-					return
-				}
-
-				podID = msg.Message
-
-			}
-
+		podID := c.Param("id")
+		podInfo, err := Hyper.GetPodInfo(podID)
+		if err != nil {
+			Logger.Debug(err)
+			websocket.Message.Send(ws, "box does not exist, closing connection")
+			return
 		}
+		if podInfo.Status.Phase != "Running" {
+			_, err := Hyper.StartPod(podID, "", false, false, nil, nil, nil)
+			if err != nil {
+				Logger.Warn(err)
+				return
+			}
+		}
+		container, _ := Hyper.GetContainerByPod(podID)
+
+		Logger.Info("CreatExec ", container)
+
+		command, err := json.Marshal([]string{"bash"})
+		if err != nil {
+			Logger.Error(err)
+			return
+		}
+
+		execID, err := Hyper.CreateExec(container, command, true)
+		if err != nil {
+			Logger.Warn(err)
+			return
+		}
+
+		err = Hyper.StartExec(container, execID, true, ws, ws, ws)
+		if err != nil {
+			Logger.Warn(err)
+			return
+		}
+
 	}).ServeHTTP(c.Response(), c.Request())
 	return nil
+
 }

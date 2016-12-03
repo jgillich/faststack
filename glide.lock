@@ -1,5 +1,5 @@
-hash: 2879f141ecd0b1e3889ca46450f288a49b61d18b3d349b41eaf4c5bf2545859b
-updated: 2016-12-03T00:27:53.199344012+01:00
+hash: d2b2ce23afea87055ff02074317a0ce1c408f01471d11a8a9ae7d3b65a881c2e
+updated: 2016-12-03T05:40:41.096962389+01:00
 imports:
 - name: github.com/Azure/go-ansiterm
   version: 70b2c90b260171e829f1ebd7c17f600c11858dbe
@@ -200,8 +200,6 @@ imports:
   version: 14f550f51af52180c2eefed15e5fd18d63c0a64a
 - name: github.com/gorilla/mux
   version: e444e69cbd2e2e3e0749a2f3c717cec491552bbf
-- name: github.com/gorilla/websocket
-  version: 1f512fc3f05332ba7117626cdfb4e07474e58e60
 - name: github.com/hyperhq/hyperd
   version: 9f31f2a534d842d6d8f2a31c2a6f3a11b1cdcbc7
   subpackages:
@@ -247,7 +245,7 @@ imports:
 - name: github.com/labstack/echo
   version: 8d504c1b699c757b267255c53b3e5219f9974abc
 - name: github.com/labstack/gommon
-  version: 9a43ff0d261e0e65594422e9eee08cf301aabbe7
+  version: 447fe7433567c785af957e549aadae2bf2000071
   subpackages:
   - color
   - log
@@ -255,8 +253,6 @@ imports:
   version: d228849504861217f796da67fae4f6e347643f15
 - name: github.com/mattn/go-isatty
   version: 30a891c33c7cde7b02a981314b4228ec99380cca
-- name: github.com/miekg/dns
-  version: 75e6e86cc601825c5dbcd4e0c209eab180997cd7
 - name: github.com/opencontainers/runc
   version: 47e3f834d73e76bc2a6a585b48d2a93325b34979
   subpackages:
@@ -281,10 +277,8 @@ imports:
   version: b2f69c69e8cd3dc2ce6a58c27254a665ae3ccd5f
   subpackages:
   - specs-go
-- name: github.com/rsc/letsencrypt
-  version: 76104d26167d38b6a0010f42bfc8ec5487742e8b
 - name: github.com/Sirupsen/logrus
-  version: 98a1428efc3d732f9e377b50c8e2113e070896cf
+  version: d26492970760ca5d33129d2d799e34be5c4782eb
 - name: github.com/tylerb/graceful
   version: 4df1190835320af7076dfcf27b3d071fd3612caf
 - name: github.com/valyala/fasttemplate
@@ -295,34 +289,25 @@ imports:
   - archive/tar
   - tar/asm
   - tar/storage
-- name: github.com/xenolf/lego
-  version: 0abbd738a45af51595a214c52b02b18d16974f19
+- name: golang.org/x/crypto
+  version: 8a549a1948fc5271eb24f36dcb0d3b47dec75a16
   subpackages:
   - acme
-- name: golang.org/x/crypto
-  version: c10c31b5e94b6f7a0283272dc2bb27163dcea24b
-  subpackages:
-  - bcrypt
-  - blowfish
-  - ocsp
+  - acme/autocert
 - name: golang.org/x/net
   version: fb93926129b8ec0056f2f458b1f519654814edf0
   subpackages:
   - context
+  - context/ctxhttp
   - http2
   - http2/hpack
   - internal/timeseries
-  - publicsuffix
   - trace
   - websocket
 - name: golang.org/x/sys
-  version: 20457ee8ea8546920d3f4e19e405da45250dc5a5
+  version: ca83bd2cb9abb47839b50eb4da612f00158f5870
   subpackages:
   - unix
-- name: golang.org/x/time
-  version: f51c12702a4d776e4c1fa9b0fabab841babae631
-  subpackages:
-  - rate
 - name: google.golang.org/grpc
   version: 933601d8cd6418a8a891bd9075a7161b0a67badb
   subpackages:
@@ -335,11 +320,6 @@ imports:
   - transport
 - name: gopkg.in/robfig/cron.v2
   version: be2e0b0deed5a68ffee390b4583a13aff8321535
-- name: gopkg.in/square/go-jose.v1
-  version: aa2e30fdd1fe9dd3394119af66451ae790d50e0d
-  subpackages:
-  - cipher
-  - json
 - name: gopkg.in/yaml.v2
   version: 7ad95dd0798a40da1ccdff6dff35fd177b5edf40
 testImports: []

@@ -9,17 +9,18 @@ import (
 
 	"time"
 
+	"github.com/Sirupsen/logrus"
 	"github.com/bamzi/jobrunner"
 	"github.com/hyperhq/hyperd/client"
 	"github.com/hyperhq/hyperd/client/api"
 	"github.com/labstack/echo"
-	"github.com/labstack/gommon/log"
 )
 
 var (
 	Hyper       = api.NewClient("unix", "/var/run/hyper.sock", nil)
 	HyperClient = client.NewHyperClient("unix", "/var/run/hyper.sock", nil)
 	Images      []Image
+	Logger      = logrus.New()
 )
 
 type ApiContext struct {
@@ -30,19 +31,17 @@ type ApiContext struct {
 func init() {
 	dat, err := ioutil.ReadFile("images/images.json")
 	if err != nil {
-		log.Fatal(err)
+		Logger.Fatal(err)
 	}
 
 	err = json.Unmarshal([]byte(dat), &Images)
 	if err != nil {
-		log.Fatal(err)
+		Logger.Fatal(err)
 	}
 }
 
 func Run() {
 	e := echo.New()
-	e.Debug = true
-	e.Logger.SetLevel(log.DEBUG)
 
 	jobrunner.Start()
 	jobrunner.Schedule("@every 1m", RemoveBoxes{})
@@ -51,12 +50,13 @@ func Run() {
 	e.Static("/", "app")
 
 	e.POST("/boxes", CreateBox)
-	e.POST("/boxes/:id/exec", ExecBox)
+	e.GET("/boxes/:id/exec", ExecBox)
 
 	tlscert, tlskey := os.Getenv("TLS_CERT"), os.Getenv("TLS_KEY")
 	if tlscert != "" && tlskey != "" {
 		e.Logger.Fatal(e.StartTLS(":7842", "cert.pem", "key.pem"))
 	} else {
+
 		e.Logger.Fatal(e.Start(":7842"))
 	}
 }
@@ -68,10 +68,10 @@ func (c PullImages) Run() {
 	for _, image := range Images {
 		for _, version := range image.Versions {
 			imageName := fmt.Sprintf("%s:%s", image.Image, version)
-			log.Info("Pulling image ", imageName)
+			Logger.Info("Pulling image ", imageName)
 			err := HyperClient.PullImage(imageName)
 			if err != nil {
-				log.Error(err)
+				Logger.Error(err)
 			}
 		}
 	}
@@ -83,7 +83,7 @@ type RemoveBoxes struct {
 func (c RemoveBoxes) Run() {
 	remoteInfo, err := Hyper.List("pod", "", "", true)
 	if err != nil {
-		log.Error(err)
+		Logger.Error(err)
 		return
 	}
 
@@ -97,7 +97,7 @@ func (c RemoveBoxes) Run() {
 
 		podInfo, err := Hyper.GetPodInfo(podID)
 		if err != nil {
-			log.Error(err)
+			Logger.Error(err)
 			continue
 		}
 
@@ -105,10 +105,10 @@ func (c RemoveBoxes) Run() {
 		if (time.Now().Unix() - podInfo.CreatedAt) > 21600 {
 			err := Hyper.RmPod(podID)
 			if err != nil {
-				log.Error(err)
+				Logger.Error(err)
 				continue
 			}
-			log.Info("Deleted ", podID)
+			Logger.Info("Deleted ", podID)
 		}
 
 	}

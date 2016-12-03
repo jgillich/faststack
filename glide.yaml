@@ -12,5 +12,5 @@ import:
 - package: github.com/joho/godotenv
   version: ^1.0.0
 - package: github.com/bamzi/jobrunner
-- package: github.com/gorilla/websocket
-  version: ^1.0.0
+- package: github.com/Sirupsen/logrus
+  version: ^0.11.0
