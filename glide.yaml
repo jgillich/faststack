@@ -1,4 +1,4 @@
-package: termbox
+package: github.com/termbox/termbox
 import:
 - package: github.com/hyperhq/hyperd
   version: ~0.7.0
