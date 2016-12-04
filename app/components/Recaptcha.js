@@ -13,7 +13,7 @@ window.grecaptchaCallback = () => {
 }
 
 function onLoad(callback, attempts = 0) {
-  if(grecaptcha) return callback();
+  if(grecaptcha) return setTimeout(callback, 0)
   if(attempts == 50) {
     throw new Error('Recaptcha not loaded after 5 seconds, giving up')
   }
@@ -21,38 +21,25 @@ function onLoad(callback, attempts = 0) {
 }
 
 export class Recaptcha extends Component {
+  shouldComponentUpdate() {
+    return false
+  }
 
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      loaded: false
-    }
-
-    onLoad(() => {
-      this.setState({loaded: true})
+  renderCaptcha() {
+    let {sitekey, theme, type, size} = this.props;
+    let elem = document.createElement('div')
+    let id = grecaptcha.render(elem, {
+      sitekey, theme, type, size,
+      callback: this.props.onChange,
+      "expired-callback": () => this.props.onChange(null),
     })
-  }
-
-  componentDidMount() {
-    this.componentDidUpdate()
-  }
-
-  componentDidUpdate() {
-    if(this.state.loaded && this.state.widgetId === undefined) {
-      let {sitekey, theme, type, size} = this.props;
-      let id = grecaptcha.render(this.element, {
-        sitekey, theme, type, size,
-        callback: this.props.onChange,
-        "expired-callback": () => this.props.onChange(null),
-      })
-      this.setState({
-        widgetId: id,
-      });
-    }
+    this.base.appendChild(elem)
   }
 
   render() {
-    return <div ref={e => this.element = e}></div>
+    onLoad(() => {
+      this.renderCaptcha()
+    })
+    return <div></div>
   }
 }
