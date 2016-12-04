@@ -13,6 +13,31 @@ Termbox is distributed as a Docker image:
 docker run -v /var/run/hyper.sock:/var/run/hyper.sock -p 7842:7842 termbox/termbox
 ```
 
+### Development
+
+Dependencies:
+
+* Golang, glide
+* Nodejs, npm
+
+Get the code and its dependencies:
+
+```sh
+go get -d github.com/termbox/termbox
+cd $GOPATH/github.com/termbox/termbox
+
+glide install
+npm install
+```
+
+Run the server:
+
+```sh
+go run main.go
+```
+
+Now open `localhost:7842`.
+
 ### Enable TLS
 
 To enable TLS and HTTP 2.0, set the `TLS_CERT` and `TLS_KEY` environment
