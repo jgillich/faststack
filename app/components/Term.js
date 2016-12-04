@@ -19,7 +19,7 @@ export default class Term extends Component {
       term.prefs_.set('cursor-color', '#00d1b2')
       term.prefs_.set('scroll-wheel-move-multiplier', 15)
 
-      let ws = new WebSocket(`ws${location.protocol === 'https:' ? 's' : ''}://${location.host}/boxes/${this.props.params.podId}/exec`)
+      let ws = new WebSocket(`ws${location.protocol === 'https:' ? 's' : ''}://${location.host}/boxes/${this.props.podId}/exec`)
 
       ws.onmessage = (ev) => {
         term.io.print(ev.data)

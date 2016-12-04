@@ -1,4 +1,4 @@
-import {hashHistory} from 'preact-router'
+import {route} from 'preact-router'
 
 export function createBox(box) {
   return function(dispatch) {
@@ -6,7 +6,6 @@ export function createBox(box) {
         type: 'CREATE_BOX',
         loading: true,
     })
-    console.log(box)
     fetch('/boxes', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
@@ -22,7 +21,7 @@ export function createBox(box) {
         type: 'CREATE_BOX',
         box: box,
       })
-      hashHistory.push(`/term/${box.podID}`)
+      route(`/term/${box.podID}`)
     }).catch(res => {
       return res.text()
     }).then(reason => {
