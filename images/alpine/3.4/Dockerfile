@@ -2,7 +2,7 @@ FROM alpine:3.4
 
 RUN apk add --no-cache \
       build-base bash \
-      curl file \
+      tmux curl file \
       git subversion \
       nodejs \
       ruby ruby-bundler \

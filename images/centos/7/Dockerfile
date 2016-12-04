@@ -4,6 +4,7 @@ FROM centos:7
 RUN yum update -y && \
     yum install -y \
       @development \
+      tmux \
       subversion \
       nodejs npm \
       ruby rubygem-bundler \

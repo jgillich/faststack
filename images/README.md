@@ -6,7 +6,7 @@ entry to `images.json`.
 All images should have the following software installed:
 
 * Basic unix tools (coreutils/busybox)
-* curl
+* tmux, curl
 * Version control: git, subversion
 * C/C++ compiler, make
 * Nodejs, npm
