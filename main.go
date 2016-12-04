@@ -1,9 +1,8 @@
 package main
 
 import (
-	"termbox/api"
-
 	"github.com/joho/godotenv"
+	"github.com/termbox/termbox/api"
 )
 
 func main() {
