@@ -1,4 +1,4 @@
-import {hashHistory} from 'react-router'
+import {hashHistory} from 'preact-router'
 
 export function createBox(box) {
   return function(dispatch) {
@@ -6,7 +6,7 @@ export function createBox(box) {
         type: 'CREATE_BOX',
         loading: true,
     })
-
+    console.log(box)
     fetch('/boxes', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},

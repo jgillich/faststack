@@ -4,11 +4,9 @@ import './styles/style.sass!'
 import 'bulma/css/bulma.css!'
 import 'whatwg-fetch'
 
-import React from 'react'
-import {render} from 'react-dom'
-import {Provider} from 'react-redux'
+import {h, render} from 'preact'
+import {Provider} from 'preact-redux';
 import App from './components/App'
-import Router from './components/Router'
 import createStore from './store'
 
 const store = createStore()
@@ -18,7 +16,7 @@ container.style.height = '100%'
 
 render(
   <Provider store={store}>
-    <Router/>
+    <App/>
   </Provider>,
   container
 )

@@ -7,5 +7,5 @@ import (
 
 func main() {
 	godotenv.Load()
-	api.Run()
+	api.New().Run()
 }

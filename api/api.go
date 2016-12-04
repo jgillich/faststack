@@ -27,9 +27,8 @@ var (
 	Logger      = logrus.New()
 )
 
-type ApiContext struct {
-	echo.Context
-	hyper *api.Client
+type Api struct {
+	server *echo.Echo
 }
 
 func init() {
@@ -44,32 +43,52 @@ func init() {
 	}
 }
 
-func Run() {
+func New() *Api {
+
 	e := echo.New()
 	e.Debug = true
 	e.Logger.SetLevel(log.INFO)
 
-	jobrunner.Start()
-	jobrunner.Schedule("@every 1m", RemoveBoxes{})
-	jobrunner.Schedule("@midnight", PullImages{})
+	e.Static("/", "app")
+
+	e.POST("/boxes", CreateBox)
+	e.GET("/boxes/:id/exec", ExecBox)
 
 	e.Renderer = &Template{
 		templates: template.Must(template.ParseGlob("views/*.html")),
 	}
 
-	e.Static("/", "app")
+	a := &Api{server: e}
 
-	e.GET("/", Index)
+	a.server.HTTPErrorHandler = a.ErrorHandler
 
-	e.POST("/boxes", CreateBox)
-	e.GET("/boxes/:id/exec", ExecBox)
+	return a
+}
+
+func (a *Api) Run() {
+
+	jobrunner.Start()
+	jobrunner.Schedule("@every 1m", RemoveBoxes{})
+	jobrunner.Schedule("@midnight", PullImages{})
 
 	tlscert, tlskey := os.Getenv("TLS_CERT"), os.Getenv("TLS_KEY")
 	if tlscert != "" && tlskey != "" {
-		e.Logger.Fatal(e.StartTLS(":7842", "cert.pem", "key.pem"))
+		Logger.Fatal(a.server.StartTLS(":7842", "cert.pem", "key.pem"))
 	} else {
+		Logger.Fatal(a.server.Start(":7842"))
+	}
+}
 
-		e.Logger.Fatal(e.Start(":7842"))
+func (a *Api) ErrorHandler(err error, c echo.Context) {
+	httpError, ok := err.(*echo.HTTPError)
+	if ok {
+		errorCode := httpError.Code
+		switch errorCode {
+		case http.StatusNotFound:
+			err = Index(c)
+		default:
+			a.server.DefaultHTTPErrorHandler(err, c)
+		}
 	}
 }
 
