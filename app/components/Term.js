@@ -15,6 +15,10 @@ export default class Term extends Component {
       term.prefs_.set('audible-bell-sound', '')
       term.prefs_.set('ctrl-c-copy', true)
       term.prefs_.set('use-default-window-copy', true)
+      term.prefs_.set('background-color', 'white')
+      term.prefs_.set('foreground-color', '#333')
+      term.prefs_.set('cursor-color', '#00d1b2')
+      term.prefs_.set('scroll-wheel-move-multiplier', 15)
 
       let ws = new WebSocket(`ws${location.protocol === 'https:' ? 's' : ''}://${location.host}/boxes/${this.props.params.podId}/exec`)
 
