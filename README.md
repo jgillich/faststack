@@ -33,7 +33,7 @@ npm install
 Run the server:
 
 ```sh
-go run main.go
+make run
 ```
 
 Now open `localhost:7842`.
