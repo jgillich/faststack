@@ -1,11 +1,12 @@
-FROM alpine:edge
+FROM fedora:25
 
-RUN apk add --no-cache go glide nodejs
+ENV GOPATH=/go
 
-ADD . /termbox
+RUN dnf install -y golang glide nodejs npm git && dnf clean all && \
+    go get -d github.com/termbox/termbox
 
-WORKDIR /termbox
+WORKDIR /go/src/github.com/termbox/termbox
 
-RUN glide install && go build && npm install && jspm install
+RUN glide install && go build && npm install
 
-CMD /termbox/termbox
+ENTRYPOINT /go/src/github.com/termbox/termbox/termbox
