@@ -14,7 +14,8 @@
     "jspm": "^0.16.48"
   },
   "scripts": {
-    "postinstall": "jspm install"
+    "postinstall": "jspm install",
+    "bundle": "jspm bundle-sfx --minify index.js app.js"
   },
   "jspm": {
     "directories": {

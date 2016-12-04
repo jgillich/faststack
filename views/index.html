@@ -1,0 +1,17 @@
+{{define "index"}}
+<!doctype html>
+<html>
+  <head>
+    <title>termbox</title>
+  </head>
+  <body>
+    {{if true}}
+    <script src="/jspm_packages/system.js"></script>
+    <script src="/config.js"></script>
+    <script>System.import('index.js')</script>
+    {{else}}
+    <script src="/bundle.js"></script>
+    {{end}}
+  </body>
+</html>
+{{end}}

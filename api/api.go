@@ -3,7 +3,10 @@ package api
 import (
 	"encoding/json"
 	"fmt"
+	"html/template"
+	"io"
 	"io/ioutil"
+	"net/http"
 	"os"
 	"strings"
 
@@ -50,7 +53,13 @@ func Run() {
 	jobrunner.Schedule("@every 1m", RemoveBoxes{})
 	jobrunner.Schedule("@midnight", PullImages{})
 
+	e.Renderer = &Template{
+		templates: template.Must(template.ParseGlob("views/*.html")),
+	}
+
 	e.Static("/", "app")
+
+	e.GET("/", Index)
 
 	e.POST("/boxes", CreateBox)
 	e.GET("/boxes/:id/exec", ExecBox)
@@ -62,6 +71,18 @@ func Run() {
 
 		e.Logger.Fatal(e.Start(":7842"))
 	}
+}
+
+func Index(c echo.Context) error {
+	return c.Render(http.StatusOK, "index", "")
+}
+
+type Template struct {
+	templates *template.Template
+}
+
+func (t *Template) Render(w io.Writer, name string, data interface{}, c echo.Context) error {
+	return t.templates.ExecuteTemplate(w, name, data)
 }
 
 type PullImages struct {
