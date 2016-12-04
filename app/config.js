@@ -34,6 +34,8 @@ System.config({
     "bulma": "npm:bulma@0.2.3",
     "core-js": "npm:core-js@1.2.7",
     "css": "github:systemjs/plugin-css@0.1.32",
+    "font-awesome": "npm:font-awesome@4.7.0",
+    "font-mfizz": "npm:font-mfizz@1.2.2",
     "hterm-umdjs": "npm:hterm-umdjs@1.1.3",
     "json": "github:systemjs/plugin-json@0.2.2",
     "react": "npm:react@15.4.1",
@@ -364,6 +366,9 @@ System.config({
       "process": "github:jspm/nodelibs-process@0.1.2",
       "promise": "npm:promise@7.1.1",
       "ua-parser-js": "npm:ua-parser-js@0.7.12"
+    },
+    "npm:font-awesome@4.7.0": {
+      "css": "github:systemjs/plugin-css@0.1.32"
     },
     "npm:fs-extra@0.30.0": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",

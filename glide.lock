@@ -1,5 +1,5 @@
-hash: 2261a1e68b60e9fbc6e494c6620cc56c59b8e2bd0b27e6beca0915158ec5a9ac
-updated: 2016-12-03T07:21:56.166930459+01:00
+hash: 668509d066a946e3f92ba7a2b494c99bfc9552adb3d44ab400ddd830ca1a4b54
+updated: 2016-12-04T05:42:42.171898758+01:00
 imports:
 - name: code.cloudfoundry.org/bytefmt
   version: b12c1522f4cbb5f35861bd5dd2c39a4fa996441a
