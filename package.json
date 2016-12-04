@@ -13,6 +13,9 @@
     "jshint": "^2.9.4",
     "jspm": "^0.16.48"
   },
+  "scripts": {
+    "postinstall": "jspm install"
+  },
   "jspm": {
     "directories": {
       "baseURL": "app"
