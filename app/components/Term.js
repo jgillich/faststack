@@ -42,7 +42,9 @@ export default class Term extends Component {
         }
       }
 
-      term.runCommandClass(HTerm)
+      ws.onopen = () => {
+        term.runCommandClass(HTerm)
+      }
     })
   }
 
