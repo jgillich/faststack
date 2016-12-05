@@ -1,0 +1,18 @@
+version: '2'
+services:
+  termbox:
+    image: termbox/termbox:1.0.0
+    container_name: termbox
+    restart: always
+    ports:
+      - 443:4443
+    volumes:
+      - /var/run/hyper.sock:/var/run/hyper.sock
+    environment:
+      - TERMBOX_ADDR=${TERMBOX_ADDR}
+      - TERMBOX_ENV=${TERMBOX_ENV}
+      - TERMBOX_RCSITEKEY=${TERMBOX_RCSITEKEY}
+      - TERMBOX_RCSECRET=${TERMBOX_RCSECRET}
+      - TERMBOX_AUTOTLS=${TERMBOX_ADDR}
+      - TERMBOX_TLSCERT=${TERMBOX_ADDR}
+      - TERMBOX_TLSKEY=${TERMBOX_ADDR}
