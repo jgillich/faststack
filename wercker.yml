@@ -3,6 +3,8 @@ box: termbox/termbox
 
 build:
   steps:
-    - glide install
-    - npm install
-    - make
+    - glide-install
+    - npm-install
+    - script:
+        name: make
+        code: make
