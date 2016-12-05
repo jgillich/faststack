@@ -1,10 +1,13 @@
 
-box: fedora
 build:
+  box: golang
   steps:
     - script:
-        name: install-packages
-        code: dnf install -y make golang glide nodejs npm
+        name: node-repo
+        code: curl -sL https://deb.nodesource.com/setup_6.x | bash -
+    - install-packages:
+        packages: nodejs rsync
+    - setup-go-workspace
     - glide-install
     - npm-install
     - nahody/jspm-install:
@@ -12,3 +15,5 @@ build:
     - script:
         name: make
         code: make
+    - wercker/copy-to-output:
+        exclude: .git
