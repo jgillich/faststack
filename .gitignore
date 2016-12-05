@@ -6,3 +6,4 @@ app/jspm_packages
 termbox
 app/bundle.js
 app/bundle.js.map
+.wercker
