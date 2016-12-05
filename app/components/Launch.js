@@ -1,6 +1,5 @@
 import {h, Component} from 'preact'
 import {connect} from 'preact-redux'
-import images from "../images.json!"
 import {createBox} from '../actions/box'
 import {Recaptcha} from './Recaptcha'
 
@@ -10,7 +9,7 @@ export class Launch extends Component {
     super(props)
 
     this.state = {
-        image: images[0]
+        image: CONFIG.images[0]
     }
   }
 
@@ -47,7 +46,7 @@ export class Launch extends Component {
           <nav class="level">
             <div class="level-item">
               <p class="control has-addons">
-                {images.map((image) =>
+                {CONFIG.images.map((image) =>
                   <a onClick={e => this.setState({image: image})}
                      class={'button is-medium' + (this.state.image.name == image.name ? ' is-primary' : '')}
                      key={image.name}>
@@ -61,7 +60,7 @@ export class Launch extends Component {
             </div>
             <div class="level-item">
               <Recaptcha
-                sitekey="6Lf-uw0UAAAAACcJpyWXVZMgNlG-fkS7Nscshkmq"
+                sitekey={CONFIG.rcsitekey}
                 onChange={c => this.setState({captcha: c})}
               />
             </div>

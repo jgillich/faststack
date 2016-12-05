@@ -5,7 +5,13 @@
     <title>termbox</title>
   </head>
   <body>
-    {{if ne .Env "production"}}
+    <script>
+    var CONFIG = {
+      rcsitekey: {{ marshal .Config.RCSitekey }},
+      images: {{ marshal .Images }}
+    }
+    </script>
+    {{if ne .Config.Env "production"}}
     <script src="/jspm_packages/system.js"></script>
     <script src="/config.js"></script>
     <script>System.import('index.js')</script>

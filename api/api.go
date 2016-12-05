@@ -27,6 +27,7 @@ type ApiConfig struct {
 	TlsKey     string
 	HyperProto string `default:"unix"`
 	HyperAddr  string `default:"/var/run/hyper.sock"`
+	RCSitekey  string
 	RCSecret   string
 }
 
@@ -57,6 +58,10 @@ func New() *Api {
 		Log.Fatal(err)
 	}
 
+	if Config.Debug() {
+		Log.Level = logrus.DebugLevel
+	}
+
 	// -- Echo
 
 	Echo := echo.New()
@@ -64,22 +69,15 @@ func New() *Api {
 
 	Echo.Static("/", "app")
 
-	Echo.Renderer = &Template{
-		templates: template.Must(template.ParseGlob("api/views/*.html")),
+	funcs := template.FuncMap{
+		"marshal": func(v interface{}) template.JS {
+			a, _ := json.Marshal(v)
+			return template.JS(a)
+		},
 	}
 
-	Echo.HTTPErrorHandler = func(err error, c echo.Context) {
-		httpError, ok := err.(*echo.HTTPError)
-		if ok {
-			errorCode := httpError.Code
-			switch errorCode {
-			case http.StatusNotFound:
-				// Render index in case of 404 and let the frontend take over
-				c.Render(http.StatusOK, "index", Config)
-				return
-			}
-		}
-		Echo.DefaultHTTPErrorHandler(err, c)
+	Echo.Renderer = &Template{
+		templates: template.Must(template.New("views").Funcs(funcs).ParseGlob("api/views/*.html")),
 	}
 
 	if !Config.Debug() {
@@ -162,6 +160,23 @@ func New() *Api {
 }
 
 func (a *Api) Run() {
+	a.Echo.HTTPErrorHandler = func(err error, c echo.Context) {
+		httpError, ok := err.(*echo.HTTPError)
+		if ok {
+			errorCode := httpError.Code
+			switch errorCode {
+			case http.StatusNotFound:
+				// Render index in case of 404 and let the frontend take over
+				if err := c.Render(http.StatusOK, "index", a); err != nil {
+					a.Log.Error(err)
+				}
+				return
+			}
+		}
+		a.Log.Debug(err)
+		a.Echo.DefaultHTTPErrorHandler(err, c)
+	}
+
 	a.Cron.Start()
 
 	if a.Config.TlsCert != "" && a.Config.TlsKey != "" {
