@@ -10,3 +10,7 @@ production: build
 
 run:
 	go run ${BUILD_FLAGS} main.go
+
+docker-run:
+	chown 777 /var/run/hyper.sock
+	su-exec termbox ./termbox

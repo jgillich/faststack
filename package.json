@@ -1,10 +1,10 @@
 {
   "name": "termbox",
   "description": "Termbox",
-  "version": "0.0.0",
-  "homepage": "",
+  "version": "0.1.0",
+  "homepage": "https://termbox.io",
   "license": "MIT",
-  "repository": {},
+  "repository": "https://github.com/termbox/termbox.git",
   "author": "Jakob Gillich <jakob@gillich.me>",
   "devDependencies": {
     "babel-cli": "^6.18.0",
@@ -39,8 +39,8 @@
     },
     "devDependencies": {
       "babel": "npm:babel-core@^5.8.24",
-      "babel-runtime": "npm:babel-runtime@^5.8.24",
-      "core-js": "npm:core-js@^1.1.4",
+      "babel-runtime": "npm:babel-runtime@^6.18.0",
+      "core-js": "npm:core-js@^2.4.1",
       "sass": "github:mobilexag/plugin-sass@^0.5.0"
     },
     "buildConfig": {
