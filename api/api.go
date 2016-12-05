@@ -5,12 +5,12 @@ import (
 	"fmt"
 	"html/template"
 	"io"
-	"io/ioutil"
 	"net/http"
 	"strings"
 
 	"time"
 
+	rice "github.com/GeertJohan/go.rice"
 	"github.com/Sirupsen/logrus"
 	"github.com/hyperhq/hyperd/client"
 	"github.com/hyperhq/hyperd/client/api"
@@ -68,7 +68,8 @@ func New() *Api {
 	Echo := echo.New()
 	Echo.Debug = Config.Debug()
 
-	Echo.Static("/", "app")
+	assetHandler := http.FileServer(rice.MustFindBox("../app").HTTPBox())
+	Echo.GET("/*", echo.WrapHandler(assetHandler))
 
 	funcs := template.FuncMap{
 		"marshal": func(v interface{}) template.JS {
@@ -77,8 +78,10 @@ func New() *Api {
 		},
 	}
 
+	templates := rice.MustFindBox("./views")
+	index, _ := templates.String("index.html")
 	Echo.Renderer = &Template{
-		templates: template.Must(template.New("views").Funcs(funcs).ParseGlob("api/views/*.html")),
+		templates: template.Must(template.New("index").Funcs(funcs).Parse(index)),
 	}
 
 	if !Config.Debug() {
@@ -87,7 +90,7 @@ func New() *Api {
 
 	// -- Images
 
-	dat, err := ioutil.ReadFile("images/images.json")
+	dat, err := rice.MustFindBox("../images").Bytes("images.json")
 	if err != nil {
 		Log.Fatal(err)
 	}
@@ -156,6 +159,7 @@ func New() *Api {
 
 	Echo.POST("/boxes", a.CreateBox)
 	Echo.GET("/boxes/:id/exec", a.ExecBox)
+	Echo.GET("/", func(c echo.Context) error { return c.Render(http.StatusOK, "index", a) })
 
 	return a
 }

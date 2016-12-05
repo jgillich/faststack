@@ -5,6 +5,9 @@ build:
     - script:
         name: node-repo
         code: curl -sL https://deb.nodesource.com/setup_6.x | bash -
+    - script:
+        name: rice
+        code: go get github.com/GeertJohan/go.rice/rice
     - install-packages:
         packages: nodejs rsync
     - setup-go-workspace
@@ -17,7 +20,7 @@ build:
         code: make
     - script:
         name: copy-output
-        code: rsync -rv "$WERCKER_SOURCE_DIR/api/views""$WERCKER_SOURCE_DIR/termbox" "$WERCKER_SOURCE_DIR/app" "$WERCKER_OUTPUT_DIR"
+        code: rsync -rv $WERCKER_SOURCE_DIR/termbox" "$WERCKER_OUTPUT_DIR"
 
 deploy:
   steps:

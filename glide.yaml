@@ -20,3 +20,4 @@ import:
 - package: github.com/kelseyhightower/envconfig
   version: ^1.2.0
 - package: github.com/robfig/cron
+- package: github.com/GeertJohan/go.rice

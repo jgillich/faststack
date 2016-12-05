@@ -5,6 +5,7 @@ BUILD_FLAGS=-ldflags "-X github.com/termbox/termbox/vendor/github.com/hyperhq/hy
 build:
 	CGO_ENABLED=0 go build -a -ldflags '-s' ${BUILD_FLAGS}
 	npm run bundle
+	rice append -i github.com/termbox/termbox/api --exec termbox
 
 run:
 	go run ${BUILD_FLAGS} main.go
