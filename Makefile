@@ -4,8 +4,6 @@ BUILD_FLAGS=-ldflags "-X github.com/termbox/termbox/vendor/github.com/hyperhq/hy
 
 build:
 	go build ${BUILD_FLAGS}
-
-production: build
 	npm run bundle
 
 run:

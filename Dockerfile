@@ -12,7 +12,7 @@ WORKDIR /go/src/github.com/termbox/termbox
 
 USER termbox
 
-RUN glide install && npm install && make production
+RUN glide install && npm install && make
 
 USER root
 
