@@ -23,11 +23,11 @@ export function createBox(box) {
       })
       route(`/term/${box.podID}`)
     }).catch(res => {
-      return res.text()
-    }).then(reason => {
-      dispatch({
-        type: 'CREATE_BOX',
-        error: new Error(reason),
+      res.text().then(reason => {
+        dispatch({
+          type: 'CREATE_BOX',
+          error: new Error(reason),
+        })
       })
     })
   };

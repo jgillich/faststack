@@ -25,9 +25,7 @@ export class Launch extends Component {
     })
   }
 
-  render() {
-    let {box} = this.props
-
+  render({box}, {image}) {
     return <div >
 
       <section class="hero is-bold is-primary">
@@ -46,14 +44,14 @@ export class Launch extends Component {
           <nav class="level">
             <div class="level-item">
               <p class="control has-addons">
-                {CONFIG.images.map((image) =>
-                  <a onClick={e => this.setState({image: image})}
-                     class={'button is-medium' + (this.state.image.name == image.name ? ' is-primary' : '')}
-                     key={image.name}>
+                {CONFIG.images.map((i) =>
+                  <a onClick={e => this.setState({image: i})}
+                     class={'button is-medium' + (image.name == i.name ? ' is-primary' : '')}
+                     key={i.name}>
                     <span class="icon">
-                      <i class={'icon-' + image.name}></i>
+                      <i class={'icon-' + i.name}></i>
                     </span>
-                    <span>{image.displayName}</span>
+                    <span>{i.displayName}</span>
                   </a>
                 )}
               </p>
