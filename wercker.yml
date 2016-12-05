@@ -28,6 +28,6 @@ deploy:
         username: $DOCKERHUB_USERNAME
         password: $DOCKERHUB_PASSWORD
         tag: latest
-        cmd: ./termbox
+        cmd: /pipeline/source/termbox
         repository: termbox/termbox
         registry: https://registry.hub.docker.com
