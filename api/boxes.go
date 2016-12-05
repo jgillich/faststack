@@ -7,7 +7,6 @@ import (
 	"io"
 	"io/ioutil"
 	"net/http"
-	"os"
 
 	"code.cloudfoundry.org/bytefmt"
 
@@ -20,7 +19,7 @@ import (
 	"github.com/labstack/echo"
 )
 
-func CreateBox(c echo.Context) error {
+func (a *Api) CreateBox(c echo.Context) error {
 	body, err := ioutil.ReadAll(c.Request().Body)
 	if err != nil {
 		return err
@@ -33,9 +32,9 @@ func CreateBox(c echo.Context) error {
 	}
 
 	// validate captcha if secret is configured
-	if os.Getenv("RECAPTCHA_SECRET") != "" {
+	if a.Config.RCSecret != "" {
 		data := url.Values{}
-		data.Set("secret", os.Getenv("RECAPTCHA_SECRET"))
+		data.Set("secret", a.Config.RCSecret)
 		data.Set("response", req.Captcha)
 		data.Set("remoteip", c.RealIP())
 
@@ -55,12 +54,12 @@ func CreateBox(c echo.Context) error {
 			return errors.New("Captcha verification failed")
 		}
 	} else {
-		Logger.Warn("Creating box without captcha verfication")
+		a.Log.Warn("Creating box without captcha verfication")
 	}
 
 	// verify image is whitelisted
 	imageAllowed := false
-	for _, image := range Images {
+	for _, image := range *a.Images {
 		if req.Image == image.Image {
 			for _, version := range image.Versions {
 				if req.Version == version {
@@ -90,14 +89,14 @@ func CreateBox(c echo.Context) error {
 		Resource:   pod.UserResource{Vcpu: 1, Memory: 512},
 	}
 
-	podID, statusCode, err := Hyper.CreatePod(pod)
+	podID, statusCode, err := a.Hyper.CreatePod(pod)
 	if err != nil {
 		if statusCode == http.StatusNotFound {
-			err = HyperClient.PullImages(&pod)
+			err = a.HyperClient.PullImages(&pod)
 			if err != nil {
 				return err
 			}
-			podID, statusCode, err = Hyper.CreatePod(pod)
+			podID, statusCode, err = a.Hyper.CreatePod(pod)
 		}
 		if err != nil {
 			return err
@@ -112,41 +111,41 @@ type execMessage struct {
 	Message string `json:"message"`
 }
 
-func ExecBox(c echo.Context) error {
+func (a *Api) ExecBox(c echo.Context) error {
 
 	websocket.Handler(func(ws *websocket.Conn) {
 		defer ws.Close()
 
 		podID := c.Param("id")
-		podInfo, err := Hyper.GetPodInfo(podID)
+		podInfo, err := a.Hyper.GetPodInfo(podID)
 		if err != nil {
-			Logger.Debug(err)
+			a.Log.Debug(err)
 			websocket.Message.Send(ws, "box does not exist, closing connection")
 			return
 		}
 		if podInfo.Status.Phase != "Running" {
-			_, err := Hyper.StartPod(podID, "", false, false, nil, nil, nil)
+			_, err := a.Hyper.StartPod(podID, "", false, false, nil, nil, nil)
 			if err != nil {
-				Logger.Warn(err)
+				a.Log.Warn(err)
 				return
 			}
 		}
-		containerID, _ := Hyper.GetContainerByPod(podID)
+		containerID, _ := a.Hyper.GetContainerByPod(podID)
 
 		command, err := json.Marshal([]string{"bash"})
 		if err != nil {
-			Logger.Error(err)
+			a.Log.Error(err)
 			return
 		}
 
-		execID, err := Hyper.CreateExec(containerID, command, true)
+		execID, err := a.Hyper.CreateExec(containerID, command, true)
 		if err != nil {
-			Logger.Warn(err)
+			a.Log.Warn(err)
 			return
 		}
 
 		if err != nil {
-			Logger.Warn(err)
+			a.Log.Warn(err)
 			return
 		}
 
@@ -155,9 +154,9 @@ func ExecBox(c echo.Context) error {
 		r, w := io.Pipe()
 
 		go func() {
-			err = Hyper.StartExec(containerID, execID, true, r, ws, ws)
+			err = a.Hyper.StartExec(containerID, execID, true, r, ws, ws)
 			if err != nil {
-				Logger.Warn(err)
+				a.Log.Warn(err)
 				return
 			}
 		}()
@@ -166,18 +165,18 @@ func ExecBox(c echo.Context) error {
 			var message ExecBoxMessage
 			err := dec.Decode(&message)
 			if err != nil {
-				Logger.Warning(err)
+				a.Log.Warning(err)
 				break
 			}
 
 			if message.Width != 0 && message.Height != 0 {
-				err = Hyper.WinResize(containerID, execID, message.Height, message.Width)
+				err = a.Hyper.WinResize(containerID, execID, message.Height, message.Width)
 				continue
 			}
 			if message.Data != "" {
 				io.WriteString(w, message.Data)
 				if err != nil {
-					Logger.Warn(err)
+					a.Log.Warn(err)
 					break
 				}
 			}

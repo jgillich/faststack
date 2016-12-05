@@ -3,3 +3,4 @@ node_modules/
 app/jspm_packages
 .env
 *.pem
+termbox

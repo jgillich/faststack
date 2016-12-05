@@ -1,5 +1,5 @@
-hash: 668509d066a946e3f92ba7a2b494c99bfc9552adb3d44ab400ddd830ca1a4b54
-updated: 2016-12-04T05:42:42.171898758+01:00
+hash: d9fcd8f2373f38f66d7681e94ff99c92a5ae5f5d4a6cfaadc308647a4961bad0
+updated: 2016-12-05T02:36:14.66042625+01:00
 imports:
 - name: code.cloudfoundry.org/bytefmt
   version: b12c1522f4cbb5f35861bd5dd2c39a4fa996441a
@@ -7,8 +7,6 @@ imports:
   version: 70b2c90b260171e829f1ebd7c17f600c11858dbe
   subpackages:
   - winterm
-- name: github.com/bamzi/jobrunner
-  version: 273175f8b6ebabab8a639a4e6260a5c50fbf016a
 - name: github.com/cloudfoundry/gosigar
   version: c32d31af94b0e9d3b2877e49c1a581ad5a793343
 - name: github.com/docker/distribution
@@ -246,6 +244,8 @@ imports:
   version: 1acbbaff2f347c412a0c7884873bd72cc9c1f5b4
 - name: github.com/joho/godotenv
   version: a01a834e1654b4c9ca5b3ad05159445cc9c7ad08
+- name: github.com/kelseyhightower/envconfig
+  version: 9aca109c9aec4633fced9717c4a09ecab3d33111
 - name: github.com/labstack/echo
   version: 8d504c1b699c757b267255c53b3e5219f9974abc
 - name: github.com/labstack/gommon
@@ -281,6 +281,8 @@ imports:
   version: b2f69c69e8cd3dc2ce6a58c27254a665ae3ccd5f
   subpackages:
   - specs-go
+- name: github.com/robfig/cron
+  version: 9585fd555638e77bba25f25db5c44b41f264aeb7
 - name: github.com/Sirupsen/logrus
   version: d26492970760ca5d33129d2d799e34be5c4782eb
 - name: github.com/tylerb/graceful
@@ -322,8 +324,6 @@ imports:
   - naming
   - peer
   - transport
-- name: gopkg.in/robfig/cron.v2
-  version: be2e0b0deed5a68ffee390b4583a13aff8321535
 - name: gopkg.in/yaml.v2
   version: 7ad95dd0798a40da1ccdff6dff35fd177b5edf40
 testImports: []
