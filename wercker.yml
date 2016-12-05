@@ -6,6 +6,7 @@ build:
     - glide-install
     - npm-install
     - nahody/jspm-install
+        github-auth: $JSPM_INSTALL_GITHUB_AUTH
     - script:
         name: make
         code: make
