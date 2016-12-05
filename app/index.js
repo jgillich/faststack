@@ -1,5 +1,5 @@
 import 'font-awesome'
-import 'font-mfizz/font/font-mfizz.css!'
+import 'fizzed/font-mfizz/font-mfizz.css!'
 import './styles/style.sass!'
 import 'bulma/css/bulma.css!'
 import 'whatwg-fetch'
