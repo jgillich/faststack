@@ -1,7 +1,7 @@
 version: '2'
 services:
   termbox:
-    image: termbox/termbox:${TERMBOX_VERSION}
+    image: termbox/termbox
     container_name: termbox
     restart: always
     ports:
