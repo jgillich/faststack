@@ -74,7 +74,7 @@ func New() *Api {
 			switch errorCode {
 			case http.StatusNotFound:
 				// Render index in case of 404 and let the frontend take over
-				c.Render(http.StatusOK, "index", "")
+				c.Render(http.StatusOK, "index", Config)
 				return
 			}
 		}
@@ -102,7 +102,7 @@ func New() *Api {
 	// -- Cron
 
 	Cron := cron.New()
-	Cron.AddFunc("@hourly", func() {
+	Cron.AddFunc("* * * * *", func() {
 		remoteInfo, err := Hyper.List("pod", "", "", true)
 		if err != nil {
 			Log.Error(err)
@@ -123,8 +123,7 @@ func New() *Api {
 				continue
 			}
 
-			// Delete pods after 6 hours
-			if (time.Now().Unix() - podInfo.CreatedAt) > 21600 {
+			if time.Duration(time.Now().Unix()-podInfo.CreatedAt) > time.Hour*6 {
 				if err := Hyper.RmPod(podID); err != nil {
 					Log.Error(err)
 					continue

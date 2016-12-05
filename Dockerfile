@@ -7,6 +7,6 @@ RUN dnf install -y make golang glide nodejs npm git && dnf clean all && \
 
 WORKDIR /go/src/github.com/termbox/termbox
 
-RUN glide install && make && npm install
+RUN glide install && npm install && make production
 
 ENTRYPOINT /go/src/github.com/termbox/termbox/termbox

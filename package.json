@@ -15,7 +15,7 @@
   },
   "scripts": {
     "postinstall": "jspm install",
-    "bundle": "jspm bundle-sfx --minify index.js app.js"
+    "bundle": "jspm bundle-sfx --minify index.js app/bundle.js"
   },
   "jspm": {
     "directories": {

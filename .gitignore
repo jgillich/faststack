@@ -4,3 +4,5 @@ app/jspm_packages
 .env
 *.pem
 termbox
+app/bundle.js
+app/bundle.js.map
