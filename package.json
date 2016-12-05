@@ -1,7 +1,7 @@
 {
   "name": "termbox",
   "description": "Termbox",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "homepage": "https://termbox.io",
   "license": "MIT",
   "repository": "https://github.com/termbox/termbox.git",
