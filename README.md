@@ -43,8 +43,10 @@ Now open `localhost:7842`.
 Termbox is configured via environment variabes, although a `.env` file is
 supported as well.
 
+* `TERMBOX_ADDR`: Address and port to listen on. Defaults to `:7842`.
 * `TERMBOX_ENV`: When set to `production`, enables various optimizations and loads the script bundle. Defaults to `development`.
 * `TERMBOX_RCSECRET`: Recaptcha secret. No captcha checks are performed if not set.
+* `TERMBOX_AUTOTLS`: If set to `true`, enables TLS and automatically obtains a certificate from Let's Encrypt.
 * `TERMBOX_TLSCERT` and `TERMBOX_TLSKEY`: Path to the TLS cert and key. TLS is disabled if not set.
 
 To generate a self signed cert for development, run:

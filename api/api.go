@@ -25,6 +25,7 @@ type ApiConfig struct {
 	Addr       string `default:":7842"`
 	TlsCert    string
 	TlsKey     string
+	AutoTls    bool
 	HyperProto string `default:"unix"`
 	HyperAddr  string `default:"/var/run/hyper.sock"`
 	RCSitekey  string
@@ -179,10 +180,18 @@ func (a *Api) Run() {
 
 	a.Cron.Start()
 
-	if a.Config.TlsCert != "" && a.Config.TlsKey != "" {
-		a.Log.Fatal(a.Echo.StartTLS(a.Config.Addr, a.Config.TlsCert, a.Config.TlsKey))
+	var err error
+
+	if a.Config.AutoTls {
+		err = a.Echo.StartAutoTLS(a.Config.Addr)
+	} else if a.Config.TlsCert != "" && a.Config.TlsKey != "" {
+		err = a.Echo.StartTLS(a.Config.Addr, a.Config.TlsCert, a.Config.TlsKey)
 	} else {
-		a.Log.Fatal(a.Echo.Start(a.Config.Addr))
+		err = a.Echo.Start(a.Config.Addr)
+	}
+
+	if err != nil {
+		a.Log.Fatal(err)
 	}
 }
 
