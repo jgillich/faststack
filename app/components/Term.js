@@ -31,6 +31,11 @@ export default class Term extends Component {
 
       function HTerm(argv) {
         this.io = argv.io.push()
+
+        ws.send(JSON.stringify({
+          width: this.io.columnCount,
+          height: this.io.rowCount,
+        }))
       }
 
       HTerm.prototype.run = function() {
