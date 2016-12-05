@@ -9,7 +9,7 @@ build:
         name: rice
         code: go get github.com/GeertJohan/go.rice/rice
     - install-packages:
-        packages: nodejs rsync
+        packages: nodejs rsync zip
     - setup-go-workspace
     - glide-install
     - npm-install
