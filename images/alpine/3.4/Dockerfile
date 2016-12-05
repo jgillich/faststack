@@ -7,5 +7,4 @@ RUN apk add --no-cache \
       nodejs \
       ruby ruby-bundler \
       go \
-      python3 py-pip && \
-    curl https://sh.rustup.rs -sSf | sh -s -- -y
+      python3 py-pip
