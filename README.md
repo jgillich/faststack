@@ -28,6 +28,7 @@ cd $GOPATH/github.com/termbox/termbox
 
 glide install
 npm install
+jspm install
 ```
 
 Run the server:
