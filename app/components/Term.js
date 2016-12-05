@@ -21,8 +21,16 @@ export default class Term extends Component {
 
       let ws = new WebSocket(`ws${location.protocol === 'https:' ? 's' : ''}://${location.host}/boxes/${this.props.podId}/exec`)
 
+      let initSize = (io) => {
+        initSize = false
+        ws.send(JSON.stringify({
+          width: term.io.columnCount,
+          height: term.io.rowCount,
+        }))
+      }
       ws.onmessage = (ev) => {
         term.io.print(ev.data)
+        if(initSize) initSize()
       }
 
       ws.onclose = () => {
@@ -31,11 +39,6 @@ export default class Term extends Component {
 
       function HTerm(argv) {
         this.io = argv.io.push()
-
-        ws.send(JSON.stringify({
-          width: this.io.columnCount,
-          height: this.io.rowCount,
-        }))
       }
 
       HTerm.prototype.run = function() {
