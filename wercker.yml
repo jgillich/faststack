@@ -1,8 +1,9 @@
 
-box: termbox/termbox
-
+box: fedora
 build:
   steps:
+    - install-packages:
+        packages: make golang glide nodejs npm
     - glide-install
     - npm-install
     - nahody/jspm-install:
