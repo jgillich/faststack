@@ -34,5 +34,14 @@
     "versions": [
       "7"
     ]
+  },
+  {
+    "displayName": "Arch Linux",
+    "name": "archlinux",
+    "image": "termbox/archlinux",
+    "command": "bash",
+    "versions": [
+      "latest"
+    ]
   }
 ]
