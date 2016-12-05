@@ -56,17 +56,17 @@ func (a *Api) CreateBox(c echo.Context) error {
 	}
 
 	// verify image is whitelisted
-	imageAllowed := false
-	for _, image := range *a.Images {
-		if req.Image == image.Image {
-			for _, version := range image.Versions {
+	var image Image
+	for _, i := range *a.Images {
+		if req.Image == i.Image {
+			for _, version := range i.Versions {
 				if req.Version == version {
-					imageAllowed = true
+					image = i
 				}
 			}
 		}
 	}
-	if !imageAllowed {
+	if image.Image == "" {
 		return errors.New("Image not allowed")
 	}
 
@@ -78,11 +78,13 @@ func (a *Api) CreateBox(c echo.Context) error {
 	}
 
 	container := pod.UserContainer{
-		Image: fmt.Sprintf("%s:%s", req.Image, req.Version),
+		Image:   fmt.Sprintf("%s:%s", image.Image, req.Version),
+		Command: []string{image.Command},
 	}
 
 	pod := pod.UserPod{
 		Name:       "termbox",
+		Hostname:   image.Name,
 		Containers: []pod.UserContainer{container},
 		Resource:   pod.UserResource{Vcpu: 1, Memory: 512},
 	}
