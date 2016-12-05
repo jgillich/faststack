@@ -34,14 +34,5 @@
     "versions": [
       "7"
     ]
-  },
-  {
-    "displayName": "Alpine",
-    "name": "alpine",
-    "image": "termbox/alpine",
-    "command": "bash",
-    "versions": [
-      "3.4"
-    ]
   }
 ]
