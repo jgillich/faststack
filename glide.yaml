@@ -6,6 +6,8 @@ import:
   - client/api
 - package: github.com/labstack/echo
   version: ~3.0.2
+  subpackages:
+  - middleware
 - package: golang.org/x/net
   subpackages:
   - context

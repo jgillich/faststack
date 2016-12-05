@@ -1,5 +1,5 @@
-hash: d9fcd8f2373f38f66d7681e94ff99c92a5ae5f5d4a6cfaadc308647a4961bad0
-updated: 2016-12-05T02:36:14.66042625+01:00
+hash: 072adb79d9d094c1877baf8dd475a9a1909483b02c8127a492373de5b7b91e74
+updated: 2016-12-05T03:41:46.244879663+01:00
 imports:
 - name: code.cloudfoundry.org/bytefmt
   version: b12c1522f4cbb5f35861bd5dd2c39a4fa996441a
@@ -9,6 +9,8 @@ imports:
   - winterm
 - name: github.com/cloudfoundry/gosigar
   version: c32d31af94b0e9d3b2877e49c1a581ad5a793343
+- name: github.com/dgrijalva/jwt-go
+  version: 9ed569b5d1ac936e6494082958d63a6aa4fff99a
 - name: github.com/docker/distribution
   version: 0f2d99b13ae0cfbcf118eff103e6e680b726b47e
   subpackages:
@@ -248,11 +250,15 @@ imports:
   version: 9aca109c9aec4633fced9717c4a09ecab3d33111
 - name: github.com/labstack/echo
   version: 8d504c1b699c757b267255c53b3e5219f9974abc
+  subpackages:
+  - middleware
 - name: github.com/labstack/gommon
   version: 447fe7433567c785af957e549aadae2bf2000071
   subpackages:
+  - bytes
   - color
   - log
+  - random
 - name: github.com/mattn/go-colorable
   version: d228849504861217f796da67fae4f6e347643f15
 - name: github.com/mattn/go-isatty

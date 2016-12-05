@@ -16,6 +16,7 @@ import (
 	"github.com/hyperhq/hyperd/client/api"
 	"github.com/kelseyhightower/envconfig"
 	"github.com/labstack/echo"
+	"github.com/labstack/echo/middleware"
 	"github.com/robfig/cron"
 )
 
@@ -79,6 +80,10 @@ func New() *Api {
 			}
 		}
 		Echo.DefaultHTTPErrorHandler(err, c)
+	}
+
+	if !Config.Debug() {
+		Echo.Use(middleware.Gzip())
 	}
 
 	// -- Images
