@@ -2,8 +2,9 @@
 box: fedora
 build:
   steps:
-    - install-packages:
-        packages: make golang glide nodejs npm
+    - script:
+        name: install-packages
+        code: dnf install -y make golang glide nodejs npm
     - glide-install
     - npm-install
     - nahody/jspm-install:
