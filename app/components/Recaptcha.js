@@ -17,7 +17,7 @@ function onLoad(callback, attempts = 0) {
   if(attempts == 50) {
     throw new Error('Recaptcha not loaded after 5 seconds, giving up')
   }
-  setTimeout(() => onLoad(callback, attempts), 100)
+  setTimeout(() => onLoad(callback, attempts++), 100)
 }
 
 export class Recaptcha extends Component {
@@ -28,7 +28,7 @@ export class Recaptcha extends Component {
   renderCaptcha() {
     let {sitekey, theme, type, size} = this.props;
     let elem = document.createElement('div')
-    let id = grecaptcha.render(elem, {
+    grecaptcha.render(elem, {
       sitekey, theme, type, size,
       callback: this.props.onChange,
       "expired-callback": () => this.props.onChange(null),
