@@ -20,7 +20,7 @@ No, it will be automatically deleted after 6 hours.
 
 #### Can I access my box using SSH?
 
-No.
+No, but we will allow you to launch boxes via SSH in the future.
 
 #### Where can I report a bug or request a feature?
 
@@ -29,5 +29,5 @@ Please create a issue on our [Github page](https://github.com/termbox/termbox).
 #### How can this be free?
 
 At our current capacity, a single launch costs us around $0.0002, so we don't
-loose much by offering it for free. We are experimenting with ads in order
-to increase server capacity and performance.
+loose much by offering it for free. We are experimenting with non-obtrusive ads
+in order to increase server resources and to finance further development.

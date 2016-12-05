@@ -29,6 +29,15 @@ export default class App extends Component {
             <Link class="nav-item" href="/doc/faq">
               FAQ
             </Link>
+            <span class="nav-item">
+              <a class="button" href="https://docs.google.com/forms/d/e/1FAIpQLSek1xv5kwutvxkt35TGyM7qEOoPWY9o2hAoNSWq1b6Bu9kykw/viewform">
+                <span class="icon">
+                  <i class="fa fa-comment"></i>
+                </span>
+                <span>Feedback</span>
+              </a>
+            </span>
+
           </div>
         </div>
       </nav>

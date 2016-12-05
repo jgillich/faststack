@@ -15,4 +15,4 @@ RUN glide install && npm install && make production
 
 USER root
 
-ENTRYPOINT make docker-run
+CMD make docker-run
