@@ -26,8 +26,7 @@ func (a *Api) CreateBox(c echo.Context) error {
 	}
 
 	var req CreateBoxRequest
-	err = json.Unmarshal(body, &req)
-	if err != nil {
+	if err = json.Unmarshal(body, &req); err != nil {
 		return err
 	}
 
@@ -46,8 +45,7 @@ func (a *Api) CreateBox(c echo.Context) error {
 		defer res.Body.Close()
 
 		var verify CaptchaVerifyResponse
-		err = json.NewDecoder(res.Body).Decode(&verify)
-		if err != nil {
+		if err := json.NewDecoder(res.Body).Decode(&verify); err != nil {
 			return err
 		}
 		if !verify.Success {
@@ -92,13 +90,14 @@ func (a *Api) CreateBox(c echo.Context) error {
 	podID, statusCode, err := a.Hyper.CreatePod(pod)
 	if err != nil {
 		if statusCode == http.StatusNotFound {
-			err = a.HyperClient.PullImages(&pod)
-			if err != nil {
+			if err := a.HyperClient.PullImages(&pod); err != nil {
 				return err
 			}
 			podID, statusCode, err = a.Hyper.CreatePod(pod)
-		}
-		if err != nil {
+			if err != nil {
+				return err
+			}
+		} else {
 			return err
 		}
 	}
@@ -144,18 +143,12 @@ func (a *Api) ExecBox(c echo.Context) error {
 			return
 		}
 
-		if err != nil {
-			a.Log.Warn(err)
-			return
-		}
-
 		dec := json.NewDecoder(ws)
 
 		r, w := io.Pipe()
 
 		go func() {
-			err = a.Hyper.StartExec(containerID, execID, true, r, ws, ws)
-			if err != nil {
+			if err := a.Hyper.StartExec(containerID, execID, true, r, ws, ws); err != nil {
 				a.Log.Warn(err)
 				return
 			}
@@ -163,18 +156,19 @@ func (a *Api) ExecBox(c echo.Context) error {
 
 		for {
 			var message ExecBoxMessage
-			err := dec.Decode(&message)
-			if err != nil {
-				a.Log.Warning(err)
+			if err := dec.Decode(&message); err != nil {
+				a.Log.Warn(err)
 				break
 			}
 
 			if message.Width != 0 && message.Height != 0 {
-				err = a.Hyper.WinResize(containerID, execID, message.Height, message.Width)
+				if err := a.Hyper.WinResize(containerID, execID, message.Height, message.Width); err != nil {
+					a.Log.Warn(err)
+				}
 				continue
 			}
 			if message.Data != "" {
-				io.WriteString(w, message.Data)
+				_, err = io.WriteString(w, message.Data)
 				if err != nil {
 					a.Log.Warn(err)
 					break
