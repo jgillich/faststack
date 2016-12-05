@@ -24,7 +24,7 @@ build:
 
 deploy:
   steps:
-    - internal/docker-scratch-push:
+    - internal/docker-push:
         username: $DOCKERHUB_USERNAME
         password: $DOCKERHUB_PASSWORD
         tag: latest
