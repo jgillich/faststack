@@ -174,7 +174,7 @@ func (a *Api) Run() {
 				return
 			}
 		}
-		a.Log.Debug(err)
+		a.Log.Info(err)
 		a.Echo.DefaultHTTPErrorHandler(err, c)
 	}
 
