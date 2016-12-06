@@ -70,6 +70,8 @@ func New() *Api {
 
 	assetHandler := http.FileServer(rice.MustFindBox("../app").HTTPBox())
 	Echo.GET("/app/*", echo.WrapHandler(http.StripPrefix("/app/", assetHandler)))
+	// fonts are still loaded from /jspm_packages/..
+	Echo.GET("/jspm_packages/*", echo.WrapHandler(assetHandler))
 
 	funcs := template.FuncMap{
 		"marshal": func(v interface{}) template.JS {
