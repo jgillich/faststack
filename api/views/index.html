@@ -12,11 +12,11 @@
     }
     </script>
     {{if ne .Config.Env "production"}}
-    <script src="/jspm_packages/system.js"></script>
-    <script src="/config.js"></script>
+    <script src="/app/jspm_packages/system.js"></script>
+    <script src="/app/config.js"></script>
     <script>System.import('index.js')</script>
     {{else}}
-    <script src="/bundle.js"></script>
+    <script src="/app/bundle.js"></script>
     {{end}}
   </body>
 </html>

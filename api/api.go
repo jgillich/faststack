@@ -69,7 +69,7 @@ func New() *Api {
 	Echo.Debug = Config.Debug()
 
 	assetHandler := http.FileServer(rice.MustFindBox("../app").HTTPBox())
-	Echo.GET("/*", echo.WrapHandler(assetHandler))
+	Echo.GET("/app/*", echo.WrapHandler(http.StripPrefix("/app/", assetHandler)))
 
 	funcs := template.FuncMap{
 		"marshal": func(v interface{}) template.JS {
@@ -109,7 +109,7 @@ func New() *Api {
 	// -- Cron
 
 	Cron := cron.New()
-	Cron.AddFunc("0 * * * *", func() {
+	Cron.AddFunc("@every 10m", func() {
 		remoteInfo, err := Hyper.List("pod", "", "", true)
 		if err != nil {
 			Log.Error(err)
