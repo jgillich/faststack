@@ -85,7 +85,7 @@ func (a *Api) CreateBox(c echo.Context) error {
 		Name:       "termbox",
 		Hostname:   image.Name,
 		Containers: []pod.UserContainer{container},
-		Resource:   pod.UserResource{Vcpu: 1, Memory: 512},
+		Resource:   pod.UserResource{Vcpu: 1, Memory: 256},
 	}
 
 	podID, statusCode, err := a.Hyper.CreatePod(pod)
