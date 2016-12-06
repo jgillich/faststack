@@ -3,7 +3,6 @@
     "displayName": "Ubuntu",
     "name": "ubuntu",
     "image": "termbox/ubuntu",
-    "command": "bash",
     "versions": [
       "16.04"
     ]
@@ -12,7 +11,6 @@
     "displayName": "Debian",
     "name": "debian",
     "image": "termbox/debian",
-    "command": "bash",
     "versions": [
       "8"
     ]
@@ -21,7 +19,6 @@
     "displayName": "Fedora",
     "name": "fedora",
     "image": "termbox/fedora",
-    "command": "bash",
     "versions": [
       "25"
     ]
@@ -30,7 +27,6 @@
     "displayName": "CentOS",
     "name": "centos",
     "image": "termbox/centos",
-    "command": "bash",
     "versions": [
       "7"
     ]
@@ -39,7 +35,6 @@
     "displayName": "Arch Linux",
     "name": "archlinux",
     "image": "termbox/archlinux",
-    "command": "bash",
     "versions": [
       "latest"
     ]

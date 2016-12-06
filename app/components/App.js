@@ -12,7 +12,7 @@ export default class App extends Component {
         <div class="container">
           <div class="nav-left">
             <Link class="nav-item is-brand" href="/">
-              <img src="/assets/logo.png" alt="termbox logo"/>
+              <img src="/app/assets/logo.png" alt="termbox logo"/>
             </Link>
           </div>
 

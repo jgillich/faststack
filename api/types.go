@@ -4,7 +4,6 @@ type Image struct {
 	DisplayName string   `json:"displayName"`
 	Name        string   `json:"name"`
 	Image       string   `json:"image"`
-	Command     string   `json:"command"`
 	Versions    []string `json:"versions"`
 }
 
