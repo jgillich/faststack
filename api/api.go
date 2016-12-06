@@ -109,7 +109,7 @@ func New() *Api {
 	// -- Cron
 
 	Cron := cron.New()
-	Cron.AddFunc("* * * * *", func() {
+	Cron.AddFunc("0 * * * *", func() {
 		remoteInfo, err := Hyper.List("pod", "", "", true)
 		if err != nil {
 			Log.Error(err)

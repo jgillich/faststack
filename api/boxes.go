@@ -148,6 +148,8 @@ func (a *Api) ExecBox(c echo.Context) error {
 		dec := json.NewDecoder(ws)
 
 		r, w := io.Pipe()
+		defer r.Close()
+		defer w.Close()
 
 		go func() {
 			if err := a.Hyper.StartExec(containerID, execID, true, r, ws, ws); err != nil {
