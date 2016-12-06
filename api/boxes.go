@@ -78,7 +78,7 @@ func (a *Api) CreateBox(c echo.Context) error {
 
 	container := pod.UserContainer{
 		Image:   fmt.Sprintf("%s:%s", image.Image, req.Version),
-		Command: []string{"tmux"},
+		Command: []string{"sh"},
 	}
 
 	pod := pod.UserPod{
@@ -132,7 +132,7 @@ func (a *Api) ExecBox(c echo.Context) error {
 		}
 		containerID, _ := a.Hyper.GetContainerByPod(podID)
 
-		command, err := json.Marshal([]string{"tmux", "attach"})
+		command, err := json.Marshal([]string{"sh", "-c", "tmux attach || tmux"})
 		if err != nil {
 			a.Log.Error(err)
 			return
