@@ -2,7 +2,6 @@ package api
 
 import (
 	"encoding/json"
-	"errors"
 	"fmt"
 	"io"
 	"io/ioutil"
@@ -49,7 +48,7 @@ func (a *Api) CreateBox(c echo.Context) error {
 			return err
 		}
 		if !verify.Success {
-			return errors.New("Captcha verification failed")
+			return c.String(http.StatusBadRequest, "Captcha verification failed")
 		}
 	} else {
 		a.Log.Warn("Creating box without captcha verfication")
@@ -67,14 +66,14 @@ func (a *Api) CreateBox(c echo.Context) error {
 		}
 	}
 	if image.Image == "" {
-		return errors.New("Image not allowed")
+		return c.String(http.StatusBadRequest, "Image not allowed")
 	}
 
 	// make sure we are not running out of memory
 	mem := sigar.Mem{}
 	mem.Get()
 	if mem.ActualFree < bytefmt.GIGABYTE {
-		return errors.New("Resource limit reached, try again later")
+		return c.String(http.StatusTooManyRequests, "Resource limit reached, try again later")
 	}
 
 	container := pod.UserContainer{
