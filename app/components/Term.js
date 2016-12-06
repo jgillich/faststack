@@ -43,6 +43,7 @@ export default class Term extends Component {
 
       HTerm.prototype.run = function() {
         this.io.onVTKeystroke = this.io.sendString = (str) => {
+          console.log(JSON.stringify(str))
           ws.send(JSON.stringify({data: str}))
         }
         this.io.onTerminalResize = (width, height) => {
