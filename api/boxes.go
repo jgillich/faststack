@@ -132,7 +132,7 @@ func (a *Api) ExecBox(c echo.Context) error {
 		}
 		containerID, _ := a.Hyper.GetContainerByPod(podID)
 
-		command, err := json.Marshal([]string{"sh", "-c", "tmux attach || tmux"})
+		command, err := json.Marshal([]string{"sh", "-c", "tmux attach -d || tmux"})
 		if err != nil {
 			a.Log.Error(err)
 			return
