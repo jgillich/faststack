@@ -153,15 +153,14 @@ func (a *Api) ExecBox(c echo.Context) error {
 
 		go func() {
 			if err := a.Hyper.StartExec(containerID, execID, true, r, ws, ws); err != nil {
-				a.Log.Warn(err)
-				return
+				a.Log.Error(err)
 			}
 		}()
 
-		for {
+		for dec.More() {
 			var message ExecBoxMessage
 			if err := dec.Decode(&message); err != nil {
-				a.Log.Warn(err)
+				a.Log.Error(err)
 				break
 			}
 
@@ -174,7 +173,7 @@ func (a *Api) ExecBox(c echo.Context) error {
 			if message.Data != "" {
 				_, err = io.WriteString(w, message.Data)
 				if err != nil {
-					a.Log.Warn(err)
+					a.Log.Error(err)
 					break
 				}
 			}
