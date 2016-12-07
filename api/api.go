@@ -10,6 +10,8 @@ import (
 
 	"time"
 
+	"os"
+
 	rice "github.com/GeertJohan/go.rice"
 	"github.com/Sirupsen/logrus"
 	"github.com/hyperhq/hyperd/client"
@@ -53,6 +55,10 @@ func New() *Api {
 	Log := logrus.New()
 
 	// -- Configuration
+
+	if os.Getenv("PORT") != "" {
+		os.Setenv("TERMBOX_ADDR", fmt.Sprintf(":%s", os.Getenv("PORT")))
+	}
 
 	var Config ApiConfig
 	if err := envconfig.Process("termbox", &Config); err != nil {
@@ -161,6 +167,9 @@ func New() *Api {
 
 	Echo.POST("/boxes", a.CreateBox)
 	Echo.GET("/boxes/:id/exec", a.ExecBox)
+
+	Echo.GET("/status", a.GetStatus)
+
 	Echo.GET("/", func(c echo.Context) error { return c.Render(http.StatusOK, "index", a) })
 
 	return a
