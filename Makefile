@@ -8,8 +8,4 @@ build:
 	rice append -i github.com/termbox/termbox/api --exec termbox
 
 run:
-	go run ${BUILD_FLAGS} main.go
-
-docker-run:
-	chown 777 /var/run/hyper.sock
-	su-exec termbox ./termbox
+	gin --buildArgs '${BUILD_FLAGS}'
