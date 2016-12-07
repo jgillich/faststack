@@ -2,6 +2,8 @@
 
 Termbox provides instant Linux terminal access via a web interface.
 
+Note: this is not [Termbox the user interface library](https://github.com/nsf/termbox).
+
 [![wercker status](https://app.wercker.com/status/1933a6fcec97deb2a05d0e9e45c3fd79/s/master "wercker status")](https://app.wercker.com/project/byKey/1933a6fcec97deb2a05d0e9e45c3fd79)
 
 ### Installation
