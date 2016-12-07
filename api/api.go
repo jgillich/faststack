@@ -6,9 +6,6 @@ import (
 	"html/template"
 	"io"
 	"net/http"
-	"strings"
-
-	"time"
 
 	"os"
 
@@ -76,8 +73,10 @@ func New() *Api {
 
 	assetHandler := http.FileServer(rice.MustFindBox("../app").HTTPBox())
 	Echo.GET("/app/*", echo.WrapHandler(http.StripPrefix("/app/", assetHandler)))
-	// fonts are still loaded from /jspm_packages/..
+
+	// Work around https://github.com/systemjs/plugin-css/issues/122
 	Echo.GET("/jspm_packages/*", echo.WrapHandler(assetHandler))
+	Echo.GET("/doc/jspm_packages/*", echo.WrapHandler(http.StripPrefix("/doc/", assetHandler)))
 
 	funcs := template.FuncMap{
 		"marshal": func(v interface{}) template.JS {
@@ -117,49 +116,6 @@ func New() *Api {
 	// -- Cron
 
 	Cron := cron.New()
-	Cron.AddFunc("@every 10m", func() {
-		remoteInfo, err := Hyper.List("pod", "", "", true)
-		if err != nil {
-			Log.Error(err)
-			return
-		}
-
-		for _, podData := range remoteInfo.GetList("podData") {
-			fields := strings.Split(podData, ":")
-			podID, podName := fields[0], fields[1]
-
-			if podName != "termbox" {
-				continue
-			}
-
-			podInfo, err := Hyper.GetPodInfo(podID)
-			if err != nil {
-				Log.Error(err)
-				continue
-			}
-
-			if (time.Now().Unix() - podInfo.CreatedAt) > 10800 {
-				if err := Hyper.RmPod(podID); err != nil {
-					Log.Error(err)
-					continue
-				}
-				Log.Info("Deleted ", podID)
-			}
-
-		}
-	})
-
-	Cron.AddFunc("@daily", func() {
-		for _, image := range Images {
-			for _, version := range image.Versions {
-				imageName := fmt.Sprintf("%s:%s", image.Image, version)
-				Log.Info("Pulling image ", imageName)
-				if err := HyperClient.PullImage(imageName); err != nil {
-					Log.Error(err)
-				}
-			}
-		}
-	})
 
 	// -- Api
 
@@ -176,6 +132,10 @@ func New() *Api {
 }
 
 func (a *Api) Run() {
+	a.Cron.AddFunc("@every 5m", a.RemoveExpiredBoxes)
+	a.Cron.AddFunc("@daily", a.UpdateImages)
+	a.Cron.Start()
+
 	a.Echo.HTTPErrorHandler = func(err error, c echo.Context) {
 		httpError, ok := err.(*echo.HTTPError)
 		if ok {
@@ -192,8 +152,6 @@ func (a *Api) Run() {
 		a.Log.Info(err)
 		a.Echo.DefaultHTTPErrorHandler(err, c)
 	}
-
-	a.Cron.Start()
 
 	var err error
 
