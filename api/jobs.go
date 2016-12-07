@@ -29,7 +29,7 @@ func (a *Api) RemoveExpiredBoxes() {
 			continue
 		}
 
-		if (time.Now().Unix() - podInfo.CreatedAt) > 10800 {
+		if time.Since(time.Unix(podInfo.CreatedAt, 0)) > time.Hour {
 			if err := a.Hyper.RmPod(podID); err != nil {
 				a.Log.Error(err)
 				continue
