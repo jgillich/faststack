@@ -9,5 +9,4 @@ RUN dnf update -y && \
       ruby rubygem-bundler \
       golang \
       rust cargo \
-      python3 python3-pip && \
-    dnf clean all
+      python3 python3-pip

@@ -9,5 +9,4 @@ RUN pacman -Syu --noconfirm && \
       ruby ruby-bundler \
       go \
       rust cargo \
-      python python-pip && \
-    pacman -Scc --noconfirm
+      python python-pip

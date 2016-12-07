@@ -10,5 +10,4 @@ RUN yum update -y && \
       ruby rubygem-bundler \
       golang \
       python3 python3-pip && \
-    yum clean all && \
     curl https://sh.rustup.rs -sSf | sh -s -- -y
