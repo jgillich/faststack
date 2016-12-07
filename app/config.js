@@ -46,6 +46,7 @@ System.config({
     "preact": "npm:preact@7.1.0",
     "preact-redux": "npm:preact-redux@1.2.0",
     "preact-router": "npm:preact-router@2.3.2",
+    "reconnecting-websocket": "github:joewalnes/reconnecting-websocket@1.0.0",
     "redux": "npm:redux@3.6.0",
     "redux-logger": "npm:redux-logger@2.7.4",
     "redux-thunk": "npm:redux-thunk@2.1.0",
@@ -119,7 +120,7 @@ System.config({
     },
     "npm:autoprefixer@6.5.3": {
       "browserslist": "npm:browserslist@1.4.0",
-      "caniuse-db": "npm:caniuse-db@1.0.30000591",
+      "caniuse-db": "npm:caniuse-db@1.0.30000592",
       "normalize-range": "npm:normalize-range@0.1.2",
       "num2fraction": "npm:num2fraction@1.2.2",
       "postcss": "npm:postcss@5.2.6",
@@ -186,7 +187,7 @@ System.config({
       "stream": "github:jspm/nodelibs-stream@0.1.0"
     },
     "npm:browserslist@1.4.0": {
-      "caniuse-db": "npm:caniuse-db@1.0.30000591",
+      "caniuse-db": "npm:caniuse-db@1.0.30000592",
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "path": "github:jspm/nodelibs-path@0.1.0",
       "process": "github:jspm/nodelibs-process@0.1.2",

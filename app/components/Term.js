@@ -1,66 +1,30 @@
 import {h, Component} from 'preact'
-import {hterm, lib} from 'hterm-umdjs'
-
-hterm.defaultStorage = new lib.Storage.Memory()
+import HTerm from './HTerm'
 
 export default class Term extends Component {
 
-  componentDidMount() {
-    // wait for DOM render
-    requestAnimationFrame(() => {
-      let term = new hterm.Terminal();
-      term.decorate(this.termElem);
-
-      term.prefs_.set('audible-bell-sound', '')
-      term.prefs_.set('ctrl-c-copy', true)
-      term.prefs_.set('use-default-window-copy', true)
-      term.prefs_.set('background-color', 'white')
-      term.prefs_.set('foreground-color', '#333')
-      term.prefs_.set('cursor-color', '#00d1b2')
-      term.prefs_.set('scroll-wheel-move-multiplier', 15)
-
-      let ws = new WebSocket(`ws${location.protocol === 'https:' ? 's' : ''}://${location.host}/boxes/${this.props.podId}/exec`)
-
-      let initSize = (io) => {
-        initSize = false
-        ws.send(JSON.stringify({
-          width: term.io.columnCount,
-          height: term.io.rowCount,
-        }))
-      }
-      ws.onmessage = (ev) => {
-        term.io.print(ev.data)
-        if(initSize) initSize()
-      }
-
-      ws.onclose = () => {
-        term.io.print('connection closed')
-      }
-
-      function HTerm(argv) {
-        this.io = argv.io.push()
-      }
-
-      HTerm.prototype.run = function() {
-        this.io.onVTKeystroke = this.io.sendString = (str) => {
-          ws.send(JSON.stringify({data: str}))
-        }
-        this.io.onTerminalResize = (width, height) => {
-          ws.send(JSON.stringify({width, height}))
-        }
-      }
-
-      ws.onopen = () => {
-        term.runCommandClass(HTerm)
-      }
-    })
+  constructor(props) {
+    super(props)
   }
 
-  render() {
+  render({podId}, {state}) {
     return <div style={{height: '90%'}}>
+
       <section class="section" style={{height: '85%'}}>
         <div class="container" style={{height: '100%'}}>
-          <div ref={(div) => { this.termElem = div; }} style={{position: 'relative', width: '100%', height: '100%'}}/>
+
+          <HTerm podId={podId} ref={(r) => this.hterm = r}
+            onOpen={() => this.setState({state: 'connected'})}
+            onClose={() => this.setState({state: 'disconnected'})}/>
+
+
+          {state == 'disconnected' ?
+          <nav class="level">
+            <div class="level-left">
+              <div class="level-item has-text-danger">The connection to the server was lost. Trying to reconnect... </div>
+              </div>
+          </nav>
+          : null}
         </div>
       </section>
 

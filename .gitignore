@@ -7,3 +7,4 @@ termbox
 app/bundle.js
 app/bundle.js.map
 .wercker
+gin-bin

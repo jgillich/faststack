@@ -27,6 +27,7 @@
       "preact": "npm:preact@^7.1.0",
       "preact-redux": "npm:preact-redux@^1.2.0",
       "preact-router": "npm:preact-router@^2.3.2",
+      "reconnecting-websocket": "github:joewalnes/reconnecting-websocket@^1.0.0",
       "redux": "npm:redux@^3.6.0",
       "redux-logger": "npm:redux-logger@^2.7.4",
       "redux-thunk": "npm:redux-thunk@^2.1.0",
