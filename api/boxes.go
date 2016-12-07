@@ -119,10 +119,10 @@ func (a *Api) ExecBox(c echo.Context) error {
 		podID := c.Param("id")
 		podInfo, err := a.Hyper.GetPodInfo(podID)
 		if err != nil {
-			a.Log.Debug(err)
 			websocket.Message.Send(ws, "box does not exist, closing connection")
 			return
 		}
+
 		if podInfo.Status.Phase != "Running" {
 			_, err := a.Hyper.StartPod(podID, "", false, false, nil, nil, nil)
 			if err != nil {
@@ -140,7 +140,7 @@ func (a *Api) ExecBox(c echo.Context) error {
 
 		execID, err := a.Hyper.CreateExec(containerID, command, true)
 		if err != nil {
-			a.Log.Warn(err)
+			a.Log.Error(err)
 			return
 		}
 
