@@ -5,7 +5,7 @@ services:
     container_name: termbox
     restart: always
     ports:
-      - 443:4443
+      - 443:7842
     volumes:
       - /var/run/hyper.sock:/var/run/hyper.sock
     environment:

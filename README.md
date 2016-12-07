@@ -10,6 +10,8 @@ Note: this is not [Termbox the user interface library](https://github.com/nsf/te
 
 First, install [HyperContainer](https://hypercontainer.io/).
 
+Right now, you have to `chmod 777 /var/run/hyper.sock` before running Termbox. We
+will be supporting HTTP authentication soon.
 
 Termbox is distributed as a Docker image:
 
@@ -17,11 +19,13 @@ Termbox is distributed as a Docker image:
 docker run -v /var/run/hyper.sock:/var/run/hyper.sock -p 7842:7842 termbox/termbox
 ```
 
+Now open `localhost:7842` and you should see the app loading up.
+
 ### Development
 
-Dependencies:
+Install  the following first:
 
-* Golang, glide
+* Golang, [glide](https://glide.sh/), [gin](github.com/codegangsta/gin)
 * Nodejs, npm
 
 Get the code and its dependencies:
