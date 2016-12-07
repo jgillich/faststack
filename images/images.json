@@ -41,7 +41,7 @@
   },
   {
     "displayName": "openSUSE",
-    "name": "opensuse",
+    "name": "suse",
     "image": "termbox/opensuse",
     "versions": [
       "tumbleweed"
