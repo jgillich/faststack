@@ -1,7 +1,7 @@
 FROM opensuse:tumbleweed
 
 RUN zypper update -y && \
-    zypper install --type pattern devel_basis && \
+    zypper install -y --type pattern devel_basis && \
     zypper install -y \
       tmux nano vim \
       subversion \
