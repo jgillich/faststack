@@ -38,5 +38,13 @@
     "versions": [
       "latest"
     ]
+  },
+  {
+    "displayName": "openSUSE",
+    "name": "opensuse",
+    "image": "termbox/opensuse",
+    "versions": [
+      "tumbleweed"
+    ]
   }
 ]
