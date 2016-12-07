@@ -3,7 +3,7 @@ FROM pritunl/archlinux
 RUN pacman -Syu --noconfirm && \
     pacman -S --noconfirm \
       base-devel \
-      tmux \
+      tmux nano vim \
       git subversion \
       nodejs npm \
       ruby ruby-bundler \

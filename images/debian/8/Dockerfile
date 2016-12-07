@@ -3,7 +3,7 @@ FROM debian:8
 RUN apt update && apt upgrade -y && \
     apt install -y \
       build-essential \
-      tmux curl \
+      tmux curl nano vim \
       git subversion \
       nodejs npm \
       ruby bundler \

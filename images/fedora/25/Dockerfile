@@ -3,7 +3,7 @@ FROM fedora:25
 RUN dnf update -y && \
     dnf install -y \
       @development-tools \
-      tmux \
+      tmux nano vim \
       subversion \
       nodejs npm \
       ruby rubygem-bundler \
