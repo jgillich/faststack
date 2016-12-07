@@ -136,7 +136,7 @@ export class Launch extends Component {
                     <p>
                       <strong>Ephemeral</strong><br/>
                       Boxes and all their data are automatically deleted after
-                      6 hours.
+                      3 hours.
                     </p>
                   </div>
                 </div>

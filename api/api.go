@@ -132,7 +132,7 @@ func New() *Api {
 				continue
 			}
 
-			if (time.Now().Unix() - podInfo.CreatedAt) > 3600 {
+			if (time.Now().Unix() - podInfo.CreatedAt) > 10800 {
 				if err := Hyper.RmPod(podID); err != nil {
 					Log.Error(err)
 					continue

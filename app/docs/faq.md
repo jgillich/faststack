@@ -16,7 +16,7 @@ High security and low startup times.
 
 #### Can I delete a box manually?
 
-No, it will be automatically deleted after 6 hours.
+No, it will be automatically deleted after 3 hours.
 
 #### Can I access my box using SSH?
 
