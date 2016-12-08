@@ -31,7 +31,7 @@ type ApiConfig struct {
 	RCSecret    string
 	BoxMemory   int `default:"256"`
 	BoxCpus     int `default:"1"`
-	BoxDuration int `default:"1"`
+	BoxDuration int `default:"3"`
 }
 
 func (a *ApiConfig) Debug() bool {
