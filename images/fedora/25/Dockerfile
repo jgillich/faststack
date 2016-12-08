@@ -4,7 +4,8 @@ RUN dnf update -y && \
     dnf install -y \
       @development-tools \
       tmux nano vim \
-      subversion \
+      iproute traceroute \
+      git subversion \
       nodejs npm \
       ruby rubygem-bundler \
       golang \

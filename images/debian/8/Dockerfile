@@ -4,6 +4,7 @@ RUN apt update && apt upgrade -y && \
     apt install -y \
       build-essential \
       tmux curl nano vim \
+      iproute traceroute \
       git subversion \
       nodejs npm \
       ruby bundler \

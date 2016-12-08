@@ -5,6 +5,7 @@ RUN yum update -y && \
     yum install -y \
       @development \
       tmux nano vim \
+      iproute traceroute \
       subversion \
       nodejs npm \
       ruby rubygem-bundler \

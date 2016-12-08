@@ -4,7 +4,8 @@ RUN zypper update -y && \
     zypper install -y --type pattern devel_basis && \
     zypper install -y \
       tmux nano vim \
-      subversion \
+      iproute traceroute \
+      git subversion \
       nodejs npm \
       ruby2.3 ruby2.3-rubygem-bundler \
       go \
