@@ -42,7 +42,8 @@ export class Launch extends Component {
         <div class="container">
 
           <div class="columns is-centered is-multiline">
-            {CONFIG.images.map((i) =>
+            {CONFIG.images.map((i, index) =>
+              index < 6 ?
               <div class="column is-centered is-2">
                 <a onClick={e => this.setState({image: i})}>
                   <div class={'card' + (image.name == i.name ? ' is-primary' : '')}>
@@ -62,6 +63,7 @@ export class Launch extends Component {
                   </div>
                 </a>
               </div>
+              : null
             )}
           </div>
 

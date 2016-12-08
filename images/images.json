@@ -46,5 +46,13 @@
     "versions": [
       "tumbleweed"
     ]
+  },
+  {
+    "displayName": "Alpine",
+    "name": "alpine",
+    "image": "termbox/alpine",
+    "versions": [
+      "3.4"
+    ]
   }
 ]
