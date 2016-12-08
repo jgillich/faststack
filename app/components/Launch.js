@@ -47,13 +47,13 @@ export class Launch extends Component {
                 <a onClick={e => this.setState({image: i})}>
                   <div class={'card' + (image.name == i.name ? ' is-primary' : '')}>
                     <div class="card-image has-text-centered">
-                      <span class="icon is-huge" style={{'padding-top': '10px'}}>
+                      <span class="icon is-huge" style={{'padding': '10px 0'}}>
                         <i class={'icon-' + i.name}/>
                       </span>
                     </div>
 
                     <div class="card-content has-text-centered">
-                      <p class="title is-5">{i.displayName}</p>
+                      <p class="title is-4">{i.displayName}</p>
                     </div>
 
                     <footer class="card-footer">
@@ -83,13 +83,12 @@ export class Launch extends Component {
                 <span>Launch</span>
               </a>
             </div>
-
+          </div>
             {box.error ?
               <div class="notification is-danger">
                 {box.error.message}
               </div>
             : null}
-          </div>
         </div>
       </section>
 
