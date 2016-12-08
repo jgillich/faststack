@@ -28,6 +28,7 @@ export class Recaptcha extends Component {
   renderCaptcha() {
     let {sitekey, theme, type, size} = this.props;
     let elem = document.createElement('div')
+    elem.style.display = 'inline-block'
     grecaptcha.render(elem, {
       sitekey, theme, type, size,
       callback: this.props.onChange,

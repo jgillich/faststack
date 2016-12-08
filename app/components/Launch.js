@@ -41,44 +41,55 @@ export class Launch extends Component {
       <section class="section">
         <div class="container">
 
-          <nav class="level">
-            <div class="level-item">
-              <p class="control has-addons">
-                {CONFIG.images.map((i) =>
-                  <a onClick={e => this.setState({image: i})}
-                     class={'button is-medium' + (image.name == i.name ? ' is-primary' : '')}
-                     key={i.name}>
-                    <span class="icon">
-                      <i class={'icon-' + i.name}></i>
-                    </span>
-                    <span>{i.displayName}</span>
-                  </a>
-                )}
-              </p>
-            </div>
-            <div class="level-item">
+          <div class="columns is-centered is-multiline">
+            {CONFIG.images.map((i) =>
+              <div class="column is-centered is-2">
+                <a onClick={e => this.setState({image: i})}>
+                  <div class={'card' + (image.name == i.name ? ' is-primary' : '')}>
+                    <div class="card-image has-text-centered">
+                      <span class="icon is-huge" style={{'padding-top': '10px'}}>
+                        <i class={'icon-' + i.name}/>
+                      </span>
+                    </div>
+
+                    <div class="card-content has-text-centered">
+                      <p class="title is-5">{i.displayName}</p>
+                    </div>
+
+                    <footer class="card-footer">
+                      <p class="card-footer-item">{i.versions[0]}</p>
+                    </footer>
+                  </div>
+                </a>
+              </div>
+            )}
+          </div>
+
+           <div class="columns is-centered">
+            <div class="column has-text-centered">
               <Recaptcha
                 sitekey={CONFIG.rcsitekey}
                 onChange={c => this.setState({captcha: c})}
               />
             </div>
-
-            <div class="level-item">
-              <a class={'button is-medium is-primary' + (box.loading ? ' is-loading' : '')}
-                 onClick={this.launchClick.bind(this)}>
+          </div>
+          <div class="columns is-centered">
+            <div class="column has-text-centered">
+              <a class={'button is-large is-primary' + (box.loading ? ' is-loading' : '')}
+                  onClick={this.launchClick.bind(this)}>
                 <span class="icon">
                   <i class="fa fa-rocket"></i>
                 </span>
                 <span>Launch</span>
               </a>
             </div>
-          </nav>
 
-          {box.error ?
-            <div class="notification is-danger">
-              {box.error.message}
-            </div>
-          : null}
+            {box.error ?
+              <div class="notification is-danger">
+                {box.error.message}
+              </div>
+            : null}
+          </div>
         </div>
       </section>
 
