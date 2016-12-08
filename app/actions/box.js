@@ -28,6 +28,11 @@ export function createBox(box) {
         box: box,
       })
       route(`/term/${box.podID}`)
+    }).catch(err => {
+      dispatch({
+        type: 'CREATE_BOX',
+        error: new Error(err),
+      })
     })
   };
 }

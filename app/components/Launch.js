@@ -19,13 +19,9 @@ export class Launch extends Component {
       version: this.state.image.versions[0],
       captcha: this.state.captcha
     }))
-
-    this.setState({
-      loading: true
-    })
   }
 
-  render({box}, {image}) {
+  render({state}, {image}) {
     return <div >
 
       <section class="hero is-bold is-primary">
@@ -77,7 +73,7 @@ export class Launch extends Component {
           </div>
           <div class="columns is-centered">
             <div class="column has-text-centered">
-              <a class={'button is-large is-primary' + (box.loading ? ' is-loading' : '')}
+              <a class={'button is-large is-primary' + (state.loading ? ' is-loading' : '')}
                   onClick={this.launchClick.bind(this)}>
                 <span class="icon">
                   <i class="fa fa-rocket"></i>
@@ -86,9 +82,9 @@ export class Launch extends Component {
               </a>
             </div>
           </div>
-            {box.error ?
+            {state.error ?
               <div class="notification is-danger">
-                {box.error.message}
+                {state.error.message}
               </div>
             : null}
         </div>
@@ -168,6 +164,6 @@ export class Launch extends Component {
 
 
 export const LaunchContainer = connect(
-  state => ({box: state.box}),
+  state => ({state: state.box}),
   dispatch => ({dispatch})
 )(Launch);
