@@ -20,15 +20,18 @@ import (
 )
 
 type ApiConfig struct {
-	Env        string `default:"development"`
-	Addr       string `default:":7842"`
-	TlsCert    string
-	TlsKey     string
-	AutoTls    bool
-	HyperProto string `default:"unix"`
-	HyperAddr  string `default:"/var/run/hyper.sock"`
-	RCSitekey  string
-	RCSecret   string
+	Env         string `default:"development"`
+	Addr        string `default:":7842"`
+	TlsCert     string
+	TlsKey      string
+	AutoTls     bool
+	HyperProto  string `default:"unix"`
+	HyperAddr   string `default:"/var/run/hyper.sock"`
+	RCSitekey   string
+	RCSecret    string
+	BoxMemory   int `default:"256"`
+	BoxCpus     int `default:"1"`
+	BoxDuration int `default:"1"`
 }
 
 func (a *ApiConfig) Debug() bool {
@@ -132,6 +135,10 @@ func New() *Api {
 }
 
 func (a *Api) Run() {
+
+	c, _ := json.MarshalIndent(a.Config, " ", " ")
+	a.Log.Info("Starting Termbox with the following configuration:\n", string(c))
+
 	a.Cron.AddFunc("@every 5m", a.RemoveExpiredBoxes)
 	a.Cron.AddFunc("@daily", a.UpdateImages)
 	a.Cron.Start()

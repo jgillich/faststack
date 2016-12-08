@@ -17,7 +17,7 @@ build:
         github-auth: $JSPM_INSTALL_GITHUB_AUTH
     - script:
         name: make
-        code: make
+        code: make static-build
     - script:
         name: copy-output
         code: rsync -rv "$WERCKER_SOURCE_DIR/termbox" "$WERCKER_OUTPUT_DIR"

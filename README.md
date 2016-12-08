@@ -56,7 +56,10 @@ supported as well.
 * `TERMBOX_ENV`: When set to `production`, enables various optimizations and loads the script bundle. Defaults to `development`.
 * `TERMBOX_RCSITEKEY` and `TERMBOX_RCSECRET`: Recaptcha site key and secret. No captcha checks are performed if not set.
 * `TERMBOX_AUTOTLS`: If set to `true`, enables TLS and automatically obtains a certificate from Let's Encrypt.
-* `TERMBOX_TLSCERT` and `TERMBOX_TLSKEY`: Path to the TLS cert and key. TLS is disabled if not set.
+* `TERMBOX_TLSCERT` and `TERMBOX_TLSKEY`: Enables TLS using the specificed certificate and key.
+* `TERMBOX_BOXMEMORY`: RAM assigned to boxes in megabytes. Defaults to `256`.
+* `TERMBOX_BOXCPUS`: CPUs assigned to boxes. Defaults to `1`.
+* `TERMBOX_BOXDURATION`: Time in hours after which boxes are deleted. Defaults to `3`.
 
 To generate a self signed cert for development, run:
 
