@@ -41,6 +41,7 @@ System.config({
     "fizzed/font-mfizz": "github:fizzed/font-mfizz@2.3.0",
     "font-awesome": "npm:font-awesome@4.7.0",
     "hterm-umdjs": "npm:hterm-umdjs@1.1.4",
+    "humanize-duration": "npm:humanize-duration@3.10.0",
     "json": "github:systemjs/plugin-json@0.2.2",
     "md": "github:guybedford/system-md@0.1.0",
     "preact": "npm:preact@7.1.0",

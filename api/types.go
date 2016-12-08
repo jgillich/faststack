@@ -25,3 +25,9 @@ type ExecBoxMessage struct {
 	Width  int    `json:"width"`
 	Height int    `json:"height"`
 }
+
+type GetBoxResponse struct {
+	Id            string `json:"id"`
+	Image         string `json:"image"`
+	TimeRemaining int    `json:"timeRemaining"`
+}

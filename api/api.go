@@ -126,6 +126,7 @@ func New() *Api {
 
 	Echo.POST("/boxes", a.CreateBox)
 	Echo.GET("/boxes/:id/exec", a.ExecBox)
+	Echo.GET("/boxes/:id", a.GetBox)
 
 	Echo.GET("/status", a.GetStatus)
 

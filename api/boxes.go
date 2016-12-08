@@ -6,6 +6,7 @@ import (
 	"io"
 	"io/ioutil"
 	"net/http"
+	"time"
 
 	"code.cloudfoundry.org/bytefmt"
 
@@ -106,11 +107,6 @@ func (a *Api) CreateBox(c echo.Context) error {
 	return c.JSON(http.StatusOK, CreateBoxResponse{PodID: podID})
 }
 
-type execMessage struct {
-	Type    string `json:"type"`
-	Message string `json:"message"`
-}
-
 func (a *Api) ExecBox(c echo.Context) error {
 
 	websocket.Handler(func(ws *websocket.Conn) {
@@ -183,7 +179,21 @@ func (a *Api) ExecBox(c echo.Context) error {
 
 }
 
-type ExecReader struct {
-	data      []byte
-	readIndex int64
+func (a *Api) GetBox(c echo.Context) error {
+
+	podID := c.Param("id")
+	podInfo, err := a.Hyper.GetPodInfo(podID)
+	if err != nil {
+		return c.String(http.StatusNotFound, "box does not exist")
+	}
+
+	remaining := time.Duration(a.Config.BoxDuration)*time.Hour - time.Since(time.Unix(podInfo.CreatedAt, 0))
+
+	res := GetBoxResponse{
+		Id:            podID,
+		TimeRemaining: int(remaining.Seconds()),
+		Image:         podInfo.Spec.Containers[0].Image,
+	}
+
+	return c.JSON(http.StatusOK, res)
 }
