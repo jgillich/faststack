@@ -73,7 +73,7 @@ func (a *Api) CreateBox(c echo.Context) error {
 	mem := sigar.Mem{}
 	mem.Get()
 	if mem.ActualFree < bytefmt.GIGABYTE {
-		return c.String(http.StatusTooManyRequests, "Resource limit reached, try again later")
+		return c.String(http.StatusTooManyRequests, "Server capacity reached , please try again later")
 	}
 
 	container := pod.UserContainer{
