@@ -12,7 +12,13 @@ export function createBox(box) {
       body: JSON.stringify(box)
     }).then(res => {
       if(res.status != 200) {
-        return Promise.reject(res)
+        res.text().then(reason => {
+          dispatch({
+            type: 'CREATE_BOX',
+            error: new Error(reason),
+          })
+        })
+        return Promise.reject()
       }
       return res.json()
     }).then((json) => {
@@ -22,13 +28,6 @@ export function createBox(box) {
         box: box,
       })
       route(`/term/${box.podID}`)
-    }).catch(res => {
-      res.text().then(reason => {
-        dispatch({
-          type: 'CREATE_BOX',
-          error: new Error(reason),
-        })
-      })
     })
   };
 }

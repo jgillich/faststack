@@ -24,7 +24,6 @@ export default class HTerm extends Component {
     term.prefs_.set('scroll-wheel-move-multiplier', 15)
 
     let ws = new ReconnectingWebSocket(`ws${location.protocol === 'https:' ? 's' : ''}://${location.host}/boxes/${podId}/exec`)
-    ws.reconnectInterval = 5000
 
     function HTerm(argv) {
       this.io = argv.io.push()

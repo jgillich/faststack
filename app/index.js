@@ -1,7 +1,7 @@
 import 'font-awesome'
 import 'fizzed/font-mfizz/font-mfizz.css!'
-import './styles/style.sass!'
 import 'bulma/css/bulma.css!'
+import './styles/style.sass!'
 import 'whatwg-fetch'
 
 import {h, render} from 'preact'
