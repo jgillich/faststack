@@ -28,7 +28,7 @@ deploy:
     - script:
         name: set-tag
         code: |
-          if [ $WERCKER_GIT_BRANCH -eq "master" ]; then
+          if [ $WERCKER_GIT_BRANCH == "master" ]; then
             export IMAGE_TAG="latest"
           else
             export IMAGE_TAG="$WERCKER_GIT_BRANCH"
