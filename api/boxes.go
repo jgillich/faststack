@@ -88,6 +88,12 @@ func (a *Api) CreateBox(c echo.Context) error {
 		Image:   fmt.Sprintf("%s:%s", image.Image, req.Version),
 		Command: []string{"sh"},
 		Ports:   []pod.UserContainerPort{port},
+		Envs: []pod.UserEnvironmentVar{
+			pod.UserEnvironmentVar{
+				Env:   "PORT",
+				Value: "2000",
+			},
+		},
 	}
 
 	pod := pod.UserPod{
