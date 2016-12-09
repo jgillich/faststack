@@ -125,14 +125,15 @@ func (a *Api) CreateBox(c echo.Context) error {
 
 func (a *Api) ExecBox(c echo.Context) error {
 
-	podID := c.Param("id")
-	podInfo, err := a.Hyper.GetPodInfo(podID)
-	if err != nil {
-		return c.String(http.StatusNotFound, "Box does not exist")
-	}
-
 	websocket.Handler(func(ws *websocket.Conn) {
 		defer ws.Close()
+
+		podID := c.Param("id")
+		podInfo, err := a.Hyper.GetPodInfo(podID)
+		if err != nil {
+			websocket.Message.Send(ws, "box does not exist, closing connection")
+			return
+		}
 
 		if podInfo.Status.Phase != "Running" {
 			_, err := a.Hyper.StartPod(podID, "", false, false, nil, nil, nil)
@@ -199,7 +200,7 @@ func (a *Api) GetBox(c echo.Context) error {
 	podID := c.Param("id")
 	podInfo, err := a.Hyper.GetPodInfo(podID)
 	if err != nil {
-		return c.String(http.StatusNotFound, "Box does not exist")
+		return c.String(http.StatusNotFound, "box does not exist")
 	}
 
 	remaining := time.Duration(a.Config.BoxDuration)*time.Hour - time.Since(time.Unix(podInfo.CreatedAt, 0))
