@@ -1,4 +1,4 @@
-import {h, Component} from 'preact'
+import Preact, {Component} from 'preact'
 
 let script = document.createElement('script')
 script.src = 'https://www.google.com/recaptcha/api.js?onload=grecaptchaCallback&render=explicit'
@@ -26,13 +26,13 @@ export class Recaptcha extends Component {
   }
 
   renderCaptcha() {
-    let {sitekey, theme, type, size} = this.props;
+    let {sitekey, theme, type, size} = this.props
     let elem = document.createElement('div')
     elem.style.display = 'inline-block'
     grecaptcha.render(elem, {
       sitekey, theme, type, size,
-      callback: this.props.onChange,
-      "expired-callback": () => this.props.onChange(null),
+      'callback': this.props.onChange,
+      'expired-callback': () => this.props.onChange(null),
     })
     this.base.appendChild(elem)
   }

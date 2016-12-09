@@ -9,10 +9,10 @@ export function createBox(box) {
     fetch('/boxes', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(box)
-    }).then(res => {
+      body: JSON.stringify(box),
+    }).then((res) => {
       if(res.status != 200) {
-        res.text().then(reason => {
+        res.text().then((reason) => {
           dispatch({
             type: 'CREATE_BOX',
             error: new Error(reason),
@@ -28,11 +28,11 @@ export function createBox(box) {
         box: box,
       })
       route(`/term/${box.podID}`)
-    }).catch(err => {
+    }).catch((err) => {
       dispatch({
         type: 'CREATE_BOX',
         error: new Error(err),
       })
     })
-  };
+  }
 }

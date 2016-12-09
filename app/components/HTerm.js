@@ -1,4 +1,4 @@
-import {h, Component} from 'preact'
+import Preact, {Component} from 'preact'
 import {hterm, lib} from 'hterm-umdjs'
 import ReconnectingWebSocket from 'reconnecting-websocket'
 import themes from '../themes'
@@ -6,7 +6,6 @@ import themes from '../themes'
 hterm.defaultStorage = new lib.Storage.Memory()
 
 function applyTheme({name, values}, term) {
-
   term.prefs_.resetAll()
 
   term.prefs_.set('audible-bell-sound', '')
@@ -16,7 +15,7 @@ function applyTheme({name, values}, term) {
     term.prefs_.set(key, values[key])
   })
 
-  localStorage.setItem('termbox-terminal-theme', name)
+  localStorage.setItem('terminal-theme', name)
 }
 
 export default class HTerm extends Component {
@@ -36,23 +35,28 @@ export default class HTerm extends Component {
       elem.style.height = '100%'
       this.base.append(elem)
 
-      requestAnimationFrame(() => { this.init(this.props, elem) })
+      requestAnimationFrame(() => {
+        this.init(this.props, elem)
+      })
     })
-
   }
 
   init({onOpen, onError, onClose, podId, getThemeChangeHandler}, elem) {
-
     let term = new hterm.Terminal()
     term.decorate(elem)
 
-    let theme = themes.find((t) => t.name == localStorage.getItem('termbox-terminal-theme'))
+    let theme = themes.find((t) => {
+      return t.name == localStorage.getItem('terminal-theme')
+    })
+
     if(!theme) {
       theme = themes[0]
     }
     applyTheme(theme, term)
 
-    let ws = new ReconnectingWebSocket(`ws${location.protocol === 'https:' ? 's' : ''}://${location.host}/boxes/${podId}/exec`)
+    let proto = 'ws' + (location.protocol == 'https:' ? 's' : '')
+    let url = `${proto}://${location.host}/boxes/${podId}/exec`
+    let ws = new ReconnectingWebSocket(url)
 
     function HTerm(argv) {
       this.io = argv.io.push()

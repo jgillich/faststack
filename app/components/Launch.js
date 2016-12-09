@@ -1,4 +1,4 @@
-import {h, Component} from 'preact'
+import Preact, {Component} from 'preact'
 import {connect} from 'preact-redux'
 import {createBox} from '../actions/box'
 import {Recaptcha} from './Recaptcha'
@@ -9,7 +9,7 @@ export class Launch extends Component {
     super(props)
 
     this.state = {
-        image: CONFIG.images[0]
+        image: CONFIG.images[0],
     }
   }
 
@@ -17,44 +17,46 @@ export class Launch extends Component {
     this.props.dispatch(createBox({
       image: this.state.image.image,
       version: this.state.image.versions[0],
-      captcha: this.state.captcha
+      captcha: this.state.captcha,
     }))
   }
 
   render({state}, {image}) {
-    return <div >
+    return <div>
 
-      <section class="hero is-bold is-primary">
-        <div class="hero-body">
-          <div class="container has-text-centered">
-            <h1 class="title">
+      <section className="hero is-bold is-primary">
+        <div className="hero-body">
+          <div className="container has-text-centered">
+            <h1 className="title">
               Launch a Linux box with two clicks.
             </h1>
           </div>
         </div>
       </section>
 
-      <section class="section">
-        <div class="container">
+      <section className="section">
+        <div className="container">
 
-          <div class="columns is-centered is-multiline">
+          <div className="columns is-centered is-multiline">
             {CONFIG.images.map((i, index) =>
               index < 6 ?
-              <div class="column is-centered is-2">
-                <a onClick={e => this.setState({image: i})}>
-                  <div class={'card' + (image.name == i.name ? ' is-primary' : '')}>
-                    <div class="card-image has-text-centered">
-                      <span class="icon is-huge" style={{'padding': '10px 0'}}>
-                        <i class={'icon-' + i.name}/>
+              <div className="column is-centered is-2">
+                <a onClick={(e) => this.setState({image: i})}>
+                  <div className={'card' +
+                    (image.name == i.name ? ' is-primary' : '')}>
+                    <div className="card-image has-text-centered">
+                      <span className="icon is-huge"
+                        style={{'padding': '10px 0'}}>
+                        <i className={'icon-' + i.name}/>
                       </span>
                     </div>
 
-                    <div class="card-content has-text-centered">
-                      <p class="title is-4">{i.displayName}</p>
+                    <div className="card-content has-text-centered">
+                      <p className="title is-4">{i.displayName}</p>
                     </div>
 
-                    <footer class="card-footer">
-                      <p class="card-footer-item">{i.versions[0]}</p>
+                    <footer className="card-footer">
+                      <p className="card-footer-item">{i.versions[0]}</p>
                     </footer>
                   </div>
                 </a>
@@ -63,47 +65,48 @@ export class Launch extends Component {
             )}
           </div>
 
-           <div class="columns is-centered">
-            <div class="column has-text-centered">
+           <div className="columns is-centered">
+            <div className="column has-text-centered">
               <Recaptcha
                 sitekey={CONFIG.rcsitekey}
-                onChange={c => this.setState({captcha: c})}
+                onChange={(c) => this.setState({captcha: c})}
               />
             </div>
           </div>
-          <div class="columns is-centered">
-            <div class="column has-text-centered">
-              <a class={'button is-large is-primary' + (state.loading ? ' is-loading' : '')}
-                  onClick={this.launchClick.bind(this)}>
-                <span class="icon">
-                  <i class="fa fa-rocket"></i>
+          <div className="columns is-centered">
+            <div className="column has-text-centered">
+              <a className={'button is-large is-primary' +
+                  (state.loading ? ' is-loading' : '')}
+                onClick={this.launchClick.bind(this)}>
+                <span className="icon">
+                  <i className="fa fa-rocket"></i>
                 </span>
                 <span>Launch</span>
               </a>
             </div>
           </div>
             {state.error ?
-              <div class="notification is-danger">
+              <div className="notification is-danger">
                 {state.error.message}
               </div>
             : null}
         </div>
       </section>
 
-      <section class="section">
-        <div class="container">
+      <section className="section">
+        <div className="container">
 
-          <div class="columns">
+          <div className="columns">
 
-            <div class="column">
-              <article class="media">
-                <div class="media-left">
-                  <figure class="icon is-large">
-                    <i class="fa fa-user-times" aria-hidden="true"></i>
+            <div className="column">
+              <article className="media">
+                <div className="media-left">
+                  <figure className="icon is-large">
+                    <i className="fa fa-user-times" aria-hidden="true"></i>
                   </figure>
                 </div>
-                <div class="media-content">
-                  <div class="content">
+                <div className="media-content">
+                  <div className="content">
                     <p>
                       <strong>Free</strong><br/>
                       Termbox is completely free, no sign up required.
@@ -113,15 +116,15 @@ export class Launch extends Component {
               </article>
             </div>
 
-            <div class="column">
-              <article class="media">
-                <div class="media-left">
-                  <figure class="icon is-large">
-                    <i class="fa fa-shield" aria-hidden="true"></i>
+            <div className="column">
+              <article className="media">
+                <div className="media-left">
+                  <figure className="icon is-large">
+                    <i className="fa fa-shield" aria-hidden="true"></i>
                   </figure>
                 </div>
-                <div class="media-content">
-                  <div class="content">
+                <div className="media-content">
+                  <div className="content">
                     <p>
                       <strong>Secure</strong><br/>
                       Boxes are securely isolated in their own virtual
@@ -132,15 +135,15 @@ export class Launch extends Component {
               </article>
             </div>
 
-            <div class="column">
-              <article class="media">
-                <div class="media-left">
-                  <figure class="icon is-large">
-                    <i class="fa fa fa-heartbeat" aria-hidden="true"></i>
+            <div className="column">
+              <article className="media">
+                <div className="media-left">
+                  <figure className="icon is-large">
+                    <i className="fa fa fa-heartbeat" aria-hidden="true"></i>
                   </figure>
                 </div>
-                <div class="media-content">
-                  <div class="content">
+                <div className="media-content">
+                  <div className="content">
                     <p>
                       <strong>Ephemeral</strong><br/>
                       Boxes and all their data are automatically deleted after
@@ -152,7 +155,10 @@ export class Launch extends Component {
             </div>
 
           </div>
-          <p class="has-text-centered">For more information, visit our <a href='/faq'>FAQ</a>.</p>
+
+          <p className="has-text-centered">
+            For more information, visit our <a href='/faq'>FAQ</a>.
+          </p>
 
         </div>
       </section>
@@ -164,6 +170,6 @@ export class Launch extends Component {
 
 
 export const LaunchContainer = connect(
-  state => ({state: state.box}),
-  dispatch => ({dispatch})
-)(Launch);
+  (state) => ({state: state.box}),
+  (dispatch) => ({dispatch})
+)(Launch)

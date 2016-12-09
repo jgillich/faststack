@@ -1,2 +1,7 @@
-export {default as faq} from './faq.md!'
-export {default as notfound} from './notfound.md!'
+import faq from './faq.md!'
+import notfound from './notfound.md!'
+
+export default {
+  faq,
+  notfound,
+}

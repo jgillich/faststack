@@ -15,6 +15,7 @@ build:
     - npm-install
     - nahody/jspm-install:
         github-auth: $JSPM_INSTALL_GITHUB_AUTH
+    - npm-test
     - script:
         name: make
         code: make static-build

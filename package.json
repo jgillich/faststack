@@ -7,9 +7,15 @@
   "repository": "https://github.com/termbox/termbox.git",
   "author": "Jakob Gillich <jakob@gillich.me>",
   "devDependencies": {
+    "eslint": "^3.11.1",
+    "eslint-config-google": "^0.7.1",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-react": "^6.8.0",
     "jspm": "^0.16.48"
   },
   "scripts": {
+    "test": "eslint --ignore-path .gitignore --ignore-pattern app/config.js app",
+    "fix": "eslint --ignore-path .gitignore --ignore-pattern app/config.js --fix app",
     "bundle": "jspm bundle-sfx --minify index.js app/bundle.js"
   },
   "jspm": {

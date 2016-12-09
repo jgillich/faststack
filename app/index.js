@@ -4,10 +4,10 @@ import 'bulma/css/bulma.css!'
 import './styles/style.sass!'
 import 'whatwg-fetch'
 
-import {h, render} from 'preact'
-import {Provider} from 'preact-redux';
-import App from './components/App'
+import Preact, {render} from 'preact'
+import {Provider} from 'preact-redux'
 import createStore from './store'
+import App from './components/App'
 
 const store = createStore()
 
