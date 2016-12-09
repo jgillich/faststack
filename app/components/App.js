@@ -1,7 +1,7 @@
 import {h, Component} from 'preact'
 import {Router, Link} from "preact-router"
 import {LaunchContainer} from './Launch'
-import Doc from './Doc'
+import Page from './Page'
 import Term from './Term'
 
 export default class App extends Component {
@@ -26,7 +26,7 @@ export default class App extends Component {
             <Link class="nav-item" href="/">
               Home
             </Link>
-            <Link class="nav-item" href="/doc/faq">
+            <Link class="nav-item" href="/faq">
               FAQ
             </Link>
             <span class="nav-item">
@@ -44,8 +44,8 @@ export default class App extends Component {
 
       <Router>
         <LaunchContainer path='/'/>
-        <Doc path='/doc/:name'/>
         <Term path='/term/:podId'/>
+        <Page path='/:name'/>
       </Router>
     </div>
   }

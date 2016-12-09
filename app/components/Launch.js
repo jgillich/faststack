@@ -152,7 +152,7 @@ export class Launch extends Component {
             </div>
 
           </div>
-          <p class="has-text-centered">For more information, visit our <a href='/doc/faq'>FAQ</a>.</p>
+          <p class="has-text-centered">For more information, visit our <a href='/faq'>FAQ</a>.</p>
 
         </div>
       </section>
