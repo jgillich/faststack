@@ -25,10 +25,18 @@ build:
 
 deploy:
   steps:
+    - script:
+        name: set-tag
+        code: |
+          if [ $WERCKER_GIT_BRANCH -eq "master" ]; then
+            export IMAGE_TAG="latest""
+          else
+            export IMAGE_TAG="$WERCKER_GIT_BRANCH"
+          fi
     - internal/docker-push:
         username: $DOCKERHUB_USERNAME
         password: $DOCKERHUB_PASSWORD
-        tag: latest
+        tag: $IMAGE_TAG, $WERCKER_GIT_COMMIT
         cmd: /pipeline/source/termbox
         repository: termbox/termbox
         registry: https://registry.hub.docker.com
