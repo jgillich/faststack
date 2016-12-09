@@ -7,7 +7,7 @@ System.config({
       "runtime",
       "optimisation.modules.system"
     ],
-    "jsxPragma": "h"
+    "jsxPragma": "Preact.h"
   },
   paths: {
     "github:*": "jspm_packages/github/*",
