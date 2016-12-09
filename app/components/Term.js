@@ -9,9 +9,16 @@ export default class Term extends Component {
     super(props)
 
     fetch(`/boxes/${props.podId}`).then((res) =>{
+      if(res.status != 200) {
+        res.text().then((reason) => {
+          this.setState({error: new Error(reason)})
+        })
+        return Promise.reject()
+      }
       return res.json()
     }).then((box) => {
       this.setState({
+        box: box,
         timeRemaining: box.timeRemaining,
       })
 
@@ -25,17 +32,19 @@ export default class Term extends Component {
     clearInterval(this.timeUpdateId)
   }
 
-  render({podId}, {state, timeRemaining}) {
+  render({podId}, {error, state, box, timeRemaining}) {
     return <div style={{height: '90%'}}>
 
       <section className="section" style={{height: '85%'}}>
-        <div className="container" style={{height: '100%'}}>
 
+        <div className="container" style={{height: '100%'}}>
+          {box ?
           <HTerm podId={podId} ref={(r) => this.hterm = r}
             onOpen={() => this.setState({state: 'connected'})}
             onClose={() => this.setState({state: 'disconnected'})}
             getThemeChangeHandler={(h) => this.setTheme = h}
             />
+          : null}
         </div>
       </section>
 
@@ -45,10 +54,13 @@ export default class Term extends Component {
             <nav className="level">
               <div className="level-item has-text-centered">
                 <p className="heading">Status</p>
-                {state == 'disconnected' ?
+                {error ?
+                  <p className="title has-text-danger">{error.message}</p>
+                : state != 'connected' ?
                   <p className="title has-text-danger">Reconnecting</p> :
                   <p className="title">Connected</p>
                 }
+
               </div>
               {/* TODO
               <div class="level-item has-text-centered">
