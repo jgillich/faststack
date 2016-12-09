@@ -57,7 +57,7 @@ export default class Term extends Component {
                 {error ?
                   <p className="title has-text-danger">{error.message}</p>
                 : state != 'connected' ?
-                  <p className="title has-text-danger">Reconnecting</p> :
+                  <p className="title has-text-danger">Connecting</p> :
                   <p className="title">Connected</p>
                 }
 
