@@ -30,4 +30,5 @@ type GetBoxResponse struct {
 	Id            string `json:"id"`
 	Image         string `json:"image"`
 	TimeRemaining int    `json:"timeRemaining"`
+	Port          int    `json:"port"`
 }

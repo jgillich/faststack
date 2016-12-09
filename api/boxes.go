@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io"
 	"io/ioutil"
+	"math/rand"
 	"net/http"
 	"time"
 
@@ -77,9 +78,16 @@ func (a *Api) CreateBox(c echo.Context) error {
 		return c.String(http.StatusTooManyRequests, "Server capacity reached , please try again later")
 	}
 
+	port := pod.UserContainerPort{
+		// random port between 10000 and 60000
+		HostPort:      10000 + rand.Intn(50000),
+		ContainerPort: 2000,
+	}
+
 	container := pod.UserContainer{
 		Image:   fmt.Sprintf("%s:%s", image.Image, req.Version),
 		Command: []string{"sh"},
+		Ports:   []pod.UserContainerPort{port},
 	}
 
 	pod := pod.UserPod{
@@ -103,6 +111,8 @@ func (a *Api) CreateBox(c echo.Context) error {
 			return err
 		}
 	}
+
+	a.Log.Infof("IP Address %v created %v with public port %v", c.RealIP(), podID, port.HostPort)
 
 	return c.JSON(http.StatusOK, CreateBoxResponse{PodID: podID})
 }
@@ -189,10 +199,13 @@ func (a *Api) GetBox(c echo.Context) error {
 
 	remaining := time.Duration(a.Config.BoxDuration)*time.Hour - time.Since(time.Unix(podInfo.CreatedAt, 0))
 
+	container := podInfo.Spec.Containers[0]
+
 	res := GetBoxResponse{
 		Id:            podID,
 		TimeRemaining: int(remaining.Seconds()),
-		Image:         podInfo.Spec.Containers[0].Image,
+		Image:         container.Image,
+		Port:          int(container.Ports[0].HostPort),
 	}
 
 	return c.JSON(http.StatusOK, res)
