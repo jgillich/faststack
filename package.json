@@ -14,8 +14,8 @@
     "jspm": "^0.16.48"
   },
   "scripts": {
-    "test": "eslint --ignore-path .gitignore --ignore-pattern app/config.js app",
-    "fix": "eslint --ignore-path .gitignore --ignore-pattern app/config.js --fix app",
+    "test": "eslint app",
+    "fix": "eslint --fix app",
     "bundle": "jspm bundle-sfx --minify index.js app/bundle.js"
   },
   "jspm": {
