@@ -57,6 +57,8 @@ export default class HTerm extends Component {
     let proto = 'ws' + (location.protocol == 'https:' ? 's' : '')
     let url = `${proto}://${location.host}/boxes/${podId}/exec`
     let ws = new ReconnectingWebSocket(url)
+    ws.maxReconnectAttempts = 10
+    ws.reconnectInterval = 5000
 
     function HTerm(argv) {
       this.io = argv.io.push()
