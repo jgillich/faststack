@@ -24,39 +24,39 @@ export class Launch extends Component {
   render({state}, {image}) {
     return <div>
 
-      <section className="hero is-bold is-primary">
-        <div className="hero-body">
-          <div className="container has-text-centered">
-            <h1 className="title">
+      <section class="hero is-bold is-primary">
+        <div class="hero-body">
+          <div class="container has-text-centered">
+            <h1 class="title">
               Launch a Linux box with two clicks.
             </h1>
           </div>
         </div>
       </section>
 
-      <section className="section">
-        <div className="container">
+      <section class="section">
+        <div class="container">
 
-          <div className="columns is-centered is-multiline">
+          <div class="columns is-centered is-multiline">
             {CONFIG.images.map((i, index) =>
               index < 6 ?
-              <div className="column is-centered is-2">
+              <div class="column is-centered is-2">
                 <a onClick={(e) => this.setState({image: i})}>
-                  <div className={'card' +
+                  <div class={'card' +
                     (image.name == i.name ? ' is-primary' : '')}>
-                    <div className="card-image has-text-centered">
-                      <span className="icon is-huge"
+                    <div class="card-image has-text-centered">
+                      <span class="icon is-huge"
                         style={{'padding': '10px 0'}}>
-                        <i className={'icon-' + i.name}/>
+                        <i class={'icon-' + i.name}/>
                       </span>
                     </div>
 
-                    <div className="card-content has-text-centered">
-                      <p className="title is-4">{i.displayName}</p>
+                    <div class="card-content has-text-centered">
+                      <p class="title is-4">{i.displayName}</p>
                     </div>
 
-                    <footer className="card-footer">
-                      <p className="card-footer-item">{i.versions[0]}</p>
+                    <footer class="card-footer">
+                      <p class="card-footer-item">{i.versions[0]}</p>
                     </footer>
                   </div>
                 </a>
@@ -65,48 +65,48 @@ export class Launch extends Component {
             )}
           </div>
 
-           <div className="columns is-centered">
-            <div className="column has-text-centered">
+           <div class="columns is-centered">
+            <div class="column has-text-centered">
               <Recaptcha
                 sitekey={CONFIG.rcsitekey}
                 onChange={(c) => this.setState({captcha: c})}
               />
             </div>
           </div>
-          <div className="columns is-centered">
-            <div className="column has-text-centered">
-              <a className={'button is-large is-primary' +
+          <div class="columns is-centered">
+            <div class="column has-text-centered">
+              <a class={'button is-large is-primary' +
                   (state.loading ? ' is-loading' : '')}
                 onClick={this.launchClick.bind(this)}>
-                <span className="icon">
-                  <i className="fa fa-rocket"></i>
+                <span class="icon">
+                  <i class="fa fa-rocket"></i>
                 </span>
                 <span>Launch</span>
               </a>
             </div>
           </div>
             {state.error ?
-              <div className="notification is-danger">
+              <div class="notification is-danger">
                 {state.error.message}
               </div>
             : null}
         </div>
       </section>
 
-      <section className="section">
-        <div className="container">
+      <section class="section">
+        <div class="container">
 
-          <div className="columns">
+          <div class="columns">
 
-            <div className="column">
-              <article className="media">
-                <div className="media-left">
-                  <figure className="icon is-large">
-                    <i className="fa fa-user-times" aria-hidden="true"></i>
+            <div class="column">
+              <article class="media">
+                <div class="media-left">
+                  <figure class="icon is-large">
+                    <i class="fa fa-user-times" aria-hidden="true"></i>
                   </figure>
                 </div>
-                <div className="media-content">
-                  <div className="content">
+                <div class="media-content">
+                  <div class="content">
                     <p>
                       <strong>Free</strong><br/>
                       Termbox is completely free, no sign up required.
@@ -116,15 +116,15 @@ export class Launch extends Component {
               </article>
             </div>
 
-            <div className="column">
-              <article className="media">
-                <div className="media-left">
-                  <figure className="icon is-large">
-                    <i className="fa fa-shield" aria-hidden="true"></i>
+            <div class="column">
+              <article class="media">
+                <div class="media-left">
+                  <figure class="icon is-large">
+                    <i class="fa fa-shield" aria-hidden="true"></i>
                   </figure>
                 </div>
-                <div className="media-content">
-                  <div className="content">
+                <div class="media-content">
+                  <div class="content">
                     <p>
                       <strong>Secure</strong><br/>
                       Boxes are securely isolated in their own virtual
@@ -135,15 +135,15 @@ export class Launch extends Component {
               </article>
             </div>
 
-            <div className="column">
-              <article className="media">
-                <div className="media-left">
-                  <figure className="icon is-large">
-                    <i className="fa fa fa-heartbeat" aria-hidden="true"></i>
+            <div class="column">
+              <article class="media">
+                <div class="media-left">
+                  <figure class="icon is-large">
+                    <i class="fa fa fa-heartbeat" aria-hidden="true"></i>
                   </figure>
                 </div>
-                <div className="media-content">
-                  <div className="content">
+                <div class="media-content">
+                  <div class="content">
                     <p>
                       <strong>Ephemeral</strong><br/>
                       Boxes and all their data are automatically deleted after
@@ -156,16 +156,16 @@ export class Launch extends Component {
 
           </div>
 
-          <p className="has-text-centered">
+          <p class="has-text-centered">
             For more information, visit our <a href='/faq'>FAQ</a>.
           </p>
 
         </div>
       </section>
 
-      <footer className="footer">
-        <div className="container">
-          <div className="content has-text-centered">
+      <footer class="footer">
+        <div class="container">
+          <div class="content has-text-centered">
             <a href='/tos'>Terms of Service</a>
           </div>
         </div>

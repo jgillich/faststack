@@ -29,6 +29,7 @@ module.exports = {
       "semi": [2, "never"],
       "require-jsdoc": 0,
       "react/prop-types": 0,
+      "react/no-unknown-property": [2, { ignore: ["class"] }]
     },
     "globals": {
       "CONFIG": true,

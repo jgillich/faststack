@@ -9,31 +9,31 @@ export default class App extends Component {
 
   render({children}) {
     return <div style={{height: '100%'}}>
-      <nav className="nav has-shadow">
-        <div className="container">
-          <div className="nav-left">
+      <nav class="nav has-shadow">
+        <div class="container">
+          <div class="nav-left">
             <Link class="nav-item is-brand" href="/">
               <img src="/app/assets/logo.png" alt="termbox logo"/>
             </Link>
           </div>
 
-          <span className="nav-toggle">
+          <span class="nav-toggle">
             <span></span>
             <span></span>
             <span></span>
           </span>
 
-          <div className="nav-right nav-menu">
+          <div class="nav-right nav-menu">
             <Link class="nav-item" href="/">
               Home
             </Link>
             <Link class="nav-item" href="/faq">
               FAQ
             </Link>
-            <span className="nav-item">
-              <a className="button" href="https://docs.google.com/forms/d/e/1FAIpQLSek1xv5kwutvxkt35TGyM7qEOoPWY9o2hAoNSWq1b6Bu9kykw/viewform">
-                <span className="icon">
-                  <i className="fa fa-comment"></i>
+            <span class="nav-item">
+              <a class="button" href="https://docs.google.com/forms/d/e/1FAIpQLSek1xv5kwutvxkt35TGyM7qEOoPWY9o2hAoNSWq1b6Bu9kykw/viewform">
+                <span class="icon">
+                  <i class="fa fa-comment"></i>
                 </span>
                 <span>Feedback</span>
               </a>
