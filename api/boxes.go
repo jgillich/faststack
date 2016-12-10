@@ -78,22 +78,25 @@ func (a *Api) CreateBox(c echo.Context) error {
 		return c.String(http.StatusTooManyRequests, "Server capacity reached , please try again later")
 	}
 
-	port := pod.UserContainerPort{
-		// random port between 10000 and 60000
-		HostPort:      10000 + rand.Intn(50000),
-		ContainerPort: 2000,
-	}
-
 	container := pod.UserContainer{
 		Image:   fmt.Sprintf("%s:%s", image.Image, req.Version),
 		Command: []string{"sh"},
-		Ports:   []pod.UserContainerPort{port},
 		Envs: []pod.UserEnvironmentVar{
 			pod.UserEnvironmentVar{
 				Env:   "PORT",
 				Value: "2000",
 			},
 		},
+	}
+
+	if a.Config.PublicAddr != "" {
+		container.Ports = []pod.UserContainerPort{
+			pod.UserContainerPort{
+				// random port between 10000 and 60000
+				HostPort:      10000 + rand.Intn(50000),
+				ContainerPort: 2000,
+			},
+		}
 	}
 
 	pod := pod.UserPod{
@@ -118,7 +121,9 @@ func (a *Api) CreateBox(c echo.Context) error {
 		}
 	}
 
-	a.Log.Infof("IP Address %v created %v with public port %v", c.RealIP(), podID, port.HostPort)
+	if a.Config.PublicAddr != "" {
+		a.Log.Infof("IP Address %v created %v with public port %v", c.RealIP(), podID, container.Ports[0].HostPort)
+	}
 
 	return c.JSON(http.StatusOK, CreateBoxResponse{PodID: podID})
 }

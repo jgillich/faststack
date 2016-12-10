@@ -8,7 +8,8 @@
     <script>
     var CONFIG = {
       rcsitekey: {{ marshal .Config.RCSitekey }},
-      images: {{ marshal .Images }}
+      addr: {{ marshal .Config.PublicAddr }},
+      images: {{ marshal .Images }},
     }
     </script>
     {{if ne .Config.Env "production"}}

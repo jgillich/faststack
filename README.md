@@ -60,6 +60,7 @@ supported as well.
 * `TERMBOX_BOXMEMORY`: RAM assigned to boxes in megabytes. Defaults to `256`.
 * `TERMBOX_BOXCPUS`: CPUs assigned to boxes. Defaults to `1`.
 * `TERMBOX_BOXDURATION`: Time in hours after which boxes are deleted. Defaults to `3`.
+* `TERMBOX_PUBLICADDR`: The public address of the server. Setting this enables public ports.
 
 To generate a self signed cert for development, run:
 

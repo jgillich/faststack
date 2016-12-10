@@ -74,6 +74,15 @@ export default class Term extends Component {
                   {humanizeDuration(timeRemaining * 1000, {largest: 2})}
                 </p>
               </div>
+              {CONFIG.addr && box ?
+                <div className="level-item has-text-centered">
+                  <p className="heading">Public port</p>
+                  <p className="title">
+                    {CONFIG.addr}:{box.port}
+                  </p>
+                </div>
+              : null}
+
               <div className="level-item has-text-centered">
                 <p className="heading">Theme</p>
                 <p className="title">

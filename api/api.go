@@ -32,6 +32,7 @@ type ApiConfig struct {
 	BoxMemory   int `default:"256"`
 	BoxCpus     int `default:"1"`
 	BoxDuration int `default:"3"`
+	PublicAddr  string
 }
 
 func (a *ApiConfig) Debug() bool {
@@ -76,11 +77,6 @@ func New() *Api {
 
 	assetHandler := http.FileServer(rice.MustFindBox("../app").HTTPBox())
 	Echo.GET("/app/*", echo.WrapHandler(http.StripPrefix("/app/", assetHandler)))
-
-	// Work around https://github.com/systemjs/plugin-css/issues/122
-	Echo.GET("/jspm_packages/*", echo.WrapHandler(assetHandler))
-	Echo.GET("/doc/jspm_packages/*", echo.WrapHandler(http.StripPrefix("/doc/", assetHandler)))
-	Echo.GET("/term/jspm_packages/*", echo.WrapHandler(http.StripPrefix("/term/", assetHandler)))
 
 	funcs := template.FuncMap{
 		"marshal": func(v interface{}) template.JS {
