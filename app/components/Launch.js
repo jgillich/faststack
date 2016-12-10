@@ -163,6 +163,14 @@ export class Launch extends Component {
         </div>
       </section>
 
+      <footer className="footer">
+        <div className="container">
+          <div className="content has-text-centered">
+            <a href='/tos'>Terms of Service</a>
+          </div>
+        </div>
+      </footer>
+
     </div>
   }
 
