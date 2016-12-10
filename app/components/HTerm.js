@@ -8,6 +8,7 @@ hterm.defaultStorage = new lib.Storage.Memory()
 function applyTheme({name, values}, term) {
   term.prefs_.resetAll()
 
+  // Prefs are listed at https://chromium.googlesource.com/apps/libapps/+/HEAD/hterm/js/hterm_preference_manager.js
   term.prefs_.set('audible-bell-sound', '')
   term.prefs_.set('scroll-wheel-move-multiplier', 15)
 
