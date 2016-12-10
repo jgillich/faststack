@@ -4,6 +4,7 @@ import {LaunchContainer} from './Launch'
 import Page from './Page'
 import Term from './Term'
 import Pricing from './Pricing'
+import Help from './Help'
 
 export default class App extends Component {
 
@@ -27,15 +28,15 @@ export default class App extends Component {
             <Link class="nav-item" href="/">
               Home
             </Link>
-            <Link class="nav-item" href="/faq">
-              FAQ
+            <Link class="nav-item" href="/help/boxes">
+              Help
             </Link>
             <span class="nav-item">
-              <a class="button" href="https://docs.google.com/forms/d/e/1FAIpQLSek1xv5kwutvxkt35TGyM7qEOoPWY9o2hAoNSWq1b6Bu9kykw/viewform">
+              <a class="button" href="https://github.com/termbox/termbox">
                 <span class="icon">
-                  <i class="fa fa-comment"></i>
+                  <i class="fa fa-github"></i>
                 </span>
-                <span>Feedback</span>
+                <span>GitHub</span>
               </a>
             </span>
 
@@ -48,6 +49,7 @@ export default class App extends Component {
         <Term path='/term/:podId'/>
         <Pricing path='/pricing'/>
         <Page path='/:name'/>
+        <Help path='/help/:name'/>
       </Router>
     </div>
   }

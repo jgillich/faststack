@@ -6,7 +6,7 @@ Every box gets 512MB RAM, a single CPU and 10GB disk.
 
 #### Can I use this to run servers?
 
-Not yet.
+Yes! Check `$PORT` for the local port.
 
 #### How is this implemented?
 
