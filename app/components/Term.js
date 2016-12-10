@@ -36,15 +36,24 @@ export default class Term extends Component {
     return <div style={{height: '90%'}}>
 
       <section className="section" style={{height: '85%'}}>
+        <div className="columns" style={{height: '100%'}}>
 
-        <div className="container" style={{height: '100%'}}>
-          {box ?
-          <HTerm podId={podId} ref={(r) => this.hterm = r}
-            onOpen={() => this.setState({state: 'connected'})}
-            onClose={() => this.setState({state: 'disconnected'})}
-            getThemeChangeHandler={(h) => this.setTheme = h}
-            />
-          : null}
+          <div className="column is-offset-1 is-10" style={{height: '100%'}}>
+            <div className="container" style={{height: '100%'}}>
+              {box ?
+              <HTerm podId={podId} ref={(r) => this.hterm = r}
+                onOpen={() => this.setState({state: 'connected'})}
+                onClose={() => this.setState({state: 'disconnected'})}
+                getThemeChangeHandler={(h) => this.setTheme = h}
+                />
+              : null}
+            </div>
+          </div>
+
+          <div className="column is-1">
+            <a href="https://www.vultr.com/?ref=7052736-3B"><img src="https://www.vultr.com/media/banner_4.png" width="160" height="600"/></a>
+          </div>
+
         </div>
       </section>
 
@@ -60,14 +69,7 @@ export default class Term extends Component {
                   <p className="title has-text-danger">Connecting</p> :
                   <p className="title">Connected</p>
                 }
-
               </div>
-              {/* TODO
-              <div class="level-item has-text-centered">
-                <p class="heading">Distribution</p>
-                <p class="title">Ubuntu 16.04</p>
-              </div>
-              */}
               <div className="level-item has-text-centered">
                 <p className="heading">Time remaining</p>
                 <p className="title">
