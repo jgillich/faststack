@@ -73,7 +73,8 @@ export default class Term extends Component {
               <div className="level-item has-text-centered">
                 <p className="heading">Time remaining</p>
                 <p className="title">
-                  {humanizeDuration(timeRemaining * 1000, {units: ['h', 'm']})}
+                  {humanizeDuration(timeRemaining * 1000, {
+                    units: ['h', 'm'], round: true})}
                 </p>
               </div>
               {CONFIG.addr && box ?
