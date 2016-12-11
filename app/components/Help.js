@@ -7,8 +7,12 @@ const Help = ({name}) =>
     <nav class="nav has-shadow">
       <div class="container">
         <div class="nav-left">
-          <a class={'nav-item is-tab ' + (name == 'boxes' ? 'is-active' : '')} href="/help/boxes">Boxes</a>
-          <a class={'nav-item is-tab ' + (name == 'terminal' ? 'is-active' : '')} href="/help/terminal">Terminal</a>
+          <a class={'nav-item is-tab ' + (name == 'boxes' ? 'is-active' : '')} href="/help/boxes">
+            Boxes
+          </a>
+          <a class={'nav-item is-tab ' + (name == 'terminal' ? 'is-active' : '')} href="/help/terminal">
+            Terminal
+          </a>
         </div>
       </div>
     </nav>
