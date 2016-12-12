@@ -6,6 +6,9 @@ and agreement to Termbox.io's Terms of Service.
 
 Termbox.io reserves the right to modify the Terms of Service without notice.
 
+To report violation of the Terms of Service, send an email to
+[abuse@termbox.io](mailto:abuse@termbox.io).
+
 #### Acceptable Conduct
 
 You are responsible for the actions of all users of your Termbox and any data
