@@ -215,7 +215,10 @@ func (a *Api) GetBox(c echo.Context) error {
 		Id:            podID,
 		TimeRemaining: int(remaining.Seconds()),
 		Image:         container.Image,
-		Port:          int(container.Ports[0].HostPort),
+	}
+
+	if len(container.Ports) != 0 {
+		res.Port = int(container.Ports[0].HostPort)
 	}
 
 	return c.JSON(http.StatusOK, res)
