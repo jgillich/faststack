@@ -12,4 +12,4 @@ RUN apt update && apt upgrade -y && \
       python python-pip && \
     curl -sSf https://static.rust-lang.org/rustup.sh | sh
 
-
+ADD https://raw.githubusercontent.com/termbox/termbox/master/dotfiles/tmux.conf /etc/tmux.conf

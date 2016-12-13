@@ -9,3 +9,5 @@ RUN apk add --update \
       ruby ruby-bundler \
       go \
       python3 py-pip
+
+ADD https://raw.githubusercontent.com/termbox/termbox/master/dotfiles/tmux.conf /etc/tmux.conf

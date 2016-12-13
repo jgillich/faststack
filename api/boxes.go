@@ -217,7 +217,7 @@ func (a *Api) GetBox(c echo.Context) error {
 		Image:         container.Image,
 	}
 
-	if len(container.Ports) != 0 {
+	if len(container.Ports) > 0 {
 		res.Port = int(container.Ports[0].HostPort)
 	}
 

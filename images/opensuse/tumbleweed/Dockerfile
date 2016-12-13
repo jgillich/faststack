@@ -12,3 +12,5 @@ RUN zypper update -y && \
       go \
       rust cargo \
       python3 python3-pip
+
+ADD https://raw.githubusercontent.com/termbox/termbox/master/dotfiles/tmux.conf /etc/tmux.conf

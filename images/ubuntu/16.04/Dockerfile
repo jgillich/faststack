@@ -9,7 +9,6 @@ RUN apt update && apt upgrade -y && \
       ruby bundler \
       golang \
       rustc cargo \
-      python python-pip && \
-    apt clean
+      python python-pip
 
-
+ADD https://raw.githubusercontent.com/termbox/termbox/master/dotfiles/tmux.conf /etc/tmux.conf

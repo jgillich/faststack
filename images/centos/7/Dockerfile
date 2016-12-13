@@ -12,3 +12,5 @@ RUN yum update -y && \
       golang \
       python3 python3-pip && \
     curl https://sh.rustup.rs -sSf | sh -s -- -y
+
+ADD https://raw.githubusercontent.com/termbox/termbox/master/dotfiles/tmux.conf /etc/tmux.conf

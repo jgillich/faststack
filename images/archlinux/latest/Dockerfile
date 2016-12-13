@@ -11,3 +11,5 @@ RUN pacman -Syu --noconfirm && \
       go \
       rust cargo \
       python python-pip
+
+ADD https://raw.githubusercontent.com/termbox/termbox/master/dotfiles/tmux.conf /etc/tmux.conf
