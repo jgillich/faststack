@@ -3,7 +3,7 @@ FROM fedora:25
 RUN dnf update -y && \
     dnf install -y \
       @development-tools \
-      tmux nano vim top \
+      tmux nano vim procps-ng \
       iproute traceroute \
       git subversion \
       nodejs npm \
