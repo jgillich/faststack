@@ -77,7 +77,7 @@ export default class Term extends Component {
                     units: ['h', 'm'], round: true, largest: 2})}
                 </p>
               </div>
-              {CONFIG.addr && box ?
+              {CONFIG.addr && box && box.port ?
                 <div class="level-item has-text-centered">
                   <p class="heading">Public port</p>
                   <p class="title">

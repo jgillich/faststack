@@ -26,19 +26,14 @@ export default class HTerm extends Component {
   }
 
   componentDidMount() {
-    // the first requestAnimationFrame should not be needed since the
-    // component should be rendered in componentDidMount()
-    // some people however reported issues with this.base not being set
-    requestAnimationFrame(() => {
-      let elem = document.createElement('div')
-      elem.style.position = 'relative'
-      elem.style.width = '100%'
-      elem.style.height = '100%'
-      this.base.append(elem)
+    let elem = document.createElement('div')
+    elem.style.position = 'relative'
+    elem.style.width = '100%'
+    elem.style.height = '100%'
+    this.base.appendChild(elem)
 
-      requestAnimationFrame(() => {
-        this.init(this.props, elem)
-      })
+    requestAnimationFrame(() => {
+      this.init(this.props, elem)
     })
   }
 
