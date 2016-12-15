@@ -20,6 +20,7 @@ export default [
       'background-color': '#fdf6e3',
       'foreground-color': '#657b83',
       'cursor-color': 'rgba(101, 123, 131, 0.5)',
+      'color-palette-overrides': solarizedOverrides,
     },
   },
 ]
