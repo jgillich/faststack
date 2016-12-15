@@ -25,7 +25,7 @@ Now open `localhost:7842` and you should see the app loading up.
 
 Install  the following first:
 
-* Golang, [glide](https://glide.sh/), [gin](github.com/codegangsta/gin)
+* Golang, [glide](https://glide.sh/), [gin](https://github.com/codegangsta/gin)
 * Nodejs, npm
 
 Get the code and its dependencies:
