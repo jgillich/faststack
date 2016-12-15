@@ -19,7 +19,7 @@ func (a *Api) RemoveExpiredBoxes() {
 		fields := strings.Split(podData, ":")
 		podID, podName := fields[0], fields[1]
 
-		if podName != "termbox" {
+		if !strings.HasPrefix(podName, "termbox") {
 			continue
 		}
 

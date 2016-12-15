@@ -38,6 +38,14 @@ func main() {
 				return nil
 			},
 		},
+		{
+			Name:  "remove",
+			Usage: "remove expired boxes",
+			Action: func(c *cli.Context) error {
+				api.New().RemoveExpiredBoxes()
+				return nil
+			},
+		},
 	}
 
 	app.Run(os.Args)
