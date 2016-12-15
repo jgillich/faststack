@@ -4,7 +4,7 @@ RUN zypper update -y && \
     zypper install -y --type pattern devel_basis && \
     zypper install -y \
       glibc-locale \
-      nano vim \
+      curl nano vim \
       iproute traceroute \
       git subversion \
       nodejs npm \
