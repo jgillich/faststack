@@ -60,7 +60,8 @@ func (c *Client) CreateBox() api.CreateBoxResponse {
 		if err != nil {
 			log.Fatal(err)
 		}
-		log.Fatal(res)
+
+		log.Fatal(string(res))
 	}
 
 	var createdBox api.CreateBoxResponse
@@ -78,6 +79,7 @@ func (c *Client) ExecBox(box api.CreateBoxResponse) {
 	if err != nil {
 		log.Fatal(err)
 	}
+	defer ws.Close()
 
 	inFd, _ := term.GetFdInfo(os.Stdin)
 	oldState, err := term.SetRawTerminal(inFd)
@@ -90,32 +92,35 @@ func (c *Client) ExecBox(box api.CreateBoxResponse) {
 	defer r.Close()
 	defer w.Close()
 
+	isOpen := true
+
 	go func() {
-		_, err = io.Copy(os.Stdout, ws)
-		if err != nil {
-			log.Fatal(err)
+		for isOpen {
+			buf := make([]byte, 32*1024)
+			n, err := os.Stdin.Read(buf)
+			if err == io.EOF {
+				break
+			}
+			if err != nil {
+				log.Fatal(err)
+			}
+			s := string(buf[:n])
+			message := api.ExecBoxMessage{Data: s}
+			messageSlice, err := json.Marshal(message)
+			if err != nil {
+				log.Fatal(err)
+			}
+
+			_, err = ws.Write(messageSlice)
+			if err != nil {
+				log.Fatal(err)
+			}
 		}
 	}()
 
-	for {
-		buf := make([]byte, 32*1024)
-		n, err := os.Stdin.Read(buf)
-		if err == io.EOF {
-			break
-		}
-		if err != nil {
-			log.Fatal(err)
-		}
-		s := string(buf[:n])
-		message := api.ExecBoxMessage{Data: s}
-		messageSlice, err := json.Marshal(message)
-		if err != nil {
-			log.Fatal(err)
-		}
-		_, err = ws.Write(messageSlice)
-		if err != nil {
-			log.Fatal(err)
-		}
+	_, err = io.Copy(os.Stdout, ws)
+	if err != nil {
+		log.Fatal(err)
 	}
-
+	isOpen = false
 }

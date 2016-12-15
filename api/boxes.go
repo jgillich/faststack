@@ -171,31 +171,31 @@ func (a *Api) ExecBox(c echo.Context) error {
 		defer w.Close()
 
 		go func() {
-			if err := a.Hyper.StartExec(containerID, execID, true, r, ws, ws); err != nil {
-				a.Log.Error(err)
-			}
-		}()
-
-		for dec.More() {
-			var message ExecBoxMessage
-			if err := dec.Decode(&message); err != nil {
-				a.Log.Error(err)
-				break
-			}
-
-			if message.Width != 0 && message.Height != 0 {
-				if err := a.Hyper.WinResize(containerID, execID, message.Height, message.Width); err != nil {
-					a.Log.Warn(err)
-				}
-				continue
-			}
-			if message.Data != "" {
-				_, err = io.WriteString(w, message.Data)
-				if err != nil {
+			for dec.More() {
+				var message ExecBoxMessage
+				if err := dec.Decode(&message); err != nil {
 					a.Log.Error(err)
 					break
 				}
+
+				if message.Width != 0 && message.Height != 0 {
+					if err := a.Hyper.WinResize(containerID, execID, message.Height, message.Width); err != nil {
+						a.Log.Warn(err)
+					}
+					continue
+				}
+				if message.Data != "" {
+					_, err = io.WriteString(w, message.Data)
+					if err != nil {
+						a.Log.Error(err)
+						break
+					}
+				}
 			}
+		}()
+
+		if err := a.Hyper.StartExec(containerID, execID, true, r, ws, ws); err != nil {
+			a.Log.Error(err)
 		}
 
 	}).ServeHTTP(c.Response(), c.Request())
