@@ -134,9 +134,6 @@ func New() *Api {
 
 func (a *Api) Run() {
 
-	c, _ := json.MarshalIndent(a.Config, " ", " ")
-	a.Log.Info("Starting Termbox with the following configuration:\n", string(c))
-
 	a.Cron.AddFunc("@every 5m", a.RemoveExpiredBoxes)
 	a.Cron.AddFunc("@daily", a.UpdateImages)
 	a.Cron.Start()

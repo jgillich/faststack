@@ -4,7 +4,7 @@ RUN yum update -y && \
     yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm && \
     yum install -y \
       @development \
-      tmux nano vim \
+      abduco nano vim \
       iproute traceroute \
       subversion \
       nodejs npm \
@@ -12,5 +12,3 @@ RUN yum update -y && \
       golang \
       python3 python3-pip && \
     curl https://sh.rustup.rs -sSf | sh -s -- -y
-
-ADD https://raw.githubusercontent.com/termbox/termbox/master/dotfiles/tmux.conf /etc/tmux.conf

@@ -2,12 +2,12 @@ FROM alpine:3.4
 
 RUN apk add --update \
       build-base bash \
-      tmux curl file nano vim \
+      curl file nano vim \
       iproute2 iputils \
       git subversion \
       nodejs \
       ruby ruby-bundler \
       go \
-      python3 py-pip
-
-ADD https://raw.githubusercontent.com/termbox/termbox/master/dotfiles/tmux.conf /etc/tmux.conf
+      python3 py-pip && \
+    curl http://www.brain-dump.org/projects/abduco/abduco-0.6.tar.gz | tar xfz - -C /tmp && \
+    cd /tmp/abduco-0.6 && make && make install

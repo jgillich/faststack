@@ -3,13 +3,14 @@ FROM pritunl/archlinux
 RUN pacman -Syu --noconfirm && \
     pacman -S --noconfirm \
       base-devel \
-      tmux nano vim \
+      nano vim \
       iproute traceroute \
       git subversion \
       nodejs npm \
       ruby ruby-bundler \
       go \
       rust cargo \
-      python python-pip
+      python python-pip && \
+    curl http://www.brain-dump.org/projects/abduco/abduco-0.6.tar.gz | tar xfz - -C /tmp && \
+    cd /tmp/abduco-0.6 && make && make install
 
-ADD https://raw.githubusercontent.com/termbox/termbox/master/dotfiles/tmux.conf /etc/tmux.conf

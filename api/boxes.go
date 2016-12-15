@@ -7,6 +7,7 @@ import (
 	"io/ioutil"
 	"math/rand"
 	"net/http"
+	"strconv"
 	"time"
 
 	"code.cloudfoundry.org/bytefmt"
@@ -99,8 +100,11 @@ func (a *Api) CreateBox(c echo.Context) error {
 		}
 	}
 
+	// TODO return boxID and not podID to client
+	boxID := rand.Int()
+
 	pod := pod.UserPod{
-		Name:       "termbox",
+		Name:       "termbox-" + strconv.Itoa(boxID),
 		Hostname:   image.Name,
 		Containers: []pod.UserContainer{container},
 		Resource:   pod.UserResource{Vcpu: a.Config.BoxCpus, Memory: a.Config.BoxMemory},
@@ -148,7 +152,7 @@ func (a *Api) ExecBox(c echo.Context) error {
 		}
 		containerID, _ := a.Hyper.GetContainerByPod(podID)
 
-		command, err := json.Marshal([]string{"sh", "-c", "tmux attach -d 2> /dev/null || tmux"})
+		command, err := json.Marshal([]string{"abduco", "-A", "termbox", "bash"})
 		if err != nil {
 			a.Log.Error(err)
 			return
