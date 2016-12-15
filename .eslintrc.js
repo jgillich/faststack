@@ -35,4 +35,4 @@ module.exports = {
     "globals": {
       "CONFIG": true,
     }
-};
+}

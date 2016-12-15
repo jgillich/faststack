@@ -37,6 +37,6 @@ deploy:
         username: $DOCKERHUB_USERNAME
         password: $DOCKERHUB_PASSWORD
         tag: $IMAGE_TAG, $WERCKER_GIT_COMMIT
-        cmd: /pipeline/source/termbox
+        cmd: /pipeline/source/termboxd
         repository: termbox/termbox
         registry: https://registry.hub.docker.com

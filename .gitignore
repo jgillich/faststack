@@ -4,6 +4,7 @@ app/jspm_packages
 .env
 *.pem
 termbox
+termboxd
 app/bundle.js
 app/bundle.js.map
 .wercker
