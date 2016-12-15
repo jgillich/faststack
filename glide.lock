@@ -1,5 +1,5 @@
-hash: 13d51c4c53d6c88f4bb5f73e0f41dd76bd430f5d165102bdabc1e35a3c5988ce
-updated: 2016-12-05T21:44:45.917495322+01:00
+hash: dd18d00d705969b1acae30dc37917f0eaa9e5325c7140d75bf523c94cf8e9bca
+updated: 2016-12-15T11:58:38.014069899+01:00
 imports:
 - name: code.cloudfoundry.org/bytefmt
   version: b12c1522f4cbb5f35861bd5dd2c39a4fa996441a
@@ -301,6 +301,8 @@ imports:
   version: d26492970760ca5d33129d2d799e34be5c4782eb
 - name: github.com/tylerb/graceful
   version: 4df1190835320af7076dfcf27b3d071fd3612caf
+- name: github.com/urfave/cli
+  version: 0bdeddeeb0f650497d603c4ad7b20cfe685682f6
 - name: github.com/valyala/fasttemplate
   version: 3b874956e03f1636d171bda64b130f9135f42cff
 - name: github.com/vbatts/tar-split
