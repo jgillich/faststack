@@ -21,7 +21,7 @@ build:
         code: make static-build
     - script:
         name: copy-output
-        code: rsync -rv "$WERCKER_SOURCE_DIR/termbox" "$WERCKER_OUTPUT_DIR"
+        code: rsync -rv "$WERCKER_SOURCE_DIR/termboxd" "$WERCKER_OUTPUT_DIR"
 
 deploy:
   steps:
