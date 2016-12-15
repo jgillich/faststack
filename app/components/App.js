@@ -13,7 +13,7 @@ export default class App extends Component {
       <nav class="nav has-shadow">
         <div class="container">
           <div class="nav-left">
-            <Link class="nav-item is-brand" href="/">
+            <Link class="nav-item is-brand" target="_blank" href="/">
               <img src="/app/assets/logo.png" alt="termbox logo"/>
             </Link>
           </div>
@@ -25,14 +25,14 @@ export default class App extends Component {
           </span>
 
           <div class="nav-right nav-menu">
-            <Link class="nav-item" href="/">
+            <Link class="nav-item" target="_blank" href="/">
               Home
             </Link>
-            <Link class="nav-item" href="/help/boxes">
+            <Link class="nav-item" target="_blank" href="/help/boxes">
               Help
             </Link>
             <span class="nav-item">
-              <a class="button" href="https://github.com/termbox/termbox">
+              <a class="button" target="_blank" href="https://github.com/termbox/termbox">
                 <span class="icon">
                   <i class="fa fa-github"></i>
                 </span>
