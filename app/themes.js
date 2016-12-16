@@ -23,4 +23,13 @@ export default [
       'color-palette-overrides': solarizedOverrides,
     },
   },
+  {
+    name: 'monokai',
+    values: {
+      'background-color': '#272822',
+      'foreground-color': '#f8f8f2',
+      'cursor-color': 'rgba(248, 248, 240, 1)',
+      'color-palette-overrides': solarizedOverrides,
+    },
+  },
 ]
