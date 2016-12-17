@@ -1,5 +1,7 @@
 FROM pritunl/archlinux
 
+ENV TERM=xterm-256color
+
 RUN pacman -Syu --noconfirm && \
     pacman -S --noconfirm \
       base-devel \

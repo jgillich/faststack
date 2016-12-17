@@ -1,5 +1,7 @@
 FROM fedora:25
 
+ENV TERM=xterm-256color
+
 RUN dnf update -y && \
     dnf install -y \
       @development-tools \

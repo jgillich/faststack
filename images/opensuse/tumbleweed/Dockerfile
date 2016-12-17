@@ -1,5 +1,7 @@
 FROM opensuse:tumbleweed
 
+ENV TERM=xterm-256color
+
 RUN zypper update -y && \
     zypper install -y --type pattern devel_basis && \
     zypper install -y \

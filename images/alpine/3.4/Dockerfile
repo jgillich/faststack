@@ -1,5 +1,7 @@
 FROM alpine:3.4
 
+ENV TERM=xterm-256color
+
 RUN apk add --update \
       build-base bash \
       curl file nano vim \
@@ -11,3 +13,4 @@ RUN apk add --update \
       python3 py-pip && \
     curl http://www.brain-dump.org/projects/abduco/abduco-0.6.tar.gz | tar xfz - -C /tmp && \
     cd /tmp/abduco-0.6 && make && make install
+
