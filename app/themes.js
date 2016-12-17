@@ -5,6 +5,17 @@ let solarizedOverrides = [
 ]
 
 export default [
+   {
+    name: 'monokai',
+    values: {
+      'background-color': '#171814',
+      'foreground-color': '#e9e9e9',
+      'color-palette-overrides': [
+        '#171814', '#f92672', '#82b414', '#fd971f', '#2196ac', '#8c54fe', '#799ba2', '#ccccc6',
+        '#272822', '#f92672', '#82b414', '#e6db74', '#66d9ef', '#9e6ffe', '#a3b9bf', '#f8f8f2',
+      ],
+    },
+  },
   {
     name: 'solarized-dark',
     values: {
