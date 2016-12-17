@@ -1,7 +1,10 @@
 package api
 
-import "github.com/labstack/echo"
-import "net/http"
+import (
+	"net/http"
+
+	"github.com/labstack/echo"
+)
 
 type Status struct {
 	ServerOk   bool
