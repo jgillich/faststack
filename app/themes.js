@@ -3,6 +3,10 @@ let solarizedOverrides = [
   '#eee8d5', '#002b36', '#cb4b16', '#586e75', '#657b83', '#839496', '#6c71c4',
   '#93a1a1', '#fdf6e3',
 ]
+let monokaiOverrides = [
+  '#272822', '#f8f8f0', '#f8f8f2', '#49483e', '#75715e', '#e6db74', '#ae81ff',
+  '#f92672', '#66d9ef', '#a6e22e', '#fd971f', '#f92672', '#66d9ef',
+]
 
 export default [
   {
@@ -29,7 +33,7 @@ export default [
       'background-color': '#272822',
       'foreground-color': '#f8f8f2',
       'cursor-color': 'rgba(248, 248, 240, 1)',
-      'color-palette-overrides': solarizedOverrides,
+      'color-palette-overrides': monokaiOverrides,
     },
   },
 ]
