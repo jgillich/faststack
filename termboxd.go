@@ -16,8 +16,10 @@ func main() {
 	app.Usage = "instant linux terminals"
 	app.Version = "1.0.0"
 
+	api := api.New()
+
 	app.Action = func(c *cli.Context) error {
-		api.New().Run()
+		api.Run()
 		return nil
 	}
 
@@ -26,7 +28,7 @@ func main() {
 			Name:  "api",
 			Usage: "run the api server",
 			Action: func(c *cli.Context) error {
-				api.New().Run()
+				api.Run()
 				return nil
 			},
 		},
@@ -34,15 +36,16 @@ func main() {
 			Name:  "pull",
 			Usage: "pull all images",
 			Action: func(c *cli.Context) error {
-				api.New().UpdateImages()
+				api.UpdateImages()
 				return nil
 			},
 		},
 		{
 			Name:  "remove",
-			Usage: "remove expired boxes",
+			Usage: "remove expired boxes and image",
 			Action: func(c *cli.Context) error {
-				api.New().RemoveExpiredBoxes()
+				api.RemoveExpiredBoxes()
+				api.RemoveCustomImages()
 				return nil
 			},
 		},

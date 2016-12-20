@@ -2,8 +2,11 @@ package api
 
 import (
 	"fmt"
+	"strconv"
 	"strings"
 	"time"
+
+	"github.com/hyperhq/hyperd/utils"
 )
 
 func (a *Api) RemoveExpiredBoxes() {
@@ -51,5 +54,44 @@ func (a *Api) UpdateImages() {
 				a.Log.Error(err)
 			}
 		}
+	}
+}
+
+func (a *Api) RemoveCustomImages() {
+	a.Log.Info("Running job RemoveCustomImages")
+
+	remoteInfo, err := a.Hyper.GetImages(true, true)
+	if err != nil {
+		a.Log.Error(err)
+		return
+	}
+
+	images := remoteInfo.GetList("imagesList")
+	for _, image := range images {
+		fields := utils.RsplitN(image, ":", 5)
+		date, _ := strconv.ParseUint(fields[3], 0, 64)
+
+		a.Log.Info(fields[0])
+
+		// keep library images
+		if !strings.Contains(fields[0], "/") {
+			continue
+		}
+
+		if strings.HasPrefix(fields[0], "termbox/") {
+			continue
+		}
+
+		if time.Since(time.Unix(int64(date), 0)) < time.Duration(a.Config.BoxDuration+1)*time.Hour {
+			continue
+		}
+
+		_, err := a.Hyper.RemoveImage(fields[2], false, false)
+		if err != nil {
+			a.Log.Error(err)
+			continue
+		}
+
+		a.Log.Infof("Removed image %s", fields[0])
 	}
 }
