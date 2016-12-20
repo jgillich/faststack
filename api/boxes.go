@@ -150,9 +150,19 @@ func (a *Api) ExecBox(c echo.Context) error {
 				return
 			}
 		}
-		containerID, _ := a.Hyper.GetContainerByPod(podID)
+		containerID, err := a.Hyper.GetContainerByPod(podID)
+		if err != nil {
+			a.Log.Error(err)
+			return
+		}
 
-		command, err := json.Marshal([]string{"abduco", "-A", "termbox", "bash"})
+		containerInfo, err := a.Hyper.GetContainerInfo(containerID)
+		if err != nil {
+			a.Log.Error(err)
+			return
+		}
+
+		command, err := json.Marshal(containerInfo.Container.Commands)
 		if err != nil {
 			a.Log.Error(err)
 			return

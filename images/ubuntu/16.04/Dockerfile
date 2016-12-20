@@ -12,3 +12,5 @@ RUN apt update && apt upgrade -y && \
       golang \
       rustc cargo \
       python python-pip
+
+CMD ["abduco", "-A", "termbox", "bash"]

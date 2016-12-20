@@ -14,3 +14,4 @@ RUN apk add --update \
     curl http://www.brain-dump.org/projects/abduco/abduco-0.6.tar.gz | tar xfz - -C /tmp && \
     cd /tmp/abduco-0.6 && make && make install
 
+CMD ["abduco", "-A", "termbox", "bash"]

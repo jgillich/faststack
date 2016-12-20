@@ -14,3 +14,5 @@ RUN yum update -y && \
       golang \
       python3 python3-pip && \
     curl https://sh.rustup.rs -sSf | sh -s -- -y
+
+CMD ["abduco", "-A", "termbox", "bash"]

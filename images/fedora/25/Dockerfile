@@ -13,3 +13,5 @@ RUN dnf update -y && \
       golang \
       rust cargo \
       python3 python3-pip
+
+CMD ["abduco", "-A", "termbox", "bash"]
