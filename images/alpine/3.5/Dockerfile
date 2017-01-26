@@ -1,9 +1,9 @@
-FROM alpine:3.4
+FROM alpine:3.5
 
 ENV TERM=xterm-256color
 
 RUN apk add --update \
-      build-base bash \
+      build-base \
       curl file nano vim \
       iproute2 iputils \
       git subversion \
@@ -14,4 +14,4 @@ RUN apk add --update \
     curl http://www.brain-dump.org/projects/abduco/abduco-0.6.tar.gz | tar xfz - -C /tmp && \
     cd /tmp/abduco-0.6 && make && make install
 
-CMD ["abduco", "-A", "termbox", "bash"]
+CMD ["abduco", "-A", "termbox", "sh"]

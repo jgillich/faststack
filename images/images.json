@@ -52,7 +52,7 @@
     "name": "alpine",
     "image": "termbox/alpine",
     "versions": [
-      "3.4"
+      "3.5"
     ]
   }
 ]
