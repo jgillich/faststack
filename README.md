@@ -8,10 +8,11 @@ Note: this is not [Termbox the user interface library](https://github.com/nsf/te
 
 ### Installation
 
-First, install [HyperContainer](https://hypercontainer.io/).
+First, install [hyperd](https://hypercontainer.io/).
 
-Right now, you have to `chmod 777 /var/run/hyper.sock` before running Termbox. We
-will be supporting HTTP authentication soon.
+By default, hyperd is accessible via a socket file at `/var/run/hyper.sock`.
+You can pass this file to Termbox, or configure hyperd to listen on a TCP address.
+Due to the lack of built in authentication, both methods should be used with care.
 
 Termbox is distributed as a Docker image:
 
@@ -61,6 +62,9 @@ supported as well.
 * `TERMBOX_BOXCPUS`: CPUs assigned to boxes. Defaults to `1`.
 * `TERMBOX_BOXDURATION`: Time in hours after which boxes are deleted. Defaults to `3`.
 * `TERMBOX_PUBLICADDR`: The public address of the server. Setting this enables public ports.
+* `TERMBOX_HYPERPROTO`: Protocol to access hyperd. Set to `unix` (default) or `tcp`.
+* `TERMBOX_HYPERADDR`: Address to access hyperd. Defaults to `/var/run/hyper.sock`.
+
 
 To generate a self signed cert for development, run:
 
