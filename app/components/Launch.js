@@ -9,19 +9,19 @@ export class Launch extends Component {
     super(props)
 
     this.state = {
-        image: CONFIG.images[0],
+        selectedImage: CONFIG.images[0],
     }
   }
 
   launchClick() {
     this.props.dispatch(createBox({
-      image: this.state.image.image,
-      version: this.state.image.versions[0],
+      image: this.state.selectedImage.image,
+      version: this.state.selectedImage.versions[0],
       captcha: this.state.captcha,
     }))
   }
 
-  render({state}, {image}) {
+  render({state}, {selectedImage}) {
     return <div>
 
       <section class="hero is-bold is-primary">
@@ -37,31 +37,28 @@ export class Launch extends Component {
       <section class="section">
         <div class="container">
 
-          <div class="columns is-centered is-multiline">
-            {CONFIG.images.map((i, index) =>
-              index < 6 ?
+          <div class="columns is-multiline">
+            {CONFIG.images.map((image) =>
               <div class="column is-centered is-2">
-                <a onClick={(e) => this.setState({image: i})}>
+                <a onClick={(e) => this.setState({selectedImage: image})}>
                   <div class={'card' +
-                    (image.name == i.name ? ' is-primary' : '')}>
+                    (image.name == selectedImage.name ? ' is-primary' : '')}>
                     <div class="card-image has-text-centered">
-                      <span class="icon is-huge"
-                        style={{'padding': '10px 0'}}>
-                        <i class={'icon-' + i.name}/>
+                      <span class="icon is-huge" style={{'padding': '10px 0'}}>
+                        <i class={'fl-' + image.name}/>
                       </span>
                     </div>
 
                     <div class="card-content has-text-centered">
-                      <p class="title is-4">{i.displayName}</p>
+                      <p class="title is-4">{image.displayName}</p>
                     </div>
 
                     <footer class="card-footer">
-                      <p class="card-footer-item">{i.versions[0]}</p>
+                      <p class="card-footer-item">{image.versions[0]}</p>
                     </footer>
                   </div>
                 </a>
               </div>
-              : null
             )}
           </div>
 
