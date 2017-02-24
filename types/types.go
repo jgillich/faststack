@@ -1,4 +1,4 @@
-package api
+package types
 
 type Image struct {
 	DisplayName string   `json:"displayName"`

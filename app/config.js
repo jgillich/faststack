@@ -46,6 +46,7 @@ System.config({
     "humanize-duration": "npm:humanize-duration@3.10.0",
     "json": "github:systemjs/plugin-json@0.3.0",
     "md": "github:guybedford/system-md@0.1.0",
+    "milligram": "npm:milligram@1.3.0",
     "preact": "npm:preact@7.2.0",
     "preact-redux": "npm:preact-redux@2.0.0",
     "preact-router": "npm:preact-router@2.4.1",
@@ -554,6 +555,9 @@ System.config({
     "npm:miller-rabin@4.0.0": {
       "bn.js": "npm:bn.js@4.11.6",
       "brorand": "npm:brorand@1.1.0"
+    },
+    "npm:milligram@1.3.0": {
+      "normalize.css": "npm:normalize.css@5.0.0"
     },
     "npm:minimatch@3.0.3": {
       "brace-expansion": "npm:brace-expansion@1.1.6",

@@ -1,4 +1,4 @@
-package api
+package daemon
 
 import (
 	"encoding/json"
@@ -17,6 +17,7 @@ import (
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
 	"github.com/robfig/cron"
+	"github.com/termbox/termbox/types"
 )
 
 type ApiConfig struct {
@@ -29,9 +30,9 @@ type ApiConfig struct {
 	HyperAddr   string `default:"/var/run/hyper.sock"`
 	RCSitekey   string
 	RCSecret    string
-	BoxMemory   int `default:"256"`
-	BoxCpus     int `default:"1"`
-	BoxDuration int `default:"3"`
+	BoxMemory   int32 `default:"256"`
+	BoxCpus     int32 `default:"1"`
+	BoxDuration int32 `default:"3"`
 	PublicAddr  string
 }
 
@@ -43,7 +44,7 @@ type Api struct {
 	Log         *logrus.Logger
 	Config      *ApiConfig
 	Echo        *echo.Echo
-	Images      *[]Image
+	Images      *[]types.Image
 	Hyper       *api.Client
 	HyperClient *client.HyperClient
 	Cron        *cron.Cron

@@ -11,7 +11,9 @@ build:
     - install-packages:
         packages: nodejs rsync zip
     - setup-go-workspace
-    - glide-install
+    - script:
+        name: dep
+        code: go get -u github.com/golang/dep/... && dep ensure
     - npm-install
     - nahody/jspm-install:
         github-auth: $JSPM_INSTALL_GITHUB_AUTH
@@ -21,7 +23,7 @@ build:
         code: make static-build
     - script:
         name: copy-output
-        code: rsync -rv "$WERCKER_SOURCE_DIR/termboxd" "$WERCKER_OUTPUT_DIR"
+        code: rsync -rv "$WERCKER_SOURCE_DIR/bin/termboxd" "$WERCKER_OUTPUT_DIR"
 
 deploy:
   steps:

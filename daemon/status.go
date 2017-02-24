@@ -1,4 +1,4 @@
-package api
+package daemon
 
 import (
 	"net/http"

@@ -1,4 +1,4 @@
-package api
+package daemon
 
 import (
 	"encoding/json"
@@ -7,7 +7,6 @@ import (
 	"io/ioutil"
 	"math/rand"
 	"net/http"
-	"strconv"
 	"time"
 
 	"code.cloudfoundry.org/bytefmt"
@@ -17,8 +16,9 @@ import (
 	"net/url"
 
 	sigar "github.com/cloudfoundry/gosigar"
-	"github.com/hyperhq/runv/hypervisor/pod"
+	apitype "github.com/hyperhq/hyperd/types"
 	"github.com/labstack/echo"
+	"github.com/termbox/termbox/types"
 )
 
 func (a *Api) CreateBox(c echo.Context) error {
@@ -27,7 +27,7 @@ func (a *Api) CreateBox(c echo.Context) error {
 		return err
 	}
 
-	var req CreateBoxRequest
+	var req types.CreateBoxRequest
 	if err = json.Unmarshal(body, &req); err != nil {
 		return err
 	}
@@ -46,7 +46,7 @@ func (a *Api) CreateBox(c echo.Context) error {
 
 		defer res.Body.Close()
 
-		var verify CaptchaVerifyResponse
+		var verify types.CaptchaVerifyResponse
 		if err := json.NewDecoder(res.Body).Decode(&verify); err != nil {
 			return err
 		}
@@ -58,7 +58,7 @@ func (a *Api) CreateBox(c echo.Context) error {
 	}
 
 	// verify image is whitelisted
-	var image Image
+	var image types.Image
 	for _, i := range *a.Images {
 		if req.Image == i.Image {
 			for _, version := range i.Versions {
@@ -79,22 +79,21 @@ func (a *Api) CreateBox(c echo.Context) error {
 		return c.String(http.StatusTooManyRequests, "Server capacity reached , please try again later")
 	}
 
-	container := pod.UserContainer{
+	container := apitype.UserContainer{
 		Image:   fmt.Sprintf("%s:%s", image.Image, req.Version),
 		Command: []string{"sh"},
-		Envs: []pod.UserEnvironmentVar{
-			pod.UserEnvironmentVar{
+		Envs: []*apitype.EnvironmentVar{
+			&apitype.EnvironmentVar{
 				Env:   "PORT",
 				Value: "2000",
-			},
-		},
+			}},
 	}
 
 	if a.Config.PublicAddr != "" {
-		container.Ports = []pod.UserContainerPort{
-			pod.UserContainerPort{
+		container.Ports = []*apitype.UserContainerPort{
+			&apitype.UserContainerPort{
 				// random port between 10000 and 60000
-				HostPort:      10000 + rand.Intn(50000),
+				HostPort:      int32(10000 + rand.Intn(50000)),
 				ContainerPort: 2000,
 			},
 		}
@@ -103,17 +102,17 @@ func (a *Api) CreateBox(c echo.Context) error {
 	// TODO return boxID and not podID to client
 	boxID := rand.Int()
 
-	pod := pod.UserPod{
-		Name:       "termbox-" + strconv.Itoa(boxID),
+	pod := apitype.UserPod{
+		//Name:       "termbox-" + strconv.Itoa(boxID),
 		Hostname:   image.Name,
-		Containers: []pod.UserContainer{container},
-		Resource:   pod.UserResource{Vcpu: a.Config.BoxCpus, Memory: a.Config.BoxMemory},
+		Containers: []*apitype.UserContainer{&container},
+		Resource:   &apitype.UserResource{Vcpu: a.Config.BoxCpus, Memory: a.Config.BoxMemory},
 	}
 
 	podID, statusCode, err := a.Hyper.CreatePod(pod)
 	if err != nil {
 		if statusCode == http.StatusNotFound {
-			if err := a.HyperClient.PullImages(&pod); err != nil {
+			if err := a.HyperClient.PullImages(pod); err != nil {
 				return err
 			}
 			podID, statusCode, err = a.Hyper.CreatePod(pod)
@@ -129,7 +128,7 @@ func (a *Api) CreateBox(c echo.Context) error {
 		a.Log.Infof("IP Address %v created %v with public port %v", c.RealIP(), podID, container.Ports[0].HostPort)
 	}
 
-	return c.JSON(http.StatusOK, CreateBoxResponse{PodID: podID})
+	return c.JSON(http.StatusOK, types.CreateBoxResponse{PodID: podID})
 }
 
 func (a *Api) ExecBox(c echo.Context) error {
@@ -182,7 +181,7 @@ func (a *Api) ExecBox(c echo.Context) error {
 
 		go func() {
 			for dec.More() {
-				var message ExecBoxMessage
+				var message types.ExecBoxMessage
 				if err := dec.Decode(&message); err != nil {
 					a.Log.Error(err)
 					break
@@ -225,7 +224,7 @@ func (a *Api) GetBox(c echo.Context) error {
 
 	container := podInfo.Spec.Containers[0]
 
-	res := GetBoxResponse{
+	res := types.GetBoxResponse{
 		Id:            podID,
 		TimeRemaining: int(remaining.Seconds()),
 		Image:         container.Image,

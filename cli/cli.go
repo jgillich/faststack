@@ -13,7 +13,7 @@ import (
 	"golang.org/x/net/websocket"
 
 	"github.com/hyperhq/runv/lib/term"
-	"github.com/termbox/termbox/api"
+	"github.com/termbox/termbox/types"
 	"github.com/urfave/cli"
 )
 
@@ -37,9 +37,9 @@ type Client struct {
 	ServerAddr string
 }
 
-func (c *Client) CreateBox() api.CreateBoxResponse {
+func (c *Client) CreateBox() types.CreateBoxResponse {
 
-	createBox := api.CreateBoxRequest{
+	createBox := types.CreateBoxRequest{
 		Image:   "termbox/fedora",
 		Version: "25",
 		Captcha: "",
@@ -64,7 +64,7 @@ func (c *Client) CreateBox() api.CreateBoxResponse {
 		log.Fatal(string(res))
 	}
 
-	var createdBox api.CreateBoxResponse
+	var createdBox types.CreateBoxResponse
 	if err := json.NewDecoder(res.Body).Decode(&createdBox); err != nil {
 		log.Fatal(err)
 	}
@@ -72,7 +72,7 @@ func (c *Client) CreateBox() api.CreateBoxResponse {
 	return createdBox
 }
 
-func (c *Client) ExecBox(box api.CreateBoxResponse) {
+func (c *Client) ExecBox(box types.CreateBoxResponse) {
 
 	origin := "http://localhost/"
 	ws, err := websocket.Dial(fmt.Sprintf("ws://%s/boxes/%s/exec", c.ServerAddr, box.PodID), "", origin)
@@ -105,7 +105,7 @@ func (c *Client) ExecBox(box api.CreateBoxResponse) {
 				log.Fatal(err)
 			}
 			s := string(buf[:n])
-			message := api.ExecBoxMessage{Data: s}
+			message := types.ExecBoxMessage{Data: s}
 			messageSlice, err := json.Marshal(message)
 			if err != nil {
 				log.Fatal(err)

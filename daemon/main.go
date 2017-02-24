@@ -1,10 +1,9 @@
-package main
+package daemon
 
 import (
 	"os"
 
 	"github.com/joho/godotenv"
-	"github.com/termbox/termbox/api"
 	"github.com/urfave/cli"
 )
 
@@ -16,7 +15,7 @@ func main() {
 	app.Usage = "instant linux terminals"
 	app.Version = "1.0.0"
 
-	api := api.New()
+	api := New()
 
 	app.Action = func(c *cli.Context) error {
 		api.Run()

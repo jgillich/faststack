@@ -1,7 +1,7 @@
 {
   "name": "termbox",
   "description": "Termbox",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "homepage": "https://termbox.io",
   "license": "MIT",
   "repository": "https://github.com/termbox/termbox.git",
@@ -31,6 +31,7 @@
       "humanize-duration": "npm:humanize-duration@^3.10.0",
       "json": "github:systemjs/plugin-json@^0.3.0",
       "md": "github:guybedford/system-md@^0.1.0",
+      "milligram": "npm:milligram@^1.3.0",
       "preact": "npm:preact@^7.1.0",
       "preact-redux": "npm:preact-redux@^2.0.0",
       "preact-router": "npm:preact-router@^2.3.2",

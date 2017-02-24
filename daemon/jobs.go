@@ -1,4 +1,4 @@
-package api
+package daemon
 
 import (
 	"fmt"
@@ -73,12 +73,8 @@ func (a *Api) RemoveCustomImages() {
 
 		a.Log.Info(fields[0])
 
-		// keep library images
-		if !strings.Contains(fields[0], "/") {
-			continue
-		}
-
-		if strings.HasPrefix(fields[0], "termbox/") {
+		// keep library and official images
+		if !strings.Contains(fields[0], "/") || strings.HasPrefix(fields[0], "termbox/") {
 			continue
 		}
 

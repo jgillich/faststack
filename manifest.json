@@ -1,0 +1,40 @@
+{
+    "dependencies": {
+        "code.cloudfoundry.org/bytefmt": {
+            "branch": "master"
+        },
+        "github.com/GeertJohan/go.rice": {
+            "branch": "master"
+        },
+        "github.com/Sirupsen/logrus": {
+            "branch": "master"
+        },
+        "github.com/cloudfoundry/gosigar": {
+            "branch": "master"
+        },
+        "github.com/hyperhq/hyperd": {
+            "branch": "master"
+        },
+        "github.com/hyperhq/runv": {
+            "branch": "master"
+        },
+        "github.com/joho/godotenv": {
+            "branch": "master"
+        },
+        "github.com/kelseyhightower/envconfig": {
+            "branch": "master"
+        },
+        "github.com/labstack/echo": {
+            "branch": "master"
+        },
+        "github.com/robfig/cron": {
+            "branch": "master"
+        },
+        "github.com/urfave/cli": {
+            "branch": "master"
+        },
+        "golang.org/x/net": {
+            "branch": "master"
+        }
+    }
+}
