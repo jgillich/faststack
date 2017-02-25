@@ -9,13 +9,14 @@
   "scripts": {
     "test": "eslint .",
     "fix": "eslint --fix .",
-    "bundle": "webpack"
+    "bundle": "webpack",
+    "dev": "webpack-dev-server --history-api-fallback",
+    "install": "git clone https://github.com/Lukas-W/font-linux node_modules/font-linux"
   },
   "dependencies": {
     "ReconnectingWebSocket": "git+https://github.com/joewalnes/reconnecting-websocket.git",
     "bulma": "^0.3.1",
     "font-awesome": "^4.7.0",
-    "font-linux": "^0.6.1",
     "hterm-umdjs": "^1.1.4",
     "html-loader": "^0.4.5",
     "humanize-duration": "^3.10.0",
@@ -41,9 +42,11 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-react": "^6.10.0",
     "file-loader": "^0.10.1",
+    "html-webpack-plugin": "^2.28.0",
     "jspm": "^0.16.48",
     "node-sass": "^4.5.0",
     "sass-loader": "^6.0.2",
-    "webpack": "^2.2.1"
+    "webpack": "^2.2.1",
+    "webpack-dev-server": "^2.4.1"
   }
 }

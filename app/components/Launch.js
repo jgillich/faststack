@@ -2,6 +2,7 @@ import Preact, {Component} from 'preact'
 import {connect} from 'preact-redux'
 import {createBox} from '../actions/box'
 import {Recaptcha} from './Recaptcha'
+import images from '../../images/images.json'
 
 export class Launch extends Component {
 
@@ -9,7 +10,7 @@ export class Launch extends Component {
     super(props)
 
     this.state = {
-        selectedImage: CONFIG.images[0],
+        selectedImage: images[0],
     }
   }
 
@@ -38,7 +39,7 @@ export class Launch extends Component {
         <div class="container">
 
           <div class="columns is-multiline">
-            {CONFIG.images.map((image) =>
+            {images.map((image) =>
               <div class="column is-centered is-2">
                 <a onClick={(e) => this.setState({selectedImage: image})}>
                   <div class={'card' +
@@ -65,7 +66,7 @@ export class Launch extends Component {
            <div class="columns is-centered">
             <div class="column has-text-centered">
               <Recaptcha
-                sitekey={CONFIG.rcsitekey}
+                sitekey={window.CONFIG ? CONFIG.rcsitekey : ""}
                 onChange={(c) => this.setState({captcha: c})}
               />
             </div>
