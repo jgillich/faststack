@@ -1,6 +1,6 @@
 import Preact, {Component} from 'preact'
 import {hterm, lib} from 'hterm-umdjs'
-import ReconnectingWebSocket from 'reconnecting-websocket'
+import ReconnectingWebSocket from 'ReconnectingWebSocket'
 import themes from '../themes'
 
 hterm.defaultStorage = new lib.Storage.Memory()

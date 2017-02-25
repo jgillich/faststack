@@ -1,8 +1,5 @@
-import 'font-awesome'
-import 'font-linux/assets/font-linux.css!'
-import 'bulma/css/bulma.css!'
-import './styles/style.sass!'
 import 'whatwg-fetch'
+import './styles/style.sass'
 
 import Preact, {render} from 'preact'
 import {Provider} from 'preact-redux'
