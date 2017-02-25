@@ -10,12 +10,13 @@ export class Create extends Component {
     super(props)
 
     this.state = {
+        name: haikunator.haikunate(),
         imageTab: 'official',
         imageSelected: images[0],
     }
   }
 
-  render({}, {imageTab, imageSelected}) {
+  render({}, {name, imageTab, imageSelected}) {
 
     let imageTabContent
 
@@ -86,7 +87,7 @@ export class Create extends Component {
 
         <label class="label">Name</label>
         <p class="control">
-          <input class="input" type="text" value={haikunator.haikunate()}/>
+          <input class="input" type="text" value={name}/>
         </p>
 
         <label class="label">Region</label>

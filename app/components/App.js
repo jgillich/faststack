@@ -8,7 +8,7 @@ export default class App extends Component {
 
   render({children}) {
     return (
-      <div>
+      <div class="grow">
         <nav class="nav has-shadow">
           <div class="nav-left">
             <Link class="nav-item is-brand" href="/">
@@ -44,6 +44,8 @@ export default class App extends Component {
 
 export function render(store) {
   const container = document.createElement('div')
+  container.className = 'grow'
+  container.id = 'main'
   document.body.appendChild(container)
 
   ReactDOM.render(

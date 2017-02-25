@@ -12,6 +12,7 @@ export default class Term extends Component {
   componentDidMount() {
     requestAnimationFrame(() => {
       let elem = document.createElement('div')
+      elem.className = 'grow'
       this.base.appendChild(elem)
       let term = new Terminal()
       term.open(elem)
@@ -20,8 +21,9 @@ export default class Term extends Component {
   }
 
   render() {
-    return <div ref={(base) => {
- this.base = base
-}}></div>
+    return (
+      <div class="grow" ref={(base) => {this.base = base}}>
+      </div>
+    )
   }
 }
