@@ -1,19 +1,11 @@
-import Preact from 'preact'
+import React from 'react'
 
 const BoxItem = () =>
-  <a href="#">
-    <div class="card">
-      <header class="card-header">
-        <p class="card-header-title">
-          Debian 8
-        </p>
-        <a class="card-header-icon">
-          <span class="icon">
-            <i class="fl-debian"></i>
-          </span>
-        </a>
-      </header>
-    </div>
+  <a class="panel-block is-active">
+    <span class="panel-icon">
+      <i class="fl-debian"></i>
+    </span>
+    FooBar
   </a>
 
 export default BoxItem

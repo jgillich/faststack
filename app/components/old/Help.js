@@ -1,4 +1,4 @@
-import Preact from 'preact'
+import React from 'react'
 import Pages from '../pages/index'
 
 const isActive = (yes) => yes ? ' is-active' : ''

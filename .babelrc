@@ -2,8 +2,6 @@
   "presets": ["es2015"],
   "plugins": [
     "syntax-jsx",
-    ["transform-react-jsx", {
-      "pragma": "Preact.h"
-    }]
+    "transform-react-jsx"
   ]
 }

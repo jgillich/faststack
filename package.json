@@ -9,7 +9,7 @@
   "scripts": {
     "test": "eslint .",
     "fix": "eslint --fix .",
-    "bundle": "webpack",
+    "bundle": "webpack -p",
     "dev": "webpack-dev-server --history-api-fallback",
     "install": "git clone https://github.com/Lukas-W/font-linux node_modules/font-linux"
   },
@@ -17,18 +17,19 @@
     "ReconnectingWebSocket": "git+https://github.com/joewalnes/reconnecting-websocket.git",
     "bulma": "^0.3.1",
     "font-awesome": "^4.7.0",
-    "hterm-umdjs": "^1.1.4",
     "html-loader": "^0.4.5",
     "humanize-duration": "^3.10.0",
     "markdown-loader": "^2.0.0",
     "preact": "^7.2.0",
+    "preact-compat": "^3.13.1",
     "preact-redux": "^2.0.0",
-    "preact-router": "^2.4.1",
+    "react-router": "^3.0.2",
     "redux": "^3.6.0",
     "redux-logger": "^2.8.1",
     "redux-thunk": "^2.2.0",
     "style-loader": "^0.13.2",
-    "whatwg-fetch": "^2.0.2"
+    "whatwg-fetch": "^2.0.2",
+    "xterm": "^2.3.2"
   },
   "devDependencies": {
     "babel-core": "^6.23.1",
@@ -42,8 +43,8 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-react": "^6.10.0",
     "file-loader": "^0.10.1",
-    "html-webpack-plugin": "^2.28.0",
     "jspm": "^0.16.48",
+    "jsx-html-class": "^1.0.3",
     "node-sass": "^4.5.0",
     "sass-loader": "^6.0.2",
     "webpack": "^2.2.1",

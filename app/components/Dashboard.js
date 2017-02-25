@@ -1,19 +1,21 @@
-import Preact from 'preact'
+import React from 'react'
 import BoxItem from './BoxItem'
-import HTerm from './HTerm'
+import Term from './Term'
 
 const Dashboard = ({name}) =>
   <section class="section">
     <div class="columns">
-      <div class="column is-narrow">
+      <div class="column is-2">
         <div class="block">
-          <a class="button is-primary">New</a>
+          <button class="button is-primary is-outlined is-fullwidth">
+            New
+          </button>
         </div>
-        <div class="block">
+        <nav class="panel">
           <BoxItem/>
           <BoxItem/>
           <BoxItem/>
-        </div>
+          </nav>
       </div>
       <div class="column">
         <article class="message">
@@ -22,7 +24,7 @@ const Dashboard = ({name}) =>
             <button class="delete"></button>
           </div>
           <div class="message-body" style={{height: '500px'}}>
-            <HTerm/>
+            <Term/>
           </div>
         </article>
       </div>

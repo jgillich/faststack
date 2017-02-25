@@ -59,5 +59,11 @@ module.exports = {
       },
     ],
   },
-  plugins: [new HtmlWebpackPlugin()]
+  plugins: [new HtmlWebpackPlugin()],
+  resolve: {
+      alias: {
+          'react': 'preact-compat',
+          'react-dom': 'preact-compat'
+      }
+  }
 }
