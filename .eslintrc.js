@@ -19,12 +19,6 @@ module.exports = {
       "react",
       "import"
     ],
-    "settings": {
-      "react": {
-        "createClass": "h",
-        "pragma": "Preact",
-      }
-    },
     "rules": {
       "semi": [2, "never"],
       "require-jsdoc": 0,

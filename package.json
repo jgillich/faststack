@@ -17,6 +17,7 @@
     "ReconnectingWebSocket": "git+https://github.com/joewalnes/reconnecting-websocket.git",
     "bulma": "^0.3.1",
     "font-awesome": "^4.7.0",
+    "haikunator": "^2.0.0",
     "html-loader": "^0.4.5",
     "humanize-duration": "^3.10.0",
     "markdown-loader": "^2.0.0",
