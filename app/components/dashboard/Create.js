@@ -27,7 +27,7 @@ export class Create extends Component {
             <div class="column">
               <a onClick={(e) => this.setState({imageSelected: image})}>
                 <div class={'card' +
-                  (image.name == imageSelected.name ? ' is-primary' : '')}>
+                  (image.name == imageSelected.name ? ' is-active' : '')}>
                   <div class="card-image has-text-centered">
                     <span class="icon is-large" style={{'padding': '10px 0'}}>
                       <i class={'fl-' + image.name}/>
