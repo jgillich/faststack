@@ -7,9 +7,9 @@
   "repository": "https://github.com/termbox/termbox.git",
   "author": "Jakob Gillich <jakob@gillich.me>",
   "scripts": {
-    "test": "eslint app",
-    "fix": "eslint --fix app",
-    "bundle": "jspm bundle-sfx --minify index.js app/bundle.js"
+    "test": "eslint .",
+    "fix": "eslint --fix .",
+    "bundle": "webpack"
   },
   "dependencies": {
     "ReconnectingWebSocket": "git+https://github.com/joewalnes/reconnecting-websocket.git",
@@ -36,10 +36,10 @@
     "babel-plugin-transform-react-jsx": "^6.23.0",
     "babel-preset-es2015": "^6.22.0",
     "css-loader": "^0.26.2",
-    "eslint": "^3.11.1",
+    "eslint": "^3.16.1",
     "eslint-config-google": "^0.7.1",
     "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-react": "^6.8.0",
+    "eslint-plugin-react": "^6.10.0",
     "file-loader": "^0.10.1",
     "jspm": "^0.16.48",
     "node-sass": "^4.5.0",

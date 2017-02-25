@@ -1,3 +1,2 @@
-app/jspm_packages
-app/config.js
-app/bundle*
+vendor
+bin

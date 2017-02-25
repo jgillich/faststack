@@ -1,11 +1,11 @@
-var path = require('path');
-var webpack = require('webpack');
+/* eslint-env node */
+let path = require('path')
 
 module.exports = {
   entry: './app/index.js',
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'bin')
+    path: path.resolve(__dirname, 'bin'),
   },
   module: {
     rules: [
@@ -13,42 +13,49 @@ module.exports = {
         test: /\.js$/,
         use: 'babel-loader',
         include: [
-          path.resolve(__dirname, "app")
+          path.resolve(__dirname, 'app'),
         ],
       },
       {
         test: /\.md$/,
         use: [
           {
-            loader: "html-loader"
+            loader: 'html-loader',
           },
           {
-            loader: "markdown-loader",
-          }
-        ]
+            loader: 'markdown-loader',
+          },
+        ],
       },
       {
         test: /\.(scss|sass)$/,
         use: [
           {
-            loader: "style-loader"
+            loader: 'style-loader',
           },
           {
-            loader: "css-loader"
+            loader: 'css-loader',
           },
           {
-            loader: "sass-loader"
-          }
-        ]
+            loader: 'sass-loader',
+          },
+        ],
       },
       {
         test: /\.css$/,
-        use: 'css-loader'
+        use: [
+          {
+            loader: 'style-loader',
+          },
+          {
+            loader: 'css-loader',
+          },
+        ],
       },
       {
         test: /\.(svg|woff2?|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/i,
-        use: 'file-loader'
+        use: 'file-loader',
       },
     ],
-  }
-};
+  },
+}
