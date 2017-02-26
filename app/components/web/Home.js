@@ -5,9 +5,9 @@ import images from '../../../images/images.json'
 export default class Home extends Component {
 
   componentDidMount() {
-    let theater = theaterJS()
+    this.theater = theaterJS()
 
-    theater
+    this.theater
       .addActor('title', 1, '.title-word')
       .addScene('title:development', 3000)
       .addScene('title:testing', 3000)
@@ -15,7 +15,11 @@ export default class Home extends Component {
       .addScene('title:learning', 3000)
       .addScene('title:teaching', 3000)
       .addScene('title:running rm --no-preserve-root /', 3000)
-      .addScene(theater.replay)
+      .addScene(this.theater.replay)
+  }
+
+  componentWillUnmount() {
+    this.theater.stop()
   }
 
   render() {
