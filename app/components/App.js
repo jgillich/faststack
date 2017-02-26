@@ -3,15 +3,16 @@ import {Router, Route, IndexRoute, Link, browserHistory} from 'react-router'
 import {Provider} from 'react-redux'
 import ReactDOM from 'react-dom'
 import {DashboardRoute} from './dashboard/Dashboard'
+import {WebRoute} from './web/Web'
 
 export default class App extends Component {
 
   render({children}) {
     return (
       <div class="grow">
-        <nav class="nav has-shadow">
+        <nav class="nav">
           <div class="nav-left">
-            <Link class="nav-item is-brand" href="/">
+            <Link class="nav-item is-brand" to="/">
               <img src="/app/assets/logo.png" alt="termbox logo"/>
             </Link>
           </div>
@@ -23,15 +24,23 @@ export default class App extends Component {
           </span>
 
           <div class="nav-right nav-menu">
-            <a class="nav-item is-tab is-active">
-              Boxes
-            </a>
-            <a class="nav-item is-tab">
-              <figure class="image is-16x16">
-                <img src=""/>
-              </figure>
-              Account
-            </a>
+
+            <Link class="nav-item is-tab" to="/help" activeClassName="is-active">
+              Help
+            </Link>
+
+            <Link class="nav-item is-tab" to="/pricing" activeClassName="is-active">
+              Pricing
+            </Link>
+
+            <span class="nav-item">
+              <a class="button" >
+                <span class="icon">
+                  <i class="fa fa-twitter"></i>
+                </span>
+                <span>Login</span>
+              </a>
+            </span>
 
           </div>
         </nav>
@@ -53,6 +62,7 @@ export function render(store) {
       <Router history={browserHistory}>
         <Route path="/" component={App}>
           {DashboardRoute}
+          {WebRoute}
         </Route>
       </Router>
     </Provider>,

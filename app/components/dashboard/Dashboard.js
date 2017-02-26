@@ -46,8 +46,10 @@ export class Dashboard extends Component {
 
 export default Dashboard
 
-export const DashboardRoute = <Route component={Dashboard}>
+export const DashboardRoute = (
+  <Route path='dashboard' component={Dashboard}>
     <IndexRoute component={Create}/>
     <Route path='/new' component={Create}/>
     <Route path="/term/:id" component={Term}/>
   </Route>
+)
