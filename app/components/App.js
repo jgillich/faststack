@@ -4,6 +4,7 @@ import {Provider} from 'react-redux'
 import ReactDOM from 'react-dom'
 import {DashboardRoute} from './dashboard/Dashboard'
 import {WebRoute} from './web/Web'
+import NotFound from './NotFound'
 
 export default class App extends Component {
 
@@ -34,16 +35,18 @@ export default class App extends Component {
             </Link>
 
             <span class="nav-item">
-              <a class="button" >
-                <span class="icon">
-                  <i class="fa fa-twitter"></i>
-                </span>
+              <Link class="button" to="/dashboard">
                 <span>Login</span>
-              </a>
+              </Link>
+
+              <Link class="button is-primary" to="/dashboard">
+                <span>Sign Up</span>
+              </Link>
             </span>
 
           </div>
         </nav>
+
 
         {children}
       </div>
@@ -63,6 +66,7 @@ export function render(store) {
         <Route path="/" component={App}>
           {DashboardRoute}
           {WebRoute}
+          <Route path="*" component={NotFound}/>
         </Route>
       </Router>
     </Provider>,

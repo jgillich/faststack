@@ -26,11 +26,7 @@ export default class Home extends Component {
     return (
       <div>
 
-        <section class="hero is-primary is-large">
-
-          <div class="hero-head">
-
-          </div>
+        <section class="hero is-primary is-medium">
 
           <div class="hero-body">
             <div class="container has-text-centered">
@@ -42,9 +38,6 @@ export default class Home extends Component {
               </h2>
               <a class="button is-primary is-inverted is-large">Sign Up</a>
             </div>
-          </div>
-
-          <div class="hero-foot">
           </div>
         </section>
 
