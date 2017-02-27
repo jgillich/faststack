@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Router, Route, IndexRoute, Link, browserHistory} from 'react-router'
+import {Router, Route, Link, browserHistory} from 'react-router'
 import {Provider} from 'react-redux'
 import ReactDOM from 'react-dom'
 import {DashboardRoute} from './dashboard/Dashboard'

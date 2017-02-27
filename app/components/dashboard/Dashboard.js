@@ -11,7 +11,7 @@ export class Dashboard extends Component {
           <div class="columns">
             <div class="column is-2">
               <div class="block">
-                <Link class="button is-primary is-outlined is-fullwidth" activeClassName="is-active" to="/new">
+                <Link class="button is-primary is-fullwidth" activeClassName="is-active" to="/new">
                   New
                 </Link>
               </div>

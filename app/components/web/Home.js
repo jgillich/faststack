@@ -45,7 +45,9 @@ export default class Home extends Component {
           <h4 class="title">We have your favourite distribution</h4>
           <div class="columns" style={{justifyContent: 'center'}}>
           {images.map((image) =>
-            <div class="column is-1"><div class="icon is-large"><i class={'fl-' + image.name}/></div></div>
+            <div class="column is-1">
+              <div class="icon is-large"><i class={'fl-' + image.name}/></div>
+            </div>
           )}
           </div>
           <h4 class="subtitle">Launch any image from Docker Hub</h4>
@@ -54,8 +56,12 @@ export default class Home extends Component {
         <div class="container section has-text-centered">
           <h4 class="title">We support your workflow</h4>
           <div class="columns" style={{justifyContent: 'center'}}>
-            <div class="column is-1"><div class="icon is-large"><i class='fa fa-desktop'/></div></div>
-            <div class="column is-1"><div class="icon is-large"><i class='fa fa-terminal'/></div></div>
+            <div class="column is-1">
+              <div class="icon is-large"><i class='fa fa-desktop'/></div>
+            </div>
+            <div class="column is-1">
+              <div class="icon is-large"><i class='fa fa-terminal'/></div>
+            </div>
           </div>
           <h4 class="subtitle">Web interface and terminal client, we have both</h4>
         </div>

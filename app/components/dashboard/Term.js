@@ -1,7 +1,5 @@
 import React, {Component} from 'react'
-import ReconnectingWebSocket from 'ReconnectingWebSocket'
 import Terminal from 'xterm'
-import themes from '../../themes'
 
 export default class Term extends Component {
 
@@ -22,7 +20,9 @@ export default class Term extends Component {
 
   render() {
     return (
-      <div class="grow" ref={(base) => {this.base = base}}>
+      <div class="grow" ref={(base) => {
+this.base = base
+}}>
       </div>
     )
   }

@@ -16,8 +16,7 @@ export class Create extends Component {
     }
   }
 
-  render({}, {name, imageTab, imageSelected}) {
-
+  render(props, {name, imageTab, imageSelected}) {
     let imageTabContent
 
     if(imageTab == 'official') {
