@@ -1,47 +1,54 @@
 import React, {Component} from 'react'
 import {Router, Route, Link, browserHistory} from 'react-router'
-import {Provider} from 'react-redux'
 import ReactDOM from 'react-dom'
+import auth from '../auth'
 import {DashboardRoute} from './dashboard/Dashboard'
 import {WebRoute} from './web/Web'
 import NotFound from './NotFound'
 
-export default class App extends Component {
+const requireAuth = (nextState, replace) => {
+  if (!auth.loggedIn()) {
+    replace({pathname: '/login'})
+  }
+}
 
-  render({children}) {
+export default class App extends Component {
+  render() {
+    let {children} = this.props
+
     return (
-      <div class="grow">
-        <nav class="nav">
-          <div class="nav-left">
-            <Link class="nav-item is-brand" to="/">
+      <div className="grow">
+        <nav className="nav">
+          <div className="nav-left">
+            <Link className="nav-item is-brand" to="/">
               <img src="/app/assets/logo.png" alt="termbox logo"/>
             </Link>
           </div>
 
-          <span class="nav-toggle">
+          <span className="nav-toggle">
             <span></span>
             <span></span>
             <span></span>
           </span>
 
-          <div class="nav-right nav-menu">
+          <div className="nav-right nav-menu">
 
-            <Link class="nav-item is-tab" to="/help" activeClassName="is-active">
+            <Link className="nav-item is-tab" to="/help" activeClassName="is-active">
               Help
             </Link>
 
-            <Link class="nav-item is-tab" to="/pricing" activeClassName="is-active">
+            <Link className="nav-item is-tab" to="/pricing" activeClassName="is-active">
               Pricing
             </Link>
 
-            <span class="nav-item">
-              <Link class="button" to="/dashboard">
+            <span className="nav-item">
+              <a className="button" onClick={auth.login.bind(auth)}>
                 <span>Login</span>
-              </Link>
+              </a>
 
-              <Link class="button is-primary" to="/dashboard">
+              <a className="button is-primary" onClick={auth.signUp.bind(auth)}>
                 <span>Sign Up</span>
-              </Link>
+              </a>
             </span>
 
           </div>
@@ -61,15 +68,13 @@ export function render(store) {
   document.body.appendChild(container)
 
   ReactDOM.render(
-    <Provider store={store}>
-      <Router history={browserHistory}>
-        <Route path="/" component={App}>
-          {DashboardRoute}
-          {WebRoute}
-          <Route path="*" component={NotFound}/>
-        </Route>
-      </Router>
-    </Provider>,
+    <Router history={browserHistory}>
+      <Route path="/" component={App}>
+        {DashboardRoute}
+        {WebRoute}
+        <Route path="*" component={NotFound}/>
+      </Route>
+    </Router>,
     container
   )
 }

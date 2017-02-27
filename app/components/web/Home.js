@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import theaterJS from 'theaterjs'
-import images from '../../../images/images.json'
+import auth from '../../auth'
 
 export default class Home extends Component {
 
@@ -25,45 +25,45 @@ export default class Home extends Component {
   render() {
     return (
       <div>
+        <section className="hero is-primary is-medium">
 
-        <section class="hero is-primary is-medium">
-
-          <div class="hero-body">
-            <div class="container has-text-centered">
-              <h1 class="title">
-                Instant Linux boxes for <span class='title-word'></span>
+          <div className="hero-body">
+            <div className="container has-text-centered">
+              <h1 className="title">
+                Instant Linux boxes for <span className='title-word'></span>
               </h1>
-              <h2 class="subtitle">
+              <h2 className="subtitle">
                 Launch custom Linux boxes in just 5 seconds. Try it for free
               </h2>
-              <a class="button is-primary is-inverted is-large">Sign Up</a>
+              <a className="button is-primary is-inverted is-large"
+                onClick={auth.signUp.bind(auth)}>Sign Up</a>
             </div>
           </div>
         </section>
 
-        <div class="container section has-text-centered">
-          <h4 class="title">We have your favourite distribution</h4>
-          <div class="columns" style={{justifyContent: 'center'}}>
-          {images.map((image) =>
-            <div class="column is-1">
-              <div class="icon is-large"><i class={'fl-' + image.name}/></div>
+        <div className="container section has-text-centered">
+          <h4 className="title">We have your favourite distribution</h4>
+          <div className="columns" style={{justifyContent: 'center'}}>
+          {[].map((image) =>
+            <div className="column is-1">
+              <div className="icon is-large"><i className={'fl-' + image.name}/></div>
             </div>
           )}
           </div>
-          <h4 class="subtitle">Launch any image from Docker Hub</h4>
+          <h4 className="subtitle">Launch any image from Docker Hub</h4>
         </div>
 
-        <div class="container section has-text-centered">
-          <h4 class="title">We support your workflow</h4>
-          <div class="columns" style={{justifyContent: 'center'}}>
-            <div class="column is-1">
-              <div class="icon is-large"><i class='fa fa-desktop'/></div>
+        <div className="container section has-text-centered">
+          <h4 className="title">We support your workflow</h4>
+          <div className="columns" style={{justifyContent: 'center'}}>
+            <div className="column is-1">
+              <div className="icon is-large"><i className='fa fa-desktop'/></div>
             </div>
-            <div class="column is-1">
-              <div class="icon is-large"><i class='fa fa-terminal'/></div>
+            <div className="column is-1">
+              <div className="icon is-large"><i className='fa fa-terminal'/></div>
             </div>
           </div>
-          <h4 class="subtitle">Web interface and terminal client, we have both</h4>
+          <h4 className="subtitle">Web interface and terminal client, we have both</h4>
         </div>
 
       </div>

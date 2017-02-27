@@ -28,5 +28,6 @@ module.exports = {
     },
     "globals": {
       "CONFIG": true,
+      "process": true,
     }
 }

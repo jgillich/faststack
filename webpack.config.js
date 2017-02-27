@@ -1,8 +1,10 @@
 /* eslint-env node */
 let path = require('path')
 let HtmlWebpackPlugin = require('html-webpack-plugin')
+let Dotenv = require('dotenv-webpack')
 
 module.exports = {
+  devtool: 'source-map',
   entry: './app/index.js',
   output: {
     filename: 'bundle.js',
@@ -59,11 +61,5 @@ module.exports = {
       },
     ],
   },
-  plugins: [new HtmlWebpackPlugin()],
-  resolve: {
-      alias: {
-          'react': 'preact-compat',
-          'react-dom': 'preact-compat',
-      },
-  },
+  plugins: [new HtmlWebpackPlugin(), new Dotenv()],
 }

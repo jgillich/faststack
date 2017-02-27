@@ -5,20 +5,22 @@ import Pricing from './Pricing'
 import Terms from './Terms'
 
 export default class Web extends Component {
-  render({children}) {
+  render() {
+    let {children} = this.props
+
     return (
       <div>
         {children}
 
-        <footer class="footer">
-          <div class="container">
-            <div class="content has-text-centered">
+        <footer className="footer">
+          <div className="container">
+            <div className="content has-text-centered">
               <p>
                 <Link to="/terms">Terms of Service</Link>
               </p>
               <p>
-                <a class="icon" href="https://github.com/termbox">
-                  <i class="fa fa-github"></i>
+                <a className="icon" href="https://github.com/termbox">
+                  <i className="fa fa-github"></i>
                 </a>
               </p>
             </div>

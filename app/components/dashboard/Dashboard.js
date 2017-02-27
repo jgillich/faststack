@@ -4,45 +4,44 @@ import Create from './Create'
 import Term from './Term'
 
 export class Dashboard extends Component {
-  render({children}) {
-    return (
-      <div>
-        <section class="section">
-          <div class="columns">
-            <div class="column is-2">
-              <div class="block">
-                <Link class="button is-primary is-fullwidth" activeClassName="is-active" to="/new">
-                  New
-                </Link>
-              </div>
-              <nav class="panel">
-                <Link class="panel-block" to="/term/foo" activeClassName="is-active">
-                  <span class="panel-icon">
-                    <i class="fl-debian"></i>
-                  </span>
-                  FooBar
-                </Link>
-                <Link class="panel-block" to="/term/foo" activeClassName="is-active">
-                  <span class="panel-icon">
-                    <i class="fl-debian"></i>
-                  </span>
-                  FooBar
-                </Link>
-                <Link class="panel-block" to="/term/foo" activeClassName="is-active">
-                  <span class="panel-icon">
-                    <i class="fl-debian"></i>
-                  </span>
-                  FooBar
-                </Link>
-              </nav>
-            </div>
-            <div class="column">
-              {children}
-            </div>
-          </div>
-        </section>
+  render() {
+    let {children} = this.props
 
-      </div>
+    return (
+      <section className="section">
+        <div className="columns">
+          <div className="column is-2">
+            <div className="block">
+              <Link className="button is-primary is-fullwidth" activeClassName="is-active" to="/new">
+                New
+              </Link>
+            </div>
+            <nav className="panel">
+              <Link className="panel-block" to="/term/foo" activeClassName="is-active">
+                <span className="panel-icon">
+                  <i className="fl-debian"></i>
+                </span>
+                FooBar
+              </Link>
+              <Link className="panel-block" to="/term/foo" activeClassName="is-active">
+                <span className="panel-icon">
+                  <i className="fl-debian"></i>
+                </span>
+                FooBar
+              </Link>
+              <Link className="panel-block" to="/term/foo" activeClassName="is-active">
+                <span className="panel-icon">
+                  <i className="fl-debian"></i>
+                </span>
+                FooBar
+              </Link>
+            </nav>
+          </div>
+          <div className="column">
+            {children}
+          </div>
+        </div>
+      </section>
     )
   }
 }

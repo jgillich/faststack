@@ -1,124 +1,126 @@
 import React, {Component} from 'react'
+import auth from '../../auth'
+
 
 export default class Pricing extends Component {
   render() {
     return (
-      <div class="container section">
+      <div className="container section">
 
-        <h1 class="title has-text-centered">Pricing</h1>
+        <h1 className="title has-text-centered">Pricing</h1>
 
-        <div class="columns">
+        <div className="columns">
 
-          <div class="column">
-            <div class="card">
-              <header class="card-header">
-                <p class="card-header-title">
+          <div className="column">
+            <div className="card">
+              <header className="card-header">
+                <p className="card-header-title">
                   Free
                 </p>
               </header>
-              <div class="card-content">
-                <div class="content ">
+              <div className="card-content">
+                <div className="content ">
                   One box
                 </div>
-                <div class="content">
+                <div className="content">
                   Suspend after 1 hour of inactivity
                 </div>
-                <div class="content">
+                <div className="content">
                   Community support
                 </div>
               </div>
-              <footer class="card-footer">
-                <span class="card-footer-item">Free</span>
+              <footer className="card-footer">
+                <span className="card-footer-item">Free</span>
               </footer>
             </div>
           </div>
 
-          <div class="column">
-            <div class="card ">
-              <header class="card-header">
-                <p class="card-header-title">
+          <div className="column">
+            <div className="card ">
+              <header className="card-header">
+                <p className="card-header-title">
                   Basic
                 </p>
               </header>
-              <div class="card-content">
-                <div class="content">
+              <div className="card-content">
+                <div className="content">
                   <strong>Two</strong> boxes
                 </div>
-                <div class="content">
+                <div className="content">
                   Suspend after 6 hours of inactivity
                 </div>
-                <div class="content">
+                <div className="content">
                   Custom images
                 </div>
               </div>
-              <footer class="card-footer">
-                <span class="card-footer-item">$5 per month</span>
+              <footer className="card-footer">
+                <span className="card-footer-item">$5 per month</span>
               </footer>
             </div>
           </div>
 
-          <div class="column">
-            <div class="card">
-              <header class="card-header">
-                <p class="card-header-title">
+          <div className="column">
+            <div className="card">
+              <header className="card-header">
+                <p className="card-header-title">
                   Pro
                 </p>
               </header>
-              <div class="card-content">
-                <div class="content">
+              <div className="card-content">
+                <div className="content">
                   <strong>Five</strong> boxes
                 </div>
-                <div class="content">
+                <div className="content">
                   <strong>One</strong> permanent box
                 </div>
-                <div class="content">
+                <div className="content">
                   Email support
                 </div>
               </div>
-              <footer class="card-footer">
-                <span class="card-footer-item">$10 per month</span>
+              <footer className="card-footer">
+                <span className="card-footer-item">$10 per month</span>
               </footer>
             </div>
           </div>
 
-          <div class="column">
-            <div class="card">
-              <header class="card-header">
-                <p class="card-header-title">
+          <div className="column">
+            <div className="card">
+              <header className="card-header">
+                <p className="card-header-title">
                   Pro Plus
                 </p>
               </header>
-              <div class="card-content">
-                <div class="content">
+              <div className="card-content">
+                <div className="content">
                   <strong>Ten</strong> boxes
                 </div>
-                <div class="content">
+                <div className="content">
                   <strong>Two</strong> permanent boxes
                 </div>
-                <div class="content">
+                <div className="content">
                   Coming soon: Dedicated IPs
                 </div>
               </div>
-              <footer class="card-footer">
-                <span class="card-footer-item">$20 per month</span>
+              <footer className="card-footer">
+                <span className="card-footer-item">$20 per month</span>
               </footer>
             </div>
           </div>
 
         </div>
 
-        <div class="section has-text-centered">
-          <a class="button is-primary is-large">Sign Up</a>
+        <div className="section has-text-centered">
+          <a className="button is-primary is-large" onClick={auth.signUp.bind(auth)}>Sign Up</a>
         </div>
 
-        <div class="section">
+        <div className="section">
 
-          <h2 class="title has-text-centered">Frequently Asked Questions</h2>
+          <h2 className="title has-text-centered">Frequently Asked Questions</h2>
 
 
-          <div class="columns is-multiline">
-            <div class="column is-half content">
-              <h4 class="subtitle">How many resources does each box get?</h4>
+          <div className="columns is-multiline">
+            <div className="column is-half content">
+              <h4 className="subtitle">How many resources does each box get?</h4>
               <p>
                 CPU and RAM are dynamic, meaning you can assign as much or as little as you need.
                 A single box grants you 1 CPU and 256MB RAM, therefore on the Pro plan you can
@@ -126,8 +128,8 @@ export default class Pricing extends Component {
               </p>
             </div>
 
-            <div class="column is-half content">
-              <h4 class="subtitle">How can I access my boxes?</h4>
+            <div className="column is-half content">
+              <h4 className="subtitle">How can I access my boxes?</h4>
               <p>
                 We offer a web interface and a terminal client that supports all major popular
                 operating systems: Windows, macOS and Linux.
@@ -138,8 +140,8 @@ export default class Pricing extends Component {
               </p>
             </div>
 
-            <div class="column is-half content">
-              <h4 class="subtitle">When are boxes suspended?</h4>
+            <div className="column is-half content">
+              <h4 className="subtitle">When are boxes suspended?</h4>
               <p>
                 A box is suspended some time after you have last accessed it
                 via our web interface or terminal client. This means that programs will continue to
