@@ -17,7 +17,7 @@
     "ReconnectingWebSocket": "git+https://github.com/joewalnes/reconnecting-websocket.git",
     "auth0-lock": "^10.11.0",
     "bulma": "^0.3.1",
-    "dotenv-webpack": "^1.4.1",
+    "dotenv-webpack": "1.4.1",
     "font-awesome": "^4.7.0",
     "haikunator": "^2.0.0",
     "html-loader": "^0.4.5",
