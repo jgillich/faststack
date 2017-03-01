@@ -2,15 +2,16 @@ import React, {Component} from 'react'
 import {Router, Route, Link, browserHistory} from 'react-router'
 import ReactDOM from 'react-dom'
 import auth from '../auth'
+import NavLink from './common/NavLink'
 import {DashboardRoute} from './dashboard/Dashboard'
 import {WebRoute} from './web/Web'
 import NotFound from './NotFound'
 
-const requireAuth = (nextState, replace) => {
+/* const requireAuth = (nextState, replace) => {
   if (!auth.loggedIn()) {
     replace({pathname: '/login'})
   }
-}
+}*/
 
 export default class App extends Component {
   render() {
@@ -33,13 +34,13 @@ export default class App extends Component {
 
           <div className="nav-right nav-menu">
 
-            <Link className="nav-item is-tab" to="/help" activeClassName="is-active">
+            <NavLink className="nav-item is-tab" to="/help">
               Help
-            </Link>
+            </NavLink>
 
-            <Link className="nav-item is-tab" to="/pricing" activeClassName="is-active">
+            <NavLink className="nav-item is-tab" to="/pricing">
               Pricing
-            </Link>
+            </NavLink>
 
             <span className="nav-item">
               <a className="button" onClick={auth.login.bind(auth)}>

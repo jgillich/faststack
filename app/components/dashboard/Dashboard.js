@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
-import {IndexRoute, Route, Link} from 'react-router'
+import {IndexRoute, Route} from 'react-router'
+import NavLink from '../common/NavLink'
 import Create from './Create'
 import Term from './Term'
 
@@ -12,29 +13,29 @@ export class Dashboard extends Component {
         <div className="columns">
           <div className="column is-2">
             <div className="block">
-              <Link className="button is-primary is-fullwidth" activeClassName="is-active" to="/new">
+              <NavLink className="button is-primary is-fullwidth" to="/new">
                 New
-              </Link>
+              </NavLink>
             </div>
             <nav className="panel">
-              <Link className="panel-block" to="/term/foo" activeClassName="is-active">
+              <NavLink className="panel-block" to="/term/foo">
                 <span className="panel-icon">
                   <i className="fl-debian"></i>
                 </span>
                 FooBar
-              </Link>
-              <Link className="panel-block" to="/term/foo" activeClassName="is-active">
+              </NavLink>
+              <NavLink className="panel-block" to="/term/foo">
                 <span className="panel-icon">
                   <i className="fl-debian"></i>
                 </span>
                 FooBar
-              </Link>
-              <Link className="panel-block" to="/term/foo" activeClassName="is-active">
+              </NavLink>
+              <NavLink className="panel-block" to="/term/foo">
                 <span className="panel-icon">
                   <i className="fl-debian"></i>
                 </span>
                 FooBar
-              </Link>
+              </NavLink>
             </nav>
           </div>
           <div className="column">

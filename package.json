@@ -8,10 +8,9 @@
   "author": "Jakob Gillich <jakob@gillich.me>",
   "scripts": {
     "test": "eslint .",
-    "fix": "eslint --fix .",
+    "fix": "eslint --fix . || true",
     "bundle": "webpack -p",
-    "dev": "webpack-dev-server --history-api-fallback",
-    "install": "git clone https://github.com/Lukas-W/font-linux node_modules/font-linux"
+    "dev": "webpack-dev-server --history-api-fallback"
   },
   "dependencies": {
     "ReconnectingWebSocket": "git+https://github.com/joewalnes/reconnecting-websocket.git",
@@ -19,6 +18,7 @@
     "bulma": "^0.3.1",
     "dotenv-webpack": "^1.4.1",
     "font-awesome": "^4.7.0",
+    "font-linux": "git+https://github.com/Lukas-W/font-linux.git",
     "haikunator": "^2.0.0",
     "html-loader": "^0.4.5",
     "humanize-duration": "^3.10.0",
@@ -31,9 +31,26 @@
     "style-loader": "^0.13.2",
     "theaterjs": "^3.1.0",
     "whatwg-fetch": "^2.0.2",
-    "xterm": "^2.3.2"
+    "xterm": "^2.3.2",
+    "body-parser": "^1.16.1",
+    "compression": "^1.6.2",
+    "cors": "^2.8.1",
+    "feathers": "^2.1.0",
+    "feathers-authentication": "^0.7.12",
+    "feathers-configuration": "^0.3.3",
+    "feathers-errors": "^2.5.0",
+    "feathers-hooks": "^1.8.0",
+    "feathers-rest": "^1.7.0",
+    "feathers-sequelize": "^1.4.0",
+    "feathers-socketio": "^1.5.0",
+    "passport": "^0.3.2",
+    "pg": "^6.1.2",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^3.30.2",
+    "winston": "^2.3.1"
   },
   "devDependencies": {
+    "babel-cli": "^6.23.0",
     "babel-core": "^6.23.1",
     "babel-loader": "^6.3.2",
     "babel-plugin-syntax-jsx": "^6.18.0",
@@ -47,7 +64,9 @@
     "file-loader": "^0.10.1",
     "jspm": "^0.16.48",
     "jsx-html-class": "^1.0.3",
+    "mocha": "^3.2.0",
     "node-sass": "^4.5.0",
+    "request": "^2.79.0",
     "sass-loader": "^6.0.2",
     "webpack": "^2.2.1",
     "webpack-dev-server": "^2.4.1"

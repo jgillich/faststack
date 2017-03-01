@@ -11,7 +11,7 @@ export class Create extends Component {
     this.state = {
         name: haikunator.haikunate(),
         imageTab: 'official',
-        imageSelected: images[0],
+        imageSelected: null,
     }
   }
 
@@ -49,17 +49,6 @@ export class Create extends Component {
     } else if(imageTab == 'custom') {
       imageTabContent = (
         <div>
-          <label className="label">Image</label>
-          <p className="control">
-            <input className="input" type="text" placeholder="user/name:tag"/>
-            <span className="help">All public <a href="https://hub.docker.com/">Docker Hub</a> images are supported</span>
-          </p>
-
-          <label className="label">Custom command</label>
-          <p className="control">
-            <input className="input" type="text"/>
-            <span className="help">If the image command is not a shell, you can overwrite it here</span>
-          </p>
         </div>
       )
     }
@@ -74,9 +63,9 @@ export class Create extends Component {
             <li className={imageTab == 'official' ? 'is-active' : ''}>
               <a onClick={() => this.setState({imageTab: 'official'})}>Official Images</a>
             </li>
-            <li className={imageTab == 'custom' ? 'is-active' : ''}>
+            {/* <li className={imageTab == 'custom' ? 'is-active' : ''}>
               <a onClick={() => this.setState({imageTab: 'custom'})}>Custom Image</a>
-            </li>
+            </li>*/}
           </ul>
         </div>
 
