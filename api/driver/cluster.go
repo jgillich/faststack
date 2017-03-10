@@ -29,7 +29,9 @@ func (c *ClusterDriver) Create(machine *types.Machine) error {
 		return err
 	}
 
-	driver, err := NewDriver(machine.Driver, host.Address)
+	address := fmt.Sprintf("%s:%v", host.Node, host.ServicePort)
+
+	driver, err := NewDriver(machine.Driver, address)
 	if err != nil {
 		return err
 	}

@@ -6,15 +6,13 @@ module.exports = {
     ],
     "env": {
       "browser": true,
-      "node": true,
       "es6": true,
-      "mocha": true,
     },
     "parserOptions": {
       "ecmaVersion": 6,
       "sourceType": "module",
       "ecmaFeatures": {
-          "jsx": true
+          "jsx": true,
       }
     },
     "plugins": [
@@ -27,11 +25,8 @@ module.exports = {
       "react/prop-types": 0,
       "react/no-unknown-property": [2, { ignore: ["class"] }],
       "max-len": [2, 100, { "ignoreUrls": true }],
-      "no-invalid-this": 0,
-      "no-console": 0,
     },
     "globals": {
-      "CONFIG": true,
       "process": true,
     }
 }

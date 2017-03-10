@@ -14,7 +14,19 @@ type LxdDriver struct {
 }
 
 func NewLxdDriver(ctx *DriverContext) (Driver, error) {
-	client, err := lxd.NewClient(&lxd.DefaultConfig, "local")
+
+	remote := lxd.RemoteConfig{
+		Addr:   ctx.remote,
+		Static: true,
+		Public: false,
+	}
+
+	lxdConfig := lxd.Config{
+		Remotes:       map[string]lxd.RemoteConfig{"remote": remote},
+		DefaultRemote: "remote",
+	}
+
+	client, err := lxd.NewClient(&lxdConfig, "remote")
 
 	if err != nil {
 		return nil, err

@@ -12,7 +12,7 @@ import (
 
 var (
 	api         = New()
-	machineJSON = `{"name":"termbox-test","image":"ubuntu:16.04","command":""}`
+	machineJSON = `{"name":"termbox-test","image":"ubuntu:16.04","driver":"lxd"}`
 )
 
 func TestCreateMachine(t *testing.T) {

@@ -7,15 +7,18 @@ import (
 	"github.com/termbox/termbox/api/types"
 )
 
-var driver, err = NewLxdDriver()
+var driver, err = NewLxdDriver(&DriverContext{remote: "unix://"})
 
-func TestCreateDelete(t *testing.T) {
+func TestLxdDriver(t *testing.T) {
 	assert.NoError(t, err)
+
+	lxdDriver, ok := driver.(*LxdDriver)
+	assert.True(t, ok)
 
 	m := types.Machine{Name: "termbox-test", Image: "ubuntu:16.04"}
 	assert.NoError(t, driver.Create(&m))
 
-	containers, err := driver.client.ListContainers()
+	containers, err := lxdDriver.client.ListContainers()
 	assert.NoError(t, err)
 
 	exists := false
@@ -31,7 +34,7 @@ func TestCreateDelete(t *testing.T) {
 
 	assert.NoError(t, driver.Delete(&m))
 
-	containers, err = driver.client.ListContainers()
+	containers, err = lxdDriver.client.ListContainers()
 	assert.NoError(t, err)
 
 	for _, c := range containers {

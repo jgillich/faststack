@@ -65,7 +65,7 @@ func New() *Api {
 
 	// -- Driver
 
-	driver, err := driver.NewLxdDriver()
+	driver, err := driver.NewClusterDriver()
 
 	if err != nil {
 		log.Fatal(err)
@@ -103,7 +103,9 @@ func (a *Api) createMachine(c echo.Context) error {
 		return err
 	}
 
-	a.driver.Create(m)
+	if err := a.driver.Create(m); err != nil {
+		return err
+	}
 
 	return c.JSON(http.StatusCreated, m)
 }
