@@ -23,11 +23,13 @@ func NewLxdDriver() (*LxdDriver, error) {
 	return &LxdDriver{client}, nil
 }
 
-func (d *LxdDriver) Create(machine types.Machine) error {
+func (d *LxdDriver) Create(machine *types.Machine) error {
 
 	profiles := []string{"default"}
 
-	res, err := d.client.Init(machine.Name, "images", machine.Image, &profiles, nil, nil, true)
+	imgremote, image := d.client.Config.ParseRemoteAndContainer(machine.Image)
+
+	res, err := d.client.Init(machine.Name, imgremote, d.client.GetAlias(image), &profiles, nil, nil, true)
 	if err != nil {
 		return err
 	}
@@ -39,7 +41,7 @@ func (d *LxdDriver) Create(machine types.Machine) error {
 	return nil
 }
 
-func (d *LxdDriver) Delete(machine types.Machine) error {
+func (d *LxdDriver) Delete(machine *types.Machine) error {
 
 	container, err := d.client.ContainerInfo(machine.Name)
 	if err != nil {

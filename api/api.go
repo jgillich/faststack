@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"net/http"
 
 	"os"
 
@@ -74,9 +75,7 @@ func New() *Api {
 
 	a := &Api{log, &config, echo, driver}
 
-	echo.POST("/machines", a.MachinesCreate)
-
-	log.Fatal(a.MachinesCreate(nil))
+	echo.POST("/machines", a.createMachine)
 
 	return a
 }
@@ -97,9 +96,14 @@ func (a *Api) Run() {
 	}
 }
 
-func (a *Api) MachinesCreate(c echo.Context) error {
+func (a *Api) createMachine(c echo.Context) error {
 
-	machine := types.Machine{Name: "foo", Image: "ubuntu/xenial"}
+	m := new(types.Machine)
+	if err := c.Bind(m); err != nil {
+		return err
+	}
 
-	return a.driver.Create(machine)
+	a.driver.Create(m)
+
+	return c.JSON(http.StatusCreated, m)
 }

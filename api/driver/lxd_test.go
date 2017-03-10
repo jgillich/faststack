@@ -13,8 +13,8 @@ func TestCreateDelete(t *testing.T) {
 		t.Error(err)
 	}
 
-	m := types.Machine{Name: "test-lxddriver", Image: "ubuntu/xenial"}
-	if err = driver.Create(m); err != nil {
+	m := types.Machine{Name: "termbox-test", Image: "ubuntu:16.04"}
+	if err = driver.Create(&m); err != nil {
 		t.Error(err)
 	}
 
@@ -34,7 +34,7 @@ func TestCreateDelete(t *testing.T) {
 		t.Error("container does not exist")
 	}
 
-	err = driver.Delete(m)
+	err = driver.Delete(&m)
 
 	containers, err = driver.client.ListContainers()
 	if err != nil {
