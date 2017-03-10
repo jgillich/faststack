@@ -1,0 +1,24 @@
+{
+  "service": {
+    "name": "lxd",
+    "tags": [
+      "driver"
+    ],
+    "port": 1100,
+    "check": {
+      "id": "lxd",
+      "name": "LXD check",
+      "tcp": "localhost:1100",
+      "interval": "30s",
+      "timeout": "1s"
+    }
+  },
+  "checks": [
+    {
+      "id": "mem",
+      "name": "mem",
+      "script": "/etc/consul.d/check_mem.sh",
+      "interval": "30s"
+    }
+  ]
+}

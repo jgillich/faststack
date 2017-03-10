@@ -2,14 +2,17 @@ package driver
 
 import (
 	"fmt"
+	"strconv"
 
 	"github.com/hashicorp/consul/api"
+	"github.com/jmcvetta/randutil"
 	"github.com/termbox/termbox/api/types"
 )
 
 // ClusterDriver implements the Driver interface in a driver-agnostic way
 // and distributes requests among cluster memembers
 type ClusterDriver struct {
+	health  *api.Health
 	catalog *api.Catalog
 	kv      *api.KV
 }
@@ -20,7 +23,7 @@ func NewClusterDriver() (Driver, error) {
 		return nil, err
 	}
 
-	return &ClusterDriver{catalog: consul.Catalog(), kv: consul.KV()}, nil
+	return &ClusterDriver{catalog: consul.Catalog(), kv: consul.KV(), health: consul.Health()}, nil
 }
 
 func (c *ClusterDriver) Create(machine *types.Machine) error {
@@ -29,7 +32,7 @@ func (c *ClusterDriver) Create(machine *types.Machine) error {
 		return err
 	}
 
-	address := fmt.Sprintf("%s:%v", host.Node, host.ServicePort)
+	address := fmt.Sprintf("%s:%v", host.Node.Node, host.Service.Port)
 
 	driver, err := NewDriver(machine.Driver, address)
 	if err != nil {
@@ -41,7 +44,7 @@ func (c *ClusterDriver) Create(machine *types.Machine) error {
 		return err
 	}
 
-	pair := api.KVPair{Key: fmt.Sprintf("machines/%v/host", machine.Name), Value: []byte(host.Address)}
+	pair := api.KVPair{Key: fmt.Sprintf("machines/%v/host", machine.Name), Value: []byte(host.Node.Node)}
 
 	_, err = c.kv.Put(&pair, nil)
 	if err != nil {
@@ -69,8 +72,9 @@ func (c *ClusterDriver) Delete(machine *types.Machine) error {
 	return nil
 }
 
-func (c *ClusterDriver) getNextHost(driver string) (*api.CatalogService, error) {
-	hosts, _, err := c.catalog.Service(driver, "", nil)
+func (c *ClusterDriver) getNextHost(driver string) (*api.ServiceEntry, error) {
+	hosts, _, err := c.health.Service(driver, "", true, nil)
+
 	if err != nil {
 		return nil, err
 	}
@@ -79,8 +83,24 @@ func (c *ClusterDriver) getNextHost(driver string) (*api.CatalogService, error) 
 		return nil, fmt.Errorf("no hosts found for driver %v", driver)
 	}
 
-	// TODO smart scheduling
-	return hosts[0], nil
+	var choices []randutil.Choice
+	for _, h := range hosts {
+		weightStr, _ := h.Node.Meta["weight"]
+
+		weight, err := strconv.Atoi(weightStr)
+		if err != nil {
+			weight = 1
+		}
+
+		choices = append(choices, randutil.Choice{Item: h, Weight: weight})
+	}
+
+	choice, err := randutil.WeightedChoice(choices)
+	if err != nil {
+		return nil, err
+	}
+
+	return choice.Item.(*api.ServiceEntry), nil
 }
 
 func (c *ClusterDriver) getMachineDriver(machine *types.Machine) (Driver, error) {
