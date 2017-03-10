@@ -4,4 +4,5 @@ type Machine struct {
 	Name    string `json:"name"`
 	Image   string `json:"image"`
 	Command string `json:"command"`
+	Driver  string `json:"driver"`
 }

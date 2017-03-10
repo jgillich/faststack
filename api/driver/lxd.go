@@ -13,7 +13,7 @@ type LxdDriver struct {
 	client *lxd.Client
 }
 
-func NewLxdDriver() (*LxdDriver, error) {
+func NewLxdDriver(ctx *DriverContext) (Driver, error) {
 	client, err := lxd.NewClient(&lxd.DefaultConfig, "local")
 
 	if err != nil {
@@ -21,6 +21,10 @@ func NewLxdDriver() (*LxdDriver, error) {
 	}
 
 	return &LxdDriver{client}, nil
+}
+
+func (d *LxdDriver) Name() string {
+	return "lxd"
 }
 
 func (d *LxdDriver) Create(machine *types.Machine) error {

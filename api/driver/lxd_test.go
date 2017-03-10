@@ -3,25 +3,20 @@ package driver
 import (
 	"testing"
 
+	"github.com/stretchr/testify/assert"
 	"github.com/termbox/termbox/api/types"
 )
 
 var driver, err = NewLxdDriver()
 
 func TestCreateDelete(t *testing.T) {
-	if err != nil {
-		t.Error(err)
-	}
+	assert.NoError(t, err)
 
 	m := types.Machine{Name: "termbox-test", Image: "ubuntu:16.04"}
-	if err = driver.Create(&m); err != nil {
-		t.Error(err)
-	}
+	assert.NoError(t, driver.Create(&m))
 
 	containers, err := driver.client.ListContainers()
-	if err != nil {
-		t.Error(err)
-	}
+	assert.NoError(t, err)
 
 	exists := false
 	for _, c := range containers {
@@ -34,21 +29,14 @@ func TestCreateDelete(t *testing.T) {
 		t.Error("container does not exist")
 	}
 
-	err = driver.Delete(&m)
+	assert.NoError(t, driver.Delete(&m))
 
 	containers, err = driver.client.ListContainers()
-	if err != nil {
-		t.Error(err)
-	}
+	assert.NoError(t, err)
 
-	exists = false
 	for _, c := range containers {
 		if c.Name == m.Name {
-			exists = true
+			t.Error("container still exists")
 		}
-	}
-
-	if exists {
-		t.Error("container still exists")
 	}
 }
