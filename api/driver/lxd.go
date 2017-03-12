@@ -6,17 +6,21 @@ import (
 	"github.com/lxc/lxd"
 	"github.com/lxc/lxd/shared"
 	"github.com/lxc/lxd/shared/api"
-	"github.com/termbox/termbox/api/types"
+)
+
+const (
+	lxdConfigOption = "driver.lxc.enable"
 )
 
 type LxdDriver struct {
-	client *lxd.Client
+	client  *lxd.Client
+	machine *Machine
 }
 
 func NewLxdDriver(ctx *DriverContext) (Driver, error) {
 
 	remote := lxd.RemoteConfig{
-		Addr:   ctx.remote,
+		Addr:   ctx.Remote.String(),
 		Static: true,
 		Public: false,
 	}
@@ -32,20 +36,16 @@ func NewLxdDriver(ctx *DriverContext) (Driver, error) {
 		return nil, err
 	}
 
-	return &LxdDriver{client}, nil
+	return &LxdDriver{client: client, machine: ctx.Machine}, nil
 }
 
-func (d *LxdDriver) Name() string {
-	return "lxd"
-}
-
-func (d *LxdDriver) Create(machine *types.Machine) error {
+func (d *LxdDriver) Create() error {
 
 	profiles := []string{"default"}
 
-	imgremote, image := d.client.Config.ParseRemoteAndContainer(machine.Image)
+	imgremote, image := d.client.Config.ParseRemoteAndContainer(d.machine.Image)
 
-	res, err := d.client.Init(machine.Name, imgremote, d.client.GetAlias(image), &profiles, nil, nil, true)
+	res, err := d.client.Init(d.machine.Name, imgremote, d.client.GetAlias(image), &profiles, nil, nil, true)
 	if err != nil {
 		return err
 	}
@@ -57,15 +57,15 @@ func (d *LxdDriver) Create(machine *types.Machine) error {
 	return nil
 }
 
-func (d *LxdDriver) Delete(machine *types.Machine) error {
+func (d *LxdDriver) Delete() error {
 
-	container, err := d.client.ContainerInfo(machine.Name)
+	container, err := d.client.ContainerInfo(d.machine.Name)
 	if err != nil {
 		return err
 	}
 
 	if container.StatusCode != 0 && container.StatusCode != api.Stopped {
-		resp, err := d.client.Action(machine.Name, shared.Stop, -1, true, false)
+		resp, err := d.client.Action(d.machine.Name, shared.Stop, -1, true, false)
 		if err != nil {
 			return err
 		}
@@ -80,7 +80,7 @@ func (d *LxdDriver) Delete(machine *types.Machine) error {
 		}
 	}
 
-	res, err := d.client.Delete(machine.Name)
+	res, err := d.client.Delete(d.machine.Name)
 	if err != nil {
 		return err
 	}

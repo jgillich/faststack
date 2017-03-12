@@ -1,109 +1,87 @@
 package main
 
 import (
-	"fmt"
 	"net/http"
 
-	"os"
+	"fmt"
 
 	"github.com/Sirupsen/logrus"
-	"github.com/kelseyhightower/envconfig"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
+	"github.com/termbox/termbox/api/config"
 	"github.com/termbox/termbox/api/driver"
-	"github.com/termbox/termbox/api/types"
 )
-
-type ApiConfig struct {
-	Env     string `default:"development"`
-	Addr    string `default:":7842"`
-	TlsCert string
-	TlsKey  string
-	AutoTls bool
-}
-
-func (a *ApiConfig) Debug() bool {
-	return a.Env != "production"
-}
 
 type Api struct {
 	log    *logrus.Logger
-	config *ApiConfig
+	config *config.Config
 	echo   *echo.Echo
-	driver driver.Driver
 }
 
-func New() *Api {
+func New(config *config.Config) *Api {
 
 	// -- Logging
 
 	log := logrus.New()
 
-	// -- Configuration
-
-	if os.Getenv("PORT") != "" {
-		os.Setenv("TERMBOX_ADDR", fmt.Sprintf(":%s", os.Getenv("PORT")))
-	}
-
-	var config ApiConfig
-	if err := envconfig.Process("termbox", &config); err != nil {
-		log.Fatal(err)
-	}
-
-	if config.Debug() {
-		log.Level = logrus.DebugLevel
-	}
-
 	// -- Echo
 
 	echo := echo.New()
-	echo.Debug = config.Debug()
 
-	if !config.Debug() {
-		echo.Use(middleware.Gzip())
-	}
-
-	// -- Driver
-
-	driver, err := driver.NewClusterDriver()
-
-	if err != nil {
-		log.Fatal(err)
-	}
+	echo.Use(middleware.Gzip())
 
 	// -- Api
 
-	a := &Api{log, &config, echo, driver}
+	a := &Api{log, config, echo}
 
 	echo.POST("/machines", a.createMachine)
 
 	return a
 }
 
-func (a *Api) Run() {
-	var err error
+func (a *Api) Run() error {
 
-	if a.config.AutoTls {
-		err = a.echo.StartAutoTLS(a.config.Addr)
-	} else if a.config.TlsCert != "" && a.config.TlsKey != "" {
-		err = a.echo.StartTLS(a.config.Addr, a.config.TlsCert, a.config.TlsKey)
+	if a.config.TLSConfig.Enable {
+		if a.config.TLSConfig.Auto {
+			return a.echo.StartAutoTLS(a.config.Address)
+		} else {
+			return a.echo.StartTLS(a.config.Address, a.config.TLSConfig.Cert, a.config.TLSConfig.Key)
+		}
 	} else {
-		err = a.echo.Start(a.config.Addr)
+		return a.echo.Start(a.config.Address)
 	}
+}
 
-	if err != nil {
-		a.log.Fatal(err)
+func (a *Api) getDriver(m *driver.Machine) (driver.Driver, error) {
+	ctx := driver.DriverContext{Config: a.config, Machine: m}
+
+	if a.config.ClusterConfig.Enable {
+		return driver.NewClusterDriver(&ctx)
+	} else {
+		str := a.config.Read(fmt.Sprintf("%v.remote", m.Driver))
+		url, err := url.ParseUrl(str)
+		if err != nil {
+			return err
+		}
+
+		ctx.Remote = url
+		return driver.NewDriver(&ctx)
 	}
 }
 
 func (a *Api) createMachine(c echo.Context) error {
 
-	m := new(types.Machine)
+	m := new(driver.Machine)
 	if err := c.Bind(m); err != nil {
 		return err
 	}
 
-	if err := a.driver.Create(m); err != nil {
+	driver, err := a.getDriver(m)
+	if err != nil {
+		return err
+	}
+
+	if err := driver.Create(); err != nil {
 		return err
 	}
 

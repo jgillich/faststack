@@ -1,6 +1,8 @@
 http {
   address = ":7842"
 
+  log_level = "DEBUG"
+
   tls {
     enable = true
 
@@ -8,8 +10,8 @@ http {
     auto = true
 
     # or manually set certificate
-    cert = "/tls.crt"
-    key = "/tls.key"
+    cert_file = "/tls.crt"
+    key_file = "/tls.key"
   }
 
 }
@@ -21,15 +23,18 @@ auth  {
   }
 }
 
+cluster {
+  enable = true
+}
+
+
+
 driver {
   cluster {
     enable = true
   }
 
-  lxd {
-    enable = true
-
-    # the address of the lxd server, ignored in cluster mode
-    remote = "unix://"
+  options = {
+    "lxd.remote": "unix://"
   }
 }

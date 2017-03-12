@@ -2,8 +2,9 @@ package driver
 
 import (
 	"fmt"
+	"net/url"
 
-	"github.com/termbox/termbox/api/types"
+	"github.com/termbox/termbox/api/config"
 )
 
 type Factory func(*DriverContext) (Driver, error)
@@ -12,23 +13,27 @@ var BuiltinDrivers = map[string]Factory{
 	"lxd": NewLxdDriver,
 }
 
-func NewDriver(name string, remote string) (Driver, error) {
-	factory, ok := BuiltinDrivers[name]
+func NewDriver(ctx *DriverContext) (Driver, error) {
+	factory, ok := BuiltinDrivers[ctx.Machine.Driver]
 	if !ok {
-		return nil, fmt.Errorf("unknown driver '%s'", name)
+		return nil, fmt.Errorf("unknown driver '%s'", ctx.Machine.Driver)
 	}
-
-	ctx := DriverContext{remote}
-
-	return factory(&ctx)
+	return factory(ctx)
 }
 
 type Driver interface {
-	//Name() string
-	Create(m *types.Machine) error
-	Delete(m *types.Machine) error
+	Create() error
+	Delete() error
 }
 
 type DriverContext struct {
-	remote string
+	Machine *Machine
+	Config  *config.Config
+	Remote  *url.URL
+}
+
+type Machine struct {
+	Name   string `json:"name"`
+	Image  string `json:"image"`
+	Driver string `json:"driver"`
 }
