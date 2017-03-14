@@ -1,27 +1,26 @@
-http {
-  address = ":7842"
+address = ":7842"
 
-  log_level = "DEBUG"
+log_level = "DEBUG"
 
-  tls {
-    enable = true
+tls {
+  enable = true
 
-    # automatically fetch certificate via letsencrypt
-    auto = true
+  # automatically fetch certificate via letsencrypt
+  auto = true
 
-    # or manually set certificate
-    cert_file = "/tls.crt"
-    key_file = "/tls.key"
-  }
-
+  # or manually set certificate
+  cert_file = "/tls.crt"
+  key_file = "/tls.key"
 }
 
+/*
 auth  {
   jwt {
     enable = true
     key = "/jwt.key"
   }
 }
+*/
 
 cluster {
   enable = true
@@ -30,7 +29,7 @@ cluster {
 driver {
   enable = ["lxd"]
 
-  options = {
-    "lxd.remote": "unix://"
+  options {
+    "lxd.remote" = "unix://"
   }
 }

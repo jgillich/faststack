@@ -73,6 +73,7 @@ func parseConfig(result *Config, list *ast.ObjectList) error {
 		"log_level",
 		"tls",
 		"cluster",
+		"driver",
 	}
 	if err := checkHCLKeys(list, valid); err != nil {
 		return multierror.Prefix(err, "config:")
@@ -126,6 +127,7 @@ func parseTLSConfig(result **TLSConfig, list *ast.ObjectList) error {
 
 	valid := []string{
 		"enable",
+		"auto",
 		"cert_file",
 		"key_file",
 	}
