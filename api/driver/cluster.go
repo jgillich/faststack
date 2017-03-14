@@ -15,7 +15,7 @@ import (
 // and distributes requests among cluster memembers
 type ClusterDriver struct {
 	machine *Machine
-	config  *config.Config
+	config  *config.DriverConfig
 	health  *api.Health
 	catalog *api.Catalog
 	kv      *api.KV

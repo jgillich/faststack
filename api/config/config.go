@@ -11,6 +11,8 @@ type Config struct {
 
 	LogLevel string
 
+	ClusterConfig *ClusterConfig
+
 	DriverConfig *DriverConfig
 }
 
@@ -24,6 +26,9 @@ type TLSConfig struct {
 
 type DriverConfig struct {
 	ClusterConfig *ClusterConfig
+
+	// Enable specifies the name of drivers to enable
+	Enable []string
 
 	// Options provides arbitrary key-value configuration for internals,
 	// like authentication and drivers. The format is:

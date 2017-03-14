@@ -28,7 +28,7 @@ type Driver interface {
 
 type DriverContext struct {
 	Machine *Machine
-	Config  *config.Config
+	Config  *config.DriverConfig
 	Remote  *url.URL
 }
 

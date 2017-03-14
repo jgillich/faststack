@@ -27,12 +27,8 @@ cluster {
   enable = true
 }
 
-
-
 driver {
-  cluster {
-    enable = true
-  }
+  enable = ["lxd"]
 
   options = {
     "lxd.remote": "unix://"

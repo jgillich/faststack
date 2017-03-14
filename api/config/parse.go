@@ -105,6 +105,13 @@ func parseConfig(result *Config, list *ast.ObjectList) error {
 		}
 	}
 
+	// Parse the cluster config
+	if o := list.Filter("driver"); len(o.Items) > 0 {
+		if err := parseDriverConfig(&result.DriverConfig, o); err != nil {
+			return multierror.Prefix(err, "driver ->")
+		}
+	}
+
 	return nil
 }
 
@@ -167,6 +174,37 @@ func parseClusterConfig(result **ClusterConfig, list *ast.ObjectList) error {
 		return err
 	}
 	*result = &clusterConfig
+	return nil
+}
+
+func parseDriverConfig(result **DriverConfig, list *ast.ObjectList) error {
+	list = list.Elem()
+	if len(list.Items) > 1 {
+		return fmt.Errorf("only one 'cluster' block allowed")
+	}
+
+	// Get the cluster object
+	listVal := list.Items[0].Val
+
+	valid := []string{
+		"enable",
+		"options",
+	}
+
+	if err := checkHCLKeys(listVal, valid); err != nil {
+		return err
+	}
+
+	var m map[string]interface{}
+	if err := hcl.DecodeObject(&m, listVal); err != nil {
+		return err
+	}
+
+	var driverConfig DriverConfig
+	if err := mapstructure.WeakDecode(m, &driverConfig); err != nil {
+		return err
+	}
+	*result = &driverConfig
 	return nil
 }
 

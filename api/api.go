@@ -2,6 +2,7 @@ package main
 
 import (
 	"net/http"
+	"net/url"
 
 	"fmt"
 
@@ -53,18 +54,18 @@ func (a *Api) Run() error {
 }
 
 func (a *Api) getDriver(m *driver.Machine) (driver.Driver, error) {
-	ctx := driver.DriverContext{Config: a.config, Machine: m}
+	ctx := driver.DriverContext{Config: a.config.DriverConfig, Machine: m}
 
 	if a.config.ClusterConfig.Enable {
 		return driver.NewClusterDriver(&ctx)
 	} else {
-		str := a.config.Read(fmt.Sprintf("%v.remote", m.Driver))
-		url, err := url.ParseUrl(str)
+		remote, _ := a.config.DriverConfig.Options[fmt.Sprintf("%v.remote", m.Driver)]
+		remoteUrl, err := url.Parse(remote)
 		if err != nil {
-			return err
+			return nil, err
 		}
 
-		ctx.Remote = url
+		ctx.Remote = remoteUrl
 		return driver.NewDriver(&ctx)
 	}
 }
