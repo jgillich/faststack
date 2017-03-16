@@ -20,13 +20,16 @@ type LxdDriver struct {
 func NewLxdDriver(ctx *DriverContext) (Driver, error) {
 
 	remote := lxd.RemoteConfig{
-		Addr:   ctx.Remote.String(),
+		Addr:   ctx.Config.Read("lxd.remote"),
 		Static: true,
 		Public: false,
 	}
 
 	lxdConfig := lxd.Config{
-		Remotes:       map[string]lxd.RemoteConfig{"remote": remote},
+		Remotes: map[string]lxd.RemoteConfig{
+			"remote": remote,
+			"images": lxd.ImagesRemote,
+		},
 		DefaultRemote: "remote",
 	}
 
@@ -43,9 +46,7 @@ func (d *LxdDriver) Create() error {
 
 	profiles := []string{"default"}
 
-	imgremote, image := d.client.Config.ParseRemoteAndContainer(d.machine.Image)
-
-	res, err := d.client.Init(d.machine.Name, imgremote, d.client.GetAlias(image), &profiles, nil, nil, true)
+	res, err := d.client.Init(d.machine.Name, "images", d.machine.Image, &profiles, nil, nil, true)
 	if err != nil {
 		return err
 	}

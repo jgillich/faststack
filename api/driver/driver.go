@@ -2,7 +2,6 @@ package driver
 
 import (
 	"fmt"
-	"net/url"
 
 	"github.com/termbox/termbox/api/config"
 )
@@ -18,6 +17,7 @@ func NewDriver(ctx *DriverContext) (Driver, error) {
 	if !ok {
 		return nil, fmt.Errorf("unknown driver '%s'", ctx.Machine.Driver)
 	}
+
 	return factory(ctx)
 }
 
@@ -29,7 +29,6 @@ type Driver interface {
 type DriverContext struct {
 	Machine *Machine
 	Config  *config.DriverConfig
-	Remote  *url.URL
 }
 
 type Machine struct {

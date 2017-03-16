@@ -25,8 +25,6 @@ type TLSConfig struct {
 }
 
 type DriverConfig struct {
-	ClusterConfig *ClusterConfig
-
 	// Enable specifies the name of drivers to enable
 	Enable []string
 
@@ -44,9 +42,24 @@ type ClusterConfig struct {
 // DefaultConfig returns the default configuration
 func DefaultConfig() *Config {
 	return &Config{
-		Address:   ":7842",
-		TLSConfig: &TLSConfig{},
-		LogLevel:  "DEBUG",
+		Address:       ":7842",
+		TLSConfig:     &TLSConfig{},
+		ClusterConfig: DefaultClusterConfig(),
+		DriverConfig:  DefaultDriverConfig(),
+		LogLevel:      "DEBUG",
+	}
+}
+
+func DefaultClusterConfig() *ClusterConfig {
+	return &ClusterConfig{
+		Enable: false,
+	}
+}
+
+func DefaultDriverConfig() *DriverConfig {
+	return &DriverConfig{
+		Enable:  []string{},
+		Options: map[string]string{},
 	}
 }
 

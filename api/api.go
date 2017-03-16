@@ -2,9 +2,6 @@ package main
 
 import (
 	"net/http"
-	"net/url"
-
-	"fmt"
 
 	"github.com/Sirupsen/logrus"
 	"github.com/labstack/echo"
@@ -37,6 +34,8 @@ func New(config *config.Config) *Api {
 
 	echo.POST("/machines", a.createMachine)
 
+	echo.DELETE("/machines/:name", a.deleteMachine)
+
 	return a
 }
 
@@ -59,13 +58,6 @@ func (a *Api) getDriver(m *driver.Machine) (driver.Driver, error) {
 	if a.config.ClusterConfig.Enable {
 		return driver.NewClusterDriver(&ctx)
 	} else {
-		remote, _ := a.config.DriverConfig.Options[fmt.Sprintf("%v.remote", m.Driver)]
-		remoteUrl, err := url.Parse(remote)
-		if err != nil {
-			return nil, err
-		}
-
-		ctx.Remote = remoteUrl
 		return driver.NewDriver(&ctx)
 	}
 }
@@ -83,6 +75,25 @@ func (a *Api) createMachine(c echo.Context) error {
 	}
 
 	if err := driver.Create(); err != nil {
+		return err
+	}
+
+	return c.JSON(http.StatusCreated, m)
+}
+
+func (a *Api) deleteMachine(c echo.Context) error {
+
+	M := driver.Machine{
+		Name:   c.Param("name"),
+		Driver: TODO,
+	}
+
+	driver, err := a.getDriver(m)
+	if err != nil {
+		return err
+	}
+
+	if err := driver.Delete(); err != nil {
 		return err
 	}
 

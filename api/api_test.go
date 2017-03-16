@@ -3,17 +3,28 @@ package main
 import (
 	"net/http"
 	"net/http/httptest"
+	"os"
 	"strings"
 	"testing"
 
 	"github.com/labstack/echo"
 	"github.com/stretchr/testify/assert"
+	"github.com/termbox/termbox/api/config"
 )
 
 var (
-	api         = New()
-	machineJSON = `{"name":"termbox-test","image":"ubuntu:16.04","driver":"lxd"}`
+	api         *Api
+	machineJSON = `{"name":"faststack-TestCreateMachine","image":"ubuntu/xenial","driver":"lxd"}`
 )
+
+func TestMain(m *testing.M) {
+	cfg := config.DefaultConfig()
+	cfg.DriverConfig.Enable = append(cfg.DriverConfig.Enable, "lxd")
+	cfg.DriverConfig.Options["lxd.remote"] = "unix://"
+	api = New(cfg)
+
+	os.Exit(m.Run())
+}
 
 func TestCreateMachine(t *testing.T) {
 	e := echo.New()
