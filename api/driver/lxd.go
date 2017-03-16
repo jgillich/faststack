@@ -13,14 +13,13 @@ const (
 )
 
 type LxdDriver struct {
-	client  *lxd.Client
-	machine *Machine
+	client *lxd.Client
 }
 
-func NewLxdDriver(ctx *DriverContext) (Driver, error) {
+func NewLxdDriver(options map[string]string) (Driver, error) {
 
 	remote := lxd.RemoteConfig{
-		Addr:   ctx.Config.Read("lxd.remote"),
+		Addr:   options["lxd.remote"],
 		Static: true,
 		Public: false,
 	}
@@ -39,14 +38,14 @@ func NewLxdDriver(ctx *DriverContext) (Driver, error) {
 		return nil, err
 	}
 
-	return &LxdDriver{client: client, machine: ctx.Machine}, nil
+	return &LxdDriver{client: client}, nil
 }
 
-func (d *LxdDriver) Create() error {
+func (d *LxdDriver) Create(name, image string) error {
 
 	profiles := []string{"default"}
 
-	res, err := d.client.Init(d.machine.Name, "images", d.machine.Image, &profiles, nil, nil, true)
+	res, err := d.client.Init(name, "images", image, &profiles, nil, nil, true)
 	if err != nil {
 		return err
 	}
@@ -58,15 +57,15 @@ func (d *LxdDriver) Create() error {
 	return nil
 }
 
-func (d *LxdDriver) Delete() error {
+func (d *LxdDriver) Delete(name string) error {
 
-	container, err := d.client.ContainerInfo(d.machine.Name)
+	container, err := d.client.ContainerInfo(name)
 	if err != nil {
 		return err
 	}
 
 	if container.StatusCode != 0 && container.StatusCode != api.Stopped {
-		resp, err := d.client.Action(d.machine.Name, shared.Stop, -1, true, false)
+		resp, err := d.client.Action(name, shared.Stop, -1, true, false)
 		if err != nil {
 			return err
 		}
@@ -81,7 +80,7 @@ func (d *LxdDriver) Delete() error {
 		}
 	}
 
-	res, err := d.client.Delete(d.machine.Name)
+	res, err := d.client.Delete(name)
 	if err != nil {
 		return err
 	}

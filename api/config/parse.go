@@ -74,6 +74,7 @@ func parseConfig(result *Config, list *ast.ObjectList) error {
 		"tls",
 		"cluster",
 		"driver",
+		"redis",
 	}
 	if err := checkHCLKeys(list, valid); err != nil {
 		return multierror.Prefix(err, "config:")
@@ -110,6 +111,13 @@ func parseConfig(result *Config, list *ast.ObjectList) error {
 	if o := list.Filter("driver"); len(o.Items) > 0 {
 		if err := parseDriverConfig(&result.DriverConfig, o); err != nil {
 			return multierror.Prefix(err, "driver ->")
+		}
+	}
+
+	// Parse the redis config
+	if o := list.Filter("redis"); len(o.Items) > 0 {
+		if err := parseRedisConfig(&result.RedisConfig, o); err != nil {
+			return multierror.Prefix(err, "redis ->")
 		}
 	}
 
@@ -207,6 +215,38 @@ func parseDriverConfig(result **DriverConfig, list *ast.ObjectList) error {
 		return err
 	}
 	*result = &driverConfig
+	return nil
+}
+
+func parseRedisConfig(result **RedisConfig, list *ast.ObjectList) error {
+	list = list.Elem()
+	if len(list.Items) > 1 {
+		return fmt.Errorf("only one 'redis' block allowed")
+	}
+
+	// Get the cluster object
+	listVal := list.Items[0].Val
+
+	valid := []string{
+		"address",
+		"password",
+		"database",
+	}
+
+	if err := checkHCLKeys(listVal, valid); err != nil {
+		return err
+	}
+
+	var m map[string]interface{}
+	if err := hcl.DecodeObject(&m, listVal); err != nil {
+		return err
+	}
+
+	var redisConfig RedisConfig
+	if err := mapstructure.WeakDecode(m, &redisConfig); err != nil {
+		return err
+	}
+	*result = &redisConfig
 	return nil
 }
 

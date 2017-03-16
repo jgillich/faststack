@@ -13,6 +13,11 @@ tls {
   key_file = "/tls.key"
 }
 
+redis {
+  address   = "localhost:6379"
+  password  = ""
+}
+
 /*
 auth  {
   jwt {

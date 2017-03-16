@@ -14,6 +14,8 @@ type Config struct {
 	ClusterConfig *ClusterConfig
 
 	DriverConfig *DriverConfig
+
+	RedisConfig *RedisConfig
 }
 
 // TLSConfig holds various TLS related configurations
@@ -37,6 +39,12 @@ type DriverConfig struct {
 
 type ClusterConfig struct {
 	Enable bool
+}
+
+type RedisConfig struct {
+	Address  string
+	Password string
+	Database int
 }
 
 // DefaultConfig returns the default configuration
