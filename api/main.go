@@ -7,8 +7,8 @@ import (
 	"flag"
 	"fmt"
 
+	"github.com/faststackco/faststack/api/config"
 	"github.com/mitchellh/cli"
-	"github.com/termbox/termbox/api/config"
 )
 
 func main() {

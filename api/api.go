@@ -4,10 +4,10 @@ import (
 	"net/http"
 
 	"github.com/Sirupsen/logrus"
+	"github.com/faststackco/faststack/api/config"
+	"github.com/faststackco/faststack/api/scheduler"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
-	"github.com/termbox/termbox/api/config"
-	"github.com/termbox/termbox/api/scheduler"
 )
 
 type Api struct {

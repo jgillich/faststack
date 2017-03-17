@@ -7,9 +7,9 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/faststackco/faststack/api/config"
 	"github.com/labstack/echo"
 	"github.com/stretchr/testify/assert"
-	"github.com/termbox/termbox/api/config"
 )
 
 var (
@@ -21,7 +21,7 @@ func TestMain(m *testing.M) {
 	cfg := config.DefaultConfig()
 	cfg.DriverConfig.Enable = append(cfg.DriverConfig.Enable, "lxd")
 	cfg.DriverConfig.Options["lxd.remote"] = "unix://"
-	api = New(cfg)
+	api, _ = New(cfg)
 
 	os.Exit(m.Run())
 }

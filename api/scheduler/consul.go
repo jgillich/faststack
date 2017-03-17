@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"strconv"
 
+	"github.com/faststackco/faststack/api/config"
+	"github.com/faststackco/faststack/api/driver"
 	"github.com/hashicorp/consul/api"
 	"github.com/jmcvetta/randutil"
-	"github.com/termbox/termbox/api/config"
-	"github.com/termbox/termbox/api/driver"
 	"gopkg.in/redis.v5"
 )
 

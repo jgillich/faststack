@@ -4,34 +4,27 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"github.com/termbox/termbox/api/config"
 )
 
 func TestLxdDriver(t *testing.T) {
-	machine := Machine{
-		Name:   "faststack-TestLxdDriver",
-		Driver: "lxd",
-		Image:  "ubuntu/xenial",
+	name := "faststack-TestLxdDriver"
+	image := "ubuntu/xenial"
+
+	options := map[string]string{
+		"lxd.remote": "unix://",
 	}
 
-	config := config.DriverConfig{
-		Enable: []string{"lxd"},
-		Options: map[string]string{
-			"lxd.remote": "unix://",
-		},
-	}
-
-	driver, err := NewLxdDriver(&DriverContext{&machine, &config})
+	driver, err := NewLxdDriver(options)
 	assert.NoError(t, err)
 
-	assert.NoError(t, driver.Create())
+	assert.NoError(t, driver.Create(name, image))
 
 	containers, err := driver.(*LxdDriver).client.ListContainers()
 	assert.NoError(t, err)
 
 	exists := false
 	for _, c := range containers {
-		if c.Name == machine.Name {
+		if c.Name == name {
 			exists = true
 		}
 	}
@@ -40,13 +33,13 @@ func TestLxdDriver(t *testing.T) {
 		t.Error("container does not exist")
 	}
 
-	assert.NoError(t, driver.Delete())
+	assert.NoError(t, driver.Delete(name))
 
 	containers, err = driver.(*LxdDriver).client.ListContainers()
 	assert.NoError(t, err)
 
 	for _, c := range containers {
-		if c.Name == machine.Name {
+		if c.Name == name {
 			t.Error("container still exists")
 		}
 	}
