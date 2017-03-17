@@ -7,16 +7,24 @@ import (
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
 	"github.com/termbox/termbox/api/config"
-	"github.com/termbox/termbox/api/driver"
+	"github.com/termbox/termbox/api/scheduler"
 )
 
 type Api struct {
 	log    *logrus.Logger
 	config *config.Config
 	echo   *echo.Echo
+	sched  scheduler.Scheduler
 }
 
-func New(config *config.Config) *Api {
+func New(config *config.Config) (*Api, error) {
+
+	// -- Scheduler
+
+	sched, err := scheduler.NewConsulScheduler(config)
+	if err != nil {
+		return nil, err
+	}
 
 	// -- Logging
 
@@ -30,13 +38,13 @@ func New(config *config.Config) *Api {
 
 	// -- Api
 
-	a := &Api{log, config, echo}
+	a := &Api{log, config, echo, sched}
 
 	echo.POST("/machines", a.createMachine)
 
 	echo.DELETE("/machines/:name", a.deleteMachine)
 
-	return a
+	return a, nil
 }
 
 func (a *Api) Run() error {
@@ -52,50 +60,31 @@ func (a *Api) Run() error {
 	}
 }
 
-func (a *Api) getDriver(m *driver.Machine) (driver.Driver, error) {
-	ctx := driver.DriverContext{Config: a.config.DriverConfig, Machine: m}
-
-	if a.config.ClusterConfig.Enable {
-		return driver.NewClusterDriver(&ctx)
-	} else {
-		return driver.NewDriver(&ctx)
-	}
-}
-
 func (a *Api) createMachine(c echo.Context) error {
 
-	m := new(driver.Machine)
-	if err := c.Bind(m); err != nil {
+	type request struct {
+		Name   string
+		Driver string
+		Image  string
+	}
+
+	req := new(request)
+	if err := c.Bind(req); err != nil {
 		return err
 	}
 
-	driver, err := a.getDriver(m)
-	if err != nil {
+	if err := a.sched.Create(req.Name, req.Image, req.Driver); err != nil {
 		return err
 	}
 
-	if err := driver.Create(); err != nil {
-		return err
-	}
-
-	return c.JSON(http.StatusCreated, m)
+	return c.String(http.StatusCreated, "created")
 }
 
 func (a *Api) deleteMachine(c echo.Context) error {
 
-	M := driver.Machine{
-		Name:   c.Param("name"),
-		Driver: TODO,
-	}
-
-	driver, err := a.getDriver(m)
-	if err != nil {
+	if err := a.sched.Delete(c.Param("name")); err != nil {
 		return err
 	}
 
-	if err := driver.Delete(); err != nil {
-		return err
-	}
-
-	return c.JSON(http.StatusCreated, m)
+	return c.String(http.StatusOK, "deleted")
 }

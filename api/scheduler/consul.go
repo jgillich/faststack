@@ -19,7 +19,7 @@ type ConsulScheduler struct {
 	kv      *api.KV
 }
 
-func NewConsulScheduler(config *config.Config) (*ConsulScheduler, error) {
+func NewConsulScheduler(config *config.Config) (Scheduler, error) {
 	consul, err := api.NewClient(api.DefaultConfig())
 	if err != nil {
 		return nil, err
@@ -52,9 +52,7 @@ func (c *ConsulScheduler) Create(name, image, driverName string) error {
 
 	var choices []randutil.Choice
 	for _, h := range hosts {
-		weightStr, _ := h.Node.Meta["weight"]
-
-		weight, err := strconv.Atoi(weightStr)
+		weight, err := strconv.Atoi(h.Node.Meta["weight"])
 		if err != nil {
 			weight = 1
 		}

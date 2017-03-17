@@ -43,7 +43,13 @@ func (c RunCommand) Run(args []string) int {
 		return 1
 	}
 
-	if err := New(cfg).Run(); err != nil {
+	a, err := New(cfg)
+	if err != nil {
+		fmt.Println(err)
+		return 1
+	}
+
+	if err := a.Run(); err != nil {
 		fmt.Println(err)
 		return 1
 	}
