@@ -8,6 +8,10 @@ export class AuthService {
       auth: {
         redirectUrl: process.env.URL + '/dashboard',
         responseType: 'token',
+        params: {
+          scope: 'openid permissions roles email email_verified user_metadata app_metadata',
+          //audience: 'https://api.faststack.co',
+        }
       },
     })
     this.lock.on('authenticated', this._doAuthentication.bind(this))

@@ -71,6 +71,7 @@ func parseConfig(result *Config, list *ast.ObjectList) error {
 	valid := []string{
 		"address",
 		"log_level",
+		"auth",
 		"tls",
 		"cluster",
 		"driver",
@@ -121,6 +122,13 @@ func parseConfig(result *Config, list *ast.ObjectList) error {
 		}
 	}
 
+	// Parse the auth config
+	if o := list.Filter("auth"); len(o.Items) > 0 {
+		if err := parseAuthConfig(&result.AuthConfig, o); err != nil {
+			return multierror.Prefix(err, "auth ->")
+		}
+	}
+
 	return nil
 }
 
@@ -130,7 +138,6 @@ func parseTLSConfig(result **TLSConfig, list *ast.ObjectList) error {
 		return fmt.Errorf("only one 'tls' block allowed")
 	}
 
-	// Get the TLS object
 	listVal := list.Items[0].Val
 
 	valid := []string{
@@ -163,7 +170,6 @@ func parseClusterConfig(result **ClusterConfig, list *ast.ObjectList) error {
 		return fmt.Errorf("only one 'cluster' block allowed")
 	}
 
-	// Get the cluster object
 	listVal := list.Items[0].Val
 
 	valid := []string{
@@ -193,7 +199,6 @@ func parseDriverConfig(result **DriverConfig, list *ast.ObjectList) error {
 		return fmt.Errorf("only one 'cluster' block allowed")
 	}
 
-	// Get the cluster object
 	listVal := list.Items[0].Val
 
 	valid := []string{
@@ -224,7 +229,6 @@ func parseRedisConfig(result **RedisConfig, list *ast.ObjectList) error {
 		return fmt.Errorf("only one 'redis' block allowed")
 	}
 
-	// Get the cluster object
 	listVal := list.Items[0].Val
 
 	valid := []string{
@@ -247,6 +251,35 @@ func parseRedisConfig(result **RedisConfig, list *ast.ObjectList) error {
 		return err
 	}
 	*result = &redisConfig
+	return nil
+}
+
+func parseAuthConfig(result **AuthConfig, list *ast.ObjectList) error {
+	list = list.Elem()
+	if len(list.Items) > 1 {
+		return fmt.Errorf("only one 'auth' block allowed")
+	}
+
+	listVal := list.Items[0].Val
+
+	valid := []string{
+		"key",
+	}
+
+	if err := checkHCLKeys(listVal, valid); err != nil {
+		return err
+	}
+
+	var m map[string]interface{}
+	if err := hcl.DecodeObject(&m, listVal); err != nil {
+		return err
+	}
+
+	var authConfig AuthConfig
+	if err := mapstructure.WeakDecode(m, &authConfig); err != nil {
+		return err
+	}
+	*result = &authConfig
 	return nil
 }
 

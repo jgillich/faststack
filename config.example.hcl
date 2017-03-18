@@ -18,14 +18,10 @@ redis {
   password  = ""
 }
 
-/*
+
 auth  {
-  jwt {
-    enable = true
-    key = "/jwt.key"
-  }
+   key = "foobar"
 }
-*/
 
 cluster {
   enable = true

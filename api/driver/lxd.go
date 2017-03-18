@@ -3,20 +3,19 @@ package driver
 import (
 	"fmt"
 
+	"io"
+
+	"github.com/faststackco/faststack/api/config"
 	"github.com/lxc/lxd"
 	"github.com/lxc/lxd/shared"
 	"github.com/lxc/lxd/shared/api"
-)
-
-const (
-	lxdConfigOption = "driver.lxc.enable"
 )
 
 type LxdDriver struct {
 	client *lxd.Client
 }
 
-func NewLxdDriver(options map[string]string) (Driver, error) {
+func NewLxdDriver(options config.DriverOptions) (Driver, error) {
 
 	remote := lxd.RemoteConfig{
 		Addr:   options["lxd.remote"],
@@ -88,6 +87,13 @@ func (d *LxdDriver) Delete(name string) error {
 	if err := d.client.WaitForSuccess(res.Operation); err != nil {
 		return err
 	}
+
+	return nil
+}
+
+func (d *LxdDriver) Exec(name string, stdin io.ReadCloser, stdout io.WriteCloser, stderr io.WriteCloser) error {
+
+	d.client.Exec(name, []string{"/bin/bash"}, nil, stdin, stdout, stderr, nil, 80, 25)
 
 	return nil
 }

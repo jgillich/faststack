@@ -12,31 +12,25 @@ import (
 )
 
 type ConsulScheduler struct {
-	redis   *redis.Client
-	config  *config.Config
-	health  *api.Health
-	catalog *api.Catalog
-	kv      *api.KV
+	redis         *redis.Client
+	driverOptions *config.DriverOptions
+	health        *api.Health
+	catalog       *api.Catalog
+	kv            *api.KV
 }
 
-func NewConsulScheduler(config *config.Config) (Scheduler, error) {
+func NewConsulScheduler(redis *redis.Client, options *config.DriverOptions) (Scheduler, error) {
 	consul, err := api.NewClient(api.DefaultConfig())
 	if err != nil {
 		return nil, err
 	}
 
-	redis := redis.NewClient(&redis.Options{
-		Addr:     config.RedisConfig.Address,
-		Password: config.RedisConfig.Password,
-		DB:       config.RedisConfig.Database,
-	})
-
 	return &ConsulScheduler{
-		config:  config,
-		redis:   redis,
-		catalog: consul.Catalog(),
-		kv:      consul.KV(),
-		health:  consul.Health(),
+		redis:         redis,
+		driverOptions: options,
+		catalog:       consul.Catalog(),
+		kv:            consul.KV(),
+		health:        consul.Health(),
 	}, nil
 }
 
@@ -110,7 +104,7 @@ func (c *ConsulScheduler) Delete(name string) error {
 
 func (c *ConsulScheduler) newDriver(name string, node *api.Node) (driver.Driver, error) {
 	driverOptions := make(map[string]string)
-	for key, value := range c.config.DriverConfig.Options {
+	for key, value := range *c.driverOptions {
 		driverOptions[key] = value
 	}
 

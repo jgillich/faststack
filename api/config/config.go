@@ -6,10 +6,12 @@ type Config struct {
 	// Address is the socket to bind to
 	Address string
 
+	LogLevel string
+
 	// TLSConfig holds various TLS related configurations
 	TLSConfig *TLSConfig
 
-	LogLevel string
+	AuthConfig *AuthConfig
 
 	ClusterConfig *ClusterConfig
 
@@ -34,8 +36,10 @@ type DriverConfig struct {
 	// like authentication and drivers. The format is:
 	//
 	//	namespace.option = value
-	Options map[string]string
+	Options DriverOptions
 }
+
+type DriverOptions map[string]string
 
 type ClusterConfig struct {
 	Enable bool
@@ -45,6 +49,10 @@ type RedisConfig struct {
 	Address  string
 	Password string
 	Database int
+}
+
+type AuthConfig struct {
+	Key string
 }
 
 // DefaultConfig returns the default configuration
