@@ -44,7 +44,15 @@ func (d *LxdDriver) Create(name, image string) error {
 
 	profiles := []string{"default"}
 
-	res, err := d.client.Init(name, "images", image, &profiles, nil, nil, true)
+	var config map[string]string
+	config["limits.cpu"] = "4"
+	config["limits.cpu.allowance"] = "10%"
+	config["limits.cpu.priority"] = "0"
+	config["limits.disk.priority"] = "0"
+	config["limits.memory"] = "1GB"
+	config["limits.processes"] = "100"
+
+	res, err := d.client.Init(name, "images", image, &profiles, config, nil, false)
 	if err != nil {
 		return err
 	}

@@ -8,6 +8,7 @@ import (
 	jwt "github.com/dgrijalva/jwt-go"
 	"github.com/faststackco/faststack/api/config"
 	"github.com/faststackco/faststack/api/scheduler"
+	"github.com/faststackco/faststack/api/types"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
 	"gopkg.in/redis.v5"
@@ -79,17 +80,11 @@ func (a *Api) createMachine(c echo.Context) error {
 	claims := user.Claims.(*JwtClaims)
 
 	count, _ := a.redis.SCard(fmt.Sprintf("user:%s:machines", claims.Email)).Result()
-	if int(count) >= claims.Quota.Cpus {
+	if int(count) >= claims.AppMetadata.Quota.Instances {
 		return c.String(http.StatusMethodNotAllowed, "quota exceeded")
 	}
 
-	type request struct {
-		Name   string
-		Driver string
-		Image  string
-	}
-
-	req := new(request)
+	req := new(types.CreateMachineRequest)
 	if err := c.Bind(req); err != nil {
 		return err
 	}
@@ -99,7 +94,6 @@ func (a *Api) createMachine(c echo.Context) error {
 	}
 
 	if err := a.redis.SAdd(fmt.Sprintf("user:%s:machines", req.Name)).Err(); err != nil {
-		// TODO log; this should never happen
 		return err
 	}
 
@@ -125,15 +119,4 @@ func (a *Api) deleteMachine(c echo.Context) error {
 	}
 
 	return c.String(http.StatusOK, "deleted")
-}
-
-type JwtClaims struct {
-	Email string `json:"email"`
-	Quota Quota  `json:"quota"`
-	jwt.StandardClaims
-}
-
-type Quota struct {
-	Cpus int `json:"cpus"`
-	Ram  int `json:"ram"`
 }

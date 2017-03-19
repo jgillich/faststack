@@ -35,7 +35,7 @@ type RunCommand struct {
 }
 
 func (c RunCommand) Run(args []string) int {
-	var configPath = flag.String("config", "", "config file path")
+	var configPath = flag.String("config", "config.hcl", "config file path")
 
 	cfg, err := config.ParseConfigFile(*configPath)
 	if err != nil {
