@@ -31,7 +31,7 @@ func New(config *config.Config) (*Api, error) {
 
 	// -- Scheduler
 
-	sched, err := scheduler.NewConsulScheduler(redis, &config.DriverConfig.Options)
+	sched, err := scheduler.NewScheduler(config.SchedulerConfig.Name, redis, &config.DriverConfig.Options)
 	if err != nil {
 		return nil, err
 	}

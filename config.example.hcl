@@ -23,8 +23,8 @@ auth  {
    key = "foobar"
 }
 
-cluster {
-  enable = true
+scheduler {
+  name = "local"
 }
 
 driver {

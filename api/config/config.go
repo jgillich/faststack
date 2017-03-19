@@ -13,7 +13,7 @@ type Config struct {
 
 	AuthConfig *AuthConfig
 
-	ClusterConfig *ClusterConfig
+	SchedulerConfig *SchedulerConfig
 
 	DriverConfig *DriverConfig
 
@@ -41,8 +41,8 @@ type DriverConfig struct {
 
 type DriverOptions map[string]string
 
-type ClusterConfig struct {
-	Enable bool
+type SchedulerConfig struct {
+	Name string
 }
 
 type RedisConfig struct {
@@ -58,17 +58,10 @@ type AuthConfig struct {
 // DefaultConfig returns the default configuration
 func DefaultConfig() *Config {
 	return &Config{
-		Address:       ":7842",
-		TLSConfig:     &TLSConfig{},
-		ClusterConfig: DefaultClusterConfig(),
-		DriverConfig:  DefaultDriverConfig(),
-		LogLevel:      "DEBUG",
-	}
-}
-
-func DefaultClusterConfig() *ClusterConfig {
-	return &ClusterConfig{
-		Enable: false,
+		Address:      ":7842",
+		TLSConfig:    &TLSConfig{},
+		DriverConfig: DefaultDriverConfig(),
+		LogLevel:     "DEBUG",
 	}
 }
 

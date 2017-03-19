@@ -73,7 +73,7 @@ func parseConfig(result *Config, list *ast.ObjectList) error {
 		"log_level",
 		"auth",
 		"tls",
-		"cluster",
+		"scheduler",
 		"driver",
 		"redis",
 	}
@@ -87,7 +87,10 @@ func parseConfig(result *Config, list *ast.ObjectList) error {
 		return err
 	}
 	delete(m, "tls")
-	delete(m, "cluster")
+	delete(m, "scheduler")
+	delete(m, "driver")
+	delete(m, "redis")
+	delete(m, "auth")
 
 	// Decode the rest
 	if err := mapstructure.WeakDecode(m, result); err != nil {
@@ -101,10 +104,10 @@ func parseConfig(result *Config, list *ast.ObjectList) error {
 		}
 	}
 
-	// Parse the cluster config
-	if o := list.Filter("cluster"); len(o.Items) > 0 {
-		if err := parseClusterConfig(&result.ClusterConfig, o); err != nil {
-			return multierror.Prefix(err, "cluster ->")
+	// Parse the scheduler config
+	if o := list.Filter("scheduler"); len(o.Items) > 0 {
+		if err := parseSchedulerConfig(&result.SchedulerConfig, o); err != nil {
+			return multierror.Prefix(err, "scheduler ->")
 		}
 	}
 
@@ -164,16 +167,16 @@ func parseTLSConfig(result **TLSConfig, list *ast.ObjectList) error {
 	return nil
 }
 
-func parseClusterConfig(result **ClusterConfig, list *ast.ObjectList) error {
+func parseSchedulerConfig(result **SchedulerConfig, list *ast.ObjectList) error {
 	list = list.Elem()
 	if len(list.Items) > 1 {
-		return fmt.Errorf("only one 'cluster' block allowed")
+		return fmt.Errorf("only one 'scheduler' block allowed")
 	}
 
 	listVal := list.Items[0].Val
 
 	valid := []string{
-		"enable",
+		"name",
 	}
 
 	if err := checkHCLKeys(listVal, valid); err != nil {
@@ -185,11 +188,11 @@ func parseClusterConfig(result **ClusterConfig, list *ast.ObjectList) error {
 		return err
 	}
 
-	var clusterConfig ClusterConfig
-	if err := mapstructure.WeakDecode(m, &clusterConfig); err != nil {
+	var schedulerConfig SchedulerConfig
+	if err := mapstructure.WeakDecode(m, &schedulerConfig); err != nil {
 		return err
 	}
-	*result = &clusterConfig
+	*result = &schedulerConfig
 	return nil
 }
 

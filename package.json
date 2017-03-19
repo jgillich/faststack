@@ -46,6 +46,7 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-react": "^6.10.0",
     "file-loader": "^0.10.1",
+    "html-webpack-plugin": "^2.28.0",
     "jsx-html-class": "^1.0.3",
     "node-sass": "^4.5.0",
     "sass-loader": "^6.0.2",
