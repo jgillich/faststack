@@ -6,6 +6,7 @@ import (
 	"io"
 
 	"github.com/faststackco/faststack/api/config"
+	"github.com/gorilla/websocket"
 	"github.com/lxc/lxd"
 	"github.com/lxc/lxd/shared"
 	"github.com/lxc/lxd/shared/api"
@@ -50,7 +51,7 @@ func (d *LxdDriver) Create(name, image string) error {
 	config["limits.cpu.priority"] = "0"
 	config["limits.disk.priority"] = "0"
 	config["limits.memory"] = "1GB"
-	config["limits.processes"] = "100"
+	config["limits.processes"] = "500"
 
 	res, err := d.client.Init(name, "images", image, &profiles, config, nil, false)
 	if err != nil {
@@ -99,9 +100,13 @@ func (d *LxdDriver) Delete(name string) error {
 	return nil
 }
 
-func (d *LxdDriver) Exec(name string, stdin io.ReadCloser, stdout io.WriteCloser, stderr io.WriteCloser) error {
+func (d *LxdDriver) Exec(name string, stdin io.ReadCloser, stdout io.WriteCloser, stderr io.WriteCloser, controlHandler func(*websocket.Conn)) error {
 
-	d.client.Exec(name, []string{"/bin/bash"}, nil, stdin, stdout, stderr, nil, 80, 25)
+	controlHandlerWrapper := func(c *lxd.Client, control *websocket.Conn) {
+		controlHandler(control)
+	}
 
-	return nil
+	_, err := d.client.Exec(name, []string{"/bin/bash"}, nil, stdin, stdout, stderr, controlHandlerWrapper, 80, 25)
+
+	return err
 }

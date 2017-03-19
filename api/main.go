@@ -43,13 +43,13 @@ func (c RunCommand) Run(args []string) int {
 		return 1
 	}
 
-	a, err := New(cfg)
+	a, err := NewServer(cfg)
 	if err != nil {
 		fmt.Println(err)
 		return 1
 	}
 
-	if err := a.Run(); err != nil {
+	if err := a.StartAuto(); err != nil {
 		fmt.Println(err)
 		return 1
 	}

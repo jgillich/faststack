@@ -1,4 +1,4 @@
-package types
+package handler
 
 type CreateMachineRequest struct {
 	Name   string

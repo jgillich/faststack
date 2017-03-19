@@ -2,9 +2,11 @@ package scheduler
 
 import (
 	"fmt"
+	"io"
 
 	"github.com/faststackco/faststack/api/config"
-	"github.com/termbox.bak/termbox/api/driver"
+	"github.com/faststackco/faststack/api/driver"
+	"github.com/gorilla/websocket"
 	redis "gopkg.in/redis.v5"
 )
 
@@ -54,4 +56,20 @@ func (c *LocalScheduler) Delete(name string) error {
 	}
 
 	return c.redis.HDel(fmt.Sprintf("machine:%s", name)).Err()
+}
+
+func (c *LocalScheduler) Exec(name string, stdin io.ReadCloser, stdout io.WriteCloser, stderr io.WriteCloser, controlHandler func(*websocket.Conn)) error {
+	hash, err := c.redis.HGetAll(fmt.Sprintf("machine:%s", name)).Result()
+
+	driverName, ok := hash["driver"]
+	if !ok {
+		return fmt.Errorf("machine '%s' does not exist", name)
+	}
+
+	driver, err := driver.NewDriver(driverName, *c.driverOptions)
+	if err != nil {
+		return err
+	}
+
+	return driver.Exec(name, stdin, stdout, stderr, controlHandler)
 }

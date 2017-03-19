@@ -2,8 +2,10 @@ package driver
 
 import (
 	"fmt"
+	"io"
 
 	"github.com/faststackco/faststack/api/config"
+	"github.com/gorilla/websocket"
 )
 
 type Factory func(config.DriverOptions) (Driver, error)
@@ -24,4 +26,5 @@ func NewDriver(name string, options config.DriverOptions) (Driver, error) {
 type Driver interface {
 	Create(name, image string) error
 	Delete(name string) error
+	Exec(name string, stdin io.ReadCloser, stdout io.WriteCloser, stderr io.WriteCloser, controlHandler func(*websocket.Conn)) error
 }

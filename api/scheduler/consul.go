@@ -2,10 +2,12 @@ package scheduler
 
 import (
 	"fmt"
+	"io"
 	"strconv"
 
 	"github.com/faststackco/faststack/api/config"
 	"github.com/faststackco/faststack/api/driver"
+	"github.com/gorilla/websocket"
 	"github.com/hashicorp/consul/api"
 	"github.com/jmcvetta/randutil"
 	"gopkg.in/redis.v5"
@@ -100,6 +102,27 @@ func (c *ConsulScheduler) Delete(name string) error {
 	}
 
 	return c.redis.HDel(fmt.Sprintf("machine:%s", name)).Err()
+}
+
+func (c *ConsulScheduler) Exec(name string, stdin io.ReadCloser, stdout io.WriteCloser, stderr io.WriteCloser, controlHandler func(*websocket.Conn)) error {
+	hash, err := c.redis.HGetAll(fmt.Sprintf("machine:%s", name)).Result()
+
+	nodeID, ok := hash["nodeID"]
+	if !ok {
+		return fmt.Errorf("machine '%s' does not exist", name)
+	}
+
+	node, _, err := c.catalog.Node(nodeID, nil)
+	if err != nil {
+		return err
+	}
+
+	driver, err := c.newDriver(hash["driver"], node.Node)
+	if err != nil {
+		return err
+	}
+
+	return driver.Exec(name, stdin, stdout, stderr, controlHandler)
 }
 
 func (c *ConsulScheduler) newDriver(name string, node *api.Node) (driver.Driver, error) {
