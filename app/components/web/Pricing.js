@@ -12,30 +12,6 @@ export default class Pricing extends Component {
         <div className="columns">
 
           <div className="column">
-            <div className="card">
-              <header className="card-header">
-                <p className="card-header-title">
-                  Free
-                </p>
-              </header>
-              <div className="card-content">
-                <div className="content ">
-                  One box
-                </div>
-                <div className="content">
-                  Suspend after 1 hour of inactivity
-                </div>
-                <div className="content">
-                  Community support
-                </div>
-              </div>
-              <footer className="card-footer">
-                <span className="card-footer-item">Free</span>
-              </footer>
-            </div>
-          </div>
-
-          <div className="column">
             <div className="card ">
               <header className="card-header">
                 <p className="card-header-title">
@@ -44,13 +20,10 @@ export default class Pricing extends Component {
               </header>
               <div className="card-content">
                 <div className="content">
-                  <strong>Two</strong> boxes
+                  <strong>Two</strong> machines
                 </div>
                 <div className="content">
-                  Suspend after 6 hours of inactivity
-                </div>
-                <div className="content">
-                  Custom images
+                  <strong>1x</strong> Performance
                 </div>
               </div>
               <footer className="card-footer">
@@ -68,13 +41,10 @@ export default class Pricing extends Component {
               </header>
               <div className="card-content">
                 <div className="content">
-                  <strong>Five</strong> boxes
+                  <strong>Five</strong> machines
                 </div>
                 <div className="content">
-                  <strong>One</strong> permanent box
-                </div>
-                <div className="content">
-                  Email support
+                  <strong>2x</strong> Performance
                 </div>
               </div>
               <footer className="card-footer">
@@ -92,14 +62,12 @@ export default class Pricing extends Component {
               </header>
               <div className="card-content">
                 <div className="content">
-                  <strong>Ten</strong> boxes
+                  <strong>Six</strong> machines
                 </div>
                 <div className="content">
-                  <strong>Two</strong> permanent boxes
+                 <strong>4x</strong> Performance
                 </div>
-                <div className="content">
-                  Coming soon: Dedicated IPs
-                </div>
+
               </div>
               <footer className="card-footer">
                 <span className="card-footer-item">$20 per month</span>
@@ -120,11 +88,18 @@ export default class Pricing extends Component {
 
           <div className="columns is-multiline">
             <div className="column is-half content">
-              <h4 className="subtitle">How many resources does each box get?</h4>
+              <h4 className="subtitle">How much performance do I get?</h4>
               <p>
-                CPU and RAM are dynamic, meaning you can assign as much or as little as you need.
-                A single box grants you 1 CPU and 256MB RAM, therefore on the Pro plan you can
-                assign up to 5 CPUs and 1280MB of RAM.
+                The amount of CPU, disk and network a machine can use depends on system utilization
+                and performance modifier. For example, a machine on the Pro plan is guaranteed to
+                get double the resources of a machine on the Basic plan.
+                <br/>
+                In the case of low system utilization, a machine can use as much as it needs, we
+                only make use of throttling to ensure everyone gets a fair share of the
+                resources.
+                <br/>
+                At the moment, RAM is set to 1GB per machine, but this is subject to change.
+
               </p>
             </div>
 

@@ -21,9 +21,8 @@ export default class Term extends Component {
   render() {
     return (
       <div className="grow" ref={(base) => {
-this.base = base
-}}>
-      </div>
+        this.base = base
+      }}></div>
     )
   }
 }

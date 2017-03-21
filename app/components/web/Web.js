@@ -1,22 +1,24 @@
 import React, {Component} from 'react'
-import {IndexRoute, Route, Link} from 'react-router'
+import {Route, Link} from 'react-router-dom'
 import Home from './Home'
 import Pricing from './Pricing'
 import Terms from './Terms'
 
 export default class Web extends Component {
   render() {
-    let {children} = this.props
+    let {match} = this.props
 
     return (
       <div>
-        {children}
+        <Route exact path={match.url} component={Home}/>
+        <Route path={`${match.url}pricing`} component={Pricing}/>
+        <Route path={`${match.url}terms`} component={Terms}/>
 
         <footer className="footer">
           <div className="container">
             <div className="content has-text-centered">
               <p>
-                <Link to="/terms">Terms of Service</Link>
+                <Link to={`${match.url}terms`}>Terms of Service</Link>
               </p>
               <p>
                 <a className="icon" href="https://github.com/termbox">
@@ -31,11 +33,3 @@ export default class Web extends Component {
     )
   }
 }
-
-export const WebRoute = (
-  <Route component={Web}>
-    <IndexRoute component={Home}/>
-    <Route path='/pricing' component={Pricing}/>
-    <Route path='/terms' component={Terms}/>
-  </Route>
-)
