@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {BrowserRouter as Router, Route, Link, NavLink} from 'react-router-dom'
+import {BrowserRouter as Router, Route, Link, NavLink, Switch} from 'react-router-dom'
 import ReactDOM from 'react-dom'
 import auth from '../auth'
 import Dashboard from './dashboard/Dashboard'
@@ -15,7 +15,7 @@ export default class App extends Component {
   render() {
     return (
       <Router>
-        <div className="grow">
+        <div>
           <nav className="nav">
             <div className="nav-left">
               <Link className="nav-item is-brand" to="/">
@@ -40,20 +40,21 @@ export default class App extends Component {
               </NavLink>
 
               <span className="nav-item">
-                <a className="button" onClick={auth.login.bind(auth)}>
+                <a className="button" onClick={() => auth.login()}>
                   <span>Login</span>
                 </a>
 
-                <a className="button is-primary" onClick={auth.signUp.bind(auth)}>
+                <a className="button is-primary" onClick={() => auth.signUp()}>
                   <span>Sign Up</span>
                 </a>
               </span>
 
             </div>
           </nav>
-
-          <Route path="/dashboard" component={Dashboard}/>
-          <Route path="/" component={Web}/>
+          <Switch>
+            <Route path="/dashboard" component={Dashboard}/>
+            <Route path="/" component={Web}/>
+          </Switch>
         </div>
       </Router>
     )
@@ -62,8 +63,6 @@ export default class App extends Component {
 
 export function render(store) {
   const container = document.createElement('div')
-  container.className = 'grow'
-  container.id = 'main'
   document.body.appendChild(container)
 
   ReactDOM.render(

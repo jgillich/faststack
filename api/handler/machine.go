@@ -70,6 +70,8 @@ func (h *Handler) ExecMachine(c echo.Context) error {
 		return c.String(http.StatusBadRequest, fmt.Sprintf("machine '%s' does not exist for user '%s'", name, claims.Email))
 	}
 
+	h.sched.Exec()
+
 	upgrader := websocket.Upgrader{}
 
 	ws, err := upgrader.Upgrade(c.Response(), c.Request(), nil)

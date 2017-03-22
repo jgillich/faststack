@@ -21,7 +21,7 @@ export default class Web extends Component {
                 <Link to={`${match.url}terms`}>Terms of Service</Link>
               </p>
               <p>
-                <a className="icon" href="https://github.com/termbox">
+                <a className="icon" href="https://github.com/faststackco/faststack">
                   <i className="fa fa-github"></i>
                 </a>
               </p>

@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Route, NavLink} from 'react-router-dom'
+import {Route, Redirect, NavLink} from 'react-router-dom'
 import Create from './Create'
 import Term from './Term'
 
@@ -38,6 +38,7 @@ export default class Dashboard extends Component {
             </nav>
           </div>
           <div className="column">
+            <Redirect from={`${match.url}/`} to={`${match.url}/create`}/>
             <Route exact path={`${match.url}/create`} component={Create}/>
             <Route path={`${match.url}/term/:id`} component={Term}/>
           </div>
