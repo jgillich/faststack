@@ -10,7 +10,7 @@
     "test": "eslint .",
     "fix": "eslint --fix . || true",
     "bundle": "webpack -p",
-    "dev": "webpack-dev-server --history-api-fallback"
+    "dev": "webpack-dev-server --history-api-fallback --open"
   },
   "dependencies": {
     "ReconnectingWebSocket": "git+https://github.com/joewalnes/reconnecting-websocket.git",
