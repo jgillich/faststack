@@ -17,6 +17,7 @@ type SignUpRequest struct {
 	Password string `json:"password" valid:"stringlength(8|100),required"`
 	Name     string `json:"name" valid:"alphanum,stringlength(4|20),required"`
 	Email    string `json:"email" valid:"email,required"`
+	Token    string `json:"token"`
 }
 
 func (h *Handler) SignUp(c echo.Context) error {
@@ -56,7 +57,8 @@ func (h *Handler) SignUp(c echo.Context) error {
 	}
 
 	params := &stripe.CustomerParams{
-		Email: user.Email,
+		Email:  user.Email,
+		Source: &stripe.SourceParams{Token: req.Token},
 	}
 	customer, err := customer.New(params)
 	if err != nil {
