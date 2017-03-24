@@ -3,15 +3,40 @@ import Haikunator from 'haikunator'
 
 let haikunator = new Haikunator()
 
+// TODO fetch from somewhere
+let images = [
+ {
+   name: 'ubuntu',
+   displayName: 'Ubuntu',
+   versions: ['16.04'],
+ },
+  {
+   name: 'fedora',
+   displayName: 'Fedora',
+   versions: ['25'],
+ },
+  {
+   name: 'centos',
+   displayName: 'CentOS',
+   versions: ['7'],
+ },
+   {
+   name: 'alpine',
+   displayName: 'Alpine',
+   versions: ['3.5'],
+ },
+]
+
+
 export class Create extends Component {
 
   constructor(props) {
     super(props)
 
     this.state = {
-        name: haikunator.haikunate(),
+        name: haikunator.haikunate({tokenLength: 0}),
         imageTab: 'official',
-        imageSelected: null,
+        imageSelected: images[0],
     }
   }
 
@@ -22,14 +47,14 @@ export class Create extends Component {
     if(imageTab == 'official') {
       imageTabContent = (
         <div className="columns">
-          {[].map((image) =>
+          {images.map((image) =>
             <div className="column">
               <a onClick={(e) => this.setState({imageSelected: image})}>
                 <div className={'card' +
                   (image.name == imageSelected.name ? ' is-active' : '')}>
-                  <div className="card-image has-text-centered">
-                    <span className="icon is-large" style={{'padding': '10px 0'}}>
-                      <i className={'fl-' + image.name}/>
+                  <div className="card-image has-text-centered" style={{'paddingTop': '10px'}}>
+                    <span className="icon is-large" >
+                      <i className={'fa fl-' + image.name}/>
                     </span>
                   </div>
 
@@ -54,41 +79,53 @@ export class Create extends Component {
     }
 
     return (
-      <div className="container">
+      <div className="container columns">
 
-        <h1 className="title">New Box</h1>
+        <div className="column is-10">
 
-        <div className="tabs">
-          <ul>
-            <li className={imageTab == 'official' ? 'is-active' : ''}>
-              <a onClick={() => this.setState({imageTab: 'official'})}>Official Images</a>
-            </li>
-            {/* <li className={imageTab == 'custom' ? 'is-active' : ''}>
-              <a onClick={() => this.setState({imageTab: 'custom'})}>Custom Image</a>
-            </li>*/}
-          </ul>
+          <h1 className="title">Create Machine</h1>
+
+          <div className="tabs">
+            <ul>
+              <li className={imageTab == 'official' ? 'is-active' : ''}>
+                <a onClick={() => this.setState({imageTab: 'official'})}>Official Images</a>
+              </li>
+              {/* <li className={imageTab == 'custom' ? 'is-active' : ''}>
+                <a onClick={() => this.setState({imageTab: 'custom'})}>Custom Image</a>
+              </li>*/}
+            </ul>
+          </div>
+
+          {imageTabContent}
+
+          <hr/>
+
+          <div className="field">
+            <label className="label">Name</label>
+            <p className="control">
+              <input className="input" type="text" value={name}/>
+            </p>
+          </div>
+
+          <div className="field">
+            <label className="label">Region</label>
+            <p className="control">
+              <span className="select">
+                <select>
+                  <option>Europe</option>
+                  <option>North America</option>
+                </select>
+              </span>
+            </p>
+          </div>
+
+          <div className="field">
+            <p class="control">
+              <button className="button is-large is-fullwidth is-primary">Create</button>
+            </p>
+          </div>
+
         </div>
-
-        {imageTabContent}
-
-        <hr/>
-
-        <label className="label">Name</label>
-        <p className="control">
-          <input className="input" type="text" value={name}/>
-        </p>
-
-        <label className="label">Region</label>
-        <p className="control">
-          <span className="select">
-            <select>
-              <option>Europe</option>
-              <option>United States</option>
-            </select>
-          </span>
-        </p>
-
-        <a className="button is-fullwidth is-primary">Launch</a>
       </div>
     )
   }

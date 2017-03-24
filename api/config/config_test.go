@@ -7,7 +7,7 @@ import (
 )
 
 func TestParseConfig(t *testing.T) {
-	_, err := ParseConfigFile("../../config.example.hcl")
+	_, err := ParseConfigFile("../config.example.hcl")
 
 	assert.NoError(t, err)
 }

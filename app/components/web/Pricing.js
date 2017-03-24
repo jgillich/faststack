@@ -20,14 +20,41 @@ export default class Pricing extends Component {
               </header>
               <div className="card-content">
                 <div className="content">
-                  <strong>Two</strong> machines
+                  Up to <strong>2</strong> machines
                 </div>
                 <div className="content">
-                  <strong>1x</strong> Performance
+                  <strong>1</strong> vCPU
+                </div>
+                <div className="content">
+                  <strong>1</strong> GB RAM
                 </div>
               </div>
               <footer className="card-footer">
                 <span className="card-footer-item">$5 per month</span>
+              </footer>
+            </div>
+          </div>
+
+          <div className="column">
+            <div className="card">
+              <header className="card-header">
+                <p className="card-header-title">
+                  Standard
+                </p>
+              </header>
+              <div className="card-content">
+                <div className="content">
+                  Up to <strong>4</strong> machines
+                </div>
+                <div className="content">
+                  <strong>2</strong> vCPUs
+                </div>
+                <div className="content">
+                  <strong>2</strong> GB RAM
+                </div>
+              </div>
+              <footer className="card-footer">
+                <span className="card-footer-item">$10 per month</span>
               </footer>
             </div>
           </div>
@@ -41,31 +68,13 @@ export default class Pricing extends Component {
               </header>
               <div className="card-content">
                 <div className="content">
-                  <strong>Five</strong> machines
+                  Up to <strong>6</strong> machines
                 </div>
                 <div className="content">
-                  <strong>2x</strong> Performance
-                </div>
-              </div>
-              <footer className="card-footer">
-                <span className="card-footer-item">$10 per month</span>
-              </footer>
-            </div>
-          </div>
-
-          <div className="column">
-            <div className="card">
-              <header className="card-header">
-                <p className="card-header-title">
-                  Pro Plus
-                </p>
-              </header>
-              <div className="card-content">
-                <div className="content">
-                  <strong>Six</strong> machines
+                 <strong>4</strong> vCPUs
                 </div>
                 <div className="content">
-                 <strong>4x</strong> Performance
+                  <strong>4</strong> GB RAM
                 </div>
 
               </div>
@@ -78,7 +87,7 @@ export default class Pricing extends Component {
         </div>
 
         <div className="section has-text-centered">
-          <a className="button is-primary is-large" onClick={auth.signUp.bind(auth)}>Sign Up</a>
+          <a className="button is-primary is-large" onClick={auth.signUp.bind(auth)}>Get Started</a>
         </div>
 
         <div className="section">
@@ -91,8 +100,8 @@ export default class Pricing extends Component {
               <h4 className="subtitle">How much performance do I get?</h4>
               <p>
                 The amount of CPU, disk and network a machine can use depends on system utilization
-                and performance modifier. For example, a machine on the Pro plan is guaranteed to
-                get double the resources of a machine on the Basic plan.
+                and performance modifier. A machine on the Pro plan is guaranteed to get double the
+                resources of a machine on the Basic plan, four times as much on the Pro Plus plan.
                 <br/>
                 In the case of low system utilization, a machine can use as much as it needs, we
                 only make use of throttling to ensure everyone gets a fair share of the
