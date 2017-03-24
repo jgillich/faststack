@@ -13,7 +13,6 @@ import (
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
 	"github.com/labstack/echo"
 	"github.com/stretchr/testify/assert"
-	stripe "github.com/stripe/stripe-go"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -22,8 +21,6 @@ var (
 )
 
 func TestMain(m *testing.M) {
-	stripe.Key = "sk_test_wXzOwaHdvv9UivuOF8b0pvTG"
-
 	var err error
 
 	testDb, err = model.Db("sqlite3", "/tmp/test.db")
@@ -39,11 +36,11 @@ func TestMain(m *testing.M) {
 	os.Exit(retCode)
 }
 
-func TestCreateUser(t *testing.T) {
+func TestSignUp(t *testing.T) {
 	json := `{"name":"username", "email":"user@email.com", "password": "qqqqwwww"}`
 
 	e := echo.New()
-	req, err := http.NewRequest(echo.POST, "/user", strings.NewReader(json))
+	req, err := http.NewRequest(echo.POST, "/signup", strings.NewReader(json))
 	if assert.NoError(t, err) {
 		req.Header.Set(echo.HeaderContentType, echo.MIMEApplicationJSON)
 		rec := httptest.NewRecorder()
@@ -59,18 +56,18 @@ func TestCreateUser(t *testing.T) {
 }
 
 func TestLogin(t *testing.T) {
-	pass, err := bcrypt.GenerateFromPassword([]byte("password3021"), bcrypt.DefaultCost)
+	pass, err := bcrypt.GenerateFromPassword([]byte("qqqqwwww"), bcrypt.DefaultCost)
 	assert.NoError(t, err)
 	testDb.Create(&model.User{
-		Name:           "username3021",
+		Name:           "username",
 		PasswordBcrypt: pass,
 	})
 	assert.NoError(t, testDb.Error)
 
-	json := `{"name":"username3021", "password": "password3021"}`
+	json := `{"name":"username", "password": "qqqqwwww"}`
 
 	e := echo.New()
-	req, err := http.NewRequest(echo.POST, "/user/login", strings.NewReader(json))
+	req, err := http.NewRequest(echo.POST, "/login", strings.NewReader(json))
 	if assert.NoError(t, err) {
 		req.Header.Set(echo.HeaderContentType, echo.MIMEApplicationJSON)
 		rec := httptest.NewRecorder()
@@ -82,5 +79,32 @@ func TestLogin(t *testing.T) {
 			// TODO validate token
 		}
 	}
+}
 
+func TestUserInfo(t *testing.T) {
+	pass, err := bcrypt.GenerateFromPassword([]byte("qqqqwwww"), bcrypt.DefaultCost)
+	assert.NoError(t, err)
+	testDb.Create(&model.User{
+		Name:           "username",
+		PasswordBcrypt: pass,
+	})
+	assert.NoError(t, testDb.Error)
+
+	e := echo.New()
+	req, err := http.NewRequest(echo.GET, "/userinfo", nil)
+	if assert.NoError(t, err) {
+		req.Header.Set(echo.HeaderContentType, echo.MIMEApplicationJSON)
+		rec := httptest.NewRecorder()
+		c := e.NewContext(req, rec)
+		h := &Handler{testDb}
+
+		claims := Claims{}
+		claims.Name = "username"
+		aContext := AuthenticatedContext{c, claims}
+
+		if assert.NoError(t, h.UserInfo(aContext)) {
+			assert.Equal(t, http.StatusOK, rec.Code)
+			// TODO validate
+		}
+	}
 }
