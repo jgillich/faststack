@@ -18,7 +18,8 @@ export default class Web extends Component {
           <div className="container">
             <div className="content has-text-centered">
               <p>
-                <Link to={`${match.url}terms`}>Terms of Service</Link>
+                <a href="https://status.faststack.co">Status</a>&nbsp;&nbsp;&nbsp;
+                <Link to={`${match.url}terms`}>Terms</Link>
               </p>
               <p>
                 <a className="icon" href="https://github.com/faststackco/faststack">

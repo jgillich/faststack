@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import {Link} from 'react-router-dom'
 import theaterJS from 'theaterjs'
 import auth from '../../auth'
 
@@ -9,12 +10,10 @@ export default class Home extends Component {
 
     this.theater
       .addActor('title', 1, '.title-word')
-      .addScene('title:development', 3000)
-      .addScene('title:testing', 3000)
-      .addScene('title:cross-compiling', 3000)
-      .addScene('title:learning', 3000)
-      .addScene('title:teaching', 3000)
-      .addScene('title:running rm --no-preserve-root /', 3000)
+      .addScene('title:makers', 3000)
+      .addScene('title:developers', 3000)
+      .addScene('title:learners', 3000)
+      .addScene('title:teachers', 3000)
       .addScene(this.theater.replay)
   }
 
@@ -26,14 +25,13 @@ export default class Home extends Component {
     return (
       <div>
         <section className="hero is-primary is-medium">
-
           <div className="hero-body">
             <div className="container has-text-centered">
               <h1 className="title">
-                Instant Linux boxes for <span className='title-word'></span>
+                Cloud compute for <span className='title-word'></span>
               </h1>
               <h2 className="subtitle">
-                Launch custom Linux boxes in just 5 seconds. Try it for free
+                Launch preconfigured Linux machines in just 5 seconds. Try it for free
               </h2>
               <a className="button is-primary is-inverted is-large"
                 onClick={auth.signUp.bind(auth)}>Sign Up</a>
@@ -41,30 +39,95 @@ export default class Home extends Component {
           </div>
         </section>
 
-        <div className="container section has-text-centered">
-          <h4 className="title">We have your favourite distribution</h4>
-          <div className="columns" style={{justifyContent: 'center'}}>
-          {[].map((image) =>
-            <div className="column is-1">
-              <div className="icon is-large"><i className={'fl-' + image.name}/></div>
+        <section className="section">
+          <div className="columns is-centered has-text-centered">
+            <div className="column is-2">
+              <div className="icon"><i className="fa fa-clock-o" /></div>
+              <h5 className="title is-5">
+                5 second deploys
+              </h5>
             </div>
-          )}
-          </div>
-          <h4 className="subtitle">Launch any image from Docker Hub</h4>
-        </div>
 
-        <div className="container section has-text-centered">
-          <h4 className="title">We support your workflow</h4>
-          <div className="columns" style={{justifyContent: 'center'}}>
-            <div className="column is-1">
-              <div className="icon is-large"><i className='fa fa-desktop'/></div>
+            <div className="column is-2">
+              <div className="icon"><i className="fa fa-tachometer" /></div>
+              <h5 className="title is-5">
+                High speed SSD-powered infrastructure
+              </h5>
             </div>
-            <div className="column is-1">
-              <div className="icon is-large"><i className='fa fa-terminal'/></div>
+
+            <div className="column is-2">
+              <div className="icon"><i className="fa fa-globe" /></div>
+              <h5 className="title is-5">
+                EU and NA locations
+              </h5>
+            </div>
+
+            <div className="column is-2">
+              <div className="icon"><i className="fa fa-desktop" /></div>
+              <h5 className="title is-5">
+                Web and terminal clients
+              </h5>
             </div>
           </div>
-          <h4 className="subtitle">Web interface and terminal client, we have both</h4>
-        </div>
+
+          <div className="columns is-centered has-text-centered">
+            <div className="column is-2">
+              <div className="icon"><i className="fa fa-cog" /></div>
+              <h5 className="title is-5">
+                Root administrator access
+              </h5>
+            </div>
+
+            <div className="column is-2">
+              <div className="icon"><i className="fa fa-cubes" /></div>
+              <h5 className="title is-5">
+                Preconfigured images
+              </h5>
+            </div>
+
+            <div className="column is-2">
+              <div className="icon"><i className="fa fa-globe" /></div>
+              <h5 className="title is-5">
+                More
+              </h5>
+            </div>
+
+            <div className="column is-2">
+              <div className="icon"><i className="fa fa-globe" /></div>
+              <h5 className="title is-5">
+                More
+              </h5>
+            </div>
+          </div>
+        </section>
+        <section className="section">
+          <div className="columns is-centered is-multiline">
+            <div className="column is-12 has-text-centered">
+              <h3 className="title is-3">
+                How does FastStack compare to other cloud providers?
+              </h3>
+            </div>
+          </div>
+          <div className="columns is-centered">
+            <div className="column is-2">
+              <ul>
+                <li><span className="icon is-small"><i className="fa fa-check"/></span> Incredible value</li>
+                <li><span className="icon is-small"><i className="fa fa-check"/></span> Ultra-fast deploys</li>
+                <li><span className="icon is-small"><i className="fa fa-check"/></span> Flat rate pricing</li>
+              </ul>
+            </div>
+            <div className="column is-2">
+              <ul>
+                <li><span className="icon is-small"><i className="fa fa-times"/></span> Dedicated IPv4</li>
+                <li><span className="icon is-small"><i className="fa fa-times"/></span> Always running</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section className="section has-text-centered">
+          <a className="button is-large is-primary" onClick={auth.signUp.bind(auth)}> Get Started</a>
+        </section>
 
       </div>
 
