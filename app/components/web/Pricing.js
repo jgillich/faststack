@@ -1,9 +1,10 @@
 import React, {Component} from 'react'
-import auth from '../../auth'
-
+import {Link} from 'react-router-dom'
 
 export default class Pricing extends Component {
   render() {
+    let {match} = this.props
+
     return (
       <div className="container section">
 
@@ -87,7 +88,7 @@ export default class Pricing extends Component {
         </div>
 
         <div className="section has-text-centered">
-          <a className="button is-primary is-large" onClick={auth.signUp.bind(auth)}>Get Started</a>
+          <Link className="button is-primary is-large" to={`${match.url}signup`}>Get Started</Link>
         </div>
 
         <div className="section">

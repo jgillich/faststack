@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import {BrowserRouter as Router, Route, Link, NavLink, Switch} from 'react-router-dom'
 import ReactDOM from 'react-dom'
-import auth from '../auth'
 import Dashboard from './dashboard/Dashboard'
 import Web from './web/Web'
 
@@ -40,13 +39,13 @@ export default class App extends Component {
               </NavLink>
 
               <span className="nav-item">
-                <a className="button" onClick={() => auth.login()}>
+                <Link className="button" to="/login">
                   <span>Login</span>
-                </a>
+                </Link>
 
-                <a className="button is-primary" onClick={() => auth.signUp()}>
+                <Link className="button is-primary" to="/signup">
                   <span>Sign Up</span>
-                </a>
+                </Link>
               </span>
 
             </div>

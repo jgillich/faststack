@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
-import {Link} from 'react-router-dom'
 import theaterJS from 'theaterjs'
-import auth from '../../auth'
+import {Link} from 'react-router-dom'
 
 export default class Home extends Component {
 
@@ -12,8 +11,9 @@ export default class Home extends Component {
       .addActor('title', 1, '.title-word')
       .addScene('title:makers', 3000)
       .addScene('title:developers', 3000)
-      .addScene('title:learners', 3000)
+      .addScene('title:students', 3000)
       .addScene('title:teachers', 3000)
+      .addScene('title:everyone', 6000)
       .addScene(this.theater.replay)
   }
 
@@ -22,19 +22,35 @@ export default class Home extends Component {
   }
 
   render() {
+    let {match} = this.props
+
     return (
       <div>
         <section className="hero is-primary is-medium">
           <div className="hero-body">
             <div className="container has-text-centered">
               <h1 className="title">
-                Cloud compute for <span className='title-word'></span>
+                Cloud compute for <span className="title-word"></span>
               </h1>
               <h2 className="subtitle">
                 Launch preconfigured Linux machines in just 5 seconds. Try it for free
               </h2>
-              <a className="button is-primary is-inverted is-large"
-                onClick={auth.signUp.bind(auth)}>Sign Up</a>
+              <Link className="button is-primary is-inverted is-large" to={`${match.url}login`}>Sign Up</Link>
+            </div>
+          </div>
+        </section>
+
+         <section className="section">
+          <div className="columns is-centered is-multiline">
+            <div className="column is-12 has-text-centered">
+              <h3 className="title is-3">
+                  The personal cloud computing platform
+              </h3>
+            </div>
+          </div>
+          <div className="columns is-centered has-text-centered">
+            <div className="column is-6">
+              FooBarBaz
             </div>
           </div>
         </section>
@@ -42,28 +58,28 @@ export default class Home extends Component {
         <section className="section">
           <div className="columns is-centered has-text-centered">
             <div className="column is-2">
-              <div className="icon"><i className="fa fa-clock-o" /></div>
+              <div className="icon"><i className="fa fa-clock-o"/></div>
               <h5 className="title is-5">
                 5 second deploys
               </h5>
             </div>
 
             <div className="column is-2">
-              <div className="icon"><i className="fa fa-tachometer" /></div>
+              <div className="icon"><i className="fa fa-tachometer"/></div>
               <h5 className="title is-5">
                 High speed SSD-powered infrastructure
               </h5>
             </div>
 
             <div className="column is-2">
-              <div className="icon"><i className="fa fa-globe" /></div>
+              <div className="icon"><i className="fa fa-globe"/></div>
               <h5 className="title is-5">
                 EU and NA locations
               </h5>
             </div>
 
             <div className="column is-2">
-              <div className="icon"><i className="fa fa-desktop" /></div>
+              <div className="icon"><i className="fa fa-desktop"/></div>
               <h5 className="title is-5">
                 Web and terminal clients
               </h5>
@@ -72,34 +88,35 @@ export default class Home extends Component {
 
           <div className="columns is-centered has-text-centered">
             <div className="column is-2">
-              <div className="icon"><i className="fa fa-cog" /></div>
+              <div className="icon"><i className="fa fa-cog"/></div>
               <h5 className="title is-5">
                 Root administrator access
               </h5>
             </div>
 
             <div className="column is-2">
-              <div className="icon"><i className="fa fa-cubes" /></div>
+              <div className="icon"><i className="fa fa-cubes"/></div>
               <h5 className="title is-5">
                 Preconfigured images
               </h5>
             </div>
 
             <div className="column is-2">
-              <div className="icon"><i className="fa fa-globe" /></div>
+              <div className="icon"><i className="fa fa-globe"/></div>
               <h5 className="title is-5">
                 More
               </h5>
             </div>
 
             <div className="column is-2">
-              <div className="icon"><i className="fa fa-globe" /></div>
+              <div className="icon"><i className="fa fa-globe"/></div>
               <h5 className="title is-5">
                 More
               </h5>
             </div>
           </div>
         </section>
+
         <section className="section">
           <div className="columns is-centered is-multiline">
             <div className="column is-12 has-text-centered">
@@ -126,7 +143,7 @@ export default class Home extends Component {
         </section>
 
         <section className="section has-text-centered">
-          <a className="button is-large is-primary" onClick={auth.signUp.bind(auth)}> Get Started</a>
+          <Link className="button is-large is-primary" to={`${match.url}signup`}> Get Started</Link>
         </section>
 
       </div>

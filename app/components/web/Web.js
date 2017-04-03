@@ -3,6 +3,7 @@ import {Route, Link} from 'react-router-dom'
 import Home from './Home'
 import Pricing from './Pricing'
 import Terms from './Terms'
+import Login from './Login'
 
 export default class Web extends Component {
   render() {
@@ -13,6 +14,7 @@ export default class Web extends Component {
         <Route exact path={match.url} component={Home}/>
         <Route path={`${match.url}pricing`} component={Pricing}/>
         <Route path={`${match.url}terms`} component={Terms}/>
+        <Route path={`${match.url}login`} component={Login}/>
 
         <footer className="footer">
           <div className="container">
