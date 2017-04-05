@@ -98,17 +98,11 @@ export default class Pricing extends Component {
 
           <div className="columns is-multiline">
             <div className="column is-half content">
-              <h4 className="subtitle">How much performance do I get?</h4>
+              <h4 className="subtitle">How does auto suspend work?</h4>
               <p>
-                The amount of CPU, disk and network a machine can use depends on system utilization
-                and performance modifier. A machine on the Pro plan is guaranteed to get double the
-                resources of a machine on the Basic plan, four times as much on the Pro Plus plan.
-                <br/>
-                In the case of low system utilization, a machine can use as much as it needs, we
-                only make use of throttling to ensure everyone gets a fair share of the
-                resources.
-                <br/>
-                At the moment, RAM is set to 1GB per machine, but this is subject to change.
+                You can use your machines as long as you want, we only suspend them when you are not using
+                them. At the moment, this happens 12 hours after you last connected. When you
+                reconnect to a suspended machine, all running processes will be restored.
 
               </p>
             </div>
@@ -117,29 +111,15 @@ export default class Pricing extends Component {
               <h4 className="subtitle">How can I access my boxes?</h4>
               <p>
                 We offer a web interface and a terminal client that supports all major popular
-                operating systems: Windows, macOS and Linux.
-              </p>
-              <p>
-                We do not offer SSH, but creating a custom image that includes a SSH server is
-                trivial. For an example, consult our <a href="#">documentation</a>.
+                operating systems: Windows, macOS and Linux. We do not support SSH at this time.
               </p>
             </div>
 
             <div className="column is-half content">
-              <h4 className="subtitle">When are boxes suspended?</h4>
+              <h4 className="subtitle">What payment methods do you accept?</h4>
               <p>
-                A box is suspended some time after you have last accessed it
-                via our web interface or terminal client. This means that programs will continue to
-                run even if you are not connected, but they will be stopped gracefully after
-                a fixed time period (1 hour for the free plan, 6 hours for all paid plans). All data
-                remains intact after suspension and reconnecting to the box will restart the timer.
+                We accept Visa, MasterCard, American Express, and Discover.
               </p>
-
-              <p>
-                The Plus plan also allows you to make a box permanent, which means it
-                will never be suspended.
-              </p>
-
             </div>
 
           </div>

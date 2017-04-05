@@ -30,7 +30,7 @@ export default class Home extends Component {
           <div className="hero-body">
             <div className="container has-text-centered">
               <h1 className="title">
-                Cloud compute for <span className="title-word"></span>
+                Cloud workspaces for <span className="title-word"></span>
               </h1>
               <h2 className="subtitle">
                 Launch preconfigured Linux machines in just 5 seconds. Try it for free
@@ -44,13 +44,20 @@ export default class Home extends Component {
           <div className="columns is-centered is-multiline">
             <div className="column is-12 has-text-centered">
               <h3 className="title is-3">
-                  The personal cloud computing platform
+                  Your personal cloud workspace
               </h3>
             </div>
           </div>
-          <div className="columns is-centered has-text-centered">
-            <div className="column is-6">
-              FooBarBaz
+          <div className="columns is-centered">
+            <div className="column is-4">
+              <img src="http://placehold.it/600x300"/>
+            </div>
+            <div className="column is-2">
+              Pick one of our <a href="#">preconfigured images</a>
+              <div className="has-text-centered"><i className="fa fa-chevron-down"></i></div>
+              Get to work right in your browser, or download our <a href="#">command line client</a>
+              <div className="has-text-centered"><i className="fa fa-chevron-down"></i></div>
+              When you're done, your machine will <a href="#">suspend automatically</a>
             </div>
           </div>
         </section>
