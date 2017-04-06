@@ -1,19 +1,25 @@
 import React, {Component} from 'react'
-import {BrowserRouter as Router, Route, Link, NavLink, Switch} from 'react-router-dom'
+import {BrowserRouter, Route, Link, NavLink, Switch} from 'react-router-dom'
 import ReactDOM from 'react-dom'
 import Dashboard from './dashboard/Dashboard'
 import Web from './web/Web'
+import User from '../stores/User'
 
-/* const requireAuth = (nextState, replace) => {
-  if (!auth.loggedIn()) {
-    replace({pathname: '/login'})
-  }
-}*/
+const user = new User()
 
 export default class App extends Component {
+
+  static childContextTypes = {
+    user: React.PropTypes.object
+  }
+
+  getChildContext() {
+    return {user}
+  }
+
   render() {
     return (
-      <Router>
+      <BrowserRouter>
         <div>
           <nav className="nav">
             <div className="nav-left">
@@ -55,7 +61,7 @@ export default class App extends Component {
             <Route path="/" component={Web}/>
           </Switch>
         </div>
-      </Router>
+      </BrowserRouter>
     )
   }
 }

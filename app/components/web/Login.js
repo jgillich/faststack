@@ -1,8 +1,17 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
+import {observer} from 'mobx-react';
 
+@observer
 export default class Login extends Component {
+
+  static contextTypes = {
+    user: React.PropTypes.object
+  }
+
   render() {
+    let {user} = this.context
+
     return (
       <div className="container section">
         <div className="columns is-centered">
@@ -11,14 +20,14 @@ export default class Login extends Component {
             <div className="field">
               <label className="label">Username</label>
               <p className="control">
-                <input className="input" type="text"/>
+                <input className="input" type="text" onChange={ev => user.name = ev.target.value}/>
               </p>
             </div>
 
             <div className="field">
               <label className="label">Password</label>
               <p className="control">
-                <input className="input" type="password"/>
+                <input className="input" type="password" onChange={ev => user.password = ev.target.value}/>
               </p>
             </div>
 
