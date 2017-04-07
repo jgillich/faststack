@@ -23,8 +23,8 @@ export default class Input extends Component {
     let {type, message, expanded, placeholder} = this.props
 
     return (
-      <p className={"control " + (expanded ? "is-expanded" : "")}>
-        <input className={"input " + (this.state.valid ? "" : "is-danger")}
+      <p className={'control ' + (expanded ? 'is-expanded' : '')}>
+        <input className={'input ' + (this.state.valid ? '' : 'is-danger')}
           value={this.state.value} type={type || "text"}
           placeholder={placeholder}
           onChange={ev => this.setState({value: ev.target.value})}

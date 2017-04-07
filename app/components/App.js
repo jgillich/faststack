@@ -6,17 +6,15 @@ import Web from './web/Web'
 import User from '../stores/User'
 
 const user = new User()
-const stripe = Stripe(process.env.STRIPE_PUBKEY)
 
 export default class App extends Component {
 
   static childContextTypes = {
     user: React.PropTypes.object,
-    stripe: React.PropTypes.object,
   }
 
   getChildContext() {
-    return {user, stripe}
+    return {user}
   }
 
   render() {

@@ -13,6 +13,8 @@ export default class User {
 
   @observable token = ""
 
+  @observable stripeToken = ""
+
 	@computed
   get loggedIn() {
 		if(!this.token) {
@@ -35,7 +37,7 @@ export default class User {
       this.fetch('/login', {
         method: 'POST',
         headers: {
-          'Content-Type': 'text/json',
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({name: this.name, password: this.password})
       }).then(res => {
@@ -50,7 +52,27 @@ export default class User {
 
   @action
   async signup() {
+    return new Promise((resolve, reject) => {
 
+    this.fetch('/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: this.name,
+          password: this.password,
+          email: this.email,
+          stripe_token: this.stripeToken,
+        })
+      }).then(res => {
+        if(res.status != 200) {
+          return reject(res.body)
+        }
+        this.token = res.body
+        resolve()
+      }).catch(reject)
+    })
   }
 
   async fetch(url, options) {
