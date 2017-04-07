@@ -88,7 +88,7 @@ export default class Pricing extends Component {
         </div>
 
         <div className="section has-text-centered">
-          <Link className="button is-primary is-large" to={`${match.url}signup`}>Get Started</Link>
+          <Link className="button is-primary is-large" to="/signup">Get Started</Link>
         </div>
 
         <div className="section">

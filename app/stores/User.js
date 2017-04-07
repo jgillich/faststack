@@ -3,13 +3,15 @@ import jwtDecode from 'jwt-decode'
 
 export default class User {
 
-	@observable name
+	@observable name = ""
 
-  @observable password
+  @observable password = ""
 
-  @observable email
+  @observable email = ""
 
-  @observable token
+  @observable plan = "standard"
+
+  @observable token = ""
 
 	@computed
   get loggedIn() {
@@ -30,7 +32,7 @@ export default class User {
   async login() {
     return new Promise((resolve, reject) => {
 
-      fetch('https;//TODO/login', {
+      this.fetch('/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'text/json',
@@ -44,6 +46,15 @@ export default class User {
         this.token = res.body
       }) // TODO catch
     })
+  }
+
+  @action
+  async signup() {
+
+  }
+
+  async fetch(url, options) {
+    return fetch(`${process.env.BILLSTACK_URL}${url}`, options)
   }
 
 }

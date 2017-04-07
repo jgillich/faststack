@@ -20,14 +20,14 @@ export default class Login extends Component {
             <div className="field">
               <label className="label">Username</label>
               <p className="control">
-                <input className="input" type="text" onChange={ev => user.name = ev.target.value}/>
+                <input className="input" type="text" value={user.name} onChange={ev => user.name = ev.target.value}/>
               </p>
             </div>
 
             <div className="field">
               <label className="label">Password</label>
               <p className="control">
-                <input className="input" type="password" onChange={ev => user.password = ev.target.value}/>
+                <input className="input" type="password" value={user.password} onChange={ev => user.password = ev.target.value}/>
               </p>
             </div>
 

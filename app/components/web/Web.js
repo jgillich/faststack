@@ -4,6 +4,7 @@ import Home from './Home'
 import Pricing from './Pricing'
 import Terms from './Terms'
 import Login from './Login'
+import Signup from './Signup'
 
 export default class Web extends Component {
   render() {
@@ -15,6 +16,7 @@ export default class Web extends Component {
         <Route path={`${match.url}pricing`} component={Pricing}/>
         <Route path={`${match.url}terms`} component={Terms}/>
         <Route path={`${match.url}login`} component={Login}/>
+        <Route path={`${match.url}signup`} component={Signup}/>
 
         <footer className="footer">
           <div className="container">
