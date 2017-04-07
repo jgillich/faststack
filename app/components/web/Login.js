@@ -1,12 +1,16 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
-import {observer} from 'mobx-react';
+import {observer} from 'mobx-react'
 
 @observer
 export default class Login extends Component {
 
   static contextTypes = {
-    user: React.PropTypes.object
+    user: React.PropTypes.object,
+  }
+
+  doLogin() {
+
   }
 
   render() {
@@ -33,7 +37,7 @@ export default class Login extends Component {
 
             <div className="field is-grouped">
               <p className="control">
-                <button className="button is-primary">Login</button>
+                <button className="button is-primary" onClick={this.doLogin}>Login</button>
               </p>
               <p className="control">
                 <Link className="button is-link" to="/signup">Sign up</Link>

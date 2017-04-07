@@ -35,7 +35,7 @@ export default class Home extends Component {
               <h2 className="subtitle">
                 Launch preconfigured Linux machines in just 5 seconds. Try it for free
               </h2>
-              <Link className="button is-primary is-inverted is-large" to={`${match.url}login`}>Sign Up</Link>
+              <Link className="button is-primary is-inverted is-large" to="/signup">Sign Up</Link>
             </div>
           </div>
         </section>
@@ -150,7 +150,7 @@ export default class Home extends Component {
         </section>
 
         <section className="section has-text-centered">
-          <Link className="button is-large is-primary" to={`${match.url}signup`}> Get Started</Link>
+          <Link className="button is-large is-primary" to="/signup"> Get Started</Link>
         </section>
 
       </div>

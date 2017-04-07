@@ -40,7 +40,7 @@ export default class Pricing extends Component {
             <div className="card">
               <header className="card-header">
                 <p className="card-header-title">
-                  Standard
+                  Standard &nbsp;<span className="help is-primary">Free for 7 days</span>
                 </p>
               </header>
               <div className="card-content">
@@ -103,7 +103,6 @@ export default class Pricing extends Component {
                 You can use your machines as long as you want, we only suspend them when you are not using
                 them. At the moment, this happens 12 hours after you last connected. When you
                 reconnect to a suspended machine, all running processes will be restored.
-
               </p>
             </div>
 
