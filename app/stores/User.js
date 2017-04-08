@@ -6,8 +6,11 @@ export default class User {
   constructor() {
     // if token is set, call update to fetch user info
     if(this.loggedIn) {
+      let claims = jwtDecode(this.token)
+      this.name = claims.name
+      this.email = claims.email
+      // invoke update in case something changed
       this.update()
-      // TODO catch errors
     }
   }
 

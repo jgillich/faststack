@@ -60,7 +60,7 @@ export default class App extends Component {
 
                 {user.loggedIn ?
                 <Link to="/dashboard">
-                  <span className="icon"><img src={`https://www.gravatar.com/avatar/${md5(user.email)}?d=mm`}/></span>
+                  <span className="icon"><img src={`https://www.gravatar.com/avatar/${md5(user.email)}?d=retro`}/></span>
                   &nbsp;
                   <span>{user.name}</span>
                 </Link> : null}
