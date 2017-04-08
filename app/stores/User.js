@@ -39,14 +39,22 @@ export default class User {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({name: this.name, password: this.password})
+        body: JSON.stringify({
+          name: this.name,
+          password: this.password,
+          claims: ['email'],
+        })
       }).then(res => {
-        if(res.status != 200) {
-          return reject(res.body)
+        if(!res.ok) {
+          return res.json().then(reject)
         }
-
-        this.token = res.body
-      }) // TODO catch
+        resolve()
+      }).then((token) => {
+        let claims = jwtDecode(token)
+        this.email = claims.email
+        this.token = token
+      })
+      .catch(() => reject(new Error('Network error')))
     })
   }
 
@@ -66,12 +74,11 @@ export default class User {
           stripe_token: this.stripeToken,
         })
       }).then(res => {
-        if(res.status != 200) {
-          return reject(res.body)
+        if(!res.ok) {
+          return res.json().then(reject)
         }
-        this.token = res.body
         resolve()
-      }).catch(reject)
+      }).catch(() => reject(new Error('Network error')))
     })
   }
 
