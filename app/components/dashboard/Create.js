@@ -48,7 +48,7 @@ export class Create extends Component {
       imageTabContent = (
         <div className="columns">
           {images.map((image) =>
-            <div className="column">
+            <div className="column" key={image.name}>
               <a onClick={(e) => this.setState({imageSelected: image})}>
                 <div className={'card' +
                   (image.name == imageSelected.name ? ' is-active' : '')}>
@@ -103,7 +103,7 @@ export class Create extends Component {
           <div className="field">
             <label className="label">Name</label>
             <p className="control">
-              <input className="input" type="text" value={name}/>
+              <input className="input" type="text" value={name} onChange={() => null}/>
             </p>
           </div>
 
@@ -120,7 +120,7 @@ export class Create extends Component {
           </div>
 
           <div className="field">
-            <p class="control">
+            <p className="control">
               <button className="button is-large is-fullwidth is-primary">Create</button>
             </p>
           </div>

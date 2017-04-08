@@ -8,22 +8,20 @@ import Signup from './Signup'
 
 export default class Web extends Component {
   render() {
-    let {match} = this.props
-
     return (
       <div>
-        <Route exact path={match.url} component={Home}/>
-        <Route path={`${match.url}pricing`} component={Pricing}/>
-        <Route path={`${match.url}terms`} component={Terms}/>
-        <Route path={`${match.url}login`} component={Login}/>
-        <Route path={`${match.url}signup`} component={Signup}/>
+        <Route exact path="/" component={Home}/>
+        <Route path="/pricing" component={Pricing}/>
+        <Route path="/terms" component={Terms}/>
+        <Route path="/login" component={Login}/>
+        <Route path="/signup" component={Signup}/>
 
         <footer className="footer">
           <div className="container">
             <div className="content has-text-centered">
               <p>
                 <a href="https://status.faststack.co">Status</a>&nbsp;&nbsp;&nbsp;
-                <Link to={`${match.url}terms`}>Terms</Link>
+                <Link to="/terms">Terms</Link>
               </p>
               <p>
                 <a className="icon" href="https://github.com/faststackco/faststack">

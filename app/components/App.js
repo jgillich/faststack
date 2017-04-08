@@ -1,12 +1,14 @@
 import React, {Component} from 'react'
 import {BrowserRouter, Route, Link, NavLink, Switch} from 'react-router-dom'
 import ReactDOM from 'react-dom'
+import {observer} from 'mobx-react'
 import Dashboard from './dashboard/Dashboard'
 import Web from './web/Web'
 import User from '../stores/User'
 
 const user = new User()
 
+@observer
 export default class App extends Component {
 
   static childContextTypes = {
@@ -40,18 +42,28 @@ export default class App extends Component {
                 Help
               </NavLink>
 
+              {!user.loggedIn ?
               <NavLink className="nav-item is-tab" to="/pricing">
                 Pricing
-              </NavLink>
+              </NavLink> : null}
 
               <span className="nav-item">
+                {!user.loggedIn ?
                 <Link className="button" to="/login">
                   <span>Login</span>
-                </Link>
+                </Link> : null}
 
-                <Link className="button is-primary" to="/signup">
+                {!user.loggedIn ?<Link className="button is-primary" to="/signup">
                   <span>Sign Up</span>
-                </Link>
+                </Link> : null}
+
+                {user.loggedIn ?
+                <Link to="/dashboard">
+                  <span className="icon"><img src="https://placehold.it/50x50"/></span>
+                  &nbsp;
+                  <span>{user.name}</span>
+                </Link> : null}
+
               </span>
 
             </div>

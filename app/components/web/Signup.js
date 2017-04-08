@@ -34,6 +34,8 @@ export default class Signup extends Component {
       } else {
         this.context.user.stripeToken = res.id
         this.context.user.signup().then(() => {
+          return this.context.user.login()
+        }).then(() => {
           this.setState({redirectToReferrer: true})
         }).catch(error => {
           this.setState({error: error.message, loading: false})

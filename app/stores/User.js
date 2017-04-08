@@ -3,6 +3,14 @@ import jwtDecode from 'jwt-decode'
 
 export default class User {
 
+  constructor() {
+    // if token is set, call update to fetch user info
+    if(this.loggedIn) {
+      this.update()
+      // TODO catch errors
+    }
+  }
+
 	@observable name = ""
 
   @observable password = ""
@@ -11,7 +19,7 @@ export default class User {
 
   @observable plan = "standard"
 
-  @observable token = ""
+  @observable token = sessionStorage.getItem("token")
 
   @observable stripeToken = ""
 
@@ -23,12 +31,36 @@ export default class User {
 
     let claims = jwtDecode(this.token)
 
-    if(claims.exp < Date.now()) {
+    if(claims.exp < (Date.now() / 1000)) {
       return false
     }
 
     return true
 	}
+
+  @action
+  async update() {
+    return new Promise((resolve, reject) => {
+
+      this.fetch('/userinfo', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': this.token,
+        }
+      }).then(res => {
+        if(!res.ok) {
+          return res.json().then(reject)
+        }
+        return res.json()
+      }).then((user) => {
+        this.name = user.name
+        this.email = user.email
+        resolve()
+      })
+      .catch(() => reject(new Error('Network error')))
+    })
+  }
 
   @action
   async login() {
@@ -48,11 +80,14 @@ export default class User {
         if(!res.ok) {
           return res.json().then(reject)
         }
-        resolve()
+        return res.text()
       }).then((token) => {
         let claims = jwtDecode(token)
+        this.name = claims.name
         this.email = claims.email
         this.token = token
+        sessionStorage.setItem("token", token)
+        resolve()
       })
       .catch(() => reject(new Error('Network error')))
     })
