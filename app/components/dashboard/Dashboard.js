@@ -2,8 +2,26 @@ import React, {Component} from 'react'
 import {Route, Redirect, NavLink} from 'react-router-dom'
 import Create from './Create'
 import Term from './Term'
+import Machines from '../../stores/Machines'
 
 export default class Dashboard extends Component {
+
+  static contextTypes = {
+    user: React.PropTypes.object,
+  }
+
+  static childContextTypes = {
+    machines: React.PropTypes.object,
+  }
+
+  getChildContext() {
+    return {machines: this.machines}
+  }
+
+  componentWillMount() {
+    this.machines = new Machines(this.context.user.token)
+  }
+
   render() {
     let {match} = this.props
 
@@ -17,24 +35,14 @@ export default class Dashboard extends Component {
               </NavLink>
             </div>
             <nav className="panel">
-              <NavLink className="panel-block" to={`${match.url}/term/foo`}>
-                <span className="panel-icon">
-                  <i className="fl-debian"></i>
-                </span>
-                FooBar
-              </NavLink>
-              <NavLink className="panel-block" to={`${match.url}/term/foo`}>
-                <span className="panel-icon">
-                  <i className="fl-debian"></i>
-                </span>
-                FooBar
-              </NavLink>
-              <NavLink className="panel-block" to={`${match.url}/term/foo`}>
-                <span className="panel-icon">
-                  <i className="fl-debian"></i>
-                </span>
-                FooBar
-              </NavLink>
+              {this.machines.machines.map(machine => {
+                <NavLink className="panel-block" to={`${match.url}/term/${machine.name}`}>
+                  <span className="panel-icon">
+                    <i className="fl-debian"></i>
+                  </span>
+                  {machine.name}
+                </NavLink>
+              })}
             </nav>
           </div>
           <div className="column">

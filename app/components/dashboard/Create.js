@@ -30,18 +30,30 @@ let images = [
 
 export class Create extends Component {
 
-  constructor(props) {
-    super(props)
+  static contextTypes = {
+    machines: React.PropTypes.object,
+  }
 
-    this.state = {
-        name: haikunator.haikunate({tokenLength: 0}),
-        imageTab: 'official',
-        imageSelected: images[0],
-    }
+  state = {
+    name: haikunator.haikunate({tokenLength: 0}),
+    imageTab: 'official',
+    imageSelected: images[0],
+    loading: false,
+    error: null,
+  }
+
+  create() {
+    this.setState({loading: true})
+    this.context.machines.create(this.state.name, "ubuntu/xenial").then(() => {
+      alert('success')
+    }).catch(error => {
+      this.setState({error: error.message, loading: false})
+      console.log(error, this.state)
+    })
   }
 
   render() {
-    let {name, imageTab, imageSelected} = this.state
+    let {name, imageTab, imageSelected, loading} = this.state
     let imageTabContent
 
     if(imageTab == 'official') {
@@ -85,45 +97,56 @@ export class Create extends Component {
 
           <h1 className="title">Create Machine</h1>
 
-          <div className="tabs">
-            <ul>
-              <li className={imageTab == 'official' ? 'is-active' : ''}>
-                <a onClick={() => this.setState({imageTab: 'official'})}>Official Images</a>
-              </li>
-              {/* <li className={imageTab == 'custom' ? 'is-active' : ''}>
-                <a onClick={() => this.setState({imageTab: 'custom'})}>Custom Image</a>
-              </li>*/}
-            </ul>
-          </div>
+          <form onSubmit={e => { e.preventDefault(); this.create()}}>
 
-          {imageTabContent}
+            <div className="tabs">
+              <ul>
+                <li className={imageTab == 'official' ? 'is-active' : ''}>
+                  <a onClick={() => this.setState({imageTab: 'official'})}>Official Images</a>
+                </li>
+                {/* <li className={imageTab == 'custom' ? 'is-active' : ''}>
+                  <a onClick={() => this.setState({imageTab: 'custom'})}>Custom Image</a>
+                </li>*/}
+              </ul>
+            </div>
 
-          <hr/>
+            {imageTabContent}
 
-          <div className="field">
-            <label className="label">Name</label>
-            <p className="control">
-              <input className="input" type="text" value={name} onChange={() => null}/>
-            </p>
-          </div>
+            <hr/>
 
-          <div className="field">
-            <label className="label">Region</label>
-            <p className="control">
-              <span className="select">
-                <select>
-                  <option>Europe</option>
-                  <option>North America</option>
-                </select>
-              </span>
-            </p>
-          </div>
+            <div className="field">
+              <label className="label">Name</label>
+              <p className="control">
+                <input className="input" type="text" value={name}
+                  onChange={(e) => this.name = e.target.value}/>
+              </p>
+            </div>
 
-          <div className="field">
-            <p className="control">
-              <button className="button is-large is-fullwidth is-primary">Create</button>
-            </p>
-          </div>
+            <div className="field">
+              <label className="label">Region</label>
+              <p className="control">
+                <span className="select">
+                  <select>
+                    <option>Europe</option>
+                    <option>North America</option>
+                  </select>
+                </span>
+              </p>
+            </div>
+
+            <div className="field">
+              <p className="control">
+                <button className={"button is-large is-fullwidth is-primary " + (loading ? "is-loading" : "")}>Create</button>
+              </p>
+            </div>
+          </form>
+
+          <br/>
+
+          { !this.state.error ? null :
+            <div className="notification is-danger">
+              {this.state.error}
+            </div> }
 
         </div>
       </div>

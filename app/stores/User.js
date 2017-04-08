@@ -46,7 +46,7 @@ export default class User {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': this.token,
+          'Authorization': this.token, // TODO `Bearer ${this.token}`,
         }
       }).then(res => {
         if(!res.ok) {
