@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {BrowserRouter, Route, Link, NavLink, Switch} from 'react-router-dom'
 import ReactDOM from 'react-dom'
 import {observer} from 'mobx-react'
+import md5 from 'md5'
 import Dashboard from './dashboard/Dashboard'
 import Web from './web/Web'
 import User from '../stores/User'
@@ -59,7 +60,7 @@ export default class App extends Component {
 
                 {user.loggedIn ?
                 <Link to="/dashboard">
-                  <span className="icon"><img src="https://placehold.it/50x50"/></span>
+                  <span className="icon"><img src={`https://www.gravatar.com/avatar/${md5(user.email)}?d=mm`}/></span>
                   &nbsp;
                   <span>{user.name}</span>
                 </Link> : null}
