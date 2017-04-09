@@ -36,6 +36,10 @@ export default class Signup extends Component {
         this.context.user.signup().then(() => {
           return this.context.user.login()
         }).then(() => {
+          return this.context.user.subscribe()
+        }).then(() => {
+          return this.context.user.login() // login again to refresh token
+        }).then(() => {
           this.setState({redirectToReferrer: true})
         }).catch(error => {
           this.setState({error: error.message, loading: false})

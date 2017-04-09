@@ -12,23 +12,14 @@ export default class Machines {
 
   @action
   async update() {
-    return new Promise((resolve, reject) => {
-      this.fetch('/machines', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${this.token}`,
-        }
-      }).then(res => {
-        if(!res.ok) {
-          return res.json().then(reject)
-        }
-        return res.json()
-      }).then((machines) => {
-        this.machines = machines
-        resolve()
-      })
-      .catch(() => reject(new Error('Network error')))
+    return this.fetch('/machines', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.token}`,
+      }
+    }).then(({data}) => {
+      this.machines = data
     })
   }
 
@@ -40,27 +31,28 @@ export default class Machines {
       driver: 'lxd',
     }
 
-    return new Promise((resolve, reject) => {
-
-      this.fetch('/machines', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${this.token}`,
-        },
-         body: JSON.stringify(machine)
-      }).then(res => {
-        if(!res.ok) {
-          return res.json().then(reject)
-        }
-        this.machines.push(machine)
-        resolve()
-      }).catch((e) => reject(new Error('Network error')))
+    return this.fetch('/machines', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.token}`,
+      },
+        body: JSON.stringify(machine)
+    }).then(res => {
+      this.machines.push(machine)
     })
   }
 
   async fetch(url, options) {
-    return fetch(`${process.env.MACHINESTACK_URL}${url}`, options)
+    return new Promise((resolve, reject) => {
+      fetch(`${process.env.MACHINESTACK_URL}${url}`, options)
+      .then(res => {
+        if(!res.ok) {
+          return res.json().then(reject)
+        }
+        res.json().then(resolve)
+      }).catch(() => reject(new Error('Network error')))
+    })
   }
 
 }

@@ -42,85 +42,79 @@ export default class User {
 
   @action
   async update() {
-    return new Promise((resolve, reject) => {
-
-      this.fetch('/userinfo', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': this.token, // TODO `Bearer ${this.token}`,
-        }
-      }).then(res => {
-        if(!res.ok) {
-          return res.json().then(reject)
-        }
-        return res.json()
-      }).then((user) => {
-        this.name = user.name
-        this.email = user.email
-        resolve()
-      })
-      .catch(() => reject(new Error('Network error')))
+    return this.fetch('/userinfo', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.token}`,
+      }
+    }).then(({data}) => {
+      this.name = data.name
+      this.email = data.email
     })
   }
 
   @action
   async login() {
-    return new Promise((resolve, reject) => {
-
-      this.fetch('/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: this.name,
-          password: this.password,
-          claims: ['email'],
-        })
-      }).then(res => {
-        if(!res.ok) {
-          return res.json().then(reject)
-        }
-        return res.text()
-      }).then((token) => {
-        let claims = jwtDecode(token)
-        this.name = claims.name
-        this.email = claims.email
-        this.token = token
-        sessionStorage.setItem("token", token)
-        resolve()
+    return this.fetch('/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: this.name,
+        password: this.password,
+        claims: ['email'],
       })
-      .catch(() => reject(new Error('Network error')))
+    }).then(({data}) => {
+      let claims = jwtDecode(data.token)
+      this.name = claims.name
+      this.email = claims.email
+      this.token = data.token
+      sessionStorage.setItem("token", data.token)
     })
   }
 
   @action
   async signup() {
-    return new Promise((resolve, reject) => {
+    return this.fetch('/signup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: this.name,
+        password: this.password,
+        email: this.email,
+        stripe_token: this.stripeToken,
+      })
+    })
+  }
 
-    this.fetch('/signup', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: this.name,
-          password: this.password,
-          email: this.email,
-          stripe_token: this.stripeToken,
-        })
-      }).then(res => {
-        if(!res.ok) {
-          return res.json().then(reject)
-        }
-        resolve()
-      }).catch(() => reject(new Error('Network error')))
+  @action
+  async subscribe() {
+    return this.fetch('/subscribe', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.token}`,
+      },
+      body: JSON.stringify({
+        plan: this.plan,
+      })
     })
   }
 
   async fetch(url, options) {
-    return fetch(`${process.env.BILLSTACK_URL}${url}`, options)
+    return new Promise((resolve, reject) => {
+      fetch(`${process.env.BILLSTACK_URL}${url}`, options)
+      .then(res => {
+        if(!res.ok) {
+          return res.json().then(reject)
+        }
+        res.json().then(resolve)
+      }).catch(() => reject(new Error('Network error')))
+    })
   }
 
 }
