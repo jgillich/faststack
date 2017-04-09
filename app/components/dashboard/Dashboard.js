@@ -1,9 +1,11 @@
 import React, {Component} from 'react'
 import {Route, Redirect, NavLink} from 'react-router-dom'
+import {observer} from 'mobx-react'
 import Create from './Create'
 import Term from './Term'
 import Machines from '../../stores/Machines'
 
+@observer
 export default class Dashboard extends Component {
 
   static contextTypes = {
@@ -35,14 +37,15 @@ export default class Dashboard extends Component {
               </NavLink>
             </div>
             <nav className="panel">
-              {this.machines.machines.map(machine => {
-                <NavLink className="panel-block" to={`${match.url}/term/${machine.name}`}>
+              {this.machines.machines.map(machine =>
+                <NavLink key={machine.name} className="panel-block"
+                  to={`${match.url}/term/${machine.name}`}>
                   <span className="panel-icon">
                     <i className="fl-debian"></i>
                   </span>
                   {machine.name}
                 </NavLink>
-              })}
+              )}
             </nav>
           </div>
           <div className="column">

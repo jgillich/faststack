@@ -4,7 +4,6 @@ import jwtDecode from 'jwt-decode'
 export default class User {
 
   constructor() {
-    // if token is set, call update to fetch user info
     if(this.loggedIn) {
       let claims = jwtDecode(this.token)
       this.name = claims.name

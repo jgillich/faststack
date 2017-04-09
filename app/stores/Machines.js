@@ -55,7 +55,7 @@ export default class Machines {
         }
         this.machines.push(machine)
         resolve()
-      }).catch(() => reject(new Error('Network error')))
+      }).catch((e) => reject(new Error('Network error')))
     })
   }
 

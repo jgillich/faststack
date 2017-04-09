@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
-import Haikunator from 'haikunator'
+import dockerNames from 'docker-names'
 
-let haikunator = new Haikunator()
 
 // TODO fetch from somewhere
 let images = [
@@ -35,20 +34,23 @@ export class Create extends Component {
   }
 
   state = {
-    name: haikunator.haikunate({tokenLength: 0}),
+    name: dockerNames.getRandomName().replace("_", "-"),
     imageTab: 'official',
     imageSelected: images[0],
     loading: false,
     error: null,
   }
 
+  randomName() {
+    this.setState({name: dockerNames.getRandomName().replace("_", "-")})
+  }
+
   create() {
-    this.setState({loading: true})
+    this.setState({loading: true, error: null})
     this.context.machines.create(this.state.name, "ubuntu/xenial").then(() => {
-      alert('success')
+      this.setState({loading: false})
     }).catch(error => {
       this.setState({error: error.message, loading: false})
-      console.log(error, this.state)
     })
   }
 
@@ -113,12 +115,14 @@ export class Create extends Component {
             {imageTabContent}
 
             <hr/>
-
-            <div className="field">
-              <label className="label">Name</label>
+            <label className="label">Name</label>
+            <div className="field has-addons">
               <p className="control">
-                <input className="input" type="text" value={name}
-                  onChange={(e) => this.name = e.target.value}/>
+              <input className="input" type="text" value={name}
+                onChange={(e) => this.setState({name: e.target.value})}/>
+              </p>
+              <p className="control">
+                <a className="button" onClick={() => this.randomName()}><i className="fa fa-random"></i></a>
               </p>
             </div>
 

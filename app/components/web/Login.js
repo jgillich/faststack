@@ -16,7 +16,7 @@ export default class Login extends Component {
   }
 
   doLogin() {
-    this.setState({loading: true})
+    this.setState({loading: true, error: null})
     this.context.user.login().then(() => {
       this.setState({redirectToReferrer: true})
     }).catch(error => {
