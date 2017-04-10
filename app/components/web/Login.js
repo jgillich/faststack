@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {Link, Redirect} from 'react-router-dom'
 import {observer} from 'mobx-react'
+import {Helmet} from 'react-helmet'
 
 @observer
 export default class Login extends Component {
@@ -36,8 +37,11 @@ export default class Login extends Component {
     }
 
     return (
-
       <div className="container section">
+        <Helmet>
+          <title>Login - FastStack</title>
+        </Helmet>
+
         <div className="columns is-centered">
           <div className="column is-4">
             <h1 className="title has-text-centered">Login</h1>

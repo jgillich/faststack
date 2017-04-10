@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
+import {Helmet} from 'react-helmet'
 
 export default class Pricing extends Component {
   render() {
@@ -7,6 +8,9 @@ export default class Pricing extends Component {
 
     return (
       <div className="container section">
+        <Helmet>
+          <title>Pricing - FastStack</title>
+        </Helmet>
 
         <h1 className="title has-text-centered">Pricing</h1>
 

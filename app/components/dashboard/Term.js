@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import Terminal from 'xterm'
+import {Helmet} from 'react-helmet'
 
 export default class Term extends Component {
 
@@ -29,9 +30,12 @@ export default class Term extends Component {
 
   render() {
     return (
-      <div ref={(base) => {
-        this.base = base
-      }}></div>
+      <div ref={(base) => {this.base = base}}>
+        <Helmet>
+          <title>TODO_MACHINE_NAME - FastStack</title>
+        </Helmet>
+
+      </div>
     )
   }
 }

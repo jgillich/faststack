@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {Route, Redirect, NavLink} from 'react-router-dom'
 import {observer} from 'mobx-react'
+import {Helmet} from 'react-helmet'
 import Create from './Create'
 import Term from './Term'
 import Machines from '../../stores/Machines'
@@ -29,6 +30,10 @@ export default class Dashboard extends Component {
 
     return (
       <section className="section">
+        <Helmet>
+          <title>Dashboard - FastStack</title>
+        </Helmet>
+
         <div className="columns">
           <div className="column is-2">
             <div className="block">

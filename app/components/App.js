@@ -3,6 +3,7 @@ import {BrowserRouter, Route, Link, NavLink, Switch} from 'react-router-dom'
 import ReactDOM from 'react-dom'
 import {observer} from 'mobx-react'
 import md5 from 'md5'
+import {Helmet} from 'react-helmet'
 import Dashboard from './dashboard/Dashboard'
 import Web from './web/Web'
 import User from '../stores/User'
@@ -24,6 +25,10 @@ export default class App extends Component {
     return (
       <BrowserRouter>
         <div>
+          <Helmet>
+              <title>FastStack</title>
+          </Helmet>
+
           <nav className="nav">
             <div className="nav-left">
               <Link className="nav-item is-brand" to="/">

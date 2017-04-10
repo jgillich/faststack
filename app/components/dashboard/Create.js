@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import dockerNames from 'docker-names'
-
+import {Helmet} from 'react-helmet'
 
 // TODO fetch from somewhere
 let images = [
@@ -94,6 +94,10 @@ export class Create extends Component {
 
     return (
       <div className="container columns">
+        <Helmet>
+          <title>Create Machine - FastStack</title>
+        </Helmet>
+
 
         <div className="column is-10">
 
