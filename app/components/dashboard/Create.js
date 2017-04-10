@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import {Redirect} from 'react-router-dom'
 import dockerNames from 'docker-names'
 import {Helmet} from 'react-helmet'
 
@@ -39,6 +40,7 @@ export class Create extends Component {
     imageSelected: images[0],
     loading: false,
     error: null,
+    redirectToTerm: false,
   }
 
   randomName() {
@@ -48,15 +50,22 @@ export class Create extends Component {
   create() {
     this.setState({loading: true, error: null})
     this.context.machines.create(this.state.name, "ubuntu/xenial").then(() => {
-      this.setState({loading: false})
+      this.setState({loading: false, redirectToTerm: true})
     }).catch(error => {
       this.setState({error: error.message, loading: false})
     })
   }
 
   render() {
-    let {name, imageTab, imageSelected, loading} = this.state
+    let {name, imageTab, imageSelected, loading, redirectToTerm} = this.state
     let imageTabContent
+
+    if (redirectToTerm) {
+      return (
+        <Redirect to={`/dashboard/term/${name}`}/>
+      )
+    }
+
 
     if(imageTab == 'official') {
       imageTabContent = (
