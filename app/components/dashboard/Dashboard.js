@@ -1,9 +1,9 @@
 import React, {Component} from 'react'
-import {Route, Redirect, NavLink} from 'react-router-dom'
+import {Route, Redirect, Switch, NavLink} from 'react-router-dom'
 import {observer} from 'mobx-react'
 import {Helmet} from 'react-helmet'
 import Create from './Create'
-import Term from './Term'
+import Machine from './Machine'
 import Machines from '../../stores/Machines'
 
 @observer
@@ -44,7 +44,7 @@ export default class Dashboard extends Component {
             <nav className="panel">
               {this.machines.machines.map(machine =>
                 <NavLink key={machine.name} className="panel-block"
-                  to={`${match.url}/term/${machine.name}`}>
+                  to={`${match.url}/machine/${machine.name}`}>
                   <span className="panel-icon">
                     <i className="fl-debian"></i>
                   </span>
@@ -54,9 +54,11 @@ export default class Dashboard extends Component {
             </nav>
           </div>
           <div className="column">
-            <Redirect from={`${match.url}/`} to={`${match.url}/create`}/>
-            <Route exact path={`${match.url}/create`} component={Create}/>
-            <Route path={`${match.url}/term/:id`} component={Term}/>
+            <Switch>
+              <Route exact path={`${match.url}/create`} component={Create}/>
+              <Route path={`${match.url}/machine/:id`} component={Machine}/>
+              <Redirect from={`${match.url}/`} to={`${match.url}/create`}/>
+            </Switch>
           </div>
         </div>
       </section>

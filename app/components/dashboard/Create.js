@@ -27,7 +27,6 @@ let images = [
  },
 ]
 
-
 export class Create extends Component {
 
   static contextTypes = {
@@ -57,12 +56,13 @@ export class Create extends Component {
   }
 
   render() {
+    let {match} = this.props
     let {name, imageTab, imageSelected, loading, redirectToTerm} = this.state
     let imageTabContent
 
     if (redirectToTerm) {
       return (
-        <Redirect to={`/dashboard/term/${name}`}/>
+        <Redirect to={`/dashboard/machine/${name}`}/>
       )
     }
 

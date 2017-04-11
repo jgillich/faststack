@@ -1,5 +1,6 @@
 import {observable, computed, reaction, action} from 'mobx';
 import jwtDecode from 'jwt-decode'
+import RobustWebSocket from 'robust-websocket'
 
 export default class Machines {
 
@@ -41,6 +42,41 @@ export default class Machines {
     }).then(res => {
       this.machines.push(machine)
     })
+  }
+
+  @action
+  async exec(name) {
+    const machine = this.find(name)
+
+
+    return this.fetch(`/machines/${name}/exec`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${this.token}`,
+      },
+    }).then(res => {
+        var io = this.ws(`/exec/${res.data.id}/io`)
+        var control = this.ws(`/exec/${res.data.id}/control`)
+
+        return {
+          io: io,
+          sendControl: () => {
+            // TODO
+          },
+          close: () => {
+            io.close()
+            control.close()
+          }
+        }
+    })
+  }
+
+  find(name) {
+    return this.machines.find(m => m.name == name)
+  }
+
+  ws(url) {
+    return new RobustWebSocket(`${process.env.MACHINESTACK_URL.replace('http', 'ws')}${url}`)
   }
 
   async fetch(url, options) {
