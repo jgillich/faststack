@@ -14,15 +14,6 @@ export default class Term extends Component {
     let elem = document.createElement('div')
     this.base.appendChild(elem)
 
-    // This is a hack.
-    // Unfortunately, CSS does not allow us to select parents and we really don't want to set
-    // height manually for every parent, so we just iterate through all parents.
-    /*let parent = elem
-    while(parent != null) {
-      parent.style.height = '100%'
-      parent = parent.parentElement
-    }*/
-
     this.context.machines.exec(this.props.machine.name)
       .then(terminal => {
         terminal.mount(elem)
