@@ -32,7 +32,7 @@
     "react-dom": "^15.4.2",
     "react-helmet": "^5.0.2",
     "react-router": "^4.0.0",
-    "react-router-dom": "^4.0.0",
+    "react-router-dom": "^4.1.1",
     "robust-websocket": "^0.2.1",
     "style-loader": "^0.16.0",
     "theaterjs": "^3.1.0",
