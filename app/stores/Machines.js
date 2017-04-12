@@ -1,6 +1,5 @@
 import {observable, computed, reaction, action} from 'mobx';
-import jwtDecode from 'jwt-decode'
-import RobustWebSocket from 'robust-websocket'
+import Terminal from './Terminal'
 
 export default class Machines {
 
@@ -8,6 +7,8 @@ export default class Machines {
     this.token = token
     this.update()
   }
+
+  sessions = {}
 
 	@observable machines = []
 
@@ -46,8 +47,10 @@ export default class Machines {
 
   @action
   async exec(name) {
-    const machine = this.find(name)
-
+    // TODO detect when session dies for good
+    if(this.sessions[name]) {
+      return Promise.resolve(this.sessions[name])
+    }
 
     return this.fetch(`/machines/${name}/exec`, {
       method: 'POST',
@@ -55,19 +58,8 @@ export default class Machines {
         'Authorization': `Bearer ${this.token}`,
       },
     }).then(res => {
-        var io = this.ws(`/exec/${res.data.id}/io`)
-        var control = this.ws(`/exec/${res.data.id}/control`)
-
-        return {
-          io: io,
-          sendControl: () => {
-            // TODO
-          },
-          close: () => {
-            io.close()
-            control.close()
-          }
-        }
+      this.sessions[name] = new Terminal(res.data.id)
+      return this.sessions[name]
     })
   }
 
@@ -75,9 +67,6 @@ export default class Machines {
     return this.machines.find(m => m.name == name)
   }
 
-  ws(url) {
-    return new RobustWebSocket(`${process.env.MACHINESTACK_URL.replace('http', 'ws')}${url}`)
-  }
 
   async fetch(url, options) {
     return new Promise((resolve, reject) => {

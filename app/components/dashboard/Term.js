@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import Terminal from 'xterm'
 
 export default class Term extends Component {
 
@@ -12,35 +11,24 @@ export default class Term extends Component {
   }
 
   componentDidMount() {
-    requestAnimationFrame(() => {
-      let elem = document.createElement('div')
-      this.base.appendChild(elem)
+    let elem = document.createElement('div')
+    this.base.appendChild(elem)
 
-      // This is a hack.
-      // Unfortunately, CSS does not allow us to select parents and we really don't want to set
-      // height manually for every parent, so we just iterate through all parents.
-      /*let parent = elem
-      while(parent != null) {
-        parent.style.height = '100%'
-        parent = parent.parentElement
-      }*/
+    // This is a hack.
+    // Unfortunately, CSS does not allow us to select parents and we really don't want to set
+    // height manually for every parent, so we just iterate through all parents.
+    /*let parent = elem
+    while(parent != null) {
+      parent.style.height = '100%'
+      parent = parent.parentElement
+    }*/
 
-      let term = new Terminal()
-      term.open(elem)
-
-      this.context.machines.exec(this.props.machine.name)
-        .then(ws => {
-          ws.io.addEventListener('message', (m) => term.write(m.data))
-          term.on('data', ws.io.send)
-        })
-        .catch(err => alert(err.message))
-    })
+    this.context.machines.exec(this.props.machine.name)
+      .then(terminal => {
+        terminal.mount(elem)
+      })
+      .catch(console.log)
   }
-
-  connect() {
-
-  }
-
 
   render() {
     const {match, machine} = this.props
