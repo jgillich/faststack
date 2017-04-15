@@ -56,7 +56,7 @@ export default class Dashboard extends Component {
           <div className="column">
             <Switch>
               <Route exact path={`${match.url}/create`} component={Create}/>
-              <Route path={`${match.url}/machine/:id`} component={Machine}/>
+              <Route path={`${match.url}/machine/:name`} render={props => <Machine key={props.match.params.name} {...props}/>}/>
               <Redirect from={`${match.url}/`} to={`${match.url}/create`}/>
             </Switch>
           </div>

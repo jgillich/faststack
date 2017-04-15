@@ -14,6 +14,7 @@ export default class Terminal {
     this.xterm.attach(io)
 
     this.elem = document.createElement('div')
+    this.elem.style.height = '80vh'
     this.xterm.open(this.elem)
 
     control.addEventListener('open', () => {
@@ -31,16 +32,6 @@ export default class Terminal {
 
   mount(elem) {
     elem.appendChild(this.elem)
-
-    // This is a hack.
-    // Unfortunately, CSS does not allow us to select parents and we really don't want to set
-    // height manually for every parent, so we just iterate through all parents.
-    let parent = this.elem
-    while(parent != null) {
-      parent.style.height = '100%'
-      parent = parent.parentElement
-    }
-
     setTimeout(() => this.xterm.fit(), 0)
   }
 
