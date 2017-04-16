@@ -14,7 +14,7 @@ export default class Terminal {
     this.xterm.attach(io)
 
     this.elem = document.createElement('div')
-    this.elem.style.height = '80vh'
+    this.elem.style.flex = '1'
     this.xterm.open(this.elem)
 
     control.addEventListener('open', () => {
@@ -33,6 +33,10 @@ export default class Terminal {
   mount(elem) {
     elem.appendChild(this.elem)
     setTimeout(() => this.xterm.fit(), 0)
+  }
+
+  focus() {
+    this.xterm.focus()
   }
 
   ws(url) {

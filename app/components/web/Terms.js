@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {Helmet} from 'react-helmet'
 import html from '../../content/terms.md'
 
-export default class Tos extends Component {
+export default class Terms extends Component {
   render() {
     return (
       <div>
