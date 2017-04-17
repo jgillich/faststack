@@ -1,10 +1,34 @@
-image: node:latest
+stages:
+  - build
 
-cache:
-  paths:
-    - node_modules/
-
-test:
+app:
+  stage: build
+  image: node:latest
   script:
     - npm install
     - npm test
+    - npm run bundle
+  artifacts:
+    paths:
+      - dist
+  cache:
+    paths:
+      - node_modules
+
+cli:
+  stage: build
+  image: golang:latest
+  script:
+    - ln -s /builds /go/src/gitlab.com
+    - cd /go/src/gitlab.com/faststack/faststack
+    - go get -u github.com/golang/dep/...
+    - dep ensure
+    - go get -u github.com/golang/lint/golint
+    - golint $(go list ./... | grep -v /vendor/)
+    - go build
+  artifacts:
+    paths:
+      - faststack
+  cache:
+    paths:
+      - vendor

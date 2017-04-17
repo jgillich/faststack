@@ -10,6 +10,7 @@ import (
 	yaml "gopkg.in/yaml.v2"
 )
 
+// Config format
 type Config struct {
 	Token        string `yaml:"token"`
 	Billstack    string `yaml:"billstack"`

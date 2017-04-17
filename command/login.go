@@ -13,6 +13,7 @@ import (
 	"gitlab.com/faststack/billstack/api"
 )
 
+// Login asks for login credentials and retrieves token
 func Login(c *cli.Context) error {
 	fmt.Print("Username: ")
 	var username string
