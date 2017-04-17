@@ -4,8 +4,6 @@ import {Helmet} from 'react-helmet'
 
 export default class Pricing extends Component {
   render() {
-    let {match} = this.props
-
     return (
       <div className="container section">
         <Helmet>
@@ -44,7 +42,8 @@ export default class Pricing extends Component {
             <div className="card">
               <header className="card-header">
                 <p className="card-header-title">
-                  Standard &nbsp;<span className="help is-primary">Free for 7 days</span>
+                  Standard &nbsp;
+                  <span className="help is-primary">Free for 7 days</span>
                 </p>
               </header>
               <div className="card-content">
@@ -92,29 +91,35 @@ export default class Pricing extends Component {
         </div>
 
         <div className="section has-text-centered">
-          <Link className="button is-primary is-large" to="/signup">Get Started</Link>
+          <Link className="button is-primary is-large" to="/signup">
+            Get Started
+          </Link>
         </div>
 
         <div className="section">
 
-          <h2 className="title has-text-centered">Frequently Asked Questions</h2>
+          <h2 className="title has-text-centered">
+            Frequently Asked Questions
+          </h2>
 
 
           <div className="columns is-multiline">
             <div className="column is-half content">
               <h4 className="subtitle">How does auto suspend work?</h4>
               <p>
-                You can use your machines as long as you want, we only suspend them when you are not using
-                them. At the moment, this happens 12 hours after you last connected. When you
-                reconnect to a suspended machine, all running processes will be restored.
+                You can use your machines as long as you want, we only suspend
+                them when you are not using them. At the moment, this happens
+                12 hours after you last connected. When you reconnect to a
+                suspended machine, all running processes will be restored.
               </p>
             </div>
 
             <div className="column is-half content">
               <h4 className="subtitle">How can I access my boxes?</h4>
               <p>
-                We offer a web interface and a terminal client that supports all major popular
-                operating systems: Windows, macOS and Linux. We do not support SSH at this time.
+                We offer a web interface and a terminal client that supports
+                all major popular operating systems: Windows, macOS and Linux.
+                We do not support SSH at this time.
               </p>
             </div>
 

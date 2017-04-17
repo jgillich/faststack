@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {Link, Redirect} from 'react-router-dom'
 import {observer} from 'mobx-react'
 import {Helmet} from 'react-helmet'
+import {Button} from '../common/Bulma'
 
 @observer
 export default class Login extends Component {
@@ -11,15 +12,17 @@ export default class Login extends Component {
   }
 
   state = {
-    redirectToReferrer: false,
+    loggedIn: false,
     error: null,
     loading: false,
   }
 
-  doLogin() {
+  submit(e) {
+    e.preventDefault()
     this.setState({loading: true, error: null})
+
     this.context.user.login().then(() => {
-      this.setState({redirectToReferrer: true})
+      this.setState({loggedIn: true})
     }).catch(error => {
       this.setState({error: error.message, loading: false})
     })
@@ -27,10 +30,10 @@ export default class Login extends Component {
 
   render() {
     let {user} = this.context
-    const { redirectToReferrer } = this.state
-    const { from } = this.props.location.state || { from: { pathname: '/dashboard' } }
+    const {loggedIn, loading} = this.state
+    const {from} = this.props.location.state || {from: {pathname: '/dashboard'}}
 
-    if (redirectToReferrer) {
+    if (loggedIn) {
       return (
         <Redirect to={from}/>
       )
@@ -46,25 +49,27 @@ export default class Login extends Component {
           <div className="column is-4">
             <h1 className="title has-text-centered">Login</h1>
 
-            <form onSubmit={e => { e.preventDefault(); this.doLogin() }}>
+            <form onSubmit={(e) => this.submit(e)}>
 
               <div className="field">
                 <label className="label">Username</label>
                 <p className="control">
-                  <input className="input" type="text" value={user.name} onChange={ev => user.name = ev.target.value}/>
+                  <input className="input" type="text" value={user.name}
+                    onChange={ev => user.name = ev.target.value}/>
                 </p>
               </div>
 
               <div className="field">
                 <label className="label">Password</label>
                 <p className="control">
-                  <input className="input" type="password" value={user.password} onChange={ev => user.password = ev.target.value}/>
+                  <input className="input" type="password" value={user.password}
+                    onChange={ev => user.password = ev.target.value}/>
                 </p>
               </div>
 
               <div className="field is-grouped">
                 <p className="control">
-                  <button className={"button is-primary " + (this.state.loading ? "is-loading" : "")}>Login</button>
+                  <Button className={{"is-loading": loading}}>Login</Button>
                 </p>
                 <p className="control">
                   <Link className="button is-link" to="/signup">Sign up</Link>

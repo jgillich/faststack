@@ -22,8 +22,6 @@ export default class Home extends Component {
   }
 
   render() {
-    let {match} = this.props
-
     return (
       <div>
         <section className="hero is-primary is-medium">
@@ -35,7 +33,7 @@ export default class Home extends Component {
               <h2 className="subtitle">
                 Launch preconfigured Linux machines in just 5 seconds. Try it for free
               </h2>
-              <Link className="button is-primary is-inverted is-large" to="/signup">Sign Up</Link>
+              <Link className="button is-primary is-inverted is-large"to="/signup">Sign Up</Link>
             </div>
           </div>
         </section>

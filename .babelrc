@@ -4,6 +4,7 @@
     "transform-decorators-legacy",
     "transform-class-properties",
     "syntax-jsx",
-    "transform-react-jsx"
+    "transform-react-jsx",
+    "transform-object-rest-spread"
   ]
 }

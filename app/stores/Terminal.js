@@ -23,11 +23,10 @@ export default class Terminal {
       this.xterm.on('resize', (size) => {
         control.send(JSON.stringify({
           command: 'window-resize',
-          args: {width: size.cols.toString(), height: size.rows.toString()}
+          args: {width: size.cols.toString(), height: size.rows.toString()},
         }))
       })
     })
-
   }
 
   mount(elem) {
@@ -40,6 +39,7 @@ export default class Terminal {
   }
 
   ws(url) {
-    return new RobustWebSocket(`${process.env.MACHINESTACK_URL.replace('http', 'ws')}${url}`)
+    let u = `${process.env.MACHINESTACK_URL.replace('http', 'ws')}${url}`
+    return new RobustWebSocket(u)
   }
 }

@@ -5,7 +5,7 @@ export default class Input extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      value: props.value || "",
+      value: props.value || '',
       valid: true,
      }
   }
@@ -25,15 +25,14 @@ export default class Input extends Component {
     return (
       <div className={'control ' + (expanded ? 'is-expanded' : '')}>
         <input className={'input ' + (this.state.valid ? '' : 'is-danger')}
-          value={this.state.value} type={type || "text"}
+          value={this.state.value} type={type || 'text'}
           placeholder={placeholder}
-          onChange={ev => this.setState({value: ev.target.value})}
-          onBlur={ev => this.onBlur(ev)}/>
+          onChange={(ev) => this.setState({value: ev.target.value})}
+          onBlur={(ev) => this.onBlur(ev)}/>
           {!message ? null : this.state.valid ? null :
             <p className="help is-danger">{message}</p>
           }
       </div>
-
     )
   }
 
