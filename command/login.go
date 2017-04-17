@@ -10,7 +10,7 @@ import (
 	"golang.org/x/crypto/ssh/terminal"
 	"gopkg.in/urfave/cli.v2"
 
-	"github.com/faststackco/billstack/api"
+	"gitlab.com/faststack/billstack/api"
 )
 
 func Login(c *cli.Context) error {

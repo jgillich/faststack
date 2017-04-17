@@ -5,7 +5,7 @@ import (
 	"os"
 	"os/user"
 
-	"github.com/faststackco/faststack/command"
+	"gitlab.com/faststack/faststack/command"
 	"gopkg.in/urfave/cli.v2"
 	"gopkg.in/urfave/cli.v2/altsrc"
 )

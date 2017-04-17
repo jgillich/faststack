@@ -8,9 +8,9 @@ import (
 
 	"gopkg.in/urfave/cli.v2"
 
-	"github.com/faststackco/billstack/api"
-	"github.com/faststackco/machinestack/model"
 	"github.com/olekukonko/tablewriter"
+	"gitlab.com/faststack/billstack/api"
+	"gitlab.com/faststack/machinestack/model"
 )
 
 type ListResponse struct {
