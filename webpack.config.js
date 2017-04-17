@@ -64,7 +64,8 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'FastStack',add      template: 'app/index.ejs',
+      title: 'FastStack',
+      template: 'app/index.ejs',
     }),
     new Dotenv(),
   ],
