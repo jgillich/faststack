@@ -12,8 +12,7 @@ export default class Machines {
 
 	@observable machines = []
 
-  @action
-  async update() {
+  @action update() {
     return this.fetch('/machines', {
       method: 'GET',
       headers: {
@@ -25,8 +24,7 @@ export default class Machines {
     })
   }
 
-  @action
-  async create(name, image) {
+  @action create(name, image) {
     const machine = {
       name: name,
       image: image,
@@ -45,8 +43,7 @@ export default class Machines {
     })
   }
 
-  @action
-  async delete(name) {
+  @action delete(name) {
     return this.fetch(`/machines/${name}`, {
       method: 'DELETE',
       headers: {
@@ -58,8 +55,7 @@ export default class Machines {
     })
   }
 
-  @action
-  async exec(name) {
+  @action exec(name) {
     // TODO detect when session dies for good
     if(this.sessions[name]) {
       return Promise.resolve(this.sessions[name])
@@ -81,7 +77,7 @@ export default class Machines {
   }
 
 
-  async fetch(url, options) {
+  fetch(url, options) {
     return new Promise((resolve, reject) => {
       fetch(`${process.env.MACHINESTACK_URL}${url}`, options)
       .then((res) => {

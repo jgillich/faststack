@@ -40,8 +40,7 @@ export default class User {
     return true
 	}
 
-  @action
-  async update() {
+  @action update() {
     return this.fetch('/userinfo', {
       method: 'GET',
       headers: {
@@ -54,8 +53,7 @@ export default class User {
     })
   }
 
-  @action
-  async login() {
+  @action login() {
     return this.fetch('/login', {
       method: 'POST',
       headers: {
@@ -75,8 +73,7 @@ export default class User {
     })
   }
 
-  @action
-  async signup() {
+  @action signup() {
     return this.fetch('/signup', {
       method: 'POST',
       headers: {
@@ -91,8 +88,7 @@ export default class User {
     })
   }
 
-  @action
-  async subscribe() {
+  @action subscribe() {
     return this.fetch('/subscribe', {
       method: 'POST',
       headers: {
@@ -105,7 +101,7 @@ export default class User {
     })
   }
 
-  async fetch(url, options) {
+  fetch(url, options) {
     return new Promise((resolve, reject) => {
       fetch(`${process.env.BILLSTACK_URL}${url}`, options)
       .then((res) => {
