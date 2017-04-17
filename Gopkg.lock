@@ -1,0 +1,144 @@
+memo = "3516741c378479f7098fa813a47d922e8b1c7d401e88ef967ca942dfda63cad1"
+
+[[projects]]
+  name = "github.com/BurntSushi/toml"
+  packages = ["."]
+  revision = "f706d00e3de6abe700c994cdd545a1a4915af060"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/asaskevich/govalidator"
+  packages = ["."]
+  revision = "872bb01704d183fe276bce6fa429408a87661998"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/dgrijalva/jwt-go"
+  packages = ["."]
+  revision = "2268707a8f0843315e2004ee4f1d021dc08baedf"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/go-pg/pg"
+  packages = [".","internal","internal/parser","internal/pool","orm","types"]
+  revision = "b80ead78e706aae155d29d808f0df17fccd8eea2"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/hashicorp/errwrap"
+  packages = ["."]
+  revision = "7554cd9344cec97297fa6649b055a8c98c2a1e55"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/hashicorp/go-multierror"
+  packages = ["."]
+  revision = "ed905158d87462226a13fe39ddf685ea65f1c11f"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/hashicorp/hcl"
+  packages = [".","hcl/ast","hcl/parser","hcl/scanner","hcl/strconv","hcl/token","json/parser","json/scanner","json/token"]
+  revision = "630949a3c5fa3c613328e1b8256052cbc2327c9b"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/jinzhu/inflection"
+  packages = ["."]
+  revision = "1c35d901db3da928c72a72d8458480cc9ade058f"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/labstack/echo"
+  packages = ["."]
+  revision = "049518f8c46759fe645a7be1c71b5bc76bc27eaa"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/labstack/gommon"
+  packages = ["color","log"]
+  revision = "e8995fb26e646187d33cff439b18609cfba23088"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/mattn/go-colorable"
+  packages = ["."]
+  revision = "d898aa9fb31c91f35dd28ca75db377eff023c076"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/mattn/go-isatty"
+  packages = ["."]
+  revision = "dda3de49cbfcec471bd7a70e6cc01fcc3ff90109"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/mattn/go-runewidth"
+  packages = ["."]
+  revision = "14207d285c6c197daabb5c9793d63e7af9ab2d50"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/mitchellh/mapstructure"
+  packages = ["."]
+  revision = "53818660ed4955e899c0bcafa97299a388bd7c8e"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/olekukonko/tablewriter"
+  packages = ["."]
+  revision = "febf2d34b54a69ce7530036c7503b1c9fbfdf0bb"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/stripe/stripe-go"
+  packages = [".","customer","event","orderitem","plan","sub"]
+  revision = "52316de96ca8c9120739b13cca17e36eb02c8737"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/valyala/bytebufferpool"
+  packages = ["."]
+  revision = "e746df99fe4a3986f4d4f79e13c1e0117ce9c2f7"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/valyala/fasttemplate"
+  packages = ["."]
+  revision = "d090d65668a286d9a180d43a19dfdc5dcad8fe88"
+
+[[projects]]
+  branch = "master"
+  name = "gitlab.com/faststack/billstack"
+  packages = ["api","model"]
+  revision = "a5f05177506e7e01c2d06d4d12132b037b4d16e0"
+
+[[projects]]
+  branch = "master"
+  name = "gitlab.com/faststack/machinestack"
+  packages = ["config","model"]
+  revision = "2898962fe25b21eb0110615c1ccdda73b2761bf3"
+
+[[projects]]
+  branch = "master"
+  name = "golang.org/x/crypto"
+  packages = ["acme","acme/autocert","bcrypt","blowfish","ssh/terminal"]
+  revision = "cbc3d0884eac986df6e78a039b8792e869bff863"
+
+[[projects]]
+  branch = "master"
+  name = "golang.org/x/sys"
+  packages = ["unix"]
+  revision = "e4594059fe4cde2daf423055a596c2cd1e6c9adf"
+
+[[projects]]
+  branch = "v2"
+  name = "gopkg.in/urfave/cli.v2"
+  packages = [".","altsrc"]
+  revision = "04b2f4ff79cf1fd71e138bafc67df8bbdb5b81c2"
+
+[[projects]]
+  branch = "v2"
+  name = "gopkg.in/yaml.v2"
+  packages = ["."]
+  revision = "a3f3340b5840cee44f372bddb5880fcbc419b46a"

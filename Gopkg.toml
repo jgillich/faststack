@@ -1,0 +1,24 @@
+
+[[dependencies]]
+  branch = "master"
+  name = "github.com/olekukonko/tablewriter"
+
+[[dependencies]]
+  branch = "master"
+  name = "gitlab.com/faststack/billstack"
+
+[[dependencies]]
+  branch = "master"
+  name = "gitlab.com/faststack/machinestack"
+
+[[dependencies]]
+  branch = "master"
+  name = "golang.org/x/crypto"
+
+[[dependencies]]
+  branch = "v2"
+  name = "gopkg.in/urfave/cli.v2"
+
+[[dependencies]]
+  branch = "v2"
+  name = "gopkg.in/yaml.v2"
