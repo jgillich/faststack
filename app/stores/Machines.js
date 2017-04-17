@@ -46,6 +46,19 @@ export default class Machines {
   }
 
   @action
+  async delete(name) {
+    return this.fetch(`/machines/${name}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.token}`,
+      }
+    }).then(res => {
+      this.machines.remove(this.find(name))
+    })
+  }
+
+  @action
   async exec(name) {
     // TODO detect when session dies for good
     if(this.sessions[name]) {
