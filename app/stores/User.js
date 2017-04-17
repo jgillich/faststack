@@ -1,4 +1,4 @@
-import {observable, computed, reaction, action} from 'mobx';
+import {observable, computed, action} from 'mobx'
 import jwtDecode from 'jwt-decode'
 
 export default class User {
@@ -13,17 +13,17 @@ export default class User {
     }
   }
 
-	@observable name = ""
+	@observable name = ''
 
-  @observable password = ""
+  @observable password = ''
 
-  @observable email = ""
+  @observable email = ''
 
-  @observable plan = "standard"
+  @observable plan = 'standard'
 
-  @observable token = sessionStorage.getItem("token")
+  @observable token = sessionStorage.getItem('token')
 
-  @observable stripeToken = ""
+  @observable stripeToken = ''
 
 	@computed
   get loggedIn() {
@@ -47,7 +47,7 @@ export default class User {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${this.token}`,
-      }
+      },
     }).then(({data}) => {
       this.name = data.name
       this.email = data.email
@@ -65,13 +65,13 @@ export default class User {
         name: this.name,
         password: this.password,
         claims: ['email'],
-      })
+      }),
     }).then(({data}) => {
       let claims = jwtDecode(data.token)
       this.name = claims.name
       this.email = claims.email
       this.token = data.token
-      sessionStorage.setItem("token", data.token)
+      sessionStorage.setItem('token', data.token)
     })
   }
 
@@ -87,7 +87,7 @@ export default class User {
         password: this.password,
         email: this.email,
         stripe_token: this.stripeToken,
-      })
+      }),
     })
   }
 
@@ -101,14 +101,14 @@ export default class User {
       },
       body: JSON.stringify({
         plan: this.plan,
-      })
+      }),
     })
   }
 
   async fetch(url, options) {
     return new Promise((resolve, reject) => {
       fetch(`${process.env.BILLSTACK_URL}${url}`, options)
-      .then(res => {
+      .then((res) => {
         if(!res.ok) {
           return res.json().then(reject)
         }

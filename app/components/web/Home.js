@@ -133,22 +133,34 @@ export default class Home extends Component {
           <div className="columns is-centered">
             <div className="column is-2">
               <ul>
-                <li><span className="icon is-small"><i className="fa fa-check"/></span> Incredible value</li>
-                <li><span className="icon is-small"><i className="fa fa-check"/></span> Ultra-fast deploys</li>
-                <li><span className="icon is-small"><i className="fa fa-check"/></span> Flat rate pricing</li>
+                <li><span className="icon is-small">
+                  <i className="fa fa-check"/></span> Incredible value
+                </li>
+                <li><span className="icon is-small">
+                  <i className="fa fa-check"/></span> Ultra-fast deploys
+                </li>
+                <li><span className="icon is-small">
+                  <i className="fa fa-check"/></span> Flat rate pricing
+                </li>
               </ul>
             </div>
             <div className="column is-2">
               <ul>
-                <li><span className="icon is-small"><i className="fa fa-times"/></span> Dedicated IPv4</li>
-                <li><span className="icon is-small"><i className="fa fa-times"/></span> Always running</li>
+                <li><span className="icon is-small">
+                  <i className="fa fa-times"/></span> Dedicated IPv4
+                </li>
+                <li><span className="icon is-small">
+                  <i className="fa fa-times"/></span> Always running
+                </li>
               </ul>
             </div>
           </div>
         </section>
 
         <section className="section has-text-centered">
-          <Link className="button is-large is-primary" to="/signup"> Get Started</Link>
+          <Link className="button is-large is-primary" to="/signup">
+            Get Started
+          </Link>
         </section>
 
       </div>

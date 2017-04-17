@@ -42,7 +42,7 @@ export default class Dashboard extends Component {
               </NavLink>
             </div>
             <nav className="panel">
-              {this.machines.machines.map(machine =>
+              {this.machines.machines.map((machine) =>
                 <NavLink key={machine.name} className="panel-block"
                   to={`${match.url}/machine/${machine.name}`}>
                   <span className="panel-icon">
@@ -56,7 +56,8 @@ export default class Dashboard extends Component {
           <div className="column">
             <Switch>
               <Route exact path={`${match.url}/create`} component={Create}/>
-              <Route path={`${match.url}/machine/:name`} render={props => <Machine key={props.match.params.name} {...props}/>}/>
+              <Route path={`${match.url}/machine/:name`}
+                render={(props) => <Machine key={props.match.params.name} {...props}/>}/>
               <Redirect from={`${match.url}/`} to={`${match.url}/create`}/>
             </Switch>
           </div>

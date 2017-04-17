@@ -1,4 +1,5 @@
 module.exports = {
+    "parser": "babel-eslint",
     "extends": [
       "eslint:recommended",
       "google",
@@ -24,9 +25,10 @@ module.exports = {
       "require-jsdoc": 0,
       "react/prop-types": 0,
       "react/no-unknown-property": [2, { ignore: ["class"] }],
-      "max-len": [2, 80, { "ignoreUrls": true }],
+      "max-len": [2, 100, { "ignoreUrls": true }],
     },
     "globals": {
       "process": true,
+      "Stripe": true,
     }
 }

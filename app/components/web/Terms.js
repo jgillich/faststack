@@ -9,7 +9,8 @@ export default class Terms extends Component {
         <Helmet>
           <title>Terms of Service - FastStack</title>
         </Helmet>
-        <div className="container section content" dangerouslySetInnerHTML={{__html: html}}/>
+        <div className="container section content"
+          dangerouslySetInnerHTML={{__html: html}}/>
       </div>
     )
   }

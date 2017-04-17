@@ -1,4 +1,4 @@
-import {observable, computed, reaction, action} from 'mobx';
+import {observable, action} from 'mobx'
 import Terminal from './Terminal'
 
 export default class Machines {
@@ -19,7 +19,7 @@ export default class Machines {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${this.token}`,
-      }
+      },
     }).then(({data}) => {
       this.machines = data
     })
@@ -39,8 +39,8 @@ export default class Machines {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${this.token}`,
       },
-        body: JSON.stringify(machine)
-    }).then(res => {
+        body: JSON.stringify(machine),
+    }).then((res) => {
       this.machines.push(machine)
     })
   }
@@ -52,8 +52,8 @@ export default class Machines {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${this.token}`,
-      }
-    }).then(res => {
+      },
+    }).then((res) => {
       this.machines.remove(this.find(name))
     })
   }
@@ -70,21 +70,21 @@ export default class Machines {
       headers: {
         'Authorization': `Bearer ${this.token}`,
       },
-    }).then(res => {
+    }).then((res) => {
       this.sessions[name] = new Terminal(res.data.id)
       return this.sessions[name]
     })
   }
 
   find(name) {
-    return this.machines.find(m => m.name == name)
+    return this.machines.find((m) => m.name == name)
   }
 
 
   async fetch(url, options) {
     return new Promise((resolve, reject) => {
       fetch(`${process.env.MACHINESTACK_URL}${url}`, options)
-      .then(res => {
+      .then((res) => {
         if(!res.ok) {
           return res.json().then(reject)
         }

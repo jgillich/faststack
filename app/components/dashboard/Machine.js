@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import {Redirect} from 'react-router-dom'
-import Terminal from 'xterm'
 import {Helmet} from 'react-helmet'
 import screenfull from 'screenfull'
 
@@ -31,13 +30,13 @@ export default class Machine extends Component {
       .then(() => {
         this.setState({deleted: true})
       })
-      .catch(error => this.setState({error: error.message}))
+      .catch((error) => this.setState({error: error.message}))
   }
 
   render() {
     const {error, deleted} = this.state
     const {match} = this.props
-    const machine  = this.context.machines.find(match.params.name)
+    const machine = this.context.machines.find(match.params.name)
 
     if(deleted) {
       return (
@@ -62,32 +61,38 @@ export default class Machine extends Component {
     }
 
     this.context.machines.exec(machine.name)
-      .then(terminal => {
+      .then((terminal) => {
         terminal.mount(this.termEl)
         terminal.focus()
         this.terminal = terminal
       })
-      .catch(error => this.setState({error: error.message}))
+      .catch((error) => this.setState({error: error.message}))
 
     return (
       <div>
         <Helmet>
           <title>{`${machine.name} - FastStack`}</title>
         </Helmet>
-        <div className="card"  ref={(el) => {this.cardEl = el}} style={{display: "flex", flexDirection: "column", height: '85vh'}}>
+        <div className="card" ref={(el) => {
+this.cardEl = el
+}} style={{display: 'flex', flexDirection: 'column', height: '85vh'}}>
           <header className="card-header">
             <p className="card-header-title">
               {machine.name} ({machine.image})
             </p>
             <a className="card-header-icon">
-              <span className="icon"><i className="fa fa-trash" onClick={() => this.delete()}></i></span>
+              <span className="icon">
+                <i className="fa fa-trash" onClick={() => this.delete()}></i>
+              </span>
             </a>
             { !screenfull.enabled ? null :
             <a className="card-header-icon" onClick={() => this.toggleFullscreen()}>
               <span className="icon"><i className="fa fa-arrows-alt"></i></span>
             </a> }
           </header>
-          <div className="card-content" style={{display: "flex", flex: "1", backgroundColor: "#000"}} ref={(el) => {this.termEl = el}}/>
+          <div className="card-content"
+            style={{display: 'flex', flex: '1', backgroundColor: '#000'}}
+            ref={(el) => this.termEl = el}/>
         </div>
 
       </div>

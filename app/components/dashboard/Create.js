@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {Redirect} from 'react-router-dom'
 import dockerNames from 'docker-names'
 import {Helmet} from 'react-helmet'
+import {Button} from '../common/Bulma'
 
 // TODO fetch from somewhere
 let images = [
@@ -34,7 +35,7 @@ export class Create extends Component {
   }
 
   state = {
-    name: dockerNames.getRandomName().replace("_", "-"),
+    name: dockerNames.getRandomName().replace('_', '-'),
     imageTab: 'official',
     imageSelected: images[0],
     loading: false,
@@ -43,20 +44,21 @@ export class Create extends Component {
   }
 
   randomName() {
-    this.setState({name: dockerNames.getRandomName().replace("_", "-")})
+    this.setState({name: dockerNames.getRandomName().replace('_', '-')})
   }
 
-  create() {
+  submit(e) {
+    e.preventDefault()
     this.setState({loading: true, error: null})
-    this.context.machines.create(this.state.name, "ubuntu/xenial").then(() => {
+
+    this.context.machines.create(this.state.name, 'ubuntu/xenial').then(() => {
       this.setState({loading: false, redirectToTerm: true})
-    }).catch(error => {
+    }).catch((error) => {
       this.setState({error: error.message, loading: false})
     })
   }
 
   render() {
-    let {match} = this.props
     let {name, imageTab, imageSelected, loading, redirectToTerm} = this.state
     let imageTabContent
 
@@ -65,7 +67,6 @@ export class Create extends Component {
         <Redirect to={`/dashboard/machine/${name}`}/>
       )
     }
-
 
     if(imageTab == 'official') {
       imageTabContent = (
@@ -112,7 +113,7 @@ export class Create extends Component {
 
           <h1 className="title">Create Machine</h1>
 
-          <form onSubmit={e => { e.preventDefault(); this.create()}}>
+          <form onSubmit={(e) => this.submit(e)}>
 
             <div className="tabs">
               <ul>
@@ -135,7 +136,9 @@ export class Create extends Component {
                 onChange={(e) => this.setState({name: e.target.value})}/>
               </p>
               <p className="control">
-                <a className="button" onClick={() => this.randomName()}><i className="fa fa-random"></i></a>
+                <a className="button" onClick={() => this.randomName()}>
+                  <i className="fa fa-random"></i>
+                </a>
               </p>
             </div>
 
@@ -153,7 +156,9 @@ export class Create extends Component {
 
             <div className="field">
               <p className="control">
-                <button className={"button is-large is-fullwidth is-primary " + (loading ? "is-loading" : "")}>Create</button>
+                <Button className={{'is-loading': loading, 'is-fullwidth is-large': true}}>
+                  Create
+                </Button>
               </p>
             </div>
           </form>

@@ -23,7 +23,7 @@ export default class Login extends Component {
 
     this.context.user.login().then(() => {
       this.setState({loggedIn: true})
-    }).catch(error => {
+    }).catch((error) => {
       this.setState({error: error.message, loading: false})
     })
   }
@@ -55,7 +55,7 @@ export default class Login extends Component {
                 <label className="label">Username</label>
                 <p className="control">
                   <input className="input" type="text" value={user.name}
-                    onChange={ev => user.name = ev.target.value}/>
+                    onChange={(ev) => user.name = ev.target.value}/>
                 </p>
               </div>
 
@@ -63,13 +63,13 @@ export default class Login extends Component {
                 <label className="label">Password</label>
                 <p className="control">
                   <input className="input" type="password" value={user.password}
-                    onChange={ev => user.password = ev.target.value}/>
+                    onChange={(ev) => user.password = ev.target.value}/>
                 </p>
               </div>
 
               <div className="field is-grouped">
                 <p className="control">
-                  <Button className={{"is-loading": loading}}>Login</Button>
+                  <Button className={{'is-loading': loading}}>Login</Button>
                 </p>
                 <p className="control">
                   <Link className="button is-link" to="/signup">Sign up</Link>
