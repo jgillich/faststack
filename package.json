@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "ReconnectingWebSocket": "git+https://github.com/joewalnes/reconnecting-websocket.git",
-    "bulma": "^0.4.0",
+    "bulma": "^0.4.1",
     "docker-names": "^1.0.3",
     "dotenv-webpack": "^1.4.1",
     "font-awesome": "^4.7.0",
