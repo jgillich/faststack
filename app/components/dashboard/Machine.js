@@ -1,12 +1,13 @@
 import React, {Component} from 'react'
 import {Redirect} from 'react-router-dom'
 import {Helmet} from 'react-helmet'
+import PropTypes from 'prop-types'
 import screenfull from 'screenfull'
 
 export default class Machine extends Component {
 
   static contextTypes = {
-    machines: React.PropTypes.object,
+    machines: PropTypes.object,
   }
 
   state = {
@@ -36,7 +37,7 @@ export default class Machine extends Component {
   render() {
     const {error, deleted} = this.state
     const {match} = this.props
-    const machine = this.context.machines.find(match.params.name)
+    const machine = this.context.machines.name(match.params.name)
 
     if(deleted) {
       return (

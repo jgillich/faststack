@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {Route, Redirect, Switch, NavLink} from 'react-router-dom'
 import {observer} from 'mobx-react'
 import {Helmet} from 'react-helmet'
+import PropTypes from 'prop-types'
 import Create from './Create'
 import Machine from './Machine'
 import Machines from '../../stores/Machines'
@@ -10,11 +11,11 @@ import Machines from '../../stores/Machines'
 export default class Dashboard extends Component {
 
   static contextTypes = {
-    user: React.PropTypes.object,
+    user: PropTypes.object,
   }
 
   static childContextTypes = {
-    machines: React.PropTypes.object,
+    machines: PropTypes.object,
   }
 
   getChildContext() {
@@ -42,7 +43,7 @@ export default class Dashboard extends Component {
               </NavLink>
             </div>
             <nav className="panel">
-              {this.machines.machines.map((machine) =>
+              {this.machines.map((machine) =>
                 <NavLink key={machine.name} className="panel-block"
                   to={`${match.url}/machine/${machine.name}`}>
                   <span className="panel-icon">

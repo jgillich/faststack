@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom'
 import {observer} from 'mobx-react'
 import md5 from 'md5'
 import {Helmet} from 'react-helmet'
+import PropTypes from 'prop-types'
 import ScrollToTop from './common/ScrollToTop'
 import Dashboard from './dashboard/Dashboard'
 import Web from './web/Web'
@@ -15,7 +16,7 @@ const user = new User()
 export default class App extends Component {
 
   static childContextTypes = {
-    user: React.PropTypes.object,
+    user: PropTypes.object,
   }
 
   getChildContext() {

@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {Link, Redirect} from 'react-router-dom'
+import PropTypes from 'prop-types'
 import {observer} from 'mobx-react'
 import {Helmet} from 'react-helmet'
 import {Button} from '../common/Bulma'
@@ -8,7 +9,7 @@ import {Button} from '../common/Bulma'
 export default class Login extends Component {
 
   static contextTypes = {
-    user: React.PropTypes.object,
+    user: PropTypes.object,
   }
 
   state = {

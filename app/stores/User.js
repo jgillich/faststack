@@ -1,9 +1,11 @@
 import {observable, computed, action} from 'mobx'
 import jwtDecode from 'jwt-decode'
+import Collection from './Collection'
 
 export default class User {
 
   constructor() {
+    this.url = process.env.BILLSTACK_URL
     if(this.loggedIn) {
       let claims = jwtDecode(this.token)
       this.name = claims.name
@@ -41,76 +43,62 @@ export default class User {
 	}
 
   @action update() {
-    return this.fetch('/userinfo', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${this.token}`,
-      },
-    }).then(({data}) => {
-      this.name = data.name
-      this.email = data.email
-    })
+    return this.fetch('GET', '/userinfo')
+      .then(({data}) => {
+        this.name = data.attributes.name
+        this.email = data.attributes.email
+      })
   }
 
   @action login() {
-    return this.fetch('/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
+    let body = JSON.stringify({
+      data: {
+        attributes: {
+          name: this.name,
+          password: this.password,
+          claims: ['email'],
+        },
       },
-      body: JSON.stringify({
-        name: this.name,
-        password: this.password,
-        claims: ['email'],
-      }),
-    }).then(({data}) => {
-      let claims = jwtDecode(data.token)
-      this.name = claims.name
-      this.email = claims.email
-      this.token = data.token
-      sessionStorage.setItem('token', data.token)
     })
+
+    return this.fetch('POST', '/login', body)
+      .then(({data}) => {
+        this.token = data.attributes.token
+        let claims = jwtDecode(this.token)
+        this.name = claims.name
+        this.email = claims.email
+        sessionStorage.setItem('token', this.token)
+      })
   }
 
   @action signup() {
-    return this.fetch('/signup', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
+    let body = JSON.stringify({
+      data: {
+        type: 'users',
+        attributes: {
+          name: this.name,
+          password: this.password,
+          email: this.email,
+          stripe_token: this.stripeToken,
+        },
       },
-      body: JSON.stringify({
-        name: this.name,
-        password: this.password,
-        email: this.email,
-        stripe_token: this.stripeToken,
-      }),
     })
+
+    return this.fetch('POST', '/signup', body)
   }
 
   @action subscribe() {
-    return this.fetch('/subscribe', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${this.token}`,
+    let body = JSON.stringify({
+      data: {
+        type: 'users',
+        attributes: {
+          plan: this.plan,
+        },
       },
-      body: JSON.stringify({
-        plan: this.plan,
-      }),
     })
+    return this.fetch('POST', '/subscribe', body)
   }
 
-  fetch(url, options) {
-    return new Promise((resolve, reject) => {
-      fetch(`${process.env.BILLSTACK_URL}${url}`, options)
-      .then((res) => {
-        if(!res.ok) {
-          return res.json().then(reject)
-        }
-        res.json().then(resolve)
-      }).catch(() => reject(new Error('Network error')))
-    })
-  }
+  fetch = Collection.prototype.fetch
 
 }

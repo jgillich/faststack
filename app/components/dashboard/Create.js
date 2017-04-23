@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {Redirect} from 'react-router-dom'
 import dockerNames from 'docker-names'
 import {Helmet} from 'react-helmet'
+import PropTypes from 'prop-types'
 import {Button} from '../common/Bulma'
 
 // TODO fetch from somewhere
@@ -31,7 +32,7 @@ let images = [
 export class Create extends Component {
 
   static contextTypes = {
-    machines: React.PropTypes.object,
+    machines: PropTypes.object,
   }
 
   state = {

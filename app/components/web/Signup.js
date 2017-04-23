@@ -4,7 +4,9 @@ import {observer} from 'mobx-react'
 import validator from 'validator'
 import pick from 'lodash.pick'
 import {Helmet} from 'react-helmet'
+import PropTypes from 'prop-types'
 import Input from '../common/Input'
+import Errors from '../common/Errors'
 
 // TODO replace all the ugly inline validation with something better
 /* eslint max-len: 0 */
@@ -17,25 +19,25 @@ export default class Signup extends Component {
     cvc: null,
     exp_month: null,
     exp_year: null,
-    error: null,
+    errors: [],
     loading: false,
     redirectToReferrer: false,
   }
 
   static contextTypes = {
-    user: React.PropTypes.object,
-    stripe: React.PropTypes.object,
+    user: PropTypes.object,
+    stripe: PropTypes.object,
   }
 
   submit(e) {
     e.preventDefault()
-    this.setState({loading: true, error: null})
+    this.setState({loading: true, errors: []})
 
     let card = pick(this.state, ['number', 'cvc', 'exp_month', 'exp_year'])
 
     Stripe.card.createToken(card, (status, res) => {
       if (res.error) {
-        this.setState({error: res.error.message, loading: false})
+        this.setState({errors: [res.error], loading: false})
       } else {
         this.context.user.stripeToken = res.id
         this.context.user.signup().then(() => {
@@ -46,8 +48,8 @@ export default class Signup extends Component {
           return this.context.user.login() // login again to refresh token
         }).then(() => {
           this.setState({redirectToReferrer: true})
-        }).catch((error) => {
-          this.setState({error: error.message, loading: false})
+        }).catch((res) => {
+          this.setState({errors: res.errors, loading: false})
         })
       }
     })
@@ -165,10 +167,7 @@ export default class Signup extends Component {
 
             <br/>
 
-            { !this.state.error ? null :
-              <div className="notification is-danger">
-                {this.state.error}
-              </div> }
+            <Errors errors={this.state.errors}/>
           </div>
         </div>
       </div>
