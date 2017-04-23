@@ -1,15 +1,16 @@
-memo = "273701610e9fd964b678f5ab649711775a66b6250cdecf03d109600fd9728aa0"
+memo = "012808b008251ec1eed44ad4b5f9b461176f54362ba6736790df4dc658c1e0f4"
 
 [[projects]]
   name = "github.com/BurntSushi/toml"
   packages = ["."]
-  revision = "f706d00e3de6abe700c994cdd545a1a4915af060"
+  revision = "b26d9c308763d68093482582cea63d69be07a0f0"
+  version = "v0.3.0"
 
 [[projects]]
   branch = "master"
   name = "github.com/asaskevich/govalidator"
   packages = ["."]
-  revision = "872bb01704d183fe276bce6fa429408a87661998"
+  revision = "2c14e1cca90af49b3b21fe2d7aaa8cc7f9da2ff8"
 
 [[projects]]
   branch = "master"
@@ -30,10 +31,10 @@ memo = "273701610e9fd964b678f5ab649711775a66b6250cdecf03d109600fd9728aa0"
   revision = "2268707a8f0843315e2004ee4f1d021dc08baedf"
 
 [[projects]]
-  branch = "master"
   name = "github.com/go-pg/pg"
   packages = [".","internal","internal/parser","internal/pool","orm","types"]
-  revision = "b80ead78e706aae155d29d808f0df17fccd8eea2"
+  revision = "1ea5295d97ab07c71c39c34698ecbfdfba54b1a8"
+  version = "v6.0.5"
 
 [[projects]]
   branch = "master"
@@ -42,22 +43,22 @@ memo = "273701610e9fd964b678f5ab649711775a66b6250cdecf03d109600fd9728aa0"
   revision = "af3dab1a94c31a072f7d7df740f4e42861aec7f0"
 
 [[projects]]
-  branch = "master"
   name = "github.com/gorilla/context"
   packages = ["."]
-  revision = "08b5f424b9271eedf6f9f0ce86cb9396ed337a42"
+  revision = "1ea25387ff6f684839d82767c1733ff4d4d15d0a"
+  version = "v1.1"
 
 [[projects]]
   branch = "master"
   name = "github.com/gorilla/websocket"
   packages = ["."]
-  revision = "3f3e394da2b801fbe732a935ef40724762a67a07"
+  revision = "a91eba7f97777409bc2c443f5534d41dd20c5720"
 
 [[projects]]
   branch = "master"
   name = "github.com/hashicorp/consul"
   packages = ["api"]
-  revision = "22986fbfe899698b534861a012c50ce128c2b713"
+  revision = "f17656c39f27f3adc79fd3fd51b9fdc84cc414a1"
 
 [[projects]]
   branch = "master"
@@ -79,9 +80,15 @@ memo = "273701610e9fd964b678f5ab649711775a66b6250cdecf03d109600fd9728aa0"
 
 [[projects]]
   branch = "master"
+  name = "github.com/hashicorp/go-rootcerts"
+  packages = ["."]
+  revision = "6bb64b370b90e7ef1fa532be9e591a81c3493e00"
+
+[[projects]]
+  branch = "master"
   name = "github.com/hashicorp/hcl"
   packages = [".","hcl/ast","hcl/parser","hcl/scanner","hcl/strconv","hcl/token","json/parser","json/scanner","json/token"]
-  revision = "630949a3c5fa3c613328e1b8256052cbc2327c9b"
+  revision = "7fa7fff964d035e8a162cce3a164b3ad02ad651b"
 
 [[projects]]
   name = "github.com/hashicorp/serf"
@@ -110,20 +117,26 @@ memo = "273701610e9fd964b678f5ab649711775a66b6250cdecf03d109600fd9728aa0"
 [[projects]]
   branch = "master"
   name = "github.com/lxc/lxd"
-  packages = [".","shared","shared/api","shared/ioprogress","shared/osarch","shared/simplestreams","shared/version"]
-  revision = "2e26a18c0b8666257dca9a91a9c789251914adde"
+  packages = [".","shared","shared/api","shared/ioprogress","shared/logger","shared/osarch","shared/simplestreams","shared/version"]
+  revision = "d49ecde84efbfa40b0f9d64008ebf4c655bcf1a3"
+
+[[projects]]
+  name = "github.com/mattn/go-runewidth"
+  packages = ["."]
+  revision = "9e777a8366cce605130a531d2cd6363d07ad7317"
+  version = "v0.0.2"
 
 [[projects]]
   branch = "master"
-  name = "github.com/mattn/go-runewidth"
+  name = "github.com/mitchellh/go-homedir"
   packages = ["."]
-  revision = "14207d285c6c197daabb5c9793d63e7af9ab2d50"
+  revision = "b8bc1bf767474819792c23f32d8286a45736f1c6"
 
 [[projects]]
   branch = "master"
   name = "github.com/mitchellh/mapstructure"
   packages = ["."]
-  revision = "53818660ed4955e899c0bcafa97299a388bd7c8e"
+  revision = "cc8532a8e9a55ea36402aa21efdf403a60d34096"
 
 [[projects]]
   branch = "master"
@@ -135,19 +148,19 @@ memo = "273701610e9fd964b678f5ab649711775a66b6250cdecf03d109600fd9728aa0"
   branch = "master"
   name = "github.com/rs/cors"
   packages = ["."]
-  revision = "a62a804a8a009876ca59105f7899938a1349f4b3"
+  revision = "2d7dd2a10331137ae3f931ba08c21fd00cbf208d"
 
 [[projects]]
-  branch = "master"
   name = "github.com/rs/xhandler"
   packages = ["."]
-  revision = "ed27b6fd65218132ee50cd95f38474a3d8a2cd12"
+  revision = "d9d9599b6aaf6a058cb7b1f48291ded2cbd13390"
+  version = "v1.0"
 
 [[projects]]
-  branch = "master"
   name = "github.com/stripe/stripe-go"
   packages = [".","customer","event","orderitem","plan","sub"]
-  revision = "52316de96ca8c9120739b13cca17e36eb02c8737"
+  revision = "10073c3aea993eb30560b0a75a4fbb46240c80df"
+  version = "v21.2.0"
 
 [[projects]]
   branch = "master"
@@ -159,52 +172,52 @@ memo = "273701610e9fd964b678f5ab649711775a66b6250cdecf03d109600fd9728aa0"
   branch = "master"
   name = "gitlab.com/faststack/billstack"
   packages = ["api","client","model"]
-  revision = "47353b80be2b680c12ac092c478f4589fc0d8b1e"
+  revision = "0f65800facbcdc1aefa9378bb70d288b558fbd56"
 
 [[projects]]
   branch = "master"
   name = "gitlab.com/faststack/machinestack"
   packages = ["api","client","config","driver","model","scheduler"]
-  revision = "5bd0c51278eab2eec5b9776afb47bec179edb7cb"
+  revision = "8dce3f5ed2ab62097c18bb6dc990ac3b7df41238"
 
 [[projects]]
-  branch = "master"
   name = "go.uber.org/atomic"
   packages = ["."]
   revision = "4e336646b2ef9fc6e47be8e21594178f98e5ebcf"
+  version = "v1.2.0"
 
 [[projects]]
   branch = "master"
   name = "go.uber.org/zap"
   packages = [".","buffer","internal/bufferpool","internal/color","internal/exit","internal/multierror","zapcore"]
-  revision = "1550bc05539134bbf8612a35f34a79ab8bf34ee3"
+  revision = "f2fca9a30853031b445cb52ff2fc37d6382c3c96"
 
 [[projects]]
   branch = "master"
   name = "golang.org/x/crypto"
   packages = ["bcrypt","blowfish","ssh/terminal"]
-  revision = "cbc3d0884eac986df6e78a039b8792e869bff863"
+  revision = "96846453c37f0876340a66a47f3f75b1f3a6cd2d"
 
 [[projects]]
   branch = "master"
   name = "golang.org/x/net"
   packages = ["context"]
-  revision = "906cda9512f77671ab44f8c8563b13a8e707b230"
+  revision = "d212a1ef2de2f5d441c327b8f26cf3ea3ea9f265"
 
 [[projects]]
   branch = "master"
   name = "golang.org/x/sys"
   packages = ["unix"]
-  revision = "e4594059fe4cde2daf423055a596c2cd1e6c9adf"
+  revision = "ea9bcade75cb975a0b9738936568ab388b845617"
 
 [[projects]]
   branch = "v2"
   name = "gopkg.in/urfave/cli.v2"
   packages = [".","altsrc"]
-  revision = "04b2f4ff79cf1fd71e138bafc67df8bbdb5b81c2"
+  revision = "922e3e2ceaaa1831c859679af772dcd534095119"
 
 [[projects]]
   branch = "v2"
   name = "gopkg.in/yaml.v2"
   packages = ["."]
-  revision = "a3f3340b5840cee44f372bddb5880fcbc419b46a"
+  revision = "cd8b52f8269e0feb286dfeef29f8fe4d5b397e0b"
