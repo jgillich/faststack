@@ -7,8 +7,6 @@ import (
 
 	"gopkg.in/urfave/cli.v2"
 
-	"os/user"
-
 	yaml "gopkg.in/yaml.v2"
 )
 
@@ -29,14 +27,6 @@ func ParseConfig(c *cli.Context) *Config {
 }
 
 func (c *Config) save(path string) error {
-	if path[:2] == "~/" {
-		u, err := user.Current()
-		if err != nil {
-			return err
-		}
-		path = filepath.Join(u.HomeDir, path[2:])
-	}
-
 	d, err := yaml.Marshal(c)
 	if err != nil {
 		return err

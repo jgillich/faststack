@@ -43,9 +43,23 @@ func main() {
 		},
 		Commands: []*cli.Command{
 			{
-				Name:   "login",
-				Usage:  "Login with your username and password",
-				Action: command.Login,
+				Name:   "launch",
+				Usage:  "Launch a new machine",
+				Action: command.Launch,
+				Flags: []cli.Flag{
+					&cli.StringFlag{
+						Name:  "name",
+						Usage: "Set the name of the machine",
+					},
+					&cli.BoolFlag{
+						Name:  "rm",
+						Usage: "Delete machine at the end of the session",
+					},
+					&cli.BoolFlag{
+						Name:  "noattach",
+						Usage: "Do not attach to the machine",
+					},
+				},
 			},
 			{
 				Name:   "list",
@@ -53,9 +67,19 @@ func main() {
 				Action: command.List,
 			},
 			{
-				Name:   "exec",
-				Usage:  "Execute a command",
-				Action: command.Exec,
+				Name:   "login",
+				Usage:  "Login with your username and password",
+				Action: command.Login,
+			},
+			{
+				Name:   "shell",
+				Usage:  "Attach to a terminal session",
+				Action: command.Shell,
+			},
+			{
+				Name:   "delete",
+				Usage:  "Delete machine",
+				Action: command.Delete,
 			},
 		},
 	}

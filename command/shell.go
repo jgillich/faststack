@@ -7,8 +7,8 @@ import (
 	"gopkg.in/urfave/cli.v2"
 )
 
-// Exec executes a command and attaches to its tty
-func Exec(c *cli.Context) error {
+// Shell executes a command and attaches to its tty
+func Shell(c *cli.Context) error {
 	name := c.Args().Get(0)
 
 	client := client.New(c.String("machinestack"), c.String("token"))

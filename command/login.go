@@ -40,5 +40,7 @@ func Login(c *cli.Context) error {
 		return err
 	}
 
+	fmt.Printf("Logged in as '%v'.", username)
+
 	return nil
 }
