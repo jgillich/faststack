@@ -52,13 +52,17 @@ func main() {
 				Usage:  "List your machines",
 				Action: command.List,
 			},
+			{
+				Name:   "exec",
+				Usage:  "Execute a command",
+				Action: command.Exec,
+			},
 		},
 	}
-	//app.Before = func(c *cli.Context) error {
-	//	altsrc.InitInputSourceWithContext(app.Flags, altsrc.NewYamlSourceFromFlagFunc("config"))(c)
-	//	return nil
-	//}
-	app.Before = altsrc.InitInputSourceWithContext(app.Flags, altsrc.NewYamlSourceFromFlagFunc("config"))
+	app.Before = func(c *cli.Context) error {
+		altsrc.InitInputSourceWithContext(app.Flags, altsrc.NewYamlSourceFromFlagFunc("config"))(c)
+		return nil
+	}
 
 	app.Run(os.Args)
 }

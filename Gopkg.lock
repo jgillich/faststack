@@ -1,4 +1,4 @@
-memo = "3516741c378479f7098fa813a47d922e8b1c7d401e88ef967ca942dfda63cad1"
+memo = "273701610e9fd964b678f5ab649711775a66b6250cdecf03d109600fd9728aa0"
 
 [[projects]]
   name = "github.com/BurntSushi/toml"
@@ -10,6 +10,18 @@ memo = "3516741c378479f7098fa813a47d922e8b1c7d401e88ef967ca942dfda63cad1"
   name = "github.com/asaskevich/govalidator"
   packages = ["."]
   revision = "872bb01704d183fe276bce6fa429408a87661998"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/auth0/go-jwt-middleware"
+  packages = ["."]
+  revision = "f3f7de3b9e394e3af3b88e1b9457f6f71d1ae0ac"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/dchest/uniuri"
+  packages = ["."]
+  revision = "8902c56451e9b58ff940bbe5fec35d5f9c04584a"
 
 [[projects]]
   branch = "master"
@@ -25,9 +37,39 @@ memo = "3516741c378479f7098fa813a47d922e8b1c7d401e88ef967ca942dfda63cad1"
 
 [[projects]]
   branch = "master"
+  name = "github.com/google/jsonapi"
+  packages = ["."]
+  revision = "af3dab1a94c31a072f7d7df740f4e42861aec7f0"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/gorilla/context"
+  packages = ["."]
+  revision = "08b5f424b9271eedf6f9f0ce86cb9396ed337a42"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/gorilla/websocket"
+  packages = ["."]
+  revision = "3f3e394da2b801fbe732a935ef40724762a67a07"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/hashicorp/consul"
+  packages = ["api"]
+  revision = "22986fbfe899698b534861a012c50ce128c2b713"
+
+[[projects]]
+  branch = "master"
   name = "github.com/hashicorp/errwrap"
   packages = ["."]
   revision = "7554cd9344cec97297fa6649b055a8c98c2a1e55"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/hashicorp/go-cleanhttp"
+  packages = ["."]
+  revision = "3573b8b52aa7b37b9358d966a898feb387f62437"
 
 [[projects]]
   branch = "master"
@@ -42,6 +84,12 @@ memo = "3516741c378479f7098fa813a47d922e8b1c7d401e88ef967ca942dfda63cad1"
   revision = "630949a3c5fa3c613328e1b8256052cbc2327c9b"
 
 [[projects]]
+  name = "github.com/hashicorp/serf"
+  packages = ["coordinate"]
+  revision = "d6574a5bb1226678d7010325fb6c985db20ee458"
+  version = "v0.8.1"
+
+[[projects]]
   branch = "master"
   name = "github.com/jinzhu/inflection"
   packages = ["."]
@@ -49,27 +97,21 @@ memo = "3516741c378479f7098fa813a47d922e8b1c7d401e88ef967ca942dfda63cad1"
 
 [[projects]]
   branch = "master"
-  name = "github.com/labstack/echo"
+  name = "github.com/jmcvetta/randutil"
   packages = ["."]
-  revision = "049518f8c46759fe645a7be1c71b5bc76bc27eaa"
+  revision = "2bb1b664bcff821e02b2a0644cd29c7e824d54f8"
 
 [[projects]]
   branch = "master"
-  name = "github.com/labstack/gommon"
-  packages = ["color","log"]
-  revision = "e8995fb26e646187d33cff439b18609cfba23088"
+  name = "github.com/julienschmidt/httprouter"
+  packages = ["."]
+  revision = "6f3f3919c8781ce5c0509c83fffc887a7830c938"
 
 [[projects]]
   branch = "master"
-  name = "github.com/mattn/go-colorable"
-  packages = ["."]
-  revision = "d898aa9fb31c91f35dd28ca75db377eff023c076"
-
-[[projects]]
-  branch = "master"
-  name = "github.com/mattn/go-isatty"
-  packages = ["."]
-  revision = "dda3de49cbfcec471bd7a70e6cc01fcc3ff90109"
+  name = "github.com/lxc/lxd"
+  packages = [".","shared","shared/api","shared/ioprogress","shared/osarch","shared/simplestreams","shared/version"]
+  revision = "2e26a18c0b8666257dca9a91a9c789251914adde"
 
 [[projects]]
   branch = "master"
@@ -91,39 +133,63 @@ memo = "3516741c378479f7098fa813a47d922e8b1c7d401e88ef967ca942dfda63cad1"
 
 [[projects]]
   branch = "master"
+  name = "github.com/rs/cors"
+  packages = ["."]
+  revision = "a62a804a8a009876ca59105f7899938a1349f4b3"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/rs/xhandler"
+  packages = ["."]
+  revision = "ed27b6fd65218132ee50cd95f38474a3d8a2cd12"
+
+[[projects]]
+  branch = "master"
   name = "github.com/stripe/stripe-go"
   packages = [".","customer","event","orderitem","plan","sub"]
   revision = "52316de96ca8c9120739b13cca17e36eb02c8737"
 
 [[projects]]
   branch = "master"
-  name = "github.com/valyala/bytebufferpool"
+  name = "github.com/urfave/negroni"
   packages = ["."]
-  revision = "e746df99fe4a3986f4d4f79e13c1e0117ce9c2f7"
-
-[[projects]]
-  branch = "master"
-  name = "github.com/valyala/fasttemplate"
-  packages = ["."]
-  revision = "d090d65668a286d9a180d43a19dfdc5dcad8fe88"
+  revision = "c0db5feaa33826cd5117930c8f4ee5c0f565eec6"
 
 [[projects]]
   branch = "master"
   name = "gitlab.com/faststack/billstack"
-  packages = ["api","model"]
-  revision = "a5f05177506e7e01c2d06d4d12132b037b4d16e0"
+  packages = ["api","client","model"]
+  revision = "47353b80be2b680c12ac092c478f4589fc0d8b1e"
 
 [[projects]]
   branch = "master"
   name = "gitlab.com/faststack/machinestack"
-  packages = ["config","model"]
-  revision = "2898962fe25b21eb0110615c1ccdda73b2761bf3"
+  packages = ["api","client","config","driver","model","scheduler"]
+  revision = "5bd0c51278eab2eec5b9776afb47bec179edb7cb"
+
+[[projects]]
+  branch = "master"
+  name = "go.uber.org/atomic"
+  packages = ["."]
+  revision = "4e336646b2ef9fc6e47be8e21594178f98e5ebcf"
+
+[[projects]]
+  branch = "master"
+  name = "go.uber.org/zap"
+  packages = [".","buffer","internal/bufferpool","internal/color","internal/exit","internal/multierror","zapcore"]
+  revision = "1550bc05539134bbf8612a35f34a79ab8bf34ee3"
 
 [[projects]]
   branch = "master"
   name = "golang.org/x/crypto"
-  packages = ["acme","acme/autocert","bcrypt","blowfish","ssh/terminal"]
+  packages = ["bcrypt","blowfish","ssh/terminal"]
   revision = "cbc3d0884eac986df6e78a039b8792e869bff863"
+
+[[projects]]
+  branch = "master"
+  name = "golang.org/x/net"
+  packages = ["context"]
+  revision = "906cda9512f77671ab44f8c8563b13a8e707b230"
 
 [[projects]]
   branch = "master"
