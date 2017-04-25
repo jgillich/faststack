@@ -27,7 +27,7 @@ func Login(c *cli.Context) error {
 	password := string(bytePassword)
 	fmt.Printf("\n")
 
-	client := client.New(c.String("machinestack"), "")
+	client := client.New(c.String("billstack"), "")
 	token, err := client.Login(username, password)
 
 	if err != nil {

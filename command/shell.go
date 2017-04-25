@@ -18,5 +18,16 @@ func Shell(c *cli.Context) error {
 		return err
 	}
 
-	return client.SessionIO(sessionID, os.Stdin, os.Stdout)
+	control, err := client.SessionControl(sessionID)
+	if err != nil {
+		return err
+	}
+
+	go controlHandler(control)
+
+	if err := client.SessionIO(sessionID, os.Stdin, os.Stdout); err != nil {
+		return err
+	}
+
+	return nil
 }
