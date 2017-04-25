@@ -7,8 +7,8 @@ Xterm.loadAddon('fit')
 
 export default class Terminal {
   constructor(id) {
-    let io = this.ws(`/exec/${id}/io`)
-    let control = this.ws(`/exec/${id}/control`)
+    let io = this.ws(`/session/${id}/io`)
+    let control = this.ws(`/session/${id}/control`)
 
     this.xterm = new Xterm()
     this.xterm.attach(io)

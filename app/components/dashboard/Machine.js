@@ -3,6 +3,7 @@ import {Redirect} from 'react-router-dom'
 import {Helmet} from 'react-helmet'
 import PropTypes from 'prop-types'
 import screenfull from 'screenfull'
+import Errors from '../common/Errors'
 
 export default class Machine extends Component {
 
@@ -12,10 +13,11 @@ export default class Machine extends Component {
 
   state = {
     deleted: false,
+    errors: [],
   }
 
   toggleFullscreen() {
-    if(!screenfull.isFullscreen) {
+    if (!screenfull.isFullscreen) {
       this.cardEl.style.height = '100%'
       this.cardEl.style.width = '100%'
     } else {
@@ -31,29 +33,27 @@ export default class Machine extends Component {
       .then(() => {
         this.setState({deleted: true})
       })
-      .catch((error) => this.setState({error: error.message}))
+      .catch((res) => this.setState({errors: res.errors}))
   }
 
   render() {
-    const {error, deleted} = this.state
+    const {errors, deleted} = this.state
     const {match} = this.props
     const machine = this.context.machines.name(match.params.name)
 
-    if(deleted) {
+    if (deleted) {
       return (
         <Redirect to="/dashboard"/>
       )
     }
 
-    if(error) {
+    if (errors.length) {
       return (
-        <div className="notification is-danger">
-          {error}
-        </div>
+        <Errors errors={errors}/>
       )
     }
 
-    if(!machine) {
+    if (!machine) {
       return (
         <div className="notification is-danger">
           Machine {match.params.name} was not found
@@ -61,7 +61,7 @@ export default class Machine extends Component {
       )
     }
 
-    this.context.machines.exec(machine.name)
+    this.context.machines.session(machine.name)
       .then((terminal) => {
         terminal.mount(this.termEl)
         terminal.focus()
@@ -74,9 +74,7 @@ export default class Machine extends Component {
         <Helmet>
           <title>{`${machine.name} - FastStack`}</title>
         </Helmet>
-        <div className="card" ref={(el) => {
-this.cardEl = el
-}} style={{display: 'flex', flexDirection: 'column', height: '85vh'}}>
+        <div className="card" ref={(el) => this.cardEl = el} style={{display: 'flex', flexDirection: 'column', height: '85vh'}}>
           <header className="card-header">
             <p className="card-header-title">
               {machine.name} ({machine.image})
@@ -86,14 +84,14 @@ this.cardEl = el
                 <i className="fa fa-trash" onClick={() => this.delete()}></i>
               </span>
             </a>
-            { !screenfull.enabled ? null :
-            <a className="card-header-icon" onClick={() => this.toggleFullscreen()}>
-              <span className="icon"><i className="fa fa-arrows-alt"></i></span>
-            </a> }
+            {!screenfull.enabled ? null :
+              <a className="card-header-icon" onClick={() => this.toggleFullscreen()}>
+                <span className="icon"><i className="fa fa-arrows-alt"></i></span>
+              </a>}
           </header>
           <div className="card-content"
             style={{display: 'flex', flex: '1', backgroundColor: '#000'}}
-            ref={(el) => this.termEl = el}/>
+            ref={(el) => this.termEl = el} />
         </div>
 
       </div>

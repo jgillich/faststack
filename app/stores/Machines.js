@@ -2,7 +2,6 @@ import {action} from 'mobx'
 import Collection from './Collection'
 import Terminal from './Terminal'
 
-
 export default class Machines extends Collection {
 
   constructor(token) {
@@ -20,15 +19,19 @@ export default class Machines extends Collection {
   }
 
   @action create(name, image) {
-    const machine = {
-      name: name,
-      image: image,
-      driver: 'lxd',
+    let data = {
+      type: 'machines',
+      attributes: {
+        name: name,
+        image: image,
+        driver: 'lxd',
+      },
     }
 
-    return this.fetch('POST', '/machines', JSON.stringify(machine))
+
+    return this.fetch('POST', '/machines', JSON.stringify({data}))
       .then((_) => {
-        this.items.push(machine)
+        this.items.push(data.attributes)
       })
   }
 
@@ -39,15 +42,15 @@ export default class Machines extends Collection {
       })
   }
 
-  @action exec(name) {
+  @action session(name) {
     // TODO detect when session dies for good
     if (this.sessions[name]) {
       return Promise.resolve(this.sessions[name])
     }
 
-    return this.fetch('GET', `/machines/${name}/exec`)
+    return this.fetch('POST', `/machines/${name}/session`)
       .then(({data}) => {
-        this.sessions[name] = new Terminal(data.attributes.id)
+        this.sessions[name] = new Terminal(data.id)
         return this.sessions[name]
       })
   }

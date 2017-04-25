@@ -4,6 +4,7 @@ import dockerNames from 'docker-names'
 import {Helmet} from 'react-helmet'
 import PropTypes from 'prop-types'
 import {Button} from '../common/Bulma'
+import Errors from '../common/Errors'
 
 // TODO fetch from somewhere
 let images = [
@@ -40,7 +41,7 @@ export class Create extends Component {
     imageTab: 'official',
     imageSelected: images[0],
     loading: false,
-    error: null,
+    errors: [],
     redirectToTerm: false,
   }
 
@@ -50,12 +51,12 @@ export class Create extends Component {
 
   submit(e) {
     e.preventDefault()
-    this.setState({loading: true, error: null})
+    this.setState({loading: true, errors: []})
 
     this.context.machines.create(this.state.name, 'ubuntu/xenial').then(() => {
       this.setState({loading: false, redirectToTerm: true})
-    }).catch((error) => {
-      this.setState({error: error.message, loading: false})
+    }).catch((res) => {
+      this.setState({errors: res.errors, loading: false})
     })
   }
 
@@ -166,10 +167,7 @@ export class Create extends Component {
 
           <br/>
 
-          { !this.state.error ? null :
-            <div className="notification is-danger">
-              {this.state.error}
-            </div> }
+          <Errors errors={this.state.errors}/>
 
         </div>
       </div>

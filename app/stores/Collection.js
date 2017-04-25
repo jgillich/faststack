@@ -4,7 +4,7 @@ const networkError = {
   errors: [
     {
       title: 'Network Error',
-      Detail: 'Please check your internet connection.',
+      detail: 'Please check your internet connection.',
     },
   ],
 }
@@ -27,7 +27,7 @@ export default class Collection {
   }
 
   name(name) {
-    return this.find((m) => m.Name == name)
+    return this.find((m) => m.name == name)
   }
 
   fetch(method, url, body) {

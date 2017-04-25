@@ -73,7 +73,7 @@ export default class Signup extends Component {
         </Helmet>
 
         <div className="columns is-centered">
-          <div className="column is-4">
+          <div className="column is-half-tablet is-one-third-desktop">
             <h1 className="title has-text-centered">Sign Up</h1>
 
             <form onSubmit={(e) => this.submit(e)}>
