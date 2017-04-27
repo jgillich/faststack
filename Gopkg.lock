@@ -46,7 +46,7 @@ memo = "70fb851dc9b78d64e06112406473b1653211c0ce5b3157baf0033c0195845820"
   branch = "master"
   name = "github.com/hashicorp/consul"
   packages = ["api"]
-  revision = "5732350c040de8c4efd0f4261a57bbfa49ea4f8a"
+  revision = "e9489db89101c8884f13ad40ad396066f9e693eb"
 
 [[projects]]
   branch = "master"
@@ -112,7 +112,7 @@ memo = "70fb851dc9b78d64e06112406473b1653211c0ce5b3157baf0033c0195845820"
   branch = "master"
   name = "github.com/lxc/lxd"
   packages = [".","shared","shared/api","shared/ioprogress","shared/logger","shared/osarch","shared/simplestreams","shared/termios","shared/version"]
-  revision = "4650ca38dba533800ba742954e104323062073c6"
+  revision = "f36a434f5649c074d6ea43811c2987b41f50936f"
 
 [[projects]]
   name = "github.com/mattn/go-runewidth"
@@ -166,13 +166,13 @@ memo = "70fb851dc9b78d64e06112406473b1653211c0ce5b3157baf0033c0195845820"
   branch = "master"
   name = "gitlab.com/faststack/billstack"
   packages = ["api","client","model"]
-  revision = "e4d0d8200d0add56587bf36a0c2b9eff60f97897"
+  revision = "7053def2a2a971cbbbdede27f6428098af5b459a"
 
 [[projects]]
   branch = "master"
   name = "gitlab.com/faststack/machinestack"
   packages = ["api","client","config","driver","model","scheduler"]
-  revision = "678dc587b0826f1cafd09eda93968e34a0a06ac9"
+  revision = "e5a297d3ea29f7420861b3c6ae888ce4c2d36591"
 
 [[projects]]
   name = "go.uber.org/atomic"

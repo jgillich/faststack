@@ -42,13 +42,22 @@ export default class Machines extends Collection {
       })
   }
 
-  @action session(name) {
+  @action session(name, width, height) {
     // TODO detect when session dies for good
     if (this.sessions[name]) {
       return Promise.resolve(this.sessions[name])
     }
 
-    return this.fetch('POST', `/machines/${name}/session`)
+    let data = {
+      attributes: {
+        name: name,
+        // TODO detect term size in advance
+        width: 80,
+        height: 25,
+      },
+    }
+
+    return this.fetch('POST', '/session', JSON.stringify({data}))
       .then(({data}) => {
         this.sessions[name] = new Terminal(data.id)
         return this.sessions[name]

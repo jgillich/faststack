@@ -1,8 +1,6 @@
 package command
 
 import (
-	"os"
-
 	"gitlab.com/faststack/machinestack/client"
 	"gitlab.com/faststack/machinestack/model"
 	"gopkg.in/urfave/cli.v2"
@@ -18,19 +16,13 @@ func Launch(c *cli.Context) error {
 
 	client := client.New(c.String("machinestack"), c.String("token"))
 
-	if err := client.MachineCreate(&machine); err != nil {
-		return err
-	}
-
-	sessionID, err := client.SessionCreate(machine.Name)
+	created, err := client.MachineCreate(&machine)
 	if err != nil {
 		return err
 	}
 
 	if !c.Bool("noattach") {
-		if err := client.SessionIO(sessionID, os.Stdin, os.Stdout); err != nil {
-			return err
-		}
+		err = shell(client, created.Name)
 	}
 
 	if c.Bool("rm") {
@@ -39,5 +31,5 @@ func Launch(c *cli.Context) error {
 		}
 	}
 
-	return nil
+	return err
 }

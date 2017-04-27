@@ -8,6 +8,7 @@ import PropTypes from 'prop-types'
 import ScrollToTop from './common/ScrollToTop'
 import Dashboard from './dashboard/Dashboard'
 import Web from './web/Web'
+import Help from './help/Help'
 import User from '../stores/User'
 
 const user = new User()
@@ -58,11 +59,11 @@ export default class App extends Component {
 
               <span className="nav-item">
                 {!user.loggedIn ?
-                <Link className="button" to="/login">
+                <Link className="button is-primary" to="/login">
                   <span>Login</span>
                 </Link> : null}
 
-                {!user.loggedIn ?<Link className="button is-primary" to="/signup">
+                {!user.loggedIn ?<Link className="button is-primary is-inverted" to="/signup">
                   <span>Sign Up</span>
                 </Link> : null}
 
@@ -79,6 +80,7 @@ export default class App extends Component {
           </nav>
           <Switch>
             <Route path="/dashboard" component={Dashboard}/>
+            <Route path="/help" component={Help}/>
             <Route path="/" component={Web}/>
           </Switch>
         </div>

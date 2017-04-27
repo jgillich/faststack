@@ -30,10 +30,6 @@ func controlHandler(c chan driver.ControlMessage) {
 		syscall.SIGSEGV,
 		syscall.SIGCONT)
 
-	// trigger SIGWINCH once to transmit initial size
-	// TODO should be part of create request
-	ch <- syscall.SIGWINCH
-
 	for sig := range ch {
 		switch sig {
 		case syscall.SIGWINCH:

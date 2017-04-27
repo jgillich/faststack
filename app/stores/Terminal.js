@@ -19,7 +19,6 @@ export default class Terminal {
 
     control.addEventListener('open', () => {
       window.addEventListener('resize', debounce(() => this.xterm.fit(), 100))
-
       this.xterm.on('resize', (size) => {
         control.send(JSON.stringify({
           command: 'window-resize',
@@ -27,6 +26,9 @@ export default class Terminal {
         }))
       })
     })
+
+    // TODO detect term size in advance
+    setTimeout(() => this.xterm.fit(), 100)
   }
 
   mount(elem) {
