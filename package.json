@@ -17,7 +17,7 @@
     "bulma": "^0.4.0",
     "classnames": "^2.2.5",
     "docker-names": "^1.0.3",
-    "dotenv-webpack": "^1.4.1",
+    "dotenv-webpack": "^1.4.4",
     "font-awesome": "^4.7.0",
     "font-linux": "git+https://github.com/Lukas-W/font-linux.git",
     "html-loader": "^0.4.5",
