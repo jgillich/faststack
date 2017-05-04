@@ -42,7 +42,7 @@
     "theaterjs": "^3.1.0",
     "validator": "^7.0.0",
     "whatwg-fetch": "^2.0.2",
-    "xterm": "^2.3.2"
+    "xterm": "^2.6.0"
   },
   "devDependencies": {
     "babel-cli": "^6.23.0",
