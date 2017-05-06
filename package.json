@@ -38,7 +38,7 @@
     "react-router-dom": "^4.0.0",
     "robust-websocket": "^0.2.1",
     "screenfull": "^3.1.0",
-    "style-loader": "^0.16.0",
+    "style-loader": "^0.17.0",
     "theaterjs": "^3.1.0",
     "validator": "^7.0.0",
     "whatwg-fetch": "^2.0.2",
